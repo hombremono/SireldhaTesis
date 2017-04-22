@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WebS</title>
+<link type="" rel="">
+
+
+
+<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+
+<script type="text/javascript" src="app1.js"></script>
+<script type="text/javascript" src="controllers/test.controller.js"></script>
+</head>
+<body ng-app="iw3">
+
+
+
+
+	<div ng-controller="TestController">
+
+
+
+		<input type="text" ng-model="txtSearch">
+		{{dataFiltrada.length}} items en la lista
+		<ul>
+			<li
+				ng-repeat="d in opt.arreglo | orderBy:'dato' | filter:txtSearch as dataFiltrada">{{d.dato}}
+				- {{d.id}}</li>
+		</ul>
+<div ng-hide="dataFiltrada.length">Sin datos</div>
+
+		<table border="1"  ng-show="dataFiltrada.length">
+			<tr
+				ng-repeat="d in opt.arreglo | orderBy:'dato' | filter:txtSearch as dataFiltrada">
+				<td>{{d.id}}</td>
+				<td>{{d.dato}}</td>
+			</tr>
+
+		</table>
+	</div>
+
+	<!-- <div ng-view=""></div>  -->
+
+</body>
+</html>

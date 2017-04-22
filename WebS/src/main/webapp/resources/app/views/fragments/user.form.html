@@ -1,0 +1,76 @@
+
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">
+		<span>Nuevo Usuario</span> 
+	</h3>
+</div>
+<div class="modal-body" id="modal-body">
+	<form class="form-horizontal">
+		<fieldset>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">Nombre</label>
+				<div class="col-md-8">
+					<input type="text"
+						placeholder="Nombre" class="form-control input-md"
+						required ng-model="$ctrl.instancia.fistName">
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">Apellido</label>
+				<div class="col-md-8">
+					<input type="text"
+						placeholder="Apellido" class="form-control input-md"
+						required ng-model="$ctrl.instancia.lastName">
+
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label">Alias</label>
+				<div class="col-md-8">
+					<input type="text"
+						placeholder="Alias" class="form-control input-md"
+						required ng-model="$ctrl.instancia.name">
+
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label">Email</label>
+				<div class="col-md-8">
+					<input type="email"
+						placeholder="email" class="form-control input-md"
+						required ng-model="$ctrl.instancia.email">
+
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label">Password</label>
+				<div class="col-md-8">
+					<input min="1" step="1" type="password"
+						placeholder="Password" class="form-control input-md" required ng-model="$ctrl.instancia.password">
+
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Repetir Password</label>
+				<div class="col-md-8">
+					<input min="1" step="1" type="password"
+						placeholder="Password" class="form-control input-md" required ng-model="$ctrl.instancia.password1">
+
+				</div>
+			</div>
+			
+
+
+		</fieldset>
+	</form>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-show="$ctrl.dataOK()" ng-click="$ctrl.ok()">Guardar</button>
+	<button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Cancelar</button>
+</div>

@@ -1,0 +1,148 @@
+<div class="container">
+	<h2 style="text-align: center;">{{titulo}}</h2>
+	<div class="col-md-8">
+		<button ng-hide="opt.agregando" class="btn btn-info"
+			ng-click="agregar()">Agregar</button>
+		<button ng-hide="opt.agregando" class="btn btn-info"
+			ng-click="agregarModal()">Agregar Modal</button>
+		<div ng-show="opt.agregando" class="panel panel-primary">
+			<div class="panel-heading">
+				<h4>Nuevo Usuario</h4>
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="nom">Nombre:</label> 
+					<input type="text" class="form-control" id="nom" ng-model="opt.user.fistName"> 
+					<label for="ape">Apellido:</label>
+					<input type="text" class="form-control" id="nom" ng-model="opt.user.lastName">
+					<label for="als">Alias:</label>
+					<input type="text" class="form-control" id="als" ng-model="opt.user.name">
+					<label for="eml">Email:</label>
+					
+					<input type="email" class="form-control" id="eml" ng-model="opt.user.email">
+					<label for="pwd">Password:</label> 
+					<input type="password"	class="form-control" id="pwd" ng-model="opt.user.password">
+					<label for="pwd1">Repetir Password:</label> 
+					<input type="password"	class="form-control" id="pwd1" ng-model="opt.user.password1">
+				</div>
+			</div>
+			<div class="panel-footer">
+				<div class="text-right">
+					<button class="btn btn-defaut" ng-click="cancelar()">Cancelar</button>
+					<button ng-show="dataOK()" class="btn btn-success" ng-click="save()">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="col-md-12" ng-hide="opt.agregando">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<br />
+				<form>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-search"></i>
+							</div>
+
+							<input type="text" class="form-control"
+								placeholder="Texto a buscar..." ng-model="search">
+
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-12" style="text-align: center;" ng-show="opt.wait">
+				<br /> <img alt="" style="width: auto; height: 70px"
+					src="images/wait.gif" />
+			</div>
+			<div class="panel-body" ng-show="datos.length">
+				<h5 style="text-align: center; color: blue">({{dataFiltrada.length}}
+					usuarios en la lista)</h5>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Alias</th>
+							<th>Email</th>
+							<th><span title="Cuenta expirada">CE</span></th>
+							<th><span title="Cuenta habilitada">CH</span></th>
+							<th><span title="Cuenta bloqueada">CB</span></th>
+							<th><span title="Credenciales expiradas">CcE</span></th>
+							<th>Roles</th>
+							<th>Opciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="r in datos | filter:search as dataFiltrada track by $index">
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-bind-html="r.fistName | highlight: search"></span>
+							</span> <span ng-show="r.id===opt.user.id"> <input type="text"
+									ng-model="opt.user.fistName" />
+							</span></td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-bind-html="r.lastName | highlight: search"></span>
+							</span> <span ng-show="r.id===opt.user.id"> <input type="text"
+									ng-model="opt.user.lastName" />
+							</span></td>
+							<td><span ng-bind-html="r.name | highlight: search"></span>
+							</td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-bind-html="r.email | highlight: search"></span>
+							</span> <span ng-show="r.id===opt.user.id"> <input type="text"
+									ng-model="opt.user.email" />
+							</span></td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-show="r.accountExpired"><b>Si</b></span><span
+									ng-hide="r.accountExpired">No</span>
+							</span> <span ng-show="r.id===opt.user.id"> <input
+									type="checkbox" ng-model="opt.user.accountExpired">
+							</span></td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-show="r.accountEnabled"><b>Si</b></span><span
+									ng-hide="r.accountEnabled">No</span>
+							</span> <span ng-show="r.id===opt.user.id"> <input
+									type="checkbox" ng-model="opt.user.accountEnabled">
+							</span></td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-show="r.accountLocked"><b>Si</b></span><span
+									ng-hide="r.accountLocked">No</span>
+							</span> <span ng-show="r.id===opt.user.id"> <input
+									type="checkbox" ng-model="opt.user.accountLocked">
+							</span></td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									ng-show="r.credentialsExpired"><b>Si</b></span><span
+									ng-hide="r.credentialsExpired">No</span>
+							</span> <span ng-show="r.id===opt.user.id"> <input
+									type="checkbox" ng-model="opt.user.credentialsExpired">
+							</span></td>
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									style="margin-right: 5px" class="label label-info"
+									ng-repeat="d in r.roles">{{d.name}}</span>
+							</span> <span ng-show="r.id===opt.user.id"> <tags-input
+										ng-model="opt.user.roles" display-property="name"
+										style="height:10%" add-on-paste="true" placeholder="Roles"
+										min-length="3" max-length="50" add-on-space="true"
+										add-on-comma="true"> <auto-complete
+										select-first-match="true" min-length="2"
+										source="filterRoles($query)"></auto-complete> </tags-input>
+							</span></td>
+
+							<td><span ng-hide="r.id===opt.user.id"> <span
+									class="glyphicon glyphicon-edit" ng-click="edit(r)"></span> <span
+									class="glyphicon glyphicon-trash" ng-click="delete(r)"></span>
+							</span> <span ng-show="r.id===opt.user.id"> <span
+									class="glyphicon glyphicon-ok" ng-click="guardar()"></span> <span
+									style="padding-left: 10px" class="glyphicon glyphicon-remove"
+									ng-click="cancelar()"></span>
+							</span></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

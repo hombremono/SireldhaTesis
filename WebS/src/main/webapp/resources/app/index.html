@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>WebS</title>
+<link type="" rel="">
+<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+
+<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+<link href="lib/ng-tags-input/ng-tags-input.min.css" rel="stylesheet">
+<link href="lib/ng-tags-input/ng-tags-input.bootstrap.min.css" rel="stylesheet">
+
+<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+<script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="lib/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="lib/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+
+<script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="lib/ng-tags-input/ng-tags-input.min.js"></script>
+
+<script type="text/javascript" src="lib/spin.js/spin.js"></script>
+<script type="text/javascript" src="lib/angular-spinner/angular-spinner.min.js"></script>
+<script type="text/javascript" src="lib/angular-loading-spinner/angular-loading-spinner.js"></script>
+
+<script type="text/javascript" 	src="app.js"></script>
+<script type="text/javascript" 	src="config/interceptors.js"></script>
+<script type="text/javascript" 	src="config/routes.js"></script>
+<script type="text/javascript" 	src="controllers/main.controller.js"></script>
+<script type="text/javascript" 	src="controllers/users.controller.js"></script>
+<script type="text/javascript" 	src="controllers/login.form.controller.js"></script>
+
+<script type="text/javascript" 	src="services/users.service.js"></script>
+<script type="text/javascript" 	src="services/roles.service.js"></script>
+<script type="text/javascript" 	src="services/core.service.js"></script>
+
+</head>
+<body ng-app="webS">
+<a href="/WebS/logout">Logout</a>
+<span us-spinner="{radius:50, width:8, length: 16, color: 'black'}"></span>
+	<div ng-view=""></div>
+</body>
+</html>
