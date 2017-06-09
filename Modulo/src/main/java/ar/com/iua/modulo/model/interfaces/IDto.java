@@ -1,4 +1,4 @@
-package ar.com.iua.modulo.model;
+package ar.com.iua.modulo.model.interfaces;
 
 import java.io.Serializable;
 

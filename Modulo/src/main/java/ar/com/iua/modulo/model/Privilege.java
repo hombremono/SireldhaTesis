@@ -10,11 +10,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Proxy;
 
+import ar.com.iua.modulo.model.interfaces.*;
+
+import java.io.Serializable;
+
 @Entity
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "privileges")
-public class Privilege implements IDto {
+public class Privilege implements IWithId, IWithName, Serializable {
 
 	private static final long serialVersionUID = -3762160433302391028L;
 	@Id

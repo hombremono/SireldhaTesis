@@ -19,8 +19,9 @@
 	</properties>
 	<modules>
 		<module>../Modulo</module>
+
 		<module>../WebS</module>
-		<!--<module>../Etiquetas</module>-->
+
 	</modules>
 	<dependencies>
 		<!-- Test -->

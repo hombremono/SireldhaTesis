@@ -1,5 +1,8 @@
 package ar.com.iua.modulo.model;
 
+
+
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Access;
@@ -13,14 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import ar.com.iua.modulo.model.interfaces.*;
 import org.hibernate.annotations.Proxy;
 @Entity
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "users")
-public class User implements IDto {
+public class User implements IWithId, IWithName, Serializable {
 
 	private static final long serialVersionUID = 8951432881307933647L;
 	

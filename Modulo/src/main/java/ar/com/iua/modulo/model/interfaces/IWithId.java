@@ -1,4 +1,4 @@
-package ar.com.iua.modulo.model;
+package ar.com.iua.modulo.model.interfaces;
 
 public interface IWithId {
 	public int getId();

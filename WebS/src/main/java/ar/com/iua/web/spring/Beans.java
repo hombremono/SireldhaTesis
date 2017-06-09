@@ -1,27 +1,19 @@
 package ar.com.iua.web.spring;
 
+import ar.com.iua.modulo.model.business.*;
+import ar.com.iua.modulo.model.business.impl.*;
+import ar.com.iua.modulo.model.persistence.dao.*;
+import ar.com.iua.modulo.model.persistence.dao.hibernate.*;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ar.com.iua.modulo.model.business.IArchivoService;
-import ar.com.iua.modulo.model.business.IRoleService;
-import ar.com.iua.modulo.model.business.IUserService;
-import ar.com.iua.modulo.model.business.impl.ArchivoService;
-import ar.com.iua.modulo.model.business.impl.RoleService;
-import ar.com.iua.modulo.model.business.impl.UserService;
-import ar.com.iua.modulo.model.persistence.dao.IArchivoDAO;
-import ar.com.iua.modulo.model.persistence.dao.IRoleDAO;
-import ar.com.iua.modulo.model.persistence.dao.IUserDAO;
-import ar.com.iua.modulo.model.persistence.dao.hibernate.ArchivoDAO;
-import ar.com.iua.modulo.model.persistence.dao.hibernate.RoleDAO;
-import ar.com.iua.modulo.model.persistence.dao.hibernate.UserDAO;
-
 @Configuration
 public class Beans {
 
-	// DAO
+	//---------------------------------------------------DAO------------------------------------------------------------
+
 	@Bean
 	@Autowired
 	public IUserDAO userDao(final SessionFactory sessionFactory) {
@@ -39,12 +31,26 @@ public class Beans {
 		return new ArchivoDAO(sessionFactory);
 	}
 
-	// Services
+	@Bean
+	@Autowired
+	public IDireccionDAO direccionDao(final SessionFactory sessionFactory) { return new DireccionDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ITelefonoDAO telefonoDao(final SessionFactory sessionFactory){ return new TelefonoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPersonaDAO personaDao(final SessionFactory sessionFactory){ return new PersonaDAO(sessionFactory);}
+
+	//---------------------------------------------------Services-------------------------------------------------------
+
 	@Bean
 	@Autowired
 	public IUserService userService(final IUserDAO userDao) {
 		return new UserService(userDao);
 	}
+
 	@Bean
 	@Autowired
 	public IRoleService roleService(final IRoleDAO roleDao) {
@@ -56,5 +62,16 @@ public class Beans {
 	public IArchivoService archivoService(final IArchivoDAO archivoDao) {
 		return new ArchivoService(archivoDao);
 	}
-	
+
+	@Bean
+	@Autowired
+	public IDireccionService direccionService(final IDireccionDAO direccionDao) {return new DireccionService(direccionDao);}
+
+	@Bean
+	@Autowired
+	public ITelefonoService telefonoService (final ITelefonoDAO telefonoDao) {return new TelefonoService(telefonoDao);}
+
+	@Bean
+	@Autowired
+	public IPersonaService personaService (final  IPersonaDAO personaDao){return new PersonaService(personaDao);}
 }
