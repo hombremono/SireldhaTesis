@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Proxy;
 @Entity
@@ -42,50 +43,51 @@ public class Persona implements IModel {
     private String mail;
 
 
-    @Column(name="nroCarnetJubilacion", nullable = false)
+    @Column(name="nroCarnetJubilacion")
     private String nroCarnetJubilacion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTipoDocumento", nullable = false)
     private TipoDocumento tipoDocumento;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idFamilia", nullable = false)
     private Familia familia;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idDependenciaLaboral", nullable = false)
     private SituacionLaboral situacionLaboral;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idSexo", nullable = false)
     private Sexo sexo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEstadoCivil", nullable = false)
     private EstadoCivil estadoCivil;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idNacionalidad", nullable = false)
     private Nacionalidad nacionalidad;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idLocalidad", nullable = false)
     private Localidad localidad;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEstudios", nullable = false)
     private Estudios estudios;
 
-    @ManyToOne
-    @JoinColumn(name = "idProfesion", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idProfesion")
     private Profesion profesion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTelefono")
     private Telefono telefono;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idRolFamiliar", nullable = false)
     private RolFamiliar rolFamiliar;
 

@@ -26,7 +26,7 @@ public class EstadoCivil implements IModel{
     @Column(name="isActive", nullable = false)
     private boolean isActive;
 
-public int getId_EstadoCivil() {
+    public int getId_EstadoCivil() {
         return id_EstadoCivil;
     }
 
