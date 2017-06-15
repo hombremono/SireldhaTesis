@@ -2,19 +2,13 @@ package ar.com.iua.web.spring;
 
 import ar.com.iua.modulo.business.IGenericService;
 import ar.com.iua.modulo.exception.NotFoundException;
-import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.IModel;
-import ar.com.iua.web.spring.services.Constantes;
-import ar.com.iua.web.spring.services.DireccionTelefonoController;
 import ar.com.iua.web.spring.services.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URI;
