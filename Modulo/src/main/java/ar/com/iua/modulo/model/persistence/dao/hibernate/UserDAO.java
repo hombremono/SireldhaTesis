@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.User;
 import ar.com.iua.modulo.model.persistence.dao.IUserDAO;
 import ar.com.iua.modulo.persistence.dao.hibernate.GenericDAO;

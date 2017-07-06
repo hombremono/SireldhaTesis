@@ -23,7 +23,7 @@ import org.hibernate.annotations.Proxy;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "users")
-public class User implements IWithId, IWithName, Serializable {
+public class User implements IWithId, IWithName, IModel, Serializable {
 
 	private static final long serialVersionUID = 8951432881307933647L;
 	

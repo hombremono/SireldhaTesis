@@ -1,4 +1,4 @@
-package ar.com.iua.modulo.business;
+package ar.com.iua.modulo.business.Interfaces.Generic;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.dbutils.ResultSetHandler;
 
 import ar.com.iua.modulo.business.exception.ServiceException;
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 
 public interface IGenericService<Entity, PK extends Serializable> extends Serializable {
 
@@ -15,6 +15,7 @@ public interface IGenericService<Entity, PK extends Serializable> extends Serial
 	public List<Entity> list() throws ServiceException;
 
 	public Entity load(PK id) throws ServiceException, NotFoundException;
+
 
 	public Entity save(Entity entity) throws ServiceException;
 
