@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
 
 public interface IGenericDAO<Entity, PK extends Serializable> extends Serializable {

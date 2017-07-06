@@ -1,10 +1,9 @@
-package ar.com.iua.modulo.model.business.impl;
+package ar.com.iua.modulo.business.impl;
 
 import ar.com.iua.modulo.business.exception.ServiceException;
-import ar.com.iua.modulo.business.impl.GenericService;
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Familia;
-import ar.com.iua.modulo.model.business.IFamiliaService;
+import ar.com.iua.modulo.business.Interfaces.IFamiliaService;
 import ar.com.iua.modulo.model.persistence.dao.IFamiliaDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
 import org.slf4j.Logger;
@@ -27,12 +26,32 @@ public class FamiliaService extends GenericService<Familia, Integer> implements 
 
 
     @Override
-    public Familia load(int id) throws ServiceException, NotFoundException {
+    public Familia load(int id, boolean getInactive) throws ServiceException, NotFoundException {
         try {
-            return dao.load(id);
+            Familia target = dao.load(id);
+            if(target.isActive() || getInactive){
+                return target;
+            } else {
+                throw new NotFoundException();
+            }
         } catch (PersistenceException e){
             LOG.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(),e);
         }
+    }
+    @Override
+    public void setInactive(int id) throws ServiceException, NotFoundException {
+        try {
+            Familia target = dao.load(id);
+            target.setActive(false);
+            dao.update(target);
+        } catch (PersistenceException e){
+            LOG.error(e.getMessage(),e);
+            throw new ServiceException(e.getMessage(),e);
+        }
+
+
+
+
     }
 }

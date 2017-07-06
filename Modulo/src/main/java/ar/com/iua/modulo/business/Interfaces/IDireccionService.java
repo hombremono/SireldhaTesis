@@ -1,8 +1,8 @@
-package ar.com.iua.modulo.model.business;
+package ar.com.iua.modulo.business.Interfaces;
 
-import ar.com.iua.modulo.business.IGenericService;
+import ar.com.iua.modulo.business.Interfaces.Generic.IGenericService;
 import ar.com.iua.modulo.business.exception.ServiceException;
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Direccion;
 
 /**
