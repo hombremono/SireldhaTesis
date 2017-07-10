@@ -1,4 +1,4 @@
-angular.module('webS',['ngRoute','ngSanitize', 'ui.bootstrap', 'ngTagsInput'])
+angular.module('webS',['ngRoute','ngSanitize', 'ui.bootstrap', 'ngTagsInput','solicitud-directives'])
 .constant('URL_API_BASE','/WebS/api/v1/')
 .run(['$rootScope','$location','$uibModal', function($rootScope,$location,$uibModal) {
     $rootScope.relocate=function(loc) {

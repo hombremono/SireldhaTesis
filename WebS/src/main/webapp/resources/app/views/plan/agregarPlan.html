@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<div ng-controller="PlanController as ctrl">
+    <h1><p>Alta de Planes</p></h1>
+    <h2>Ingrese los datos del plan que desea agregar</h2>
+    <form ng-submit="ctrl.plan.addPlan(plan)">
+        <label>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.plan.nombre" required/>
+        <label>Descripcion:</label>
+        <textarea class="form-control input-md" type="text" ng-model="ctrl.plan.descripcion" />
+         <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary" value="Agregar" />
+        </fieldset>
+    </form>
+</div>
+</html>

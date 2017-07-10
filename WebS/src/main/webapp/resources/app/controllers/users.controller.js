@@ -25,9 +25,7 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		console.log(respErr);
 		$scope.opt.roles = [];
 	});
-	$scope.agregar = function() {
-		$scope.opt.agregando=true;
-	}
+
 	$scope.save = function() {
 		usersService.add($scope.opt.user).then(function(resp) {
 			if(resp.status==201) {

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<div ng-controller="UsuarioController as ctrl">
+    <h1><p>Alta de Usuarios</p></h1>
+    <h2>Ingrese los datos del usuario que desea agreagar</h2>
+    <form ng-submit="ctrl.usuario.addUsuario(usuario)">
+        <label>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.usuario.nombre" required/>
+        <label>Apellido:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.usuario.apellido" required/>
+        <label>Mail:</label>
+        <input class="form-control input-md" type="email" ng-model="ctrl.usuario.mail" required />
+        <label>Nombre de Usuario:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.usuario.userName" required />
+        <label>Contraseña:</label>
+        <input class="form-control input-md" type="password" ng-model="ctrl.usuario.password" equals="{{ctrl.usuario.passwordCheck}}" required />
+        <label>Confirmar contraseña:</label>
+        <input class="form-control input-md" type="password" ng-model="ctrl.usuario.passwordCheck" equals="{{ctrl.usuario.password}}" required />
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary" value="Agregar" />
+        </fieldset>
+    </form>
+</div>
+</html>

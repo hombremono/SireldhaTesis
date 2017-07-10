@@ -1,0 +1,58 @@
+<div ng-controller="FamiliaController as ctrl">
+    <form ng-submit="ctrl.familia.addPersona(persona)">
+        <label>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.persona.nombre" required/>
+        <label>Apellido:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.persona.apellido" required/>
+        <label>Tipo DNI:</label>
+        <select ng-options="item as item.descripcion for item in ctrl.tiposDni track by item.id" ng-model="ctrl.persona.tipoDni"></select>
+        <label>Nro. DNI:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.persona.DNI" required ng-minlength="7"
+               ng-maxlength="9" ng-pattern="/^[0-9]*$/"/>
+        <label>CUIL:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.persona.CUIL" required ng-minlength="10"
+               ng-maxlength="12" ng-pattern="/^[0-9]*$/"/>
+        <label>Fecha de Nacimiento:</label>
+        <input ui-date="{ dateFormat: 'dd-mm-yyyy' }" type="date" ng-model="ctrl.persona.nacimiento" required/>
+        <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
+        <label>Sexo:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.sexos track by item.id" ng-model="ctrl.persona.sexo"></select>
+        <label>Estado Civil:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.estadosCiviles track by item.id" ng-model="ctrl.persona.estadoCivil"></select>
+        <label>Nacionalidad:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.nacionalidades track by item.id" ng-model="ctrl.persona.nacionalidad"></select>
+        <label>Estudios:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.estudios track by item.id" ng-model="ctrl.persona.estudios"></select>
+        <label>Profesion:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.profesiones track by item.id" ng-model="ctrl.persona.profesion"></select>
+        <label>Capacidad Constructiva:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.capConstructivas track by item.id" ng-model="ctrl.persona.capConstructiva"></select>
+        <label>Dependencia Laboral:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.depLaborales track by item.id" ng-model="ctrl.persona.depLaboral"></select>
+        <label>Relacion con Jefe de Familia:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.relacionJF track by item.id" ng-model="ctrl.persona.relacionJF"></select>
+        <!---->
+        <label>Ingreso Neto:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.persona.ingresoNeto"  ng-minlength="3"
+               ng-pattern="/^[0-9]*$/"/>
+        <label>Mail:</label>
+        <input class="form-control input-md" type="email" ng-model="ctrl.persona.mail" />
+        <label>Telefono:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.persona.telefono" ng-pattern="/^[0-9]*$/"/>
+        <label>
+            <input class="form-control input-md" type="checkbox" ng-model="ctrl.persona.jubilado" name="personaJubilada"  />
+            Jubilado
+        </label>
+        <div id="esJubilado" ng-show="ctrl.persona.jubilado">
+            <label>Nro Carnet:</label>
+            <input class="form-control input-md" type="text" ng-model="ctrl.persona.carnetJubilacion" />
+        </div>
+        <label>
+            <input class="form-control input-md" type="checkbox" ng-model="ctrl.persona.discapacidad" />
+            La Persona presenta alguna discapacidad:
+        </label>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary" value="Agregar Persona" />
+        </fieldset>
+    </form>
+</div>
