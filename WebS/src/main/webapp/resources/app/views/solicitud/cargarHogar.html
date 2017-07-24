@@ -1,0 +1,72 @@
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+
+<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="lib/angular-bootstrap/ui-bootstrap-csp.css" rel="stylesheet">
+<link href="lib/ng-tags-input/ng-tags-input.min.css" rel="stylesheet">
+<link href="lib/ng-tags-input/ng-tags-input.bootstrap.min.css" rel="stylesheet">
+
+<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+<script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="lib/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="lib/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+
+<script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="lib/ng-tags-input/ng-tags-input.min.js"></script>
+
+<script type="text/javascript" src="lib/spin.js/spin.js"></script>
+<script type="text/javascript" src="lib/angular-spinner/angular-spinner.min.js"></script>
+<script type="text/javascript" src="lib/angular-loading-spinner/angular-loading-spinner.js"></script>
+<div ng-controller="AppCtrl as ctrl">
+<h1><p>Bienvenido al Sistema de Registro Local de Demanda Habitacional Integral (SIRELDHA).</p></h1>
+    <h2>Carga de Hogar</h2>
+        <form ng-submit="crearHogar(Hogar)" name="hogarForm" >
+            <div class="form-group">
+                <label for="selectPlan">Seleccione el plan al que desea aplicar</label>
+                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.Id as plan.Descripcion for plan in Planes"></select>
+            </div>
+            <h3>Datos del Hogar</h3>
+            <div class="form-group">
+                <label for="selectVivienda">Tipo de vivienda</label>
+                <select class="form-control input-md" id="selectVivienda" ng-model="Hogar.idVivienda" ng-options="vivienda.Id as vivienda.Descripcion for vivienda in Viviendas"></select>
+            </div>
+            <div class="form-group">
+                <label for="selectLocalidad">Localidad</label>
+                <select class="form-control input-md" id="selectLocalidad" ng-model="Hogar.idLocalidad" ng-options="localidad.Id as localidad.Descripcion for localidad in Localidades"></select>
+            </div>
+            <div class="form-group">
+                <label for="inputBarrio">Barrio</label>
+                <input class="form-control input-md" id="inputBarrio" type="text" ng-model="Hogar.barrio">
+            </div>
+            <div id="divDireccion">
+                <h4>Direccion</h4>
+                <div class="form-group">
+                    <label for="inputCalle">Calle</label>
+                    <input class="form-control input-md" id="inputCalle" type="text" ng-model="Hogar.direccion.calle">
+                </div>
+                <div class="form-group">
+                    <label for="inputNumero">Calle</label>
+                    <input class="form-control input-md" id="inputNumero" type="number" ng-model="Hogar.direccion.numero">
+                </div>
+                <div class="form-group">
+                    <label for="inputPiso">Piso y Departamento</label>
+                    <input class="form-control input-md" id="inputPiso" type="text" ng-model="Hogar.direccion.pisoDepto">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputTelefono">Telefono</label>
+                <input class="form-control input-md" id="inputTelefono" type="text" ng-model="Hogar.telefono">
+                <span>Celular</span><md-checkbox id="chkCelular" ng-model="Hogar.celular"></md-checkbox>
+            </div>
+            <span>El hogar cuenta con una o mas tajetas de credito</span><md-checkbox id="chkTarjeta" ng-model="Hogar.tarjeta"></md-checkbox>
+            <div class="form-group">
+                <label for="dpInicio">Incicio de residencia</label>
+                <md-datepicker id="dpInicio" ng-model="Hogar.fechaInicio" ></md-datepicker>
+            </div>
+            <button type="submit" class="btn btn-primary">Siguiente</button>
+        </form>
+</div>
