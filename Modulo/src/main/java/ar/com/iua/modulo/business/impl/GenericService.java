@@ -7,9 +7,9 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ar.com.iua.modulo.business.IGenericService;
+import ar.com.iua.modulo.business.Interfaces.Generic.IGenericService;
 import ar.com.iua.modulo.business.exception.ServiceException;
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.persistence.dao.IGenericDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
 

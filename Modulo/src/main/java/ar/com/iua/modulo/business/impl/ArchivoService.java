@@ -1,8 +1,7 @@
-package ar.com.iua.modulo.model.business.impl;
+package ar.com.iua.modulo.business.impl;
 
-import ar.com.iua.modulo.business.impl.GenericService;
 import ar.com.iua.modulo.model.Archivo;
-import ar.com.iua.modulo.model.business.IArchivoService;
+import ar.com.iua.modulo.business.Interfaces.IArchivoService;
 import ar.com.iua.modulo.model.persistence.dao.IArchivoDAO;
 
 public class ArchivoService extends GenericService<Archivo, Integer> implements IArchivoService {

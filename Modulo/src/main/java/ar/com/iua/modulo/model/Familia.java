@@ -26,7 +26,8 @@ public class Familia implements IModel{
     @Column(name = "tarjetaCredito", nullable = false)
     private boolean tarjetaCredito;
 
-    @Column(name = "antiguedadResidencia", nullable = true)
+    //en años
+    @Column(name = "antiguedadResidencia", nullable = false)
     private int antiguedadResidencia;
 
     @Column(name = "isActive", nullable = false)

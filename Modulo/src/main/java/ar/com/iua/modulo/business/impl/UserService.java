@@ -1,13 +1,12 @@
-package ar.com.iua.modulo.model.business.impl;
+package ar.com.iua.modulo.business.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ar.com.iua.modulo.business.exception.ServiceException;
-import ar.com.iua.modulo.business.impl.GenericService;
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.User;
-import ar.com.iua.modulo.model.business.IUserService;
+import ar.com.iua.modulo.business.Interfaces.IUserService;
 import ar.com.iua.modulo.model.persistence.dao.IUserDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
 

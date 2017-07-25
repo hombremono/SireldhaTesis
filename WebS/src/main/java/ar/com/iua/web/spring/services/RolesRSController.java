@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.iua.modulo.model.business.IRoleService;
+import ar.com.iua.modulo.business.Interfaces.IRoleService;
 
 @RestController
 
