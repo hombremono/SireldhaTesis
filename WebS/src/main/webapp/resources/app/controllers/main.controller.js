@@ -1,8 +1,13 @@
 angular.module('webS')
-.controller('MainController', ['$scope', '$rootScope', 'coreService', MainController ]);
+.controller('MainController', ['$scope','$location', '$rootScope', 'coreService', MainController ]);
 
-function MainController($scope, $rootScope, coreService) {
-  $scope.titulo="Menú Principal"; 
+function MainController($scope, $location, $rootScope, coreService) {
+  $scope.titulo="Menú Principal";
+
+  $scope.startSolicitud = function(){
+  	$location.path('/requestHome');
+  };
+
 	coreService.pingAuth().then(
 			function(resp){ 
 				  if(resp.status===200 && resp.data.code==0) {

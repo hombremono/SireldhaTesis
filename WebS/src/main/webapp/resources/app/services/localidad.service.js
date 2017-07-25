@@ -1,9 +1,6 @@
 /**
  * Created by fran_ on 13/6/2017.
  */
-/**
- * Created by fran_ on 12/6/2017.
- */
 angular.module('webS')
     .factory('localidadService',['$http','URL_API_BASE',function($http, URL_API_BASE) {
         return {

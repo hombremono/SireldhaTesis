@@ -2,17 +2,17 @@
  * Created by fran_ on 13/6/2017.
  */
 angular.module('webS').controller('FamiliaController',
-    [ '$scope', '$sce', '$uibModal', 'familiaService','personaService', FamiliaController ]);
-function FamiliaController($scope, $sce, $uibModal, familiaService,personaService ) {
+    [ '$scope', '$sce', '$uibModal','$location', 'familiaService','personaService','jefeFamiliaService', FamiliaController ]);
+function FamiliaController($scope, $sce, $uibModal, $location, familiaService,personaService, jefeFamiliaService ) {
 
 $scope.titulo = "Familia";
-this.familia = {
+$scope.familia = {
     id:"",
     Apellido:"",
     JefeDeFamiliaDni:"",
     integrantes:[]
 };
-this.persona ={
+$scope.persona ={
     nombre:"",
     apellido:"",
     tipoDni:"",
@@ -27,6 +27,7 @@ this.persona ={
     capConstructiva:"",
     depLaboral:"",
     relacionJF:"",
+    DescRelacionJF:"",
     ingresoNeto:"",
     mail:"",
     telefono:"",
@@ -34,7 +35,7 @@ this.persona ={
     carnetJubilacion:"",
     discapacidad:""
 };
-this.jefeDeFamilia={
+$scope.jefeDeFamilia={
     nombre:"",
     apellido:"",
     tipoDni:"",
@@ -48,41 +49,73 @@ this.jefeDeFamilia={
     profesion:"",
     capConstructiva:"",
     depLaboral:"",
+    trabajoDependencia:{
+        empresa:"",
+        fechaIngreso:"",
+        idLocalidad:"",
+        barrio:"",
+        direccion:{
+            calle:"",
+            numero:"",
+            pisoDepto:""
+        },
+        telefono:"",
+        celular:false
+    },
+    trabajoAutonomo:{
+        inicioActividades:""
+    },
     ingresoNeto:"",
     mail:"",
     telefono:"",
     jubilado:"",
+    relacionJF:99,
+    DescRelacionJF:"Jefe/a de Familia",
     carnetJubilacion:"",
     discapacidad:""
 };
-//Variables para llenar las listas
-    this.tiposDni = [];
-    this.sexos=[];
-    this.estadosCiviles=[];
-    this.nacionalidades=[];
-    this.estudios=[];
-    this.profesiones=[];
-    this.capConstructivas=[];
-    this.depLaborales=[];
-    this.relacionJF=[];
 
-    //TODO
-    // /Agregar este metodo al Servicio
-    familiaService.cargarLista(Lista).then(function(resp) {
-        resp.ferEach(function (item) {
-            Lista.push(persona);
-        });
-    },
-        function(respErr) {
-            console.log(respErr);
-            $scope.opt.wait=false;
-    });
+$scope.defaultOptions={
+        Id:0,
+        Descripcion:"-SELECCIONE-"
+    };
+//Variables para llenar las listas
+    $scope.tiposDni = [];
+    $scope.sexos=[];
+    $scope.estadosCiviles=[];
+    $scope.nacionalidades=[];
+    $scope.estudios=[];
+    $scope.profesiones=[];
+    $scope.capConstructivas=[];
+    $scope.depLaborales=[];
+    $scope.relacionJF=[];
+    $scope.Localidades=[];
+
+
+    loadCollection = function(coleccion){
+        var datosColeccion;
+        //Llamo al servicio que me trae todos los datos
+        coleccion.push($scope.defaultOptions);
+        coleccion.push(datosColeccion);
+    };
+
+    loadCollection($scope.tiposDni);
+    loadCollection($scope.sexos);
+    loadCollection($scope.estadosCiviles);
+    loadCollection($scope.nacionalidades);
+    loadCollection($scope.estudios);
+    loadCollection($scope.profesiones);
+    loadCollection($scope.capConstructivas);
+    loadCollection($scope.depLaborales);
+    loadCollection($scope.relacionJF);
+    loadCollection($scope.Localidades);   
 
 
 
 //Agregando y wait van a servir para el loading.
-this.opt = {
+$scope.opt = {
     agregando: false,
+    editando:false,
     wait : true
 };
 var resetPersona = function () {
@@ -110,38 +143,39 @@ var resetPersona = function () {
     };
 };
 
-familiaService.list().then(function(resp) {
+$scope.listarFamilia = function(){
+    familiaService.list().then(function(resp) {
     $scope.opt.wait=false;
-    resp.forEach(function(persona){
+    resp.personas.forEach(function(persona){
         $scope.familia.integrantes.push(persona);
     });
 }, function(respErr) {
     console.log(respErr);
     $scope.opt.wait=false;
 });
-this.agregarIntegrante = function() {
-    this.opt.agregando=true;
+$scope.agregarIntegrante = function() {
+    $scope.opt.agregando=true;
+    $scope.opt.editando=false;
 };
+}
 
 //AGREGAR PERSON
-this.addPersona = function() {
-    personaService.add($scope.persona).then(function(resp) {
-
+$scope.addPersona = function(persona) {
+    personaService.add(persona).then(function(resp) {
         //Retorne el ID de la PERSONA NUEVA
         personaService.get(resp.persona.id).then(function(resp) {
             $scope.familia.integrantes.push(resp.persona);
         });
-
-        this.cancelar();
+        $scope.cancelar();
     }, function(respErr) {
         console.log(respErr);
     });
 };
-this.cancelar = function() {
+$scope.cancelar = function() {
     resetPersona();
     this.opt.agregando=false;
 };
-this.eliminarIntegrante = function(persona) {
+$scope.eliminarIntegrante = function(persona) {
     if(confirm("¿Esta seguro que desea ELIMINAR al integrante seleccionado?")) {
         personaService.delete(persona.id).then(function(resp) {
             $scope.familia.integrantes.forEach(function(item, idx) {
@@ -156,40 +190,77 @@ this.eliminarIntegrante = function(persona) {
     }
 
 };
-this.guardarCambios = function() {
+$scope.guardarCambios = function() {
     familiaService.update($scope.familia).then(function(resp) {
-        //QUE HACER? MOSTRAR CONFIRM?
         $scope.cancelar();
+        $location.path('/requestProperty');
     }, function(respErr) {
         console.log(respErr);
         $scope.cancelar();
     });
 
 };
+//Variable para volver atras la edicion
+var integranteRaw;
+$scope.editarIntegrante = function(integrante){
+    integranteRaw = integrante;
+    mapPersona(integrante);
+    $scope.opt.agregando=false;
+    $scope.opt.editando=true;
+};
 
-// $scope.agregarIntegrante = function() {
-//     var modalInstance = $uibModal.open({
-//         animation: true,
-//         ariaLabelledBy: 'modal-title',
-//         ariaDescribedBy: 'modal-body',
-//         templateUrl: 'views/plan/agregarLocalidad.html',
-//         controller: 'AddLocalidadController',
-//         controllerAs: '$ctrl',
-//         size: 'lg',
-//         resolve: {
-//             instancia: function () {
-//                 return $scope.localidad;
-//             }
-//         }
-//     });
-//     modalInstance.result.then(function (instancia) {
-//             if(instancia)
-//                 $scope.localidad = instancia;
-//             $scope.save();
-//         }, function () {
-//             $scope.cancelar();
-//         }
-//     );
-// }
-}
+mapPersona=function(int){
+    $scope.persona.nombre = int.nombre;
+    $scope.persona.apellido = int.apellido;
+    $scope.persona.tipoDni = int.tipoDni;
+    $scope.persona.DNI = int.DNI;
+    $scope.persona.CUIL = int.CUIL;
+    $scope.persona.nacimiento = int.nacimiento;
+    $scope.persona.sexo = int.sexo;
+    $scope.persona.estadoCivil = int.estadoCivil;
+    $scope.persona.nacionalidad = int.nacionalidad;
+    $scope.persona.estudios = int.estudios;
+    $scope.persona.profesion = int.profesion;
+    $scope.persona.capConstructiva = int.capConstructiva;
+    $scope.persona.depLaboral = int.depLaboral;
+    $scope.persona.relacionJF = int.relacionJF;
+    $scope.persona.ingresoNeto = int.ingresoNeto;
+    $scope.persona.mail = int.mail;
+    $scope.persona.telefono = int.telefono;
+    $scope.persona.jubilado = int.jubilado;
+    $scope.persona.carnetJubilacion = int.carnetJubilacion;
+    $scope.persona.discapacidad = int.discapacidad;
+
+};
+
+$scope.cancelarCarga = function(){
+    $scope.resetPersona();
+    $scope.opt.agregando=false;
+    $scope.opt.editando=false;
+};
+
+$scope.cancelarEdicion = function(){
+    mapPersona($scope.integranteRaw);    
+    $scope.opt.agregando=false;
+    $scope.opt.editando=false;
+};
+
+$scope.addJefeDeFamilia = function(jefeDeFamilia) {
+    jefeFamiliaService.add($scope.jefeDeFamilia).then(function(resp) {
+        jefeFamiliaService.get(resp.jefeFamilia.id).then(function(resp) {
+            $scope.familia.integrantes.push(resp.persona);
+            $scope.familia.JefeDeFamiliaDni = resp.persona.DNI;
+            $scope.familia.Apellido = resp.persona.apellido;            
+        });        
+    }, function(respErr) {
+        console.log(respErr);
+    });
+    familiaService.update($scope.familia).then(function(resp) {
+        $scope.cancelar();
+        $location.path('/family');
+    }, function(respErr) {
+        console.log(respErr);
+    });
+    //Redireccion
+};}
 

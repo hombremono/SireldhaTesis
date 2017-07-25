@@ -15,33 +15,37 @@ angular.module('webS')
     })
       //Localidades
       .when('/localities', {
-          templateUrl: 'views/listaLocalidades.html',
+          templateUrl: 'views/localidad/listaLocalidades.html',
           controller: 'LocalidadController'
       })
       //Plan
       .when('/plans', {
-          templateUrl: 'views/listaPlanes.html',
+          templateUrl: 'views/plan/listaPlanes.html',
           controller: 'PlanController'
       })
       .when('/family', {
-          templateUrl: 'views/listaFamilia.html',
+          templateUrl: 'views/familia/listaFamilia.html',
           controller: 'FamiliaController'
       })
       .when('/requestHome', {
-          templateUrl: 'views/cargarHogar.html',
-          controller: 'SolicitudController'
+          templateUrl: 'views/solicitud/cargarHogar.html',
+          controller: 'HogarController'
       })
       .when('/requestJF', {
-          templateUrl: 'views/cargarJefeHogar.html',
+          templateUrl: 'views/solicitud/cargarJefeHogar.html',
           controller: 'FamiliaController'
       })
       .when('/requestProperty', {
-          templateUrl: 'views/datosInmueble.html',
+          templateUrl: 'views/solicitud/datosInmueble.html',
           controller: 'InmuebleController'
       })
-      .when('/requestPropertyState', {
-          templateUrl: 'views/estadoInmueble.html',
-          controller: 'InmuebleController'
+      .when('/loadFiles', {
+          templateUrl: 'views/solicitud/cargarArchivos.html',
+          controller: 'FileController'
+      })
+      .when('/review', {
+          templateUrl: 'views/solicitud/review.html',
+          controller: 'ReviewController'
       })
     .otherwise({
       redirectTo: '/'

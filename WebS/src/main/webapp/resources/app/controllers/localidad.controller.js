@@ -10,6 +10,7 @@ function LocalidadController($scope, $sce, $uibModal, localidadService) {
         id:"",
         Nombre:""
     };
+    $scope.localidad = this.localidad;
     $scope.localidades =[];
 
 
@@ -38,8 +39,8 @@ function LocalidadController($scope, $sce, $uibModal, localidadService) {
         $scope.opt.agregando=true;
     }
 
-    $scope.save = function() {
-        localidadService.add($scope.localidad).then(function(resp) {
+   /* $scope.save = function() {
+        localidadService.add(this.localidad).then(function(resp) {
             //Retorne el ID de la LOCALIDAD NUEVA
             localidadService.get(resp.localidad.id).then(function(resp) {
                 mapLocalidad(resp.localidad);
@@ -48,7 +49,7 @@ function LocalidadController($scope, $sce, $uibModal, localidadService) {
         }, function(respErr) {
             console.log(respErr);
         });
-    };
+    };*/
     $scope.cancelar = function() {
         $scope.localidad = {
             id:"",
@@ -56,7 +57,7 @@ function LocalidadController($scope, $sce, $uibModal, localidadService) {
         };
         $scope.opt.agregando=false;
     }
-    $scope.delete = function(plan) {
+    $scope.eliminarLocalidad = function(localidad) {
         if(confirm("¿Esta seguro que desea ELIMINAR la localidad seleccionada?")) {
             localidadService.delete(localidad.id).then(function(resp) {
                 $scope.localidades.forEach(function(item, idx) {
@@ -90,7 +91,7 @@ function LocalidadController($scope, $sce, $uibModal, localidadService) {
     };
 
 
-    $scope.agregarModal = function() {
+    $scope.agregarLocalidad = function() {
         var modalInstance = $uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
@@ -108,7 +109,7 @@ function LocalidadController($scope, $sce, $uibModal, localidadService) {
         modalInstance.result.then(function (instancia) {
                 if(instancia)
                     $scope.localidad = instancia;
-                $scope.save();
+                $scope.guardar();
             }, function () {
                 $scope.cancelar();
             }

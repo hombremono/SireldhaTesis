@@ -2,11 +2,11 @@
  * Created by fran_ on 13/6/2017.
  */
 angular.module('webS').controller('InmuebleController',
-    [ '$scope', '$sce', '$uibModal', 'inmuebleService', InmmuebleController ]);
-function InmmuebleController($scope, $sce, $uibModal, inmuebleService ) {
+    [ '$scope', '$sce', '$uibModal','$location', 'inmuebleService', InmmuebleController ]);
+function InmmuebleController($scope, $sce, $uibModal, $location, inmuebleService ) {
 
     $scope.titulo = "Datos de Inmueble";
-    this.inmueble = {
+    $scope.inmueble = {
         id:"",
         idLocalidad:"",
         barrio:"",
@@ -45,52 +45,56 @@ function InmmuebleController($scope, $sce, $uibModal, inmuebleService ) {
     };
 
 //Variables para llenar las listas
-    this.motivosFalta = [];
-    this.tiposPared=[];
-    this.tiposTecho=[];
-    this.tiposPiso=[];
-    this.conexionesAgua=[];
-    this.procedenciasAgua=[];
-    this.tiposBano=[];
-    this.tiposLuz=[];
-    this.tiposCocina=[];
+    $scope.motivosFalta = [];
+    $scope.tiposPared=[];
+    $scope.tiposTecho=[];
+    $scope.tiposPiso=[];
+    $scope.conexionesAgua=[];
+    $scope.procedenciasAgua=[];
+    $scope.tiposBano=[];
+    $scope.tiposLuz=[];
+    $scope.tiposCocina=[];
+    $scope.Localidades=[];
+    var defaultOptions={
+        Id:0,
+        Descripcion:"-SELECCIONE-"
+    };
+    $scope.loadCollection = function(coleccion){
+        var datosColeccion;
+        //Llamo al servicio que me trae todos los datos
+        coleccion.push(defaultOptions);
+        coleccion.push(datosColeccion);
+    };
+    loadCollection($scope.motivosFalta);
+    loadCollection($scope.tiposPared);
+    loadCollection($scope.tiposPiso);
+    loadCollection($scope.conexionesAgua);
+    loadCollection($scope.tiposBano);
+    loadCollection($scope.tiposLuz);
+    loadCollection($scope.tiposCocina);
+    loadCollection($scope.Localidades);
+    
 
-    //TODO
-    // /Agregar este metodo al Servicio
-    inmuebleService.cargarLista(Lista).then(function(resp) {
-            resp.ferEach(function (item) {
-                Lista.push(persona);
-            });
-        },
-        function(respErr) {
-            console.log(respErr);
-            $scope.opt.wait=false;
-        });
-
-
-
-//Agregando y wait van a servir para el loading.
-    this.opt = {
+    $scope.opt = {
         agregando: false,
         wait : true,
         datosOK:false
     };
 
-//AGREGAR PERSON
-    this.cargarInmueble = function() {
-        inmuebleService.add(this.inmueble).then(function(resp) {
-            this.cancelar();
-            //Redirecciono
+    $scope.cargarInmueble = function() {
+        inmuebleService.add($scope.inmueble).then(function(resp) {
+            $scope.cancelar();
+            $location.path('/loadFiles');
         }, function(respErr) {
             console.log(respErr);
         });
     };
-    this.cancelar = function() {
-        this.opt.agregando=false;
+    $scope.cancelar = function() {
+        $scope.opt.agregando=false;
     };
 
     //UTILIDAD????
-    this.elimianrInmueble = function(inmueble) {
+    $scope.elimianrInmueble = function(inmueble) {
         if(confirm("¿Esta seguro que desea ELIMINAR el inmueble seleccionado?")) {
             personaService.delete(inmueble.id).then(function(resp) {
                 //Confirm?

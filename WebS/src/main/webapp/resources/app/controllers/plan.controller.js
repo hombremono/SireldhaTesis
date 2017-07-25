@@ -2,8 +2,8 @@
  * Created by fran_ on 12/6/2017.
  */
 angular.module('webS').controller('PlanController',
-    [ '$scope', '$sce', '$uibModal', 'planService', PlanController ]);
-function PlanController($scope, $sce, $uibModal, planService) {
+    [ '$scope', '$sce', '$uibModal','$location', 'planService', PlanController ]);
+function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
     $scope.plan = {
         id:"",
@@ -39,7 +39,7 @@ function PlanController($scope, $sce, $uibModal, planService) {
         $scope.opt.agregando=true;
     }
 
-    $scope.save = function() {
+    $scope.save = function(plan) {
         planService.add($scope.plan).then(function(resp) {
             //Retorne el ID del PLAN NUEVO
                 planService.get(resp.plan.id).then(function(resp) {
@@ -50,7 +50,7 @@ function PlanController($scope, $sce, $uibModal, planService) {
             console.log(respErr);
         });
     };
-    $scope.cancelar = function() {
+    $$scope.cancelar = function() {
         $scope.plan = {
             id:"",
             Nombre:"",
@@ -58,7 +58,7 @@ function PlanController($scope, $sce, $uibModal, planService) {
         };
         $scope.opt.agregando=false;
     }
-    $scope.delete = function(plan) {
+    $scope.eliminarPlan = function(plan) {
         if(confirm("¿Esta seguro que desea ELIMINAR el Plan Seleccionado?")) {
             planService.delete(plan.id).then(function(resp) {
                 $scope.planes.forEach(function(item, idx) {
@@ -91,8 +91,12 @@ function PlanController($scope, $sce, $uibModal, planService) {
 
     };
 
+    $scope.volverInicio = function(){
+        $location.path("/");
+    };
 
-    $scope.agregarModal = function() {
+
+    $scope.agregarPlan = function() {
         var modalInstance = $uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
@@ -110,7 +114,7 @@ function PlanController($scope, $sce, $uibModal, planService) {
         modalInstance.result.then(function (instancia) {
                 if(instancia)
                     $scope.plan = instancia;
-                $scope.save();
+                $scope.save(instancia);
             }, function () {
                 $scope.cancelar();
             }
