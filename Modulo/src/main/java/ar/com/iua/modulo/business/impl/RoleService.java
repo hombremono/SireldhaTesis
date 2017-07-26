@@ -1,8 +1,7 @@
-package ar.com.iua.modulo.model.business.impl;
+package ar.com.iua.modulo.business.impl;
 
-import ar.com.iua.modulo.business.impl.GenericService;
 import ar.com.iua.modulo.model.Role;
-import ar.com.iua.modulo.model.business.IRoleService;
+import ar.com.iua.modulo.business.Interfaces.IRoleService;
 import ar.com.iua.modulo.model.persistence.dao.IRoleDAO;
 
 public class RoleService extends GenericService<Role, Integer> implements IRoleService {

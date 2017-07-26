@@ -19,5 +19,8 @@ public final class Constantes {
 
 	public static final String URL_DIRTEL = URL_BASE + "/dirtel";
 	public static final String URL_PERSONA = URL_BASE + "/persona";
+	public static final String URL_FAMILIA = URL_BASE + "/familia";
+	public static final String URL_INMUEBLE = URL_BASE + "/inmueble";
+	public static final String URL_TRABAJO = URL_BASE + "/trabajo";
 
 }

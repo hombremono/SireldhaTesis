@@ -1,4 +1,4 @@
-package ar.com.iua.modulo.exception;
+package ar.com.iua.modulo.model.exception;
 
 public class NotFoundException extends Exception {
 

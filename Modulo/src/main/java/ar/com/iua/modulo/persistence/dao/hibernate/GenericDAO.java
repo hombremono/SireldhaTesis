@@ -17,7 +17,7 @@ import org.jooq.impl.DSL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.persistence.dao.IGenericDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
 

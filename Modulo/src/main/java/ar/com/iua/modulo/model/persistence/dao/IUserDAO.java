@@ -1,6 +1,6 @@
 package ar.com.iua.modulo.model.persistence.dao;
 
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.User;
 import ar.com.iua.modulo.persistence.dao.IGenericDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;

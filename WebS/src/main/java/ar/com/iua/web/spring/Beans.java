@@ -1,7 +1,7 @@
 package ar.com.iua.web.spring;
 
-import ar.com.iua.modulo.model.business.*;
-import ar.com.iua.modulo.model.business.impl.*;
+import ar.com.iua.modulo.business.Interfaces.*;
+import ar.com.iua.modulo.business.impl.*;
 import ar.com.iua.modulo.model.persistence.dao.*;
 import ar.com.iua.modulo.model.persistence.dao.hibernate.*;
 import org.hibernate.SessionFactory;
@@ -43,6 +43,10 @@ public class Beans {
 	@Autowired
 	public IPersonaDAO personaDao(final SessionFactory sessionFactory){ return new PersonaDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IFamiliaDAO familiaDao(final SessionFactory sessionFactory){ return new FamiliaDAO(sessionFactory);}
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -73,5 +77,9 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IPersonaService personaService (final  IPersonaDAO personaDao){return new PersonaService(personaDao);}
+	public IPersonaService personaService (final  IPersonaDAO personaDao){ return new PersonaService(personaDao); }
+
+	@Bean
+	@Autowired
+	public IFamiliaService familiaService (final IFamiliaDAO familiaDao){ return new FamiliaService(familiaDao); }
 }

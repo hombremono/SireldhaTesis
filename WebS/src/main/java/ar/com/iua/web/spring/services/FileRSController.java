@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import ar.com.iua.modulo.business.exception.ServiceException;
-import ar.com.iua.modulo.exception.NotFoundException;
+import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Archivo;
-import ar.com.iua.modulo.model.business.IArchivoService;
+import ar.com.iua.modulo.business.Interfaces.IArchivoService;
 
 @RestController
 

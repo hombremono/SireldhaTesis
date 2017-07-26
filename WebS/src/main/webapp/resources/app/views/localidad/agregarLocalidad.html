@@ -1,6 +1,19 @@
+<!DOCTYPE html>
+<div ng-controller="LocalidadController as ctrl">
+    <h1><p>Alta de Localidades</p></h1>
+    <h2>Ingrese la localidad que desea agregar</h2>
+    <form ng-submit="ctrl.localidad.addLocalidad(localidad)">
+        <label>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.localidad.nombre" required/>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary" value="Agregar" />
+        </fieldset>
+    </form>
+</div>
+</html>
 <div class="modal-header">
   <h3 class="modal-title" id="modal-title">
-    <span>Nueva Localidad</span> 
+    <span>Nueva Localidad</span>
   </h3>
 </div>
 <div class="modal-body" id="modal-body">
@@ -11,7 +24,7 @@
       <input type="text" class="form-control" id="inputNombre" name="nombre" ng-model="$ctrl.instancia.nombre" required>
     </div>
   </div>
-  <div ng-messages="localidadForm.nombre.$error" role="alert" ng-show="localidadForm.$submitted || localidadForm.nombre.$touched"> 
+  <div ng-messages="localidadForm.nombre.$error" role="alert" ng-show="localidadForm.$submitted || localidadForm.nombre.$touched">
     <div ng-message="required">Se requiere insertar un nombre a la localidad</div>
   </div>
 </form>
