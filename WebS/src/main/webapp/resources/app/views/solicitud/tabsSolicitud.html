@@ -1,0 +1,30 @@
+<section>
+    <!--  Tab Navigation  -->
+    <ul class="nav nav-pills">
+        <li ng-class="{ active:tab.isSet(1)}">
+            <a href="">Hogar</a>
+        </li>
+        <li ng-class="{ active:tab.isSet(2) }">
+            <a href="" >Jefe</a>
+        </li>
+        <li ng-class="{ active:tab.isSet(3)  }">
+            <a href="" >Familia</a>
+        </li>
+        <li ng-class="{ active:tab.isSet(4)  }">
+            <a href="" >Datos Inmueble</a>
+        </li>
+        <li ng-class="{ active:tab.isSet(5)  }">
+            <a href="">Estado Inmueble</a>
+        </li>
+    </ul>
+    <!--  Carga Hogar  -->
+    <cargahogar ng-show="tab.isSet(1)"></cargahogar>
+    <!--  Carga Jefe Flia  -->
+    <cargajefe ng-show="tab.isSet(2)"></cargajefe>
+    <!--  Carga Familia  -->
+    <cargafamilia ng-show="tab.isSet(3)"></cargafamilia>
+    <!--  Datos Inmueble  -->
+    <datosinmueble ng-show="tab.isSet(4)"></datosinmueble>
+    <!--  Estado Inmueble  -->
+    <estadoinmueble ng-show="tab.isSet(5)"></estadoinmueble>
+</section>

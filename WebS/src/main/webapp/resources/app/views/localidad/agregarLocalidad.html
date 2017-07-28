@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<div ng-controller="LocalidadController as ctrl">
+    <h1><p>Alta de Localidades</p></h1>
+    <h2>Ingrese la localidad que desea agregar</h2>
+    <form ng-submit="ctrl.localidad.addLocalidad(localidad)">
+        <label>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.localidad.nombre" required/>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary" value="Agregar" />
+        </fieldset>
+    </form>
+</div>
+</html>

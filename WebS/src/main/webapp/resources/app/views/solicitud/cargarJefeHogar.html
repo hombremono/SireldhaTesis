@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<div ng-controller="FamiliaController as ctrl">
+    <form ng-submit="ctrl.familia.addjefeDeFamilia(jefeDeFamilia)">
+        <label>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.nombre" required/>
+        <label>Apellido:</label>
+        <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.apellido" required/>
+        <label>Tipo DNI:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.tiposDni track by item.id" ng-model="ctrl.jefeDeFamilia.tipoDni"></select>
+        <label>Nro. DNI:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.jefeDeFamilia.DNI" required ng-minlength="7"
+               ng-maxlength="9" ng-pattern="/^[0-9]*$/"/>
+        <label>CUIL:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.jefeDeFamilia.CUIL" required ng-minlength="10"
+               ng-maxlength="12" ng-pattern="/^[0-9]*$/"/>
+        <label>Fecha de Nacimiento:</label>
+        <input  ui-date="{ dateFormat: 'dd-mm-yyyy' }" type="date" ng-model="ctrl.jefeDeFamilia.nacimiento" required/>
+        <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
+        <label>Sexo:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.sexos track by item.id" ng-model="ctrl.jefeDeFamilia.sexo"></select>
+        <label>Estado Civil:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.estadosCiviles track by item.id" ng-model="ctrl.jefeDeFamilia.estadoCivil"></select>
+        <label>Nacionalidad:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.nacionalidades track by item.id" ng-model="ctrl.jefeDeFamilia.nacionalidad"></select>
+        <label>Estudios:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.estudios track by item.id" ng-model="ctrl.jefeDeFamilia.estudios"></select>
+        <label>Profesion:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.profesiones track by item.id" ng-model="ctrl.jefeDeFamilia.profesion"></select>
+        <label>Capacidad Constructiva:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.capConstructivas track by item.id" ng-model="ctrl.jefeDeFamilia.capConstructiva"></select>
+        <label>Dependencia Laboral:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.depLaborales track by item.id" ng-model="ctrl.jefeDeFamilia.DepLaboral"></select>
+        <div id="trabajoAutonomo" ng-show="ctrl.jefeDeFamilia.DepLaboral === 1">
+            <h5>Trabajador Autonomo</h5>
+            <label>Fecha de Inicio de Actividades:</label>
+            <input ui-date="{ dateFormat: 'dd-mm-yyyy' }" type="date" ng-model="ctrl.jefeDeFamilia.trabajo.inicioActividades" />
+        </div>
+        <div id="trabajoDependencia" ng-show="ctrl.jefeDeFamilia.DepLaboral === 2">
+            <h5>Trabajador en Relacion de Dependencia</h5>
+            <label>Empresa:</label>
+            <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.trabajo.empresa" />
+            <label>Fecha de Inicio de Actividades:</label>
+            <input class="form-control input-md" ui-date="{ dateFormat: 'dd-mm-yyyy' }" type="date" ng-model="ctrl.jefeDeFamilia.trabajo.inicioActividades" />
+            <label>Localidad empresa:</label>
+            <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.trabajo.empresa.localidad" />
+            <label>Barrio empresa:</label>
+            <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.trabajo.empresa.barrio" />
+            <label>Direccion empresa:</label>
+            <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.trabajo.empresa.direccion" />
+            <label>Telefono empresa:</label>
+            <input class="form-control input-md" type="number" ng-model="ctrl.jefeDeFamilia.trabajo.empresa.telefono" ng-pattern="/^[0-9]*$/"/>
+        </div>
+        <!---->
+        <label>Ingreso Neto:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.jefeDeFamilia.ingresoNeto"  ng-minlength="3"
+               ng-pattern="/^[0-9]*$/"/>
+        <label>Mail:</label>
+        <input class="form-control input-md" type="email" ng-model="ctrl.jefeDeFamilia.mail" />
+        <label>Telefono:</label>
+        <input class="form-control input-md" type="number" ng-model="ctrl.jefeDeFamilia.telefono" ng-pattern="/^[0-9]*$/"/>
+        <label>
+            <input class="form-control input-md" type="checkbox" ng-model="ctrl.jefeDeFamilia.jubilado" name="jefeDeFamiliaJubilada"  />
+            Jubilado
+        </label>
+        <div id="esJubilado" ng-show="ctrl.jefeDeFamilia.jubilado">
+            <label>Nro Carnet:</label>
+            <input class="form-control input-md" type="text" ng-model="ctrl.jefeDeFamilia.carnetJubilacion" />
+        </div>
+        <label>
+            <input class="form-control input-md" type="checkbox" ng-model="ctrl.jefeDeFamilia.discapacidad" />
+            La persona presenta alguna discapacidad:
+        </label>
+        <fieldset class="form-group">
+            <input type="submit" class="btn btn-primary" value="Continuar" />
+        </fieldset>
+    </form>
+</div>
+
+</html>
