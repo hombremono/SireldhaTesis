@@ -1,8 +1,6 @@
-
-
 angular.module('webS').controller('HogarController',
-    [ '$scope', '$sce', '$uibModal', 'hogarService', '$location', HogarController ]);
-function HogarController($scope, $sce, $uibModal, $location, hogarService) {
+    [ '$scope', '$sce', '$uibModal', 'hogarService', HogarController ]);
+function HogarController($scope, $sce, $uibModal, hogarService) {
     $scope.titulo = "Carga de Hogar";
     $scope.Hogar = {
         id:"",
@@ -51,7 +49,7 @@ function HogarController($scope, $sce, $uibModal, $location, hogarService) {
         hogarService.add($scope.Hogar).then(function(resp) {
                         
             $scope.cancelar();
-            $location.path('/requestJF');
+            //Redireccion???
         }, function(respErr) {
             console.log(respErr);
         });

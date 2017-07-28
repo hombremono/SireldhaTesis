@@ -4,7 +4,7 @@
 <script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
 
 <html lang="en">
-<div ng-controller="FamiliaController as ctrl" ng-show="!ctrl.opt.agregando">
+<div ng-controller="FamiliaController as ctrl" ng-show="!opt.agregando && !opt.editando">
     <table class="table">
         <tr>
             <th>Dni</th>
@@ -14,18 +14,18 @@
             <th></th>
             <th></th>
         </tr>
-        <tr ng-repeat="integrante in ctrl.familia.integrantes">
-            <td>{ {integrante.DNI}}</td>
-            <td>{ {integrante.nombre}}</td>
-            <td>{ {integrante.apellido}}</td>
-            <td>{ {integrante.RelacionJF}}</td>
+        <tr ng-repeat="integrante in familia.integrantes">
+            <td>{{integrante.DNI}}</td>
+            <td>{{integrante.nombre}}</td>
+            <td>{{integrante.apellido}}</td>
+            <td>{{integrante.DescRelacionJF}}</td>
             <td>
-                <button type="button" class="btn btn-default" ng-click="ctrl.editarIntegrante(integrante)">
+                <button type="button" class="btn btn-default" ng-click="editarIntegrante(integrante)">
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </button>
             </td>
             <td>
-                <button type="button" class="btn btn-danger" ng-click="ctrl.eliminarIntegrante(integrante)">
+                <button type="button" class="btn btn-danger" ng-click="eliminarIntegrante(integrante)" ng-show="integrante.RelacionJF!='JF'">
                     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                 </button>
             </td>
@@ -33,72 +33,108 @@
     </table>
     <div class="md-col-6">
         <div class="md-col-3">
-            <button type="button" class="btn btn-success" ng-click="ctrl.agregarIntegrante()">Agregar</button>
+            <button type="button" class="btn btn-success" ng-click="agregarIntegrante()">Agregar</button>
         </div>
         <div class="md-col-3">
-            <button type="button" class="btn btn-default" ng-click="ctrl.guardarCambios()">Continuar</button>
+            <button type="button" class="btn btn-default" ng-click="guardarCambios()">Continuar</button>
         </div>
 
     </div>
 </div>
 <!--CARGA DE INTEGRANTE.-->
-<div ng-controller="FamiliaController as ctrl" ng-show="ctrl.opt.agregando">
-    <form ng-submit="ctrl.addPersona()">
-        <label>Nombre:</label>
-        <input class="form-control input-md" type="text" ng-model="ctrl.persona.nombre" required/>
-        <label>Apellido:</label>
-        <input class="form-control input-md" type="text" ng-model="ctrl.persona.apellido" required/>
-        <label>Tipo DNI:</label>
-        <select ng-options="item as item.descripcion for item in ctrl.tiposDni track by item.id" ng-model="ctrl.persona.tipoDni"></select>
-        <label>Nro. DNI:</label>
-        <input class="form-control input-md" type="number" ng-model="ctrl.persona.DNI" required ng-minlength="7"
-               ng-maxlength="9" ng-pattern="/^[0-9]*$/"/>
-        <label>CUIL:</label>
-        <input class="form-control input-md" type="number" ng-model="ctrl.persona.CUIL" required ng-minlength="10"
-               ng-maxlength="12" ng-pattern="/^[0-9]*$/"/>
-        <label>Fecha de Nacimiento:</label>
-        <input ui-date="{ dateFormat: 'dd-mm-yyyy' }" type="date" ng-model="ctrl.persona.nacimiento" required/>
-        <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
-        <label>Sexo:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.sexos track by item.id" ng-model="ctrl.persona.sexo"></select>
-        <label>Estado Civil:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.estadosCiviles track by item.id" ng-model="ctrl.persona.estadoCivil"></select>
-        <label>Nacionalidad:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.nacionalidades track by item.id" ng-model="ctrl.persona.nacionalidad"></select>
-        <label>Estudios:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.estudios track by item.id" ng-model="ctrl.persona.estudios"></select>
-        <label>Profesion:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.profesiones track by item.id" ng-model="ctrl.persona.profesion"></select>
-        <label>Capacidad Constructiva:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.capConstructivas track by item.id" ng-model="ctrl.persona.capConstructiva"></select>
-        <label>Dependencia Laboral:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.depLaborales track by item.id" ng-model="ctrl.persona.depLaboral"></select>
-        <label>Relacion con Jefe de Familia:</label>
-        <select class="form-control input-md" ng-options="item as item.descripcion for item in ctrl.relacionJF track by item.id" ng-model="ctrl.persona.relacionJF"></select>
-        <!---->
-        <label>Ingreso Neto:</label>
-        <input class="form-control input-md" type="number" ng-model="ctrl.persona.ingresoNeto"  ng-minlength="3"
-               ng-pattern="/^[0-9]*$/"/>
-        <label>Mail:</label>
-        <input class="form-control input-md" type="email" ng-model="ctrl.persona.mail" />
-        <label>Telefono:</label>
-        <input class="form-control input-md" type="number" ng-model="ctrl.persona.telefono" ng-pattern="/^[0-9]*$/"/>
-        <label>
-            <input class="form-control input-md" type="checkbox" ng-model="ctrl.persona.jubilado" name="personaJubilada"  />
+<div ng-controller="FamiliaController as ctrl" ng-show="opt.agregando">
+    <form ng-submit="addPersona(persona)" name="familiaForm">
+  <div class="form-group">
+    <label for="nombre">Nombre:</label>
+    <input class="form-control input-md" type="text" id="nombre" name="nombre" ng-model="persona.nombre" required/>
+  </div>
+  <div class="form-group">
+    <label for="apellido">Apellido:</label>
+    <input class="form-control input-md" type="text" id="apellido" name="apellido" ng-model="persona.apellido" required/>
+  </div>
+  <div class="form-group">
+    <label for="tipoDNI">Tipo DNI:</label>
+    <select ng-options="item as item.descripcion for item in tiposDni track by item.id" id="tipoDNI" ng-model="persona.tipoDni"></select>
+  </div>
+  <div class="form-group">
+    <label for="nroDNI">Nro. DNI:</label>
+    <input class="form-control input-md" type="number" ng-model="persona.DNI" required ng-minlength="7"
+               ng-maxlength="9" ng-pattern="/^[0-9]*$/" id="nroDNI" name="nroDNI"  />
+  </div>
+  <div class="form-group">
+    <label for="nroCUIL">CUIL:</label>
+    <input class="form-control input-md" type="number" ng-model="persona.CUIL" required ng-minlength="10"
+               ng-maxlength="12" ng-pattern="/^[0-9]*$/" id="nroCUIL" name="nroCUIL"/>
+  </div>
+  <div class="form-group">
+    <label for="fecNac">CUIL:</label>
+    <input ui-date="{ dateFormat: 'dd-mm-yyyy' }" type="date" id="fecNac" name="fecNac" ng-model="persona.nacimiento" required/>
+  </div>
+  <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
+  <div class="form-group">
+  <label for="sexo">Sexo:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in sexos track by item.id" ng-model="persona.sexo" 
+        id="sexo" name="sexo"></select>    
+  </div>
+  <div class="form-group">
+  <label for="estadoCivil">Estado Civil:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in estadosCiviles track by item.id" ng-model="persona.estadoCivil" id="estadoCivil" name="estadoCivil"></select>
+  </div>
+  <div class="form-group">
+   <label for="nacionalidad">Nacionalidad:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in nacionalidades track by item.id" ng-model="persona.nacionalidad" id="nacionalidad" name="nacionalidad"></select>  
+  </div>
+  <div class="form-group">
+     <label for="estudios">Estudios:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in estudios track by item.id" ng-model="persona.estudios" id="estudios" name="estudios"></select>
+  </div>
+  <div class="form-group">
+     <label for="profesion">Profesion:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in profesiones track by item.id" ng-model="persona.profesion" id="profesion" name="profesion"></select>
+  </div>
+  <div class="form-group">
+     <label for="capConstructiva">Capacidad Constructiva:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in capConstructivas track by item.id" ng-model="persona.capConstructiva" id="capConstructiva" name="capConstructiva"></select>
+  </div>
+  <div class="form-group">
+     <label for="depLaboral">Dependencia Laboral:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in depLaborales track by item.id" ng-model="persona.depLaboral" id="depLaboral" name="depLaboral"></select>
+  </div>
+  <div class="form-group" ng-show="persona.relacionJF!=99">
+     <label for="relacionJF">Relacion con Jefe de Familia:</label>
+        <select class="form-control input-md" ng-options="item as item.descripcion for item in relacionJF track by item.id" ng-model="persona.relacionJF" id="relacionJF" name="relacionJF"></select>
+  </div>
+  <!---->
+  <div class="form-group">
+     <label for="ingresoNeto">Ingreso Neto:</label>
+        <input class="form-control input-md" type="number" ng-model="persona.ingresoNeto"  ng-minlength="3"
+               ng-pattern="/^[0-9]*$/" id="ingresoNeto" name="ingresoNeto"/>
+  </div>
+  <div class="form-group">
+     <label for="mail">Mail:</label>
+        <input class="form-control input-md" type="email" ng-model="persona.mail" id="mail" name="mail"/>
+  </div>
+  <div class="form-group">
+     <label for="telefono">Telefono:</label>
+        <input class="form-control input-md" type="number" ng-model="persona.telefono" ng-pattern="/^[0-9]*$/" id="telefono" name="telefono"/>
+  </div>  
+  <div class="checkbox">
+    <label>
+            <input class="form-control input-md" type="checkbox" ng-model="persona.jubilado" name="personaJubilada"  />
             Jubilado
         </label>
-        <div id="esJubilado" ng-show="ctrl.persona.jubilado">
-            <label>Nro Carnet:</label>
-            <input class="form-control input-md" type="text" ng-model="ctrl.persona.carnetJubilacion" />
+  </div>
+  <div id="esJubilado" ng-show="persona.jubilado" class="form-group">
+            <label for="nroCarnet">Nro Carnet:</label>
+            <input class="form-control input-md" type="text" ng-model="persona.carnetJubilacion" id="nroCarnet" name="nroCarnet" />
         </div>
-        <label>
-            <input class="form-control input-md" type="checkbox" ng-model="ctrl.persona.discapacidad" />
-            La Persona presenta alguna discapacidad:
-        </label>
-        <fieldset class="form-group">
-            <input type="submit" class="btn btn-primary" value="Agregar Persona" />
-        </fieldset>
-    </form>
+        <div class="row">
+  <button type="submit" class="btn btn-primary">Agregar</button>
+  <button type="button" class="btn btn-default" ng-click="cancelarCarga()" ng-show="opt.agregando">Cancelar</button>
+  <button type="button" class="btn btn-default" ng-click="cancelarEdicion()" ng-show="opt.editando">Cancelar</button>
+</div>
+</form>
+
 </div>
 
 </html>

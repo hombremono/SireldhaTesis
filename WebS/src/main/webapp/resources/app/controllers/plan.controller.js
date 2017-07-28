@@ -2,8 +2,8 @@
  * Created by fran_ on 12/6/2017.
  */
 angular.module('webS').controller('PlanController',
-    [ '$scope', '$sce', '$uibModal','$location', 'planService', PlanController ]);
-function PlanController($scope, $sce, $uibModal, $location, planService) {
+    [ '$scope', '$sce', '$uibModal', 'planService', PlanController ]);
+function PlanController($scope, $sce, $uibModal, planService) {
     $scope.titulo = "Planes de vivienda";
     $scope.plan = {
         id:"",
@@ -92,7 +92,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     };
 
     $scope.volverInicio = function(){
-        $location.path("/");
+        $location.path("PATH A INICIO");
     };
 
 

@@ -2,8 +2,8 @@
  * Created by fran_ on 13/6/2017.
  */
 angular.module('webS').controller('InmuebleController',
-    [ '$scope', '$sce', '$uibModal','$location', 'inmuebleService', InmmuebleController ]);
-function InmmuebleController($scope, $sce, $uibModal, $location, inmuebleService ) {
+    [ '$scope', '$sce', '$uibModal', 'inmuebleService', InmmuebleController ]);
+function InmmuebleController($scope, $sce, $uibModal, inmuebleService ) {
 
     $scope.titulo = "Datos de Inmueble";
     $scope.inmueble = {
@@ -84,7 +84,7 @@ function InmmuebleController($scope, $sce, $uibModal, $location, inmuebleService
     $scope.cargarInmueble = function() {
         inmuebleService.add($scope.inmueble).then(function(resp) {
             $scope.cancelar();
-            $location.path('/loadFiles');
+            //Redirecciono
         }, function(respErr) {
             console.log(respErr);
         });

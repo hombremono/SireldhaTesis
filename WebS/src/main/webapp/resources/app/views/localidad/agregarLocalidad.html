@@ -11,3 +11,26 @@
     </form>
 </div>
 </html>
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">
+    <span>Nueva Localidad</span>
+  </h3>
+</div>
+<div class="modal-body" id="modal-body">
+<form class="form-horizontal" name="localidadForm">
+  <div class="form-group">
+    <label for="inputNombre" class="col-md-2 control-label">Nombre</label>
+    <div class="col-md-6">
+      <input type="text" class="form-control" id="inputNombre" name="nombre" ng-model="$ctrl.instancia.nombre" required>
+    </div>
+  </div>
+  <div ng-messages="localidadForm.nombre.$error" role="alert" ng-show="localidadForm.$submitted || localidadForm.nombre.$touched">
+    <div ng-message="required">Se requiere insertar un nombre a la localidad</div>
+  </div>
+</form>
+</div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-show="$ctrl.dataOK()" ng-click="$ctrl.ok()">Agregar</button>
+  <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Cancelar</button>
+</div>

@@ -1,13 +1,10 @@
 angular.module('webS').controller('FilesController',
-    [ '$scope', '$sce', '$uibModal','$location', 'filesService', FilesController ]);
-function FilesController($scope, $sce, $uibModal, $location, filesService) {
+    [ '$scope', '$sce', '$uibModal', 'filesService', FilesController ]);
+function FilesController($scope, $sce, $uibModal, filesService) {
 
   $scope.files = []; 
   $scope.upload=function(){
     //LLAMAR AL SERVICIO QUE CARGA LOS ARCHIVOS!!!!    
-  };
-  $scope.finish = function(){
-    $location.path('/review');
   };
 };
 
