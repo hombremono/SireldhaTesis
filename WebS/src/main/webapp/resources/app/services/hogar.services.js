@@ -17,5 +17,5 @@ angular.module('webS')
             delete: function(id) {
                 return $http.delete(URL_API_BASE+"hogar/"+id);
             }
-        }
+        };
     }]);

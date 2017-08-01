@@ -52,10 +52,5 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
             LOG.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(),e);
         }
-
-
-
-
     }
-
 }

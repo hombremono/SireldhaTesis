@@ -84,5 +84,5 @@ function HogarController($scope, $sce, $uibModal, $location, hogarService) {
             });
         }
 
-    }    
+    };
 }

@@ -13,5 +13,5 @@ angular.module('webS')
 		   };
 		   return $http(req);
 	   }
-   }
+   };
 }]);

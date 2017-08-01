@@ -2,9 +2,9 @@ angular.module('webS').controller('FilesController',
     [ '$scope', '$sce', '$uibModal','$location', 'filesService', FilesController ]);
 function FilesController($scope, $sce, $uibModal, $location, filesService) {
 
-  $scope.files = []; 
+  $scope.files = [];
   $scope.upload=function(){
-    //LLAMAR AL SERVICIO QUE CARGA LOS ARCHIVOS!!!!    
+    //LLAMAR AL SERVICIO QUE CARGA LOS ARCHIVOS!!!!
   };
   $scope.finish = function(){
     $location.path('/review');
@@ -23,13 +23,13 @@ app.directive('ngFileModel', ['$parse', function ($parse) {
                 var values = [];
                 angular.forEach(element[0].files, function (item) {
                     var value = {
-                       // File Name 
+                       // File Name
                         name: item.name,
-                        //File Size 
+                        //File Size
                         size: item.size,
-                        //File URL to view 
+                        //File URL to view
                         url: URL.createObjectURL(item),
-                        // File Input Value 
+                        // File Input Value
                         _file: item
                     };
                     values.push(value);
