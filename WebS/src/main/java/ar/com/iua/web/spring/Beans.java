@@ -47,6 +47,18 @@ public class Beans {
 	@Autowired
 	public IFamiliaDAO familiaDao(final SessionFactory sessionFactory){ return new FamiliaDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public ISituacionInmuebleDAO situacionInmuebleDao(final SessionFactory sessionFactory){ return new SituacionInmuebleDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ISolucionHabitacionalDAO solucionHabitacionalDao(final SessionFactory sessionFactory){ return new SolucionHabitacionalDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ILocalidadDAO localidadDao(final SessionFactory sessionFactory){ return new LocalidadDAO(sessionFactory);}
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -82,4 +94,9 @@ public class Beans {
 	@Bean
 	@Autowired
 	public IFamiliaService familiaService (final IFamiliaDAO familiaDao){ return new FamiliaService(familiaDao); }
+
+	@Bean
+	@Autowired
+	public IHogarService hogarService (final ISolucionHabitacionalDAO daoSH,final ISituacionInmuebleDAO daoSI,final ILocalidadDAO daoL)
+	{ return new HogarService(daoSH,daoSI,daoL); }
 }

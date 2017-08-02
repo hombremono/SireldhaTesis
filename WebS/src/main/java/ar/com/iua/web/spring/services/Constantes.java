@@ -22,5 +22,6 @@ public final class Constantes {
 	public static final String URL_FAMILIA = URL_BASE + "/familia";
 	public static final String URL_INMUEBLE = URL_BASE + "/inmueble";
 	public static final String URL_TRABAJO = URL_BASE + "/trabajo";
+	public static final String URL_HOGAR = URL_BASE + "/hogar";
 
 }
