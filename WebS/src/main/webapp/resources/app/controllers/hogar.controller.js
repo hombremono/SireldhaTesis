@@ -1,8 +1,8 @@
-
-
 angular.module('webS').controller('HogarController',
     [ '$scope', '$sce', '$uibModal', 'hogarService', '$location', HogarController ]);
-function HogarController($scope, $sce, $uibModal, $location, hogarService) {
+function HogarController($scope, $sce, $uibModal, hogarService, $location) {
+    debugger;
+
     $scope.titulo = "Carga de Hogar";
     $scope.Hogar = {
         id:"",
@@ -24,23 +24,38 @@ function HogarController($scope, $sce, $uibModal, $location, hogarService) {
         Id:0,
         Descripcion:"-SELECCIONE-"
     };
+    hogarService.loadCombos().then(function(resp) {
+        debugger;
 
 
-    $scope.Planes=[];
-    $scope.Viviendas=[];
-    $scope.Localidades=[];
+        datos = resp.data;
+        $scope.Planes = datos.solucionesHabitacionales;
+        $scope.Viviendas = datos.situacionesInmuebles;
+        $scope.Localidades = datos.localidades;
 
-    loadCollection = function(coleccion){
-        var datosColeccion;
-        //Llamo al servicio que me trae todos los datos
-        coleccion.push(defaultOptions);
-        coleccion.push(datosColeccion);
-    };
+    }, function(respErr) {
+        console.log(respErr);
+        $scope.datos = [];
+        $scope.opt.wait=false;
+    });
 
-    loadCollection($scope.Planes);
-    loadCollection($scope.Viviendas);
-    loadCollection($scope.Localidades);
-    
+
+
+
+    // loadCollection = function(){
+    //     debugger;
+    //     var datosColeccion;
+    //     datos = hogarService.loadCombos();
+    //     $scope.Planes = datos.solucionesHabitacionales;
+    //     $scope.Viviendas = datos.situacionesInmuebles;
+    //     $scope.Localidades = datos.localidades;
+    //     //Llamo al servicio que me trae todos los datos
+    //     coleccion.push(defaultOptions);
+    //     coleccion.push(datosColeccion);
+    // };
+
+
+
     $scope.opt = {
         agregando: false,
         wait : true
@@ -49,7 +64,7 @@ function HogarController($scope, $sce, $uibModal, $location, hogarService) {
 
     $scope.crearHogar = function() {
         hogarService.add($scope.Hogar).then(function(resp) {
-                        
+
             $scope.cancelar();
             $location.path('/requestJF');
         }, function(respErr) {
@@ -58,27 +73,27 @@ function HogarController($scope, $sce, $uibModal, $location, hogarService) {
     };
     $scope.cancelar = function() {
         $scope.Hogar = {
-        id:"",
-        idPlan:"",
-        idVivienda:"",
-        idLocalidad:"",
-        barrio:"",
-        direccion:{
-            calle:"",
-            numero:"",
-            pisoDepto:"",
-        },
-        telefono:"",
-        tarjeta:false,
-        fechaInicio:""
-    };
+            id:"",
+            idPlan:"",
+            idVivienda:"",
+            idLocalidad:"",
+            barrio:"",
+            direccion:{
+                calle:"",
+                numero:"",
+                pisoDepto:"",
+            },
+            telefono:"",
+            tarjeta:false,
+            fechaInicio:""
+        };
         $scope.opt.agregando=false;
     }
-    //Tiene que estar. Cuando se trigerea??
+
     $scope.delete = function(Hogar) {
         if(confirm("¿Esta seguro que desea ELIMINAR el hogar seleccionado?")) {
             hogarService.delete(Hogar.id).then(function(resp) {
-                $scope.cancelar();                
+                $scope.cancelar();
             }, function(respErr) {
                 console.log(respErr);
             });

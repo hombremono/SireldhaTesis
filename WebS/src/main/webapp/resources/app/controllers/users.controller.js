@@ -1,6 +1,7 @@
 angular.module('webS').controller('UsersController',
 		[ '$scope', '$sce', '$uibModal', 'usersService','rolesService', UsersController ]);
 function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
+	debugger;
 	$scope.titulo = "Usuarios";
 	$scope.datos = [];
 	$scope.opt = {
@@ -9,7 +10,7 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		agregando: false,
 		wait : true
 	};
-	
+
 	usersService.list().then(function(resp) {
 		$scope.datos = resp.data;
 		$scope.opt.wait=false;
@@ -18,7 +19,7 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		$scope.datos = [];
 		$scope.opt.wait=false;
 	});
-	
+
 	rolesService.list().then(function(resp) {
 		$scope.opt.roles = resp.data;
 	}, function(respErr) {
@@ -41,16 +42,16 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		});
 	}
 	$scope.dataOK=function() {
-		
+
 		var u= $scope.opt.user;
 		var ts=$scope.testString;
-		return $scope.opt.agregando && 
+		return $scope.opt.agregando &&
 			u != undefined &&
-			ts(u.fistName,2) && 
-			ts(u.lastName,2) && 
-			ts(u.name,2) && 
-			ts(u.email,3) && 
-			ts(u.password,2) && 
+			ts(u.fistName,2) &&
+			ts(u.lastName,2) &&
+			ts(u.name,2) &&
+			ts(u.email,3) &&
+			ts(u.password,2) &&
 			u.password==u.password1;
 	}
 	$scope.testString=function(str,minLength) {
@@ -76,10 +77,10 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 				console.log(respErr);
 			});
 		}
-		
+
 	}
-	
-	
+
+
 	$scope.guardar = function() {
 		usersService.update($scope.opt.user).then(function(resp) {
 			$scope.datos.forEach(function(item, idx) {
@@ -95,8 +96,8 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		});
 
 	}
-	
-	
+
+
 	$scope.filterRoles=function(q) {
 		var out = [];
 		$scope.opt.roles.forEach(function(item) {
@@ -107,8 +108,8 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		});
 		return out;
 	};
-	
-	
+
+
 	$scope.agregarModal = function() {
 		var modalInstance = $uibModal.open({
 		      animation: true,
@@ -119,7 +120,7 @@ function UsersController($scope, $sce, $uibModal, usersService, rolesService) {
 		      controllerAs: '$ctrl',
 		      size: 'lg',
 		      resolve: {
-		        instancia: function () { 
+		        instancia: function () {
 		        	return $scope.opt.user;
 		        }
 		      }

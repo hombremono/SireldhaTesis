@@ -2,6 +2,9 @@
 angular.module('webS')
     .factory('hogarService',['$http','URL_API_BASE',function($http, URL_API_BASE) {
         return {
+            loadCombos: function() {
+                return $http.get(URL_API_BASE+"hogar/loadCombos");
+            },
             list: function() {
                 return $http.get(URL_API_BASE+"hogar/");
             },

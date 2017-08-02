@@ -1,39 +1,38 @@
 
 
 <div class="container page-styling">
-    <div class="header-wrapper">
-        <div class="menu" ng-controller="MainController as ctrl">
-            <div class="mini-menu">
-                <label>
-                    <select class="selectnav">
-                        <option value="#" selected="">Nuestro Sistema</option>
-                        <option value="#">Como Aplicar</option>
-                        <option value="#">Propiedad Intelectual</option>
-                        <option value="#">Iniciar</option>
-                    </select>
-                </label>
-            </div>
-        </div>
-    </div>
+    <!--<div class="header-wrapper">-->
+        <!--<div class="menu" ng-controller="MainController as ctrl">-->
+            <!--<div class="mini-menu">-->
+                <!--<label>-->
+                    <!--<select class="selectnav">-->
+                        <!--<option value="#" selected="">Nuestro Sistema</option>-->
+                        <!--<option value="#">Como Aplicar</option>-->
+                        <!--<option value="#">Propiedad Intelectual</option>-->
+                        <!--<option value="#">Iniciar</option>-->
+                    <!--</select>-->
+                <!--</label>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <!--
         ACA VA EL CODIGO DE CADA PAGINA. HAY QUE CREAR DIRECTIVAS PARA AGRUPAR EL CODIGO DEL MENU Y DEL FOOTER, PARA NO REPETIRLO.
     -->
-    <div ng-controller="AppCtrl as ctrl">
         <h1><p>Bienvenido al Sistema de Registro Local de Demanda Habitacional Integral (SIRELDHA).</p></h1>
         <h2>Carga de Hogar</h2>
         <form ng-submit="crearHogar(Hogar)" name="hogarForm" >
             <div class="form-group">
                 <label for="selectPlan">Seleccione el plan al que desea aplicar</label>
-                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.Id as plan.Descripcion for plan in Planes"></select>
+                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.Id as plan.descripcion for plan in Planes"></select>
             </div>
             <h3>Datos del Hogar</h3>
             <div class="form-group">
                 <label for="selectVivienda">Tipo de vivienda</label>
-                <select class="form-control input-md" id="selectVivienda" ng-model="Hogar.idVivienda" ng-options="vivienda.Id as vivienda.Descripcion for vivienda in Viviendas"></select>
+                <select class="form-control input-md" id="selectVivienda" ng-model="Hogar.idVivienda" ng-options="vivienda.Id as vivienda.descripcion for vivienda in Viviendas"></select>
             </div>
             <div class="form-group">
                 <label for="selectLocalidad">Localidad</label>
-                <select class="form-control input-md" id="selectLocalidad" ng-model="Hogar.idLocalidad" ng-options="localidad.Id as localidad.Descripcion for localidad in Localidades"></select>
+                <select class="form-control input-md" id="selectLocalidad" ng-model="Hogar.idLocalidad" ng-options="localidad.Id as localidad.localidad for localidad in Localidades"></select>
             </div>
             <div class="form-group">
                 <label for="inputBarrio">Barrio</label>
