@@ -59,6 +59,47 @@ public class Beans {
 	@Autowired
 	public ILocalidadDAO localidadDao(final SessionFactory sessionFactory){ return new LocalidadDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IRolFamiliarDAO rolFamiliarDAO(final SessionFactory sessionFactory){ return new RolFamiliarDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IEstadoCivilDAO estadoCivilDAO(final SessionFactory sessionFactory){ return new EstadoCivilDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IEstudioDAO estudioDAO(final SessionFactory sessionFactory){ return new EstudiosDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public INacionalidadDAO nacionalidadDAO(final SessionFactory sessionFactory){ return new NacionalidadDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IProfesionDAO profesionDAO(final SessionFactory sessionFactory){ return new ProfesionDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ISexoDAO sexoDAO(final SessionFactory sessionFactory){ return new SexoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ISituacionLaboralDAO situacionLaboralDAO(final SessionFactory sessionFactory){ return new SituacionLaboralDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ITipoDocumentoDAO tipoDocumentoDAO(final SessionFactory sessionFactory){ return new TipoDocumentoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ICapacidadConstructivaDAO capacidadConstructivaDAO(final SessionFactory sessionFactory){ return new CapacidadConstructivaDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ITipoCapacidadConstructivaDAO tipoCapacidadConstructivaDAO(final SessionFactory sessionFactory){ return new TipoCapacidadConstructivaDAO(sessionFactory);}
+
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -89,7 +130,14 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IPersonaService personaService (final  IPersonaDAO personaDao){ return new PersonaService(personaDao); }
+	public IPersonaService personaService (final  IPersonaDAO personaDao,final ITipoCapacidadConstructivaDAO tipoCapacidadConstructivaDAO,
+										   final IEstadoCivilDAO estadoCivilDAO, final IEstudioDAO estudioDAO,
+										   final INacionalidadDAO nacionalidadDAO,final IProfesionDAO profesionDAO,
+										   final ISexoDAO sexoDAO, final ISituacionLaboralDAO situacionLaboralDAO,
+										   final ITipoDocumentoDAO tipoDocumentoDAO, final ILocalidadDAO localidadDAO,
+										   final IRolFamiliarDAO rolFamiliarDAO){
+		return new PersonaService(personaDao,tipoCapacidadConstructivaDAO,estadoCivilDAO,estudioDAO,nacionalidadDAO,
+				profesionDAO, sexoDAO, situacionLaboralDAO, tipoDocumentoDAO, localidadDAO,rolFamiliarDAO); }
 
 	@Bean
 	@Autowired

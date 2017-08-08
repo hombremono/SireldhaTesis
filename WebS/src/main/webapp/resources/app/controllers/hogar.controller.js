@@ -40,22 +40,6 @@ function HogarController($scope, $sce, $uibModal, hogarService, $location) {
     });
 
 
-
-
-    // loadCollection = function(){
-    //     debugger;
-    //     var datosColeccion;
-    //     datos = hogarService.loadCombos();
-    //     $scope.Planes = datos.solucionesHabitacionales;
-    //     $scope.Viviendas = datos.situacionesInmuebles;
-    //     $scope.Localidades = datos.localidades;
-    //     //Llamo al servicio que me trae todos los datos
-    //     coleccion.push(defaultOptions);
-    //     coleccion.push(datosColeccion);
-    // };
-
-
-
     $scope.opt = {
         agregando: false,
         wait : true

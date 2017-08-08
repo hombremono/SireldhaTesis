@@ -1,5 +1,6 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.business.model.PersonaCombos;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.business.Interfaces.IPersonaService;
@@ -50,6 +51,17 @@ public class PersonaController extends GenericController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete (@PathVariable int id) throws IOException {
         return setInactive(id,personaService);
+    }
+
+    @RequestMapping(value = "/loadCombos", method = RequestMethod.GET)
+    public ResponseEntity<Object> loadCombos () throws IOException {
+        try {
+            PersonaCombos target =  personaService.loadCombos();
+            return new ResponseEntity<Object>(target , HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

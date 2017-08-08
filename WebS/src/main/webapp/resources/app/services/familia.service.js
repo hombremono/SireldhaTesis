@@ -2,6 +2,9 @@
 angular.module('webS')
     .factory('familiaService',['$http','URL_API_BASE',function($http, URL_API_BASE) {
         return {
+            loadCombosPersona: function() {
+                return $http.get(URL_API_BASE+"persona/loadCombos");
+            },
             list: function() {
                 return $http.get(URL_API_BASE+"familia/");
             },

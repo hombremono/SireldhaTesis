@@ -4,7 +4,7 @@
 angular.module('webS').controller('FamiliaController',
     [ '$scope', '$sce', '$uibModal','$location', 'familiaService','personaService','jefeFamiliaService', FamiliaController ]);
 function FamiliaController($scope, $sce, $uibModal, $location, familiaService,personaService, jefeFamiliaService ) {
-
+debugger;
 $scope.titulo = "Familia";
 $scope.familia = {
     id:"",
@@ -80,35 +80,45 @@ $scope.defaultOptions={
         Descripcion:"-SELECCIONE-"
     };
 //Variables para llenar las listas
-    $scope.tiposDni = [];
-    $scope.sexos=[];
-    $scope.estadosCiviles=[];
-    $scope.nacionalidades=[];
-    $scope.estudios=[];
-    $scope.profesiones=[];
-    $scope.capConstructivas=[];
-    $scope.depLaborales=[];
-    $scope.relacionJF=[];
-    $scope.Localidades=[];
 
 
-    loadCollection = function(coleccion){
-        var datosColeccion;
-        //Llamo al servicio que me trae todos los datos
-        coleccion.push($scope.defaultOptions);
-        coleccion.push(datosColeccion);
-    };
 
-    loadCollection($scope.tiposDni);
-    loadCollection($scope.sexos);
-    loadCollection($scope.estadosCiviles);
-    loadCollection($scope.nacionalidades);
-    loadCollection($scope.estudios);
-    loadCollection($scope.profesiones);
-    loadCollection($scope.capConstructivas);
-    loadCollection($scope.depLaborales);
-    loadCollection($scope.relacionJF);
-    loadCollection($scope.Localidades);   
+    familiaService.loadCombosPersona().then(function(resp) {
+        debugger;
+        datos = resp.data;
+        $scope.tiposDni = datos.tiposDocumentos;
+        $scope.sexos=datos.generos;
+        $scope.estadosCiviles=datos.estadosCiviles;
+        $scope.nacionalidades=datos.nacionalidades;
+        $scope.estudios=datos.estudios;
+        $scope.profesiones=datos.profesiones;;
+        $scope.capConstructivas=datos.capacidadesConstructivas;;
+        $scope.depLaborales=datos.situacionesLaborales;
+        $scope.Localidades=datos.localidades;;
+        $scope.relacionJF=datos.rolesFamiliares;;
+
+    }, function(respErr) {
+        console.log(respErr);
+        $scope.datos = [];
+        $scope.opt.wait=false;
+    });
+    // loadCollection = function(coleccion){
+    //     var datosColeccion;
+    //     //Llamo al servicio que me trae todos los datos
+    //     coleccion.push($scope.defaultOptions);
+    //     coleccion.push(datosColeccion);
+    // };
+    //
+    // loadCollection($scope.tiposDni);
+    // loadCollection($scope.sexos);
+    // loadCollection($scope.estadosCiviles);
+    // loadCollection($scope.nacionalidades);
+    // loadCollection($scope.estudios);
+    // loadCollection($scope.profesiones);
+    // loadCollection($scope.capConstructivas);
+    // loadCollection($scope.depLaborales);
+    // loadCollection($scope.relacionJF);
+    // loadCollection($scope.Localidades);
 
 
 
@@ -240,7 +250,7 @@ $scope.cancelarCarga = function(){
 };
 
 $scope.cancelarEdicion = function(){
-    mapPersona($scope.integranteRaw);    
+    mapPersona($scope.integranteRaw);
     $scope.opt.agregando=false;
     $scope.opt.editando=false;
 };
@@ -250,8 +260,8 @@ $scope.addJefeDeFamilia = function(jefeDeFamilia) {
         jefeFamiliaService.get(resp.jefeFamilia.id).then(function(resp) {
             $scope.familia.integrantes.push(resp.persona);
             $scope.familia.JefeDeFamiliaDni = resp.persona.DNI;
-            $scope.familia.Apellido = resp.persona.apellido;            
-        });        
+            $scope.familia.Apellido = resp.persona.apellido;
+        });
     }, function(respErr) {
         console.log(respErr);
     });
@@ -262,5 +272,6 @@ $scope.addJefeDeFamilia = function(jefeDeFamilia) {
         console.log(respErr);
     });
     //Redireccion
-};}
+};
+ }
 
