@@ -141,7 +141,7 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IFamiliaService familiaService (final IFamiliaDAO familiaDao){ return new FamiliaService(familiaDao); }
+	public IFamiliaService familiaService (final IFamiliaDAO familiaDao, final IPersonaDAO personaDao){ return new FamiliaService(familiaDao,personaDao); }
 
 	@Bean
 	@Autowired

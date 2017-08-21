@@ -24,7 +24,7 @@ angular.module('webS')
           controller: 'PlanController'
       })
       .when('/family', {
-          templateUrl: 'views/familia/listaFamilia.html',
+          templateUrl: 'views/familia/familia.html',
           controller: 'FamiliaController'
       })
       .when('/requestHome', {

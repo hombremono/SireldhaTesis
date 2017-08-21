@@ -1,5 +1,6 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.business.Interfaces.IFamiliaService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by mnicolas on 14/06/17.
@@ -55,5 +57,22 @@ public class FamiliaController extends GenericController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delte (@PathVariable int id) throws IOException {
         return setInactive(id,familiaService);
+    }
+
+    @RequestMapping(value = "/integrantes/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getIntegrantes (@PathVariable int id) throws IOException {
+        try {
+            List<Persona> integrantes = familiaService.getIntegrantes(id);
+            if(!integrantes.isEmpty()){
+                return new ResponseEntity<Object>(integrantes , HttpStatus.OK);
+            }else  {
+                return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+            }
+        } catch (NotFoundException nfe) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

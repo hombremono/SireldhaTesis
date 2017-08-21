@@ -8,6 +8,9 @@ angular.module('webS')
             list: function() {
                 return $http.get(URL_API_BASE+"familia/");
             },
+            getIntegrantes: function(id) {
+                return $http.get(URL_API_BASE+"familia/integrantes/"+id);
+            },
             update: function(o) {
                 return $http.put(URL_API_BASE+"familia/",o);
             },

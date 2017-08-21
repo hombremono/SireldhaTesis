@@ -8,10 +8,8 @@ import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.StaleStateException;
+import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.internal.SessionImpl;
 import org.jooq.impl.DSL;
 import org.slf4j.Logger;
@@ -105,6 +103,20 @@ public class GenericDAO<Entity, PK extends Serializable> implements IGenericDAO<
 		List<Entity> l = null;
 		try {
 			l = getSession().createQuery(String.format("FROM %s", getDomainClass().getSimpleName())).list();
+		} catch (Exception e) {
+			LOG.error(e.getMessage(), e);
+			throw new PersistenceException(e.getMessage(), e);
+		} finally {
+			closeSession();
+		}
+		return l;
+	}
+
+	@Override
+	public List<Entity> searchByCriteria(Criterion criterion) throws PersistenceException {
+		List<Entity> l = null;
+		try {
+			l = getSession().createCriteria(getDomainClass()).add(criterion).list();
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 			throw new PersistenceException(e.getMessage(), e);

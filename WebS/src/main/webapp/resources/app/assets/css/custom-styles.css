@@ -97,7 +97,7 @@ a{transition:all 1s; }
  .spacing-rt{padding-right: 30px;}
  .centering{text-align: center;}
 
-.page-styling{background: #ebebeb;padding: 0 30px;margin-top: 90px;border-radius: 5px; padding-bottom: 80px;}
+.page-styling{background: #ffffff;padding: 0 30px;margin-top: 90px;border-radius: 5px; padding-bottom: 80px;}
  .ruler{border-bottom: 1px solid #c2c2c2;}
 
 .lines{background: url(../img/border.jpg) repeat-x 0; text-align: center; width: 100%;}

@@ -8,4 +8,5 @@ import ar.com.iua.modulo.persistence.dao.IGenericDAO;
  */
 public interface IPersonaDAO extends IGenericDAO <Persona, Integer> {
 
+
 }

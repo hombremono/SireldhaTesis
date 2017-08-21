@@ -7,6 +7,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
 
 public interface IGenericDAO<Entity, PK extends Serializable> extends Serializable {
 
@@ -20,12 +22,13 @@ public interface IGenericDAO<Entity, PK extends Serializable> extends Serializab
 
 	public void delete(Entity t) throws PersistenceException, NotFoundException;   
 
-	public List<Entity> list() throws PersistenceException;        
+	public List<Entity> list() throws PersistenceException;
+
+	public List<Entity> searchByCriteria(Criterion criterion) throws PersistenceException;
 
 	public String selectToJson(String sql) throws PersistenceException;
-	
+
 	public List<?> selectGeneric(String sql, ResultSetHandler<?> handler) throws PersistenceException;
-	
 	
 
 }

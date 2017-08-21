@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                    </button>
+                    <a class="navbar-brand" href="#">Integrantes de la Familia</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="">
+                                <i class="pe-7s-add-user"></i>
+								<p class="hidden-lg hidden-md">Agregar nuevo integrante</p>
+                            </a>
+                        </li>
+                        <li>
+                           <a href="">
+                                <i class="fa fa-search"></i>
+								<p class="hidden-lg hidden-md">Buscar integrante</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+
+<div ng-controller="FamiliaController as ctrl" ng-show="!ctrl.opt.agregando">
+<div class="col-md-12">
+    <div class="card card-plain">
+        <div class="header">
+        </div>
+    </div>
+        <table class="table table-hover">
+            <thead>
+            <th>Dni</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Relacion con el Jefe/a de Familia</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="integrante in ctrl.familia.integrantes">
+                <td>{ {integrante.DNI}}</td>
+                <td>{ {integrante.nombre}}</td>
+                <td>{ {integrante.apellido}}</td>
+                <td>{ {integrante.RelacionJF}}</td>
+                <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
