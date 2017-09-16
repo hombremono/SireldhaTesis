@@ -1,6 +1,9 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
 import ar.com.iua.modulo.business.model.PersonaCombos;
+import ar.com.iua.modulo.model.Direccion;
+import ar.com.iua.modulo.model.Telefono;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.business.Interfaces.IPersonaService;
@@ -23,6 +26,8 @@ public class PersonaController extends GenericController {
 
     @Autowired
     private IPersonaService personaService;
+    @Autowired
+    private ITelefonoService telefonoService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException{
@@ -39,6 +44,17 @@ public class PersonaController extends GenericController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Persona persona) throws IOException {
+        Telefono telefono = persona.getTelefono();
+        try {
+            if(telefono.getId_Telefono() <= 0) {
+                telefono.setActive(true);
+                persona.setTelefono(telefonoService.saveOrUpdate(telefono));
+            }
+        }catch (Exception e){
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
         return add(persona,personaService,Constantes.URL_PERSONA);
 
     }
