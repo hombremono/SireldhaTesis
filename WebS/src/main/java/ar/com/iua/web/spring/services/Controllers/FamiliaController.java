@@ -1,6 +1,10 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.business.Interfaces.IDireccionService;
+import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
+import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Persona;
+import ar.com.iua.modulo.model.Telefono;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.business.Interfaces.IFamiliaService;
@@ -25,6 +29,11 @@ public class FamiliaController extends GenericController {
 
     @Autowired
     private IFamiliaService familiaService;
+    @Autowired
+    private IDireccionService dirService;
+    @Autowired
+    private ITelefonoService telService;
+
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException {
@@ -45,6 +54,22 @@ public class FamiliaController extends GenericController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Familia familia) throws IOException {
+        Telefono telefono = familia.getTelefono();
+        Direccion direccion = familia.getDireccion();
+
+        try {
+            if(telefono.getId_Telefono() <= 0) {
+                telefono.setActive(true);
+                familia.setTelefono(telService.saveOrUpdate(telefono));
+            }
+            if(direccion.getId_Direccion() <= 0) {
+                direccion.setisActive(true);
+                familia.setDireccion(dirService.saveOrUpdate(direccion));
+            }
+        }catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return add(familia,familiaService,Constantes.URL_FAMILIA);
 
     }
