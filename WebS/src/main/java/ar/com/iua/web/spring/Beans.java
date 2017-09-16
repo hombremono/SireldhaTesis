@@ -19,6 +19,7 @@ public class Beans {
 	public IUserDAO userDao(final SessionFactory sessionFactory) {
 		return new UserDAO(sessionFactory);
 	}
+	
 	@Bean
 	@Autowired
 	public IRoleDAO roleDao(final SessionFactory sessionFactory) {
@@ -99,6 +100,47 @@ public class Beans {
 	@Autowired
 	public ITipoCapacidadConstructivaDAO tipoCapacidadConstructivaDAO(final SessionFactory sessionFactory){ return new TipoCapacidadConstructivaDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IMaterialParedDAO materialParedDAO (final SessionFactory sessionFactory) { return new MaterialParedDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IMaterialPisoDAO materialPisoDAO (final SessionFactory sessionFactory) { return new MaterialPisoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IMaterialTechoDAO materialTechoDAO (final SessionFactory sessionFactory) { return new MaterialTechoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IMotivoCarecimientoDAO motivoCarecimientoDAO (final SessionFactory sessionFactory) { return new MotivoCarecimientoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPoseeAguaDAO poseeAguaDAO (final SessionFactory sessionFactory) { return new PoseeAguaDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPoseeCocinaDAO poseeCocinaDAO (final SessionFactory sessionFactory) { return new PoseeCocinaDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPoseeLuzDAO poseeLuzDAO (final SessionFactory sessionFactory) { return new PoseeLuzDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IProcedenciaAguaDAO procedenciaAguaDAO (final SessionFactory sessionFactory) { return new ProcedenciaAguaDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ITipoBanoDAO tipoBanoDAO (final SessionFactory sessionFactory) { return new TipoBanoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IInmuebleDAO inmuebleDAO (final SessionFactory sessionFactory) { return new InmuebleDAO(sessionFactory);}
+
+
 
 	//---------------------------------------------------Services-------------------------------------------------------
 
@@ -147,4 +189,15 @@ public class Beans {
 	@Autowired
 	public IHogarService hogarService (final ISolucionHabitacionalDAO daoSH,final ISituacionInmuebleDAO daoSI,final ILocalidadDAO daoL)
 	{ return new HogarService(daoSH,daoSI,daoL); }
+
+	@Bean
+	@Autowired
+	public IInmuebleService inmuebleService (final IInmuebleDAO dao, final IMotivoCarecimientoDAO motivoCarecimientoDAO, final IMaterialParedDAO materialParedDAO,
+											 final IMaterialTechoDAO materialTechoDAO, final IMaterialPisoDAO materialPisoDAO, final IPoseeAguaDAO poseeAguaDAO,
+											 final IProcedenciaAguaDAO procedenciaAguaDAO, final ITipoBanoDAO tipoBanoDAO, final IPoseeLuzDAO poseeLuzDAO,
+											 final IPoseeCocinaDAO poseeCocinaDAO,final ILocalidadDAO localidadDAO)
+	{return new InmuebleService(dao,motivoCarecimientoDAO,materialParedDAO,materialTechoDAO,materialPisoDAO,poseeAguaDAO,procedenciaAguaDAO,
+								tipoBanoDAO,poseeLuzDAO,poseeCocinaDAO,localidadDAO);}
+
+
 }
