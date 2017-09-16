@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: web3
 -- ------------------------------------------------------
--- Server version	5.7.18-0ubuntu0.17.04.1
+-- Server version	5.7.19-0ubuntu0.17.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -70,7 +70,7 @@ CREATE TABLE `archivos` (
 
 LOCK TABLES `archivos` WRITE;
 /*!40000 ALTER TABLE `archivos` DISABLE KEYS */;
-INSERT INTO `archivos` VALUES (6,'�\��\�\0JFIF\0\0\0\0\0\0�\�\0C\0	\Z!\Z\"$\"$�\�\0C��\0\0`\0`\"\0�\�\0\0\0\0\0\0\0\0\0\0\0\0\0\0	�\�\0;\0\0\0\0\0\0!1A\"Q2aq�B��#Rb���3Cr��S\���\�\0\0\0\0\0\0\0\0\0\0\0\0\0\0�\�\0)\0\0\0\0\0\0\0\0\0!1AQ\"aq2���\��\�\0\0\0?\0r�554�Phw�wE>̳jW%H\�l���ugd6>jQ\�.\�O��o���\�%�O{��Gp=8�\�\�6I�\0bO�,�i�p,�f\�-T$_5n\�\\UfA�\r\�+rT2�G�U�Gb�~-3�n\��\�\�O\�qm8�%hZ��A\�A\0\��\�K��kS�e�`\��˘\0Z�Xۙ���\�\��p\0\�T\�;!f略�\�Y\Z�\�j\�\�4O�\�\�\�J\�[\�\�AL�r\��s\�p(I�5��߉\�TjQ\�\�y\�\�ĤyR��J�\�؍�\�mS|R;oE��}%���Ӏ\�Wakz�����\\�����I)�����\��\�͋ú\�\�\�*����f\����򶟺�\�\�y\�L�\"]A\�S�d8�^uG*qj9R�Ԓt\�{}\\\�n5�h�\���\�O�G\�\��\0���KM\rԇ����U�WW\�\�NvR�%#\'\�@�\0�|\�\\�𒔸\0lj\�\�ԛZbN<\�(g\�\�c�M�ң��\�r�\Z|q5{-\�+Xv�\\\�o\��%!���z�_�\�ePφ\��<ͨ\����\�\��1\'9 \�\�ޙ2�=�-:\�\�Y\�Q��W�r}\�GN�B\�c�̹���P�ꆷhR+\0f�fA\�L�G�\']�\�N&�\�d&4d�)S�\�*J�2GA�7;�\�\�q�Ƴ\��䪪؊�\�m\r�+Kl�(+!\�|Y��Ʋoh�8D�6��Ctĺ*k\�(qj	8	G\�rs�\�a\�Q\�\�\�u\�\�\�\�->�����i\�(\�9&G)Np�JH\�ߔ��bHP;e\����\�U\�\�r\"���q�+\�\�Z8!>]�\�\�\�\�\�\��pT)FU�t��~0�\�Ф!�%9Q	Q �Jp3�A�5��\0\n�\Z*��E�)ʙN@K2\�d)\�s�u+�+$���\�PD�\r\"�Ǉ�܎�5Ssש6\�Mb�5�Pc�.:��\0�$\�\0ܝ,R����]�n)4[�!\�&8=BwK_|���@hkچݸo\�h��jYC0 D���m��%N�3��\�\�\�Æ^\�6\��\�qN�<0K\�#��1\�\��t�\���Ժ��L�\�^p\"K�qի��s\�\Zn�˦U�`ƭ]N�?\n]�Sן\�U��:�G�1!\�9*\���\�Б\"U�OzS�DH\�6zB�]\�\�L�\�3\�\�\�S\�5V\�S\�Q͹Xa�.4�xxI r8��;\�Ї��\�\�qʸ�JQ}�Q�|�\�O�xϩ\'��n�ݵ\�!��̛�\�%ꌑ�Z�\r>�F\������\�I`\�Ge\�j\Z|\Zn#c{wH��\�\�`\�=��Ҥ�\��K�r~5Bw����\�\\/+F����+-�\��\��\0��)��9��0\�i\nBy�\�U�H\Z>\�\'ٶ�[aLT*\�%�\�\�\\x\�卜_��}I\�\�\�ߗ|Iש�Y�%���Q\r����\�:��a;t\�цF��.`F\�7֙wʗJ(yE��O:w\�(|C\�3�~Y��1\�q�\�^\\jch\�\�n\�9\���|)�\'d�d\nT�9)\r,�c\�8%)\�\�\�t\�t\�{J�E�\�M�\�ȓB��9Z�����IA\rr����\�\'\' ��5*Q\�S�L�\Z�N�O�\�Z���\�i\�$��]�A\�SN��_o�\�j�S�\�Դ[\�e\�R�@��aX!G�Cx\�yX\�\�ƺx}I�컚\�M\�\�\�Bt\�m��m�����נ�f��6�\�R�3끘�?n\�\0\�8H\0�q��i\�=\�s]RL��Ɠd��Q�C,�=R2~�$��D���\�\�jbis\�De\�;�\0��\�-��T���m\�\�\r�\��1ZO8kH�\�stܓ�\Z]\��v���\'7!��cV�\�\�\�y�\�U�}5�.�T�S۩;Sp^XB[d �\�\0�\�u��\�n$:�r�*�q�\��r\�\��T�̣�L�E\r�\\\�\�)aհ\��+@\�2�$\�q��\�:\�sq\"�:�\�|ǡ\�[|�B\�V�\�	�)=\�\�t1K��Q�ۖ\�a鱈��9�l�\0	\�}�\�z�&�\��\�e�\�vI[\\��$\��\�S���;ZK�\�6MFl�\��v\�H\'����D�\��ϵ\�\�\���\�v\�\�d�\��_\�l��S�@\�͢Q\�*Tz]\"0�F@C,0�T���{\�\Z�G?fd6JA)\��|\�Q�Y�G�Ou\�<��yp{\�\�\�@\�+_~�S5�\�e\�\�\�c\�qK�9R\�@qc���\�N�\�7\"�ӈ�\�\�[8�mc\�I\��}tn\��ÅC��:0fk>�\�ͨI>\Zǣ�yO\�?-^G*�\�\�55\�X��b`6l̨\�K\�[X\�!���\0*U�-�\�LZ�Y\�\�%���\�J�\�w\�\�\�\���Ө��E��T�(\�ўPO`�T��\0{k\�ˉ�\�u\rIK�֌\�S.\�P\�I؃\�\����焺K�\�5FE�cp&�\Z�{�Ċ�B�ĸ�\�$31*\'��\�#c\�A�\�lh\�/\�\�*mM�<ڈ->\�F;\�?�\�e�2��\�G�9�/�\�\�}A���[v\��d鐢��0J�C\�Z�0��gC�\�*\�\�;\�<\�\�2q\��\�A�9\�\�\�f2b��\�W3j�\�\�KF\�o�\�i��_0.-�~^�yN6�\�ҿEb-]�n:�����n�\\z�@\�\�_X��\� �����9�~\�\'R$<Q\�wc�8\Zw_\�\�\�[�U^�K�\�m�mƊd\�r�����ly�\�9\�\00{\�kbE\�*d~_���X7��\'\�۾�1�ީIJK���\�\�~\"�\�͗(��\�H/�W}~J\�h3K�;�\�\�\�]M��\�Vdx\�?4���\�5f\�\�\�>��gZ]F�\�vܥs�<���cu�K;�nɕ�(�]BV���\0�}�Yj�&٥�_�\�?_\r:�\�(.+\�륛ڻ�\�7&��\�#���@\�BR7$\0�܀7;�\�^~�N7��\�����\0*NI[���6�~\�\�\\\�\�J\�&tO\�\�\�\�xI�*m��f6$\�P>�\���z`�\�\�F�e&ݧAk\�\�\�2\n\�o�� ����\'`;�9\Z\"�m�=~�\�B+�\�u\��M����Ԕ�\��\�\�\�<[��\�q*PRʘ�\��o�\�\�題/&�\��Zs\�c=���\��� \�\�V]^�\"c�Rߔ\�^\�J=\0�l5aN��)\��C��/��\��kL�\��m%!4��\�c\nt�\�?~\�A�^\"\�,G\��6tSZ\Z(,�e2<�\�J\�&\�wt�2�%ٗ|ߒ��Ni�\�^��a��\\II\�O�\�ӜKq\�r՞\�c�h�\�\\\�\�>\�|%�z%�G\�l���V�{Z\�\n^I�\�L�^¼��6$�n��`\�?d\�\�\�e�\�*�63l�-\�e\'\�v\�\�F�?�}Z�r�Z�q�\��`\0�\r3EOf�E�×\�\�I)\�#?MY�\�o���h|;r�,��\���\�\�{L4s\�\�\�Ӧ_�\�','2016-11-03 20:07:48','image/jpeg','duke-java.jpeg',3445);
+INSERT INTO `archivos` VALUES (6,'����\0JFIF\0\0\0\0\0\0��\0C\0	\Z!\Z\"$\"$��\0C��\0\0`\0`\"\0��\0\0\0\0\0\0\0\0\0\0\0\0\0\0	��\0;\0\0\0\0\0\0!1A\"Q2aq�B��#Rb���3Cr��S����\0\0\0\0\0\0\0\0\0\0\0\0\0\0��\0)\0\0\0\0\0\0\0\0\0!1AQ\"aq2������\0\0\0?\0r�554�Phw�wE>̳jW%H�l���ugd6>jQ�.�O��o����%�O{��Gp=8���6I�\0bO�,�i�p,�f�-T$_5n�\\UfA�\r�+rT2�G�U�Gb�~-3�n����O�qm8�%hZ��A�A\0���K��kS�e�`��˘\0Z�Xۙ������p\0�T�;!f略��Y\Z��j��4O����J�[��AL�r��s�p(I�5��߉�TjQ��y��ĤyR��J��؍��mS|R;oE��}%���Ӏ�Wakz�����\\�����I)��������͋ú���*����f����򶟺���y�L�\"]A�S�d8�^uG*qj9R�Ԓt�{}\\�n5�h�����O�G���\0���KM\rԇ����U�WW��NvR�%#\'�@�\0�|�\\�𒔸\0lj��ԛZbN<�(g��c�M�ң���r�\Z|q5{-�+Xv�\\�o��%!���z�_��ePφ��<ͨ�������1\'9 ��ޙ2�=�-:��Y�Q��W�r}�GN�B�c�̹���P�ꆷhR+\0f�fA�L�G�\']��N&��d&4d�)S��*J�2GA�7;���q�Ƴ��䪪؊��m\r�+Kl�(+!�|Y��Ʋoh�8D�6��Ctĺ*k�(qj	8	G�rs��a�Q���u����->�����i�(�9&G)Np�JH�ߔ��bHP;e�����U��r\"���q�+��Z8!>]��������pT)FU�t��~0��Ф!�%9Q	Q �Jp3�A�5��\0\n�\Z*��E�)ʙN@K2�d)�s�u+�+$����PD�\r\"�Ǉ�܎�5Ssש6�Mb�5�Pc�.:��\0�$�\0ܝ,R����]�n)4[�!�&8=BwK_|���@hkچݸo�h��jYC0 D���m��%N�3�����Æ^�6���qN�<0K�#��1���t����Ժ��L��^p\"K�qի��s�\Zn�˦U�`ƭ]N�?\n]�Sן�U��:�G�1!�9*����Б\"U�OzS�DH�6zB�]��L��3���S�5V�S�Q͹Xa�.4�xxI r8��;�Ї����qʸ�JQ}�Q�|��O�xϩ\'��n�ݵ�!��̛��%ꌑ�Z�\r>�F�������I`�Ge�j\Z|\Zn#c{wH����`�=��Ҥ���K�r~5Bw�����\\/+F����+-�����\0��)��9��0�i\nBy��U�H\Z>�\'ٶ�[aLT*�%���\\x�卜_��}I���ߗ|Iש�Y�%���Q\r�����:��a;t�цF��.`F�7֙wʗJ(yE��O:w�(|C�3�~Y��1�q��^\\jch��n�9���|)�\'d�d\nT�9)\r,�c�8%)���t�t�{J�E��M��ȓB��9Z�����IA\rr�����\'\' ��5*Q�S�L�\Z�N�O��Z����i�$��]�A�SN��_o��j�S��Դ[�e�R�@��aX!G�Cx�yX��ƺx}I�컚�M���Bt�m��m�����נ�f��6��R�3끘�?n�\0�8H\0�q��i�=�s]RL��Ɠd��Q�C,�=R2~�$��D�����jbis�De�;�\0���-��T���m��\r���1ZO8kH��stܓ�\Z]��v���\'7!��cV����y��U�}5�.�T�S۩;Sp^XB[d ��\0��u���n$:�r�*�q���r���T�̣�L�E\r�\\��)aհ��+@�2�$�q���:�sq\"�:��|ǡ�[|�B�V��	�)=��t1K��Q�ۖ�a鱈��9�l�\0	�}��z�&����e��vI[\\��$���S���;ZK��6MFl���v�H\'����D���ϵ������v��d���_�l��S�@�͢Q�*Tz]\"0�F@C,0�T���{�\Z�G?fd6JA)��|�Q�Y�G�Ou�<��yp{���@�+_~�S5��e���c�qK�9R�@qc����N��7\"�ӈ���[8�mc�I��}tn��ÅC��:0fk>��ͨI>\Zǣ�yO�?-^G*���55�X��b`6l̨�K�[X�!���\0*U�-��LZ�Y��%����J��w������Ө��E��T�(�ўPO`�T��\0{k�ˉ��u\rIK�֌�S.�P�I؃�����焺K��5FE�cp&�\Z�{�Ċ�B�ĸ��$31*\'���#c�A��lh�/��*mM�<ڈ->�F;�?��e�2���G�9�/���}A���[v��d鐢��0J�C�Z�0��gC��*��;�<��2q���A�9���f2b���W3j���KF�o��i��_0.-�~^�yN6��ҿEb-]�n:�����n�\\z�@��_X��� �����9�~�\'R$<Q�wc�8\Zw_���[�U^�K��m�mƊd�r�����ly��9�\00{�kbE�*d~_���X7��\'�۾�1�ީIJK�����~\"��͗(���H/�W}~J�h3K�;����]M���Vdx�?4����5f���>��gZ]F��vܥs�<���cu�K;�nɕ�(�]BV���\0�}�Yj�&٥�_��?_\r:��(.+�륛ڻ��7&���#���@�BR7$\0�܀7;��^~�N7�������\0*NI[���6�~��\\��J�&tO����xI�*m��f6$�P>����z`���F�e&ݧAk���2\n�o�� ����\'`;�9\Z\"�m�=~��B+��u��M����Ԕ������<[���q*PRʘ���o���題/&���Zs�c=������ ��V]^�\"c�Rߔ�^�J=\0�l5aN��)��C��/����kL���m%!4���c\nt��?~�A�^\"�,G��6tSZ\Z(,�e2<��J�&�wt�2�%ٗ|ߒ��Ni��^��a��\\II�O��ӜKq�r՞�c�h��\\��>�|%�z%�G�l���V�{Z�\n^I��L�^¼��6$�n��`�?d���e��*�63l�-�e\'�v��F�?�}Z�r�Z�q���`\0�\r3EOf�E�×��I)�#?MY��o���h|;r�,�������{L4s���Ӧ_��','2016-11-03 20:07:48','image/jpeg','duke-java.jpeg',3445);
 /*!40000 ALTER TABLE `archivos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +303,7 @@ CREATE TABLE `direccion` (
   PRIMARY KEY (`id_Direccion`),
   KEY `fk_DireccionLocalidad_idx` (`idLocalidad`),
   CONSTRAINT `fk_direccion_1` FOREIGN KEY (`idLocalidad`) REFERENCES `localidad` (`id_Localidad`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -404,6 +404,8 @@ INSERT INTO `direccion` VALUES (89,'espana','611','','roca',0,0,8,1);
 INSERT INTO `direccion` VALUES (90,'Acalle','0123','Adpto','Abarrio',123,456,1,0);
 INSERT INTO `direccion` VALUES (91,'Acalle22222','0123','Adpto','Abarrio',123,456,1,0);
 INSERT INTO `direccion` VALUES (92,'Acalle22222','0123','Adpto','Abarrio',123,456,1,0);
+INSERT INTO `direccion` VALUES (93,'27 de abril','3276','','Alto Alberdi',0,0,8,0);
+INSERT INTO `direccion` VALUES (94,'27 de abril','3276','','Alto Alberdi',0,0,8,0);
 /*!40000 ALTER TABLE `direccion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,7 +510,7 @@ CREATE TABLE `familia` (
   `idTelefono` int(11) NOT NULL,
   `ingresoNetoFamiliar` float NOT NULL DEFAULT '0',
   `tarjetaCredito` tinyint(1) NOT NULL DEFAULT '0',
-  `antiguedadResidencia` int NOT NULL,
+  `antiguedadResidencia` int(11) NOT NULL,
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_Familia`),
   KEY `fk_FamiliaSituacionInmueble_idx` (`idSituacionInmueble`),
@@ -519,7 +521,7 @@ CREATE TABLE `familia` (
   CONSTRAINT `fk_familia_2` FOREIGN KEY (`idDireccion`) REFERENCES `direccion` (`id_Direccion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_familia_3` FOREIGN KEY (`idSolucionHabitacional`) REFERENCES `solucionhabitacional` (`id_SolucionHabitacional`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_familia_4` FOREIGN KEY (`idTelefono`) REFERENCES `telefono` (`id_Telefono`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -528,56 +530,59 @@ CREATE TABLE `familia` (
 
 LOCK TABLES `familia` WRITE;
 /*!40000 ALTER TABLE `familia` DISABLE KEYS */;
-INSERT INTO `familia` VALUES (2,4,1,2,2,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (3,1,1,3,3,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (4,4,1,4,4,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (5,4,4,7,8,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (6,4,1,10,12,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (7,4,1,12,15,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (8,4,4,14,18,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (9,3,1,15,21,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (10,1,1,16,24,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (11,1,6,19,28,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (12,3,1,20,30,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (13,1,3,21,31,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (14,3,1,22,33,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (15,3,1,24,36,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (16,3,4,27,40,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (17,3,1,29,42,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (18,3,1,31,45,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (19,3,1,33,48,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (20,3,1,36,52,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (21,3,1,37,55,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (22,3,1,39,58,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (23,3,1,41,61,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (24,1,3,43,64,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (25,1,1,44,67,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (30,1,1,47,72,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (31,1,1,48,75,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (32,1,3,50,79,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (33,4,1,51,82,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (34,4,1,53,85,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (35,4,1,55,89,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (36,4,1,58,93,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (37,4,4,61,97,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (38,4,1,63,100,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (39,4,1,66,104,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (40,4,1,68,107,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (41,1,4,70,110,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (42,1,7,71,113,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (43,2,1,73,117,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (44,2,1,74,119,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (45,2,4,75,122,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (46,2,5,76,125,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (62,2,1,78,129,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (63,2,1,80,133,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (64,2,6,82,136,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (65,2,2,83,138,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (66,2,1,84,141,0,1,'0000-00-00',1);
-INSERT INTO `familia` VALUES (67,2,1,85,144,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (68,2,1,86,147,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (69,4,1,87,149,0,0,'0000-00-00',1);
-INSERT INTO `familia` VALUES (70,1,1,89,151,0,0,'0000-00-00',1);
+INSERT INTO `familia` VALUES (2,4,1,2,2,0,0,2,0);
+INSERT INTO `familia` VALUES (3,1,1,3,3,0,0,0,1);
+INSERT INTO `familia` VALUES (4,4,1,4,4,0,1,0,1);
+INSERT INTO `familia` VALUES (5,4,4,7,8,0,1,0,1);
+INSERT INTO `familia` VALUES (6,4,1,10,12,0,0,0,1);
+INSERT INTO `familia` VALUES (7,4,1,12,15,0,0,0,1);
+INSERT INTO `familia` VALUES (8,4,4,14,18,0,0,0,1);
+INSERT INTO `familia` VALUES (9,3,1,15,21,0,1,0,1);
+INSERT INTO `familia` VALUES (10,1,1,16,24,0,0,0,1);
+INSERT INTO `familia` VALUES (11,1,6,19,28,0,0,0,1);
+INSERT INTO `familia` VALUES (12,3,1,20,30,0,1,0,1);
+INSERT INTO `familia` VALUES (13,1,3,21,31,0,0,0,1);
+INSERT INTO `familia` VALUES (14,3,1,22,33,0,1,0,1);
+INSERT INTO `familia` VALUES (15,3,1,24,36,0,0,0,1);
+INSERT INTO `familia` VALUES (16,3,4,27,40,0,0,0,1);
+INSERT INTO `familia` VALUES (17,3,1,29,42,0,1,0,1);
+INSERT INTO `familia` VALUES (18,3,1,31,45,0,1,0,1);
+INSERT INTO `familia` VALUES (19,3,1,33,48,0,1,0,1);
+INSERT INTO `familia` VALUES (20,3,1,36,52,0,0,0,1);
+INSERT INTO `familia` VALUES (21,3,1,37,55,0,1,0,1);
+INSERT INTO `familia` VALUES (22,3,1,39,58,0,0,0,1);
+INSERT INTO `familia` VALUES (23,3,1,41,61,0,0,0,1);
+INSERT INTO `familia` VALUES (24,1,3,43,64,0,0,0,1);
+INSERT INTO `familia` VALUES (25,1,1,44,67,0,0,0,1);
+INSERT INTO `familia` VALUES (30,1,1,47,72,0,0,0,1);
+INSERT INTO `familia` VALUES (31,1,1,48,75,0,0,0,1);
+INSERT INTO `familia` VALUES (32,1,3,50,79,0,0,0,1);
+INSERT INTO `familia` VALUES (33,4,1,51,82,0,0,0,1);
+INSERT INTO `familia` VALUES (34,4,1,53,85,0,0,0,1);
+INSERT INTO `familia` VALUES (35,4,1,55,89,0,0,0,1);
+INSERT INTO `familia` VALUES (36,4,1,58,93,0,1,0,1);
+INSERT INTO `familia` VALUES (37,4,4,61,97,0,1,0,1);
+INSERT INTO `familia` VALUES (38,4,1,63,100,0,0,0,1);
+INSERT INTO `familia` VALUES (39,4,1,66,104,0,1,0,1);
+INSERT INTO `familia` VALUES (40,4,1,68,107,0,1,0,1);
+INSERT INTO `familia` VALUES (41,1,4,70,110,0,0,0,1);
+INSERT INTO `familia` VALUES (42,1,7,71,113,0,0,0,1);
+INSERT INTO `familia` VALUES (43,2,1,73,117,0,0,0,1);
+INSERT INTO `familia` VALUES (44,2,1,74,119,0,0,0,1);
+INSERT INTO `familia` VALUES (45,2,4,75,122,0,0,0,1);
+INSERT INTO `familia` VALUES (46,2,5,76,125,0,0,0,1);
+INSERT INTO `familia` VALUES (62,2,1,78,129,0,0,0,1);
+INSERT INTO `familia` VALUES (63,2,1,80,133,0,0,0,1);
+INSERT INTO `familia` VALUES (64,2,6,82,136,0,0,0,1);
+INSERT INTO `familia` VALUES (65,2,2,83,138,0,0,0,1);
+INSERT INTO `familia` VALUES (66,2,1,84,141,0,1,0,1);
+INSERT INTO `familia` VALUES (67,2,1,85,144,0,0,0,1);
+INSERT INTO `familia` VALUES (68,2,1,86,147,0,0,0,1);
+INSERT INTO `familia` VALUES (69,4,1,87,149,0,0,0,1);
+INSERT INTO `familia` VALUES (70,1,1,89,151,0,0,0,1);
+INSERT INTO `familia` VALUES (71,4,1,2,2,0,0,1,1);
+INSERT INTO `familia` VALUES (72,4,1,2,2,0,0,1,1);
+INSERT INTO `familia` VALUES (73,4,1,94,2,0,0,1,1);
 /*!40000 ALTER TABLE `familia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -608,12 +613,13 @@ CREATE TABLE `inmueble` (
   KEY `fk_InmueblePared_idx` (`idPared`),
   KEY `fk_InmuebleTecho_idx` (`idTecho`),
   KEY `fk_InmuebleServicioAgua_idx` (`idServicioAgua`),
+  CONSTRAINT `FK_fgxwjm8msjfq8kldb20wmimnq` FOREIGN KEY (`idFamilia`) REFERENCES `familia` (`id_Familia`),
   CONSTRAINT `fk_InmuebleMaterialPiso` FOREIGN KEY (`idMaterialPiso`) REFERENCES `materialpiso` (`id_MaterialPiso`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_InmueblePared` FOREIGN KEY (`idPared`) REFERENCES `pared` (`id_Pared`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_InmueblePoseeLuz` FOREIGN KEY (`idPoseeLuz`) REFERENCES `poseeluz` (`id_PoseeLuz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_InmuebleServicioAgua` FOREIGN KEY (`idServicioAgua`) REFERENCES `servicioagua` (`id_ServicioAgua`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_InmuebleTecho` FOREIGN KEY (`idTecho`) REFERENCES `techo` (`id_Techo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -622,11 +628,11 @@ CREATE TABLE `inmueble` (
 
 LOCK TABLES `inmueble` WRITE;
 /*!40000 ALTER TABLE `inmueble` DISABLE KEYS */;
-INSERT INTO `inmueble` VALUES (24,124,49,3,44,NULL,26,5,0,2,0,1);
-INSERT INTO `inmueble` VALUES (25,0,50,3,45,NULL,NULL,1,0,1,0,1);
-INSERT INTO `inmueble` VALUES (26,129,51,1,46,1,27,1,0,1,0,1);
-INSERT INTO `inmueble` VALUES (27,132,52,4,47,2,28,1,1,3,1,1);
-INSERT INTO `inmueble` VALUES (28,167,53,3,48,NULL,NULL,6,0,2,0,1);
+INSERT INTO `inmueble` VALUES (24,10,49,3,44,NULL,26,5,0,2,1,1);
+INSERT INTO `inmueble` VALUES (25,10,50,3,45,NULL,NULL,1,0,1,0,0);
+INSERT INTO `inmueble` VALUES (26,10,51,1,46,1,27,1,0,1,0,1);
+INSERT INTO `inmueble` VALUES (27,10,52,4,47,2,28,1,1,3,1,1);
+INSERT INTO `inmueble` VALUES (28,10,53,3,48,NULL,NULL,6,0,2,0,1);
 INSERT INTO `inmueble` VALUES (30,4,55,1,50,1,30,2,0,2,0,1);
 INSERT INTO `inmueble` VALUES (31,5,56,1,51,1,31,1,0,3,1,1);
 INSERT INTO `inmueble` VALUES (32,6,57,1,52,1,32,2,0,2,0,1);
@@ -667,6 +673,7 @@ INSERT INTO `inmueble` VALUES (68,65,93,3,88,NULL,NULL,1,0,2,1,1);
 INSERT INTO `inmueble` VALUES (69,66,94,3,89,2,NULL,1,0,1,0,1);
 INSERT INTO `inmueble` VALUES (70,67,95,3,90,2,65,2,0,6,1,1);
 INSERT INTO `inmueble` VALUES (71,69,96,4,91,3,66,1,0,1,0,1);
+INSERT INTO `inmueble` VALUES (72,10,49,3,44,NULL,26,5,0,2,0,1);
 /*!40000 ALTER TABLE `inmueble` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -821,7 +828,6 @@ DROP TABLE IF EXISTS `nacionalidad`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `nacionalidad` (
   `id_Nacionalidad` int(11) NOT NULL AUTO_INCREMENT,
-  `nacionalidad` varchar(45) NOT NULL,
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id_Nacionalidad`)
@@ -834,8 +840,8 @@ CREATE TABLE `nacionalidad` (
 
 LOCK TABLES `nacionalidad` WRITE;
 /*!40000 ALTER TABLE `nacionalidad` DISABLE KEYS */;
-INSERT INTO `nacionalidad` VALUES (1,'Argentino',1,'');
-INSERT INTO `nacionalidad` VALUES (2,'Extranjero',1,'');
+INSERT INTO `nacionalidad` VALUES (1,1,'Argentino');
+INSERT INTO `nacionalidad` VALUES (2,1,'Extranjero');
 /*!40000 ALTER TABLE `nacionalidad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1015,164 +1021,164 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'Diego Alejandro','Gordo','25469112','20254691128','2017-06-13',30000,'a@b','',1,4,1,1,2,1,1,6,2,1,5,0,1);
+INSERT INTO `persona` VALUES (1,'Diego Alejandro','Gordo','25469112','20254691128','2017-06-13',30000,'a@b','',1,4,1,1,2,1,1,6,2,1,5,0,0);
 INSERT INTO `persona` VALUES (2,'fffffuuu','rsfhfdgh','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,3,1,1,6,2,1,5,0,1);
-INSERT INTO `persona` VALUES (3,'Joaquin','Gordo','44551983','20445519838','0000-00-00',0,'','',1,4,5,1,1,1,1,4,1,3,6,0,1);
-INSERT INTO `persona` VALUES (4,'Manuel','Gordo','46718939','20467189399','0000-00-00',0,'','',1,4,5,1,1,1,1,1,1,3,6,0,1);
-INSERT INTO `persona` VALUES (5,'Felipe','Gordo','50034513','20500345139','0000-00-00',0,'','',1,4,5,1,1,1,1,1,1,3,6,0,1);
-INSERT INTO `persona` VALUES (6,'Carolina Beatriz','Pacheco','26456789','27264567897','0000-00-00',8000,'','',1,5,1,2,4,1,1,7,3,1,9,0,1);
-INSERT INTO `persona` VALUES (7,'Micaela','Pacheco','40567890','27405678907','0000-00-00',0,'','',1,5,5,2,1,1,1,4,1,3,10,0,1);
-INSERT INTO `persona` VALUES (8,'SofÃ­a','Pacheco','47906221','27479062217','0000-00-00',0,'','',1,5,5,2,1,1,1,1,1,3,10,0,1);
-INSERT INTO `persona` VALUES (9,'Mauricio ','Lucero','24167987','20241679879','0000-00-00',25000,'','',1,6,2,1,2,1,1,7,2,1,13,0,1);
-INSERT INTO `persona` VALUES (10,'Carolina','AchÃ¡val','22345679','20223456798','0000-00-00',0,'','',1,6,3,2,2,1,1,5,1,2,14,0,1);
-INSERT INTO `persona` VALUES (11,'Ricardo','Gargantini','17564345','20175643459','0000-00-00',20000,'','',1,7,2,2,2,1,1,7,2,1,16,0,1);
-INSERT INTO `persona` VALUES (12,'Ana','Carignano','18904340','27189043407','0000-00-00',0,'','',1,7,4,2,2,1,1,7,1,2,17,0,1);
-INSERT INTO `persona` VALUES (13,'Carlos ','GoirÃ¡n','27540012','20275400127','0000-00-00',14000,'','',1,8,1,1,2,1,1,5,3,1,19,0,1);
-INSERT INTO `persona` VALUES (14,'Natalia','Comelli','28456789','27284567897','0000-00-00',0,'','',1,8,1,2,2,1,1,7,3,2,20,0,1);
-INSERT INTO `persona` VALUES (15,'Christhian','GoirÃ¡n','52987333','20529873339','0000-00-00',0,'','',1,8,5,1,1,1,1,1,1,3,20,0,1);
-INSERT INTO `persona` VALUES (16,'Martina','GoirÃ¡n','54123456','27541234567','0000-00-00',0,'','',1,8,5,2,1,1,1,1,1,3,20,0,1);
-INSERT INTO `persona` VALUES (17,'Luis Julio ','Beladelli','26672084','20266720845','0000-00-00',5000,'','',1,9,2,1,2,1,1,5,1,1,22,0,1);
-INSERT INTO `persona` VALUES (18,'Vanina','PÃ©rez','24963455','20249634555','0000-00-00',2500,'','',1,9,3,2,2,2,1,4,1,2,23,0,1);
-INSERT INTO `persona` VALUES (19,'Rosa','Beladelli','52852963','27528529630','0000-00-00',0,'','',1,9,4,2,1,1,1,1,1,3,23,0,1);
-INSERT INTO `persona` VALUES (20,'Francisco','PeÃ±aloza','20323555','27230235555','0000-00-00',21000,'chacho_penaloza@hotmail.com','',1,10,1,1,2,1,1,5,3,1,25,0,1);
-INSERT INTO `persona` VALUES (21,'Rosa','Pascual','21450879','20214508793','0000-00-00',11000,'rosi70pascual@yahoo.com','',1,10,1,2,2,1,1,5,1,2,26,0,1);
-INSERT INTO `persona` VALUES (22,'Milagros','Pascual','38542669','20385426693','0000-00-00',0,'','',1,10,5,2,2,1,1,3,1,3,26,0,1);
-INSERT INTO `persona` VALUES (23,'PeÃ±aloza','MatÃ­as','40125635','21401256350','0000-00-00',0,'','',1,10,5,1,1,1,1,3,1,3,26,0,1);
-INSERT INTO `persona` VALUES (24,'BUstos','JosÃ©','7562031','2075620315','0000-00-00',6500,'','7562031',1,11,5,1,6,1,1,2,1,1,29,0,1);
-INSERT INTO `persona` VALUES (25,'Marcelo ','Villaroel ','30852471','27308524710','0000-00-00',12000,'marcelo471@hotmail.com','',1,12,2,1,2,1,1,6,3,1,32,0,1);
-INSERT INTO `persona` VALUES (26,'Marcelo ','Villarroel','25343757','20253437570','0000-00-00',6000,'','',1,14,5,1,3,1,1,2,1,1,34,0,1);
-INSERT INTO `persona` VALUES (27,'Maria Victoria ','Acosta ','26896323','27268963235','0000-00-00',0,'mariacosta@hotmail.com','',1,14,4,2,3,1,1,3,1,2,35,0,1);
-INSERT INTO `persona` VALUES (28,'Milagros ','LeguizamÃ³n','36741852','27367418523','0000-00-00',0,'mililegui@gmail.com','',1,14,4,2,1,1,1,4,1,3,35,0,1);
-INSERT INTO `persona` VALUES (29,'JeremÃ­as ','LeguizamÃ³n','40859632','20408596320','0000-00-00',0,'jere2005@gamil.com','',1,14,5,1,1,1,1,3,1,3,35,0,1);
-INSERT INTO `persona` VALUES (30,'Marcelo ','Acosta','43968574','27439685744','0000-00-00',0,'','',1,14,5,1,1,1,1,2,1,3,35,0,1);
-INSERT INTO `persona` VALUES (31,'Mateo','Villarroel','53455122','23534551220','0000-00-00',0,'','',1,14,5,1,1,1,1,1,1,3,35,0,1);
-INSERT INTO `persona` VALUES (32,'Pedro','GonzÃ¡lez','36452147','27364521470','0000-00-00',9000,'pedrito@hotmail.com','',1,15,1,1,2,1,1,5,3,1,37,0,1);
-INSERT INTO `persona` VALUES (33,'Celeste ','Peirano','37586923','20375869230','0000-00-00',3500,'celepeirano@gmail.com','',1,15,4,2,2,1,1,5,1,2,38,0,1);
-INSERT INTO `persona` VALUES (34,'Luis Miguel ','SÃ¡nchez','38568923','20385689231','0000-00-00',6500,'luismi1987@gmail.com','',1,16,3,1,4,1,1,2,1,1,41,0,1);
-INSERT INTO `persona` VALUES (35,'Patricia ','Guevara','26585213','20265852130','0000-00-00',12000,'patoguevara1@gmail.com','',1,17,2,2,6,1,1,5,1,1,43,0,1);
-INSERT INTO `persona` VALUES (36,'RubÃ©n ','Guevara','9886644','2798866441','0000-00-00',5660,'','58745',1,17,4,1,6,1,1,3,1,6,44,0,1);
-INSERT INTO `persona` VALUES (37,'Natalia Alejandra','Tabares','39564712','20395647120','0000-00-00',3500,'natitabares@hotmail.com','',1,17,3,2,1,1,1,5,1,3,44,0,1);
-INSERT INTO `persona` VALUES (38,'Ricardo RubÃ©n ','Tabares','41852963','20418529630','0000-00-00',0,'rickiruben@gmail.com','',1,17,5,1,1,1,1,6,1,3,44,0,1);
-INSERT INTO `persona` VALUES (39,'Edgar David ','Tabares','42852963','20428529630','0000-00-00',0,'edgarcitotaba@gmail.com','',1,17,5,1,1,1,1,4,1,3,44,0,1);
-INSERT INTO `persona` VALUES (40,'Pablo Angel','Tabares','45789456','20457894565','0000-00-00',0,'angeltabares13@hotmail.com','',1,17,4,1,1,1,1,3,1,3,44,0,1);
-INSERT INTO `persona` VALUES (41,'Laura Soledad ','Tabares','47895623','20478956230','0000-00-00',0,'','',1,17,5,2,1,1,1,2,1,3,44,0,1);
-INSERT INTO `persona` VALUES (42,'Walter Ariel ','Tabares','49852741','27498527411','0000-00-00',0,'','',1,17,5,1,1,1,1,2,1,3,44,0,1);
-INSERT INTO `persona` VALUES (43,'Serena JazmÃ­n ','Reynoso','50594132','20505941320','0000-00-00',0,'','',1,17,5,2,1,1,1,1,1,5,44,0,1);
-INSERT INTO `persona` VALUES (44,'Ezequiel ','Romero','10589632','20105896320','0000-00-00',5680,'','25417',1,18,5,1,2,1,1,3,1,1,46,0,1);
-INSERT INTO `persona` VALUES (45,'Mercedes','VÃ¡zquez ','11784521','27117845212','0000-00-00',0,'','25478',1,18,5,2,2,1,1,3,1,2,47,0,1);
-INSERT INTO `persona` VALUES (46,'Eduardo ','Gimenez','8965374','2089653744','0000-00-00',24000,'eduardogimenez@hotmail.com','',1,19,1,1,2,1,1,7,3,1,49,0,1);
-INSERT INTO `persona` VALUES (47,'Elsa Rosa','PÃ©rez','14587422','20145874224','0000-00-00',5400,'elsitaperez@hotmail.com','',1,19,3,2,2,1,1,5,1,2,50,0,1);
-INSERT INTO `persona` VALUES (48,'RocÃ­o ','Gimenez','41852987','27418529875','0000-00-00',3500,'ro1992@hotmail.com','',1,19,1,2,1,1,1,6,1,3,50,0,1);
-INSERT INTO `persona` VALUES (49,'Lourdes','Gimenez','44854741','20448547410','0000-00-00',3000,'','',1,19,5,2,1,1,1,5,1,3,50,0,1);
-INSERT INTO `persona` VALUES (50,'Valeria ','Gorosito ','30124578','20301245780','0000-00-00',7400,'','',1,20,3,2,4,1,1,4,1,1,53,0,1);
-INSERT INTO `persona` VALUES (51,'RaÃºl','Gorosito','6541789','2765417897','0000-00-00',5900,'','6987',1,20,5,1,6,1,1,3,3,6,54,0,1);
-INSERT INTO `persona` VALUES (52,'Tomas ','Reinoso','40589678','27405896784','0000-00-00',8500,'tommyreinoso@hotmail.com','',1,20,1,1,4,1,1,5,1,8,54,0,1);
-INSERT INTO `persona` VALUES (53,'Valeria ','Gorosito','27550575','20275505750','0000-00-00',8000,'valegorosito@gmail.com','',1,21,2,2,5,1,1,5,3,1,56,0,1);
-INSERT INTO `persona` VALUES (54,'RaÃºl','Gorosito','8555333','2785553335','0000-00-00',6000,'','',1,21,5,1,6,1,1,3,1,6,57,0,1);
-INSERT INTO `persona` VALUES (55,'TomÃ¡s ','Reinoso','30897456','20308974560','0000-00-00',12000,'tommyreinoso@hotmail.com','',1,21,1,1,1,1,1,7,3,8,57,0,1);
-INSERT INTO `persona` VALUES (56,'Santiago ','Romero ','40852963','20408529630','0000-00-00',0,'santiromero@hotmail.com','',1,21,5,1,1,1,1,4,1,3,57,0,1);
-INSERT INTO `persona` VALUES (57,'Federico ','Romero ','42518475','20425184750','0000-00-00',0,'federomero@gmail.com','',1,21,5,1,1,1,1,4,1,3,57,0,1);
-INSERT INTO `persona` VALUES (58,'Maria Gracia','Romero ','54598456','27545984562','0000-00-00',0,'','',1,21,5,2,1,1,1,1,1,3,57,0,1);
-INSERT INTO `persona` VALUES (59,'Luis Julio ','Casas','24566122','20245661220','0000-00-00',14000,'ceramistaluisjulio@gmail.com','',1,22,2,1,3,1,1,5,3,1,59,0,1);
-INSERT INTO `persona` VALUES (60,'Mariana','LÃ³pez','25455788','27254557885','0000-00-00',7000,'marianita1976@hotmail.com','',1,22,3,2,3,1,1,5,1,2,60,0,1);
-INSERT INTO `persona` VALUES (61,'Guadalupe ','Casas','44888963','20448889630','0000-00-00',0,'','',1,22,5,2,1,1,1,2,1,3,60,0,1);
-INSERT INTO `persona` VALUES (62,'Manuela','Casas','46852741','20468527410','0000-00-00',0,'','',1,22,5,2,1,1,1,2,1,3,60,0,1);
-INSERT INTO `persona` VALUES (63,'Nora Beatriz ','FernÃ¡ndez ','26896452','20268964520','0000-00-00',5600,'','',1,23,3,2,4,1,1,5,1,1,62,0,1);
-INSERT INTO `persona` VALUES (64,'Mariela ','FernÃ¡ndez ','42158745','20421587450','0000-00-00',2500,'marifernandez@hotmail.com','',1,23,3,2,1,1,1,4,1,3,63,0,1);
-INSERT INTO `persona` VALUES (65,'Carlos Miguel ','Ferreyra ','39654321','27396543215','0000-00-00',4500,'carlitosfe@gmail.com','',1,23,3,1,1,1,1,5,1,4,63,0,1);
-INSERT INTO `persona` VALUES (66,'Julio ','Ferreyra ','55854785','20558547850','0000-00-00',0,'','',1,23,5,1,1,1,1,1,1,5,63,0,1);
-INSERT INTO `persona` VALUES (67,'AnalÃ­a','Carpio','25457878','20254578780','0000-00-00',0,'','',1,24,5,2,3,1,1,5,1,1,65,0,1);
-INSERT INTO `persona` VALUES (68,'Cristian ','Gutierrez','25896363','27258963635','0000-00-00',6500,'','',1,24,3,1,3,1,1,4,1,2,66,0,1);
-INSERT INTO `persona` VALUES (69,'Camila ','Gutierrez','38451245','20384512450','0000-00-00',0,'','',1,24,5,2,1,1,1,2,1,3,66,0,1);
-INSERT INTO `persona` VALUES (70,'Emanuel ','FalcÃ³n ','22858596','20228585960','0000-00-00',10400,'','',1,25,1,1,2,1,1,5,3,1,68,0,1);
-INSERT INTO `persona` VALUES (71,'Rita ','GÃ³mez','24789632','20247896320','0000-00-00',4500,'','',1,25,3,2,2,1,1,5,1,2,69,0,1);
-INSERT INTO `persona` VALUES (72,'Irene ','FalcÃ³n ','48524511','20485245110','0000-00-00',0,'','',1,25,5,2,1,1,1,2,1,3,69,0,1);
-INSERT INTO `persona` VALUES (73,'Lucila ','FalcÃ³n ','51235689','20512356890','0000-00-00',0,'','',1,25,5,2,1,1,1,1,1,3,69,0,1);
-INSERT INTO `persona` VALUES (74,'NÃ©stor Fabian ','Sequeira ','14859685','20148596850','0000-00-00',14000,'','',1,30,2,1,2,1,1,5,1,1,73,0,1);
-INSERT INTO `persona` VALUES (75,'Maria Teresa ','Saavedra ','16857421','27168574210','0000-00-00',5000,'','568547',1,30,3,2,2,1,1,5,1,2,74,0,1);
-INSERT INTO `persona` VALUES (76,'Celeste Evelin ','Tita','25857411','27258574115','0000-00-00',6000,'','',1,31,1,2,1,1,1,3,1,1,76,0,1);
-INSERT INTO `persona` VALUES (77,'Eduardo ','Tita ','9452179','2094521790','0000-00-00',8000,'','65987',1,31,5,1,6,1,1,2,3,6,77,0,1);
-INSERT INTO `persona` VALUES (78,'MarÃ­a del Carmen ','MartÃ­nez ','28966587','27289665874','0000-00-00',4500,'','',1,32,3,2,4,1,1,4,1,1,80,0,1);
-INSERT INTO `persona` VALUES (79,'Micaela ','Lucero ','36857485','20368574850','0000-00-00',0,'','',1,32,5,2,1,1,1,5,1,3,81,0,1);
-INSERT INTO `persona` VALUES (80,'Pedro ','Lucero ','55486969','27554869695','0000-00-00',0,'','',1,32,5,1,1,1,1,1,1,5,81,0,1);
-INSERT INTO `persona` VALUES (81,'Marcos ','Lucero ','45783221','20457832210','0000-00-00',0,'','',1,32,5,1,1,1,1,2,1,3,81,0,1);
-INSERT INTO `persona` VALUES (82,'Leonel ','Lucero ','40857412','20408574125','0000-00-00',3000,'','',1,32,5,1,1,1,1,4,1,3,81,0,1);
-INSERT INTO `persona` VALUES (83,'Santiago','Lucero ','39856523','20398565230','0000-00-00',0,'','',1,32,5,1,1,1,1,5,1,3,81,0,1);
-INSERT INTO `persona` VALUES (84,'RaÃºl ','Lucero ','11548263','20115482630','0000-00-00',6000,'','65874',1,32,5,1,2,1,1,3,1,7,81,0,1);
-INSERT INTO `persona` VALUES (85,'Sara','Suarez','14856200','27148562003','0000-00-00',5600,'','69874',1,32,5,2,2,1,1,2,1,7,81,0,1);
-INSERT INTO `persona` VALUES (86,'Roberto ','Peralta','18667593','20186675939','0000-00-00',0,'','142333366',1,33,3,1,2,1,1,2,1,1,83,0,1);
-INSERT INTO `persona` VALUES (87,'Mirta','LudueÃ±a','18567498','27185674987','0000-00-00',0,'','',1,33,5,2,2,1,1,4,1,2,84,0,1);
-INSERT INTO `persona` VALUES (88,'Roberto Eduardo','Peralta','39876543','20398765439','0000-00-00',5000,'','',1,33,3,1,1,1,1,5,1,3,84,0,1);
-INSERT INTO `persona` VALUES (89,'Wilson Jorge','Peralta','40879238','20408792389','0000-00-00',3000,'','',1,33,3,1,1,1,1,1,1,3,84,0,1);
-INSERT INTO `persona` VALUES (90,'Jessica del Valle','Peralta','45874009','27458740097','0000-00-00',3000,'','',1,33,4,2,1,1,1,5,3,3,84,0,1);
-INSERT INTO `persona` VALUES (91,'AyelÃ©n Beatriz','Peralta','50967789','27509677897','0000-00-00',0,'','',1,33,5,2,1,1,1,2,1,3,84,0,1);
-INSERT INTO `persona` VALUES (92,'MarÃ­a de las Mercedes','CÃ¡ceres de LudueÃ±a','12228975','27122289757','0000-00-00',4000,'','',1,33,5,2,6,1,1,2,1,7,84,0,1);
-INSERT INTO `persona` VALUES (93,'Roxana Matilde','Peralta','24188520','27241885207','0000-00-00',6000,'','',1,34,1,2,4,1,1,5,1,1,86,0,1);
-INSERT INTO `persona` VALUES (94,'Brian','Peralta','52896772','20528967729','0000-00-00',0,'','',1,34,5,1,1,1,1,1,1,3,87,0,1);
-INSERT INTO `persona` VALUES (95,'NatalÃ­','Peralta','54188796','27541887969','0000-00-00',0,'','',1,34,5,2,1,1,1,1,1,3,87,0,1);
-INSERT INTO `persona` VALUES (96,'Rodrigo ','Pedraza','27892336','20278923369','0000-00-00',13000,'','',1,35,1,1,3,1,1,4,3,1,90,0,1);
-INSERT INTO `persona` VALUES (97,'MarÃ­a Luz ','Martiarena','29753268','27297532687','0000-00-00',0,'','',1,35,5,2,3,1,1,4,1,2,91,0,1);
-INSERT INTO `persona` VALUES (98,'Maximiliano ','Pedraza','48976888','20489768889','0000-00-00',0,'','',1,35,5,1,1,1,1,2,1,3,91,0,1);
-INSERT INTO `persona` VALUES (99,'BelÃ©n','Pedraza','53987664','27539876647','0000-00-00',0,'','',1,35,5,2,1,1,1,1,1,3,91,0,1);
-INSERT INTO `persona` VALUES (100,'Gustavo','Montenegro','30198755','20301987559','0000-00-00',13000,'','',1,36,1,1,2,1,1,6,2,1,94,0,1);
-INSERT INTO `persona` VALUES (101,'Mariela','Ballatore','36987569','27369875697','0000-00-00',6000,'','',1,36,1,2,2,1,1,6,1,2,95,0,1);
-INSERT INTO `persona` VALUES (102,'Pedro','Montenegro','54779666','20547796669','0000-00-00',0,'','',1,36,5,1,1,1,1,1,1,3,95,0,1);
-INSERT INTO `persona` VALUES (103,'Edith','Ballatore','42998756','27429987567','0000-00-00',0,'','123456',1,36,5,2,6,1,1,5,1,7,95,0,1);
-INSERT INTO `persona` VALUES (104,'JosÃ© ','Quinteros','22789429','20227894299','0000-00-00',15000,'','',1,37,4,1,2,1,1,5,1,1,98,0,1);
-INSERT INTO `persona` VALUES (105,'Adriana','Pagani','23789456','27237894567','0000-00-00',0,'','',1,37,5,2,2,1,1,7,3,2,99,0,1);
-INSERT INTO `persona` VALUES (106,'JosÃ©','Quinteros','46879249','20468792499','0000-00-00',0,'','',1,37,5,1,1,1,1,2,1,3,99,0,1);
-INSERT INTO `persona` VALUES (107,'RaÃºl','Gordon','17564892','20175648929','0000-00-00',25000,'','',1,38,1,1,2,1,1,7,2,1,101,0,1);
-INSERT INTO `persona` VALUES (108,'Liliana','Pacheco','56298123','27562981237','0000-00-00',6000,'','',1,38,5,2,2,1,1,7,3,2,102,0,1);
-INSERT INTO `persona` VALUES (109,'Juan Pablo ','Gordon','29100356','20291003569','0000-00-00',0,'','',1,38,5,1,1,1,1,4,1,3,102,0,1);
-INSERT INTO `persona` VALUES (110,'RocÃ­o','Gordon','57896243','27578962437','0000-00-00',0,'','',1,38,5,2,1,1,1,1,1,5,102,0,1);
-INSERT INTO `persona` VALUES (111,'Rosana','Costa','24789561','27247895617','0000-00-00',15000,'','',1,39,2,2,5,1,1,7,2,1,105,0,1);
-INSERT INTO `persona` VALUES (112,'SofÃ­a','Stoppani','53986489','27539864897','0000-00-00',0,'','',1,39,5,2,1,1,1,4,1,3,106,0,1);
-INSERT INTO `persona` VALUES (113,'Marianela ','Stoppani','49789123','27497891237','0000-00-00',0,'','',1,39,5,2,1,1,1,1,1,3,106,0,1);
-INSERT INTO `persona` VALUES (114,'Rodolfo','Pedrotti','2687596','2026875969','0000-00-00',12000,'','',1,40,2,1,3,1,1,6,3,1,108,0,1);
-INSERT INTO `persona` VALUES (115,'Julia','Mattoni','19879204','27198792047','0000-00-00',3000,'','',1,40,3,2,3,1,1,4,1,2,109,0,1);
-INSERT INTO `persona` VALUES (116,'Marianela','Pedrotti','57896321','27578963217','0000-00-00',0,'','',1,40,5,2,1,1,1,1,1,3,109,0,1);
-INSERT INTO `persona` VALUES (117,'Navarro','Hilario','33877952','20338779525','0000-00-00',21000,'hnava86@hotmail.com','',1,41,2,1,3,1,1,7,2,1,111,0,1);
-INSERT INTO `persona` VALUES (118,'Carolina','Sappori','32054123','22320541233','0000-00-00',29000,'carosappori@yahoo.com','',1,41,1,2,3,2,1,7,1,2,112,0,1);
-INSERT INTO `persona` VALUES (119,'Antonio','Martinez','22012336','23220123368','0000-00-00',16900,'','',1,42,3,1,2,1,1,4,3,1,114,0,1);
-INSERT INTO `persona` VALUES (120,'Marta','Blanes','27895623','20278956235','0000-00-00',7000,'','',1,42,3,2,2,1,1,5,1,2,115,0,1);
-INSERT INTO `persona` VALUES (121,'MatÃ­as','Martinez','33250123','20332501235','0000-00-00',0,'','',1,42,4,2,1,1,1,4,1,3,115,0,1);
-INSERT INTO `persona` VALUES (122,'Marcos','Martinez','34100256','22341002566','0000-00-00',0,'','',1,42,5,1,2,1,1,4,1,3,115,0,1);
-INSERT INTO `persona` VALUES (123,'Aylen','Martinez','34562300','20345623003','0000-00-00',0,'','',1,42,4,2,1,1,1,3,1,3,115,0,1);
-INSERT INTO `persona` VALUES (124,'Antonia','Martinez','360123012','203601230125','0000-00-00',0,'','',1,42,5,2,1,1,1,3,1,3,115,0,1);
-INSERT INTO `persona` VALUES (125,'Ester','Blanes','7805774','2278057745','0000-00-00',6900,'','7805774',1,42,5,2,6,1,1,5,1,6,115,0,1);
-INSERT INTO `persona` VALUES (126,'Caro33lina','Fragueiro','35578785','27355787856','0000-00-00',5000,'carofragueiro@gmail.com','',1,43,4,2,2,1,1,1,1,1,118,0,1);
-INSERT INTO `persona` VALUES (127,'Carolina','Fragueiro','35578785','27355787856','0000-00-00',15000,'car@gmail.com','',1,44,5,2,2,1,1,7,2,1,120,0,1);
-INSERT INTO `persona` VALUES (128,'AgustÃ­n','Fragueiro','4000000','2040000003','0000-00-00',0,'','',1,44,5,1,1,1,1,1,1,3,121,0,1);
-INSERT INTO `persona` VALUES (129,'Elizabet','Fragueiro','21112362','27203623529','0000-00-00',0,'','',1,44,5,2,1,1,1,3,1,3,121,0,1);
-INSERT INTO `persona` VALUES (130,'Sebastian','Fragueiro','45236263','20456325896','0000-00-00',10000,'','',1,44,1,1,1,1,1,7,1,2,121,0,1);
-INSERT INTO `persona` VALUES (131,'Sebastian','Carbone','21456789','20214567896','0000-00-00',8000,'','',1,45,3,1,2,1,1,5,3,1,123,0,1);
-INSERT INTO `persona` VALUES (132,'Andrea','Icardi','32564785','12325647856','0000-00-00',0,'','',1,45,5,2,2,1,1,7,1,2,124,0,1);
-INSERT INTO `persona` VALUES (133,'Lidia','Zalazar','12365452','20123564523','0000-00-00',0,'','',1,46,5,2,3,1,1,4,1,1,126,0,1);
-INSERT INTO `persona` VALUES (134,'Santino','Zalazar','42536521','20425632512','0000-00-00',0,'','',1,46,5,1,1,1,1,1,1,3,127,0,1);
-INSERT INTO `persona` VALUES (135,'Sebastian','Zalazar','25632563','20256325632','0000-00-00',10000,'','',1,46,1,1,3,1,1,7,2,2,127,0,1);
-INSERT INTO `persona` VALUES (136,'Andrea','Icardi','25639589','12253654523','0000-00-00',15000,'','',1,62,1,2,4,1,1,5,1,1,130,0,1);
-INSERT INTO `persona` VALUES (137,'Luis','Icardi','45263362','20452633626','0000-00-00',0,'','',1,62,5,1,1,1,1,1,1,3,131,0,1);
-INSERT INTO `persona` VALUES (138,'Bautista','Icardi','48659326','20486956593','0000-00-00',0,'','',1,62,5,1,1,1,1,1,1,3,131,0,1);
-INSERT INTO `persona` VALUES (139,'Adolfo','Arbach','21345654','20213456546','0000-00-00',15000,'','',1,63,2,1,3,1,1,7,2,1,134,0,1);
-INSERT INTO `persona` VALUES (140,'Julieta','Dep','14562356','20146523652','0000-00-00',0,'','',1,63,5,2,3,1,1,5,1,2,135,0,1);
-INSERT INTO `persona` VALUES (141,'MatÃ­as','Sales','21345658','20214569876','0000-00-00',0,'','',1,63,5,1,1,1,1,3,1,3,135,0,1);
-INSERT INTO `persona` VALUES (142,'Guillermo','Frags','21456321','2012354659','0000-00-00',5000,'','',1,63,2,1,5,1,1,1,2,7,135,0,1);
-INSERT INTO `persona` VALUES (143,'Pablo','Tevez','12456987','20126547896','0000-00-00',0,'','',1,63,5,1,1,1,1,1,1,9,135,0,1);
-INSERT INTO `persona` VALUES (144,'RomÃ¡n','Comba','32562365','274567896','0000-00-00',0,'','',1,63,5,1,1,1,1,5,3,8,135,0,1);
-INSERT INTO `persona` VALUES (145,'Estefania','Gherra','30265985','20325623589','0000-00-00',10000,'','',1,64,5,2,1,1,1,7,2,1,137,0,1);
-INSERT INTO `persona` VALUES (146,'Liliana','Arraya','146589765','27146598756','0000-00-00',15000,'','',1,65,3,2,5,1,1,7,2,1,139,0,1);
-INSERT INTO `persona` VALUES (147,'MamÃ¡Liliana','Arraya','76589568','2776586549','0000-00-00',2000,'','22565487',1,65,5,2,6,1,1,7,1,6,140,0,1);
-INSERT INTO `persona` VALUES (148,'Federico','Castro','12546987','20125469876','0000-00-00',20000,'','',1,66,2,1,3,1,1,7,2,1,142,0,1);
-INSERT INTO `persona` VALUES (149,'Angeles','Villasuso','25645985','20256459876','0000-00-00',10000,'','',1,66,2,2,3,1,1,7,2,2,143,0,1);
-INSERT INTO `persona` VALUES (150,'Cecilia','Gomez','25648956','27153689546','0000-00-00',54000,'','',1,67,4,2,5,1,1,7,2,1,145,0,1);
-INSERT INTO `persona` VALUES (151,'Sofia','Navarro','30526526','27356256253','0000-00-00',2000,'','',1,67,4,2,1,1,1,7,2,3,146,0,1);
-INSERT INTO `persona` VALUES (152,'Sebastian','Carb','26598654','20265322145','0000-00-00',0,'','',1,67,5,1,3,1,1,1,1,4,146,0,1);
-INSERT INTO `persona` VALUES (153,'Pilar','Navarro','12654987','20126549876','0000-00-00',5000,'','',1,67,4,2,1,1,1,5,1,3,146,0,1);
-INSERT INTO `persona` VALUES (154,'MarÃ­a','Gomez','4658658','2746586589','0000-00-00',2000,'','5465456',1,67,5,2,5,1,1,7,1,6,146,0,1);
-INSERT INTO `persona` VALUES (155,'Florencia','Gomez','23654987','20326549879','0000-00-00',0,'','',1,67,5,2,1,1,1,7,1,8,146,0,1);
-INSERT INTO `persona` VALUES (156,'BebÃ©','Pololo','45658965','27456899856','0000-00-00',0,'','',1,67,5,1,1,1,1,1,1,5,146,0,1);
-INSERT INTO `persona` VALUES (157,'Paolo','Lopez','12546985','20125469876','0000-00-00',2000,'','2256454',1,68,5,1,1,1,1,1,1,1,148,0,1);
-INSERT INTO `persona` VALUES (158,'Daniela','RodrÃ­guez','14256987','27142569877','0000-00-00',3500,'','',1,69,3,2,5,1,1,1,1,1,150,0,1);
+INSERT INTO `persona` VALUES (3,'Joaquin','Gordo','44551983','20445519838','2017-07-05',0,'','',1,4,5,1,1,1,1,4,1,3,6,0,0);
+INSERT INTO `persona` VALUES (4,'Manuel','Gordo','46718939','20467189399','2017-07-05',0,'','',1,4,5,1,1,1,1,1,1,3,6,0,1);
+INSERT INTO `persona` VALUES (5,'Felipe','Gordo','50034513','20500345139','2017-07-05',0,'','',1,4,5,1,1,1,1,1,1,3,6,0,1);
+INSERT INTO `persona` VALUES (6,'Carolina Beatriz','Pacheco','26456789','27264567897','2017-07-05',8000,'','',1,5,1,2,4,1,1,7,3,1,9,0,1);
+INSERT INTO `persona` VALUES (7,'Micaela','Pacheco','40567890','27405678907','2017-07-05',0,'','',1,5,5,2,1,1,1,4,1,3,10,0,1);
+INSERT INTO `persona` VALUES (8,'SofÃ­a','Pacheco','47906221','27479062217','2017-07-05',0,'','',1,5,5,2,1,1,1,1,1,3,10,0,1);
+INSERT INTO `persona` VALUES (9,'Mauricio ','Lucero','24167987','20241679879','2017-07-05',25000,'','',1,6,2,1,2,1,1,7,2,1,13,0,1);
+INSERT INTO `persona` VALUES (10,'Carolina','AchÃ¡val','22345679','20223456798','2017-07-05',0,'','',1,6,3,2,2,1,1,5,1,2,14,0,1);
+INSERT INTO `persona` VALUES (11,'Ricardo','Gargantini','17564345','20175643459','2017-07-05',20000,'','',1,7,2,2,2,1,1,7,2,1,16,0,1);
+INSERT INTO `persona` VALUES (12,'Ana','Carignano','18904340','27189043407','2017-07-05',0,'','',1,7,4,2,2,1,1,7,1,2,17,0,1);
+INSERT INTO `persona` VALUES (13,'Carlos ','GoirÃ¡n','27540012','20275400127','2017-07-05',14000,'','',1,8,1,1,2,1,1,5,3,1,19,0,1);
+INSERT INTO `persona` VALUES (14,'Natalia','Comelli','28456789','27284567897','2017-07-05',0,'','',1,8,1,2,2,1,1,7,3,2,20,0,1);
+INSERT INTO `persona` VALUES (15,'Christhian','GoirÃ¡n','52987333','20529873339','2017-07-05',0,'','',1,8,5,1,1,1,1,1,1,3,20,0,1);
+INSERT INTO `persona` VALUES (16,'Martina','GoirÃ¡n','54123456','27541234567','2017-07-05',0,'','',1,8,5,2,1,1,1,1,1,3,20,0,1);
+INSERT INTO `persona` VALUES (17,'Luis Julio ','Beladelli','26672084','20266720845','2017-07-05',5000,'','',1,9,2,1,2,1,1,5,1,1,22,0,1);
+INSERT INTO `persona` VALUES (18,'Vanina','PÃ©rez','24963455','20249634555','2017-07-05',2500,'','',1,9,3,2,2,2,1,4,1,2,23,0,1);
+INSERT INTO `persona` VALUES (19,'Rosa','Beladelli','52852963','27528529630','2017-07-05',0,'','',1,9,4,2,1,1,1,1,1,3,23,0,1);
+INSERT INTO `persona` VALUES (20,'Francisco','PeÃ±aloza','20323555','27230235555','2017-07-05',21000,'chacho_penaloza@hotmail.com','',1,10,1,1,2,1,1,5,3,1,25,0,1);
+INSERT INTO `persona` VALUES (21,'Rosa','Pascual','21450879','20214508793','2017-07-05',11000,'rosi70pascual@yahoo.com','',1,10,1,2,2,1,1,5,1,2,26,0,1);
+INSERT INTO `persona` VALUES (22,'Milagros','Pascual','38542669','20385426693','2017-07-05',0,'','',1,10,5,2,2,1,1,3,1,3,26,0,1);
+INSERT INTO `persona` VALUES (23,'PeÃ±aloza','MatÃ­as','40125635','21401256350','2017-07-05',0,'','',1,10,5,1,1,1,1,3,1,3,26,0,1);
+INSERT INTO `persona` VALUES (24,'BUstos','JosÃ©','7562031','2075620315','2017-07-05',6500,'','7562031',1,11,5,1,6,1,1,2,1,1,29,0,1);
+INSERT INTO `persona` VALUES (25,'Marcelo ','Villaroel ','30852471','27308524710','2017-07-05',12000,'marcelo471@hotmail.com','',1,12,2,1,2,1,1,6,3,1,32,0,1);
+INSERT INTO `persona` VALUES (26,'Marcelo ','Villarroel','25343757','20253437570','2017-07-05',6000,'','',1,14,5,1,3,1,1,2,1,1,34,0,1);
+INSERT INTO `persona` VALUES (27,'Maria Victoria ','Acosta ','26896323','27268963235','2017-07-05',0,'mariacosta@hotmail.com','',1,14,4,2,3,1,1,3,1,2,35,0,1);
+INSERT INTO `persona` VALUES (28,'Milagros ','LeguizamÃ³n','36741852','27367418523','2017-07-05',0,'mililegui@gmail.com','',1,14,4,2,1,1,1,4,1,3,35,0,1);
+INSERT INTO `persona` VALUES (29,'JeremÃ­as ','LeguizamÃ³n','40859632','20408596320','2017-07-05',0,'jere2005@gamil.com','',1,14,5,1,1,1,1,3,1,3,35,0,1);
+INSERT INTO `persona` VALUES (30,'Marcelo ','Acosta','43968574','27439685744','2017-07-05',0,'','',1,14,5,1,1,1,1,2,1,3,35,0,1);
+INSERT INTO `persona` VALUES (31,'Mateo','Villarroel','53455122','23534551220','2017-07-05',0,'','',1,14,5,1,1,1,1,1,1,3,35,0,1);
+INSERT INTO `persona` VALUES (32,'Pedro','GonzÃ¡lez','36452147','27364521470','2017-07-05',9000,'pedrito@hotmail.com','',1,15,1,1,2,1,1,5,3,1,37,0,1);
+INSERT INTO `persona` VALUES (33,'Celeste ','Peirano','37586923','20375869230','2017-07-05',3500,'celepeirano@gmail.com','',1,15,4,2,2,1,1,5,1,2,38,0,1);
+INSERT INTO `persona` VALUES (34,'Luis Miguel ','SÃ¡nchez','38568923','20385689231','2017-07-05',6500,'luismi1987@gmail.com','',1,16,3,1,4,1,1,2,1,1,41,0,1);
+INSERT INTO `persona` VALUES (35,'Patricia ','Guevara','26585213','20265852130','2017-07-05',12000,'patoguevara1@gmail.com','',1,17,2,2,6,1,1,5,1,1,43,0,1);
+INSERT INTO `persona` VALUES (36,'RubÃ©n ','Guevara','9886644','2798866441','2017-07-05',5660,'','58745',1,17,4,1,6,1,1,3,1,6,44,0,1);
+INSERT INTO `persona` VALUES (37,'Natalia Alejandra','Tabares','39564712','20395647120','2017-07-05',3500,'natitabares@hotmail.com','',1,17,3,2,1,1,1,5,1,3,44,0,1);
+INSERT INTO `persona` VALUES (38,'Ricardo RubÃ©n ','Tabares','41852963','20418529630','2017-07-05',0,'rickiruben@gmail.com','',1,17,5,1,1,1,1,6,1,3,44,0,1);
+INSERT INTO `persona` VALUES (39,'Edgar David ','Tabares','42852963','20428529630','2017-07-05',0,'edgarcitotaba@gmail.com','',1,17,5,1,1,1,1,4,1,3,44,0,1);
+INSERT INTO `persona` VALUES (40,'Pablo Angel','Tabares','45789456','20457894565','2017-07-05',0,'angeltabares13@hotmail.com','',1,17,4,1,1,1,1,3,1,3,44,0,1);
+INSERT INTO `persona` VALUES (41,'Laura Soledad ','Tabares','47895623','20478956230','2017-07-05',0,'','',1,17,5,2,1,1,1,2,1,3,44,0,1);
+INSERT INTO `persona` VALUES (42,'Walter Ariel ','Tabares','49852741','27498527411','2017-07-05',0,'','',1,17,5,1,1,1,1,2,1,3,44,0,1);
+INSERT INTO `persona` VALUES (43,'Serena JazmÃ­n ','Reynoso','50594132','20505941320','2017-07-05',0,'','',1,17,5,2,1,1,1,1,1,5,44,0,1);
+INSERT INTO `persona` VALUES (44,'Ezequiel ','Romero','10589632','20105896320','2017-07-05',5680,'','25417',1,18,5,1,2,1,1,3,1,1,46,0,1);
+INSERT INTO `persona` VALUES (45,'Mercedes','VÃ¡zquez ','11784521','27117845212','2017-07-05',0,'','25478',1,18,5,2,2,1,1,3,1,2,47,0,1);
+INSERT INTO `persona` VALUES (46,'Eduardo ','Gimenez','8965374','2089653744','2017-07-05',24000,'eduardogimenez@hotmail.com','',1,19,1,1,2,1,1,7,3,1,49,0,1);
+INSERT INTO `persona` VALUES (47,'Elsa Rosa','PÃ©rez','14587422','20145874224','2017-07-05',5400,'elsitaperez@hotmail.com','',1,19,3,2,2,1,1,5,1,2,50,0,1);
+INSERT INTO `persona` VALUES (48,'RocÃ­o ','Gimenez','41852987','27418529875','2017-07-05',3500,'ro1992@hotmail.com','',1,19,1,2,1,1,1,6,1,3,50,0,1);
+INSERT INTO `persona` VALUES (49,'Lourdes','Gimenez','44854741','20448547410','2017-07-05',3000,'','',1,19,5,2,1,1,1,5,1,3,50,0,1);
+INSERT INTO `persona` VALUES (50,'Valeria ','Gorosito ','30124578','20301245780','2017-07-05',7400,'','',1,20,3,2,4,1,1,4,1,1,53,0,1);
+INSERT INTO `persona` VALUES (51,'RaÃºl','Gorosito','6541789','2765417897','2017-07-05',5900,'','6987',1,20,5,1,6,1,1,3,3,6,54,0,1);
+INSERT INTO `persona` VALUES (52,'Tomas ','Reinoso','40589678','27405896784','2017-07-05',8500,'tommyreinoso@hotmail.com','',1,20,1,1,4,1,1,5,1,8,54,0,1);
+INSERT INTO `persona` VALUES (53,'Valeria ','Gorosito','27550575','20275505750','2017-07-05',8000,'valegorosito@gmail.com','',1,21,2,2,5,1,1,5,3,1,56,0,1);
+INSERT INTO `persona` VALUES (54,'RaÃºl','Gorosito','8555333','2785553335','2017-07-05',6000,'','',1,21,5,1,6,1,1,3,1,6,57,0,1);
+INSERT INTO `persona` VALUES (55,'TomÃ¡s ','Reinoso','30897456','20308974560','2017-07-05',12000,'tommyreinoso@hotmail.com','',1,21,1,1,1,1,1,7,3,8,57,0,1);
+INSERT INTO `persona` VALUES (56,'Santiago ','Romero ','40852963','20408529630','2017-07-05',0,'santiromero@hotmail.com','',1,21,5,1,1,1,1,4,1,3,57,0,1);
+INSERT INTO `persona` VALUES (57,'Federico ','Romero ','42518475','20425184750','2017-07-05',0,'federomero@gmail.com','',1,21,5,1,1,1,1,4,1,3,57,0,1);
+INSERT INTO `persona` VALUES (58,'Maria Gracia','Romero ','54598456','27545984562','2017-07-05',0,'','',1,21,5,2,1,1,1,1,1,3,57,0,1);
+INSERT INTO `persona` VALUES (59,'Luis Julio ','Casas','24566122','20245661220','2017-07-05',14000,'ceramistaluisjulio@gmail.com','',1,22,2,1,3,1,1,5,3,1,59,0,1);
+INSERT INTO `persona` VALUES (60,'Mariana','LÃ³pez','25455788','27254557885','2017-07-05',7000,'marianita1976@hotmail.com','',1,22,3,2,3,1,1,5,1,2,60,0,1);
+INSERT INTO `persona` VALUES (61,'Guadalupe ','Casas','44888963','20448889630','2017-07-05',0,'','',1,22,5,2,1,1,1,2,1,3,60,0,1);
+INSERT INTO `persona` VALUES (62,'Manuela','Casas','46852741','20468527410','2017-07-05',0,'','',1,22,5,2,1,1,1,2,1,3,60,0,1);
+INSERT INTO `persona` VALUES (63,'Nora Beatriz ','FernÃ¡ndez ','26896452','20268964520','2017-07-05',5600,'','',1,23,3,2,4,1,1,5,1,1,62,0,1);
+INSERT INTO `persona` VALUES (64,'Mariela ','FernÃ¡ndez ','42158745','20421587450','2017-07-05',2500,'marifernandez@hotmail.com','',1,23,3,2,1,1,1,4,1,3,63,0,1);
+INSERT INTO `persona` VALUES (65,'Carlos Miguel ','Ferreyra ','39654321','27396543215','2017-07-05',4500,'carlitosfe@gmail.com','',1,23,3,1,1,1,1,5,1,4,63,0,1);
+INSERT INTO `persona` VALUES (66,'Julio ','Ferreyra ','55854785','20558547850','2017-07-05',0,'','',1,23,5,1,1,1,1,1,1,5,63,0,1);
+INSERT INTO `persona` VALUES (67,'AnalÃ­a','Carpio','25457878','20254578780','2017-07-05',0,'','',1,24,5,2,3,1,1,5,1,1,65,0,1);
+INSERT INTO `persona` VALUES (68,'Cristian ','Gutierrez','25896363','27258963635','2017-07-05',6500,'','',1,24,3,1,3,1,1,4,1,2,66,0,1);
+INSERT INTO `persona` VALUES (69,'Camila ','Gutierrez','38451245','20384512450','2017-07-05',0,'','',1,24,5,2,1,1,1,2,1,3,66,0,1);
+INSERT INTO `persona` VALUES (70,'Emanuel ','FalcÃ³n ','22858596','20228585960','2017-07-05',10400,'','',1,25,1,1,2,1,1,5,3,1,68,0,1);
+INSERT INTO `persona` VALUES (71,'Rita ','GÃ³mez','24789632','20247896320','2017-07-05',4500,'','',1,25,3,2,2,1,1,5,1,2,69,0,1);
+INSERT INTO `persona` VALUES (72,'Irene ','FalcÃ³n ','48524511','20485245110','2017-07-05',0,'','',1,25,5,2,1,1,1,2,1,3,69,0,1);
+INSERT INTO `persona` VALUES (73,'Lucila ','FalcÃ³n ','51235689','20512356890','2017-07-05',0,'','',1,25,5,2,1,1,1,1,1,3,69,0,1);
+INSERT INTO `persona` VALUES (74,'NÃ©stor Fabian ','Sequeira ','14859685','20148596850','2017-07-05',14000,'','',1,30,2,1,2,1,1,5,1,1,73,0,1);
+INSERT INTO `persona` VALUES (75,'Maria Teresa ','Saavedra ','16857421','27168574210','2017-07-05',5000,'','568547',1,30,3,2,2,1,1,5,1,2,74,0,1);
+INSERT INTO `persona` VALUES (76,'Celeste Evelin ','Tita','25857411','27258574115','2017-07-05',6000,'','',1,31,1,2,1,1,1,3,1,1,76,0,1);
+INSERT INTO `persona` VALUES (77,'Eduardo ','Tita ','9452179','2094521790','2017-07-05',8000,'','65987',1,31,5,1,6,1,1,2,3,6,77,0,1);
+INSERT INTO `persona` VALUES (78,'MarÃ­a del Carmen ','MartÃ­nez ','28966587','27289665874','2017-07-05',4500,'','',1,32,3,2,4,1,1,4,1,1,80,0,1);
+INSERT INTO `persona` VALUES (79,'Micaela ','Lucero ','36857485','20368574850','2017-07-05',0,'','',1,32,5,2,1,1,1,5,1,3,81,0,1);
+INSERT INTO `persona` VALUES (80,'Pedro ','Lucero ','55486969','27554869695','2017-07-05',0,'','',1,32,5,1,1,1,1,1,1,5,81,0,1);
+INSERT INTO `persona` VALUES (81,'Marcos ','Lucero ','45783221','20457832210','2017-07-05',0,'','',1,32,5,1,1,1,1,2,1,3,81,0,1);
+INSERT INTO `persona` VALUES (82,'Leonel ','Lucero ','40857412','20408574125','2017-07-05',3000,'','',1,32,5,1,1,1,1,4,1,3,81,0,1);
+INSERT INTO `persona` VALUES (83,'Santiago','Lucero ','39856523','20398565230','2017-07-05',0,'','',1,32,5,1,1,1,1,5,1,3,81,0,1);
+INSERT INTO `persona` VALUES (84,'RaÃºl ','Lucero ','11548263','20115482630','2017-07-05',6000,'','65874',1,32,5,1,2,1,1,3,1,7,81,0,1);
+INSERT INTO `persona` VALUES (85,'Sara','Suarez','14856200','27148562003','2017-07-05',5600,'','69874',1,32,5,2,2,1,1,2,1,7,81,0,1);
+INSERT INTO `persona` VALUES (86,'Roberto ','Peralta','18667593','20186675939','2017-07-05',0,'','142333366',1,33,3,1,2,1,1,2,1,1,83,0,1);
+INSERT INTO `persona` VALUES (87,'Mirta','LudueÃ±a','18567498','27185674987','2017-07-05',0,'','',1,33,5,2,2,1,1,4,1,2,84,0,1);
+INSERT INTO `persona` VALUES (88,'Roberto Eduardo','Peralta','39876543','20398765439','2017-07-05',5000,'','',1,33,3,1,1,1,1,5,1,3,84,0,1);
+INSERT INTO `persona` VALUES (89,'Wilson Jorge','Peralta','40879238','20408792389','2017-07-05',3000,'','',1,33,3,1,1,1,1,1,1,3,84,0,1);
+INSERT INTO `persona` VALUES (90,'Jessica del Valle','Peralta','45874009','27458740097','2017-07-05',3000,'','',1,33,4,2,1,1,1,5,3,3,84,0,1);
+INSERT INTO `persona` VALUES (91,'AyelÃ©n Beatriz','Peralta','50967789','27509677897','2017-07-05',0,'','',1,33,5,2,1,1,1,2,1,3,84,0,1);
+INSERT INTO `persona` VALUES (92,'MarÃ­a de las Mercedes','CÃ¡ceres de LudueÃ±a','12228975','27122289757','2017-07-05',4000,'','',1,33,5,2,6,1,1,2,1,7,84,0,1);
+INSERT INTO `persona` VALUES (93,'Roxana Matilde','Peralta','24188520','27241885207','2017-07-05',6000,'','',1,34,1,2,4,1,1,5,1,1,86,0,1);
+INSERT INTO `persona` VALUES (94,'Brian','Peralta','52896772','20528967729','2017-07-05',0,'','',1,34,5,1,1,1,1,1,1,3,87,0,1);
+INSERT INTO `persona` VALUES (95,'NatalÃ­','Peralta','54188796','27541887969','2017-07-05',0,'','',1,34,5,2,1,1,1,1,1,3,87,0,1);
+INSERT INTO `persona` VALUES (96,'Rodrigo ','Pedraza','27892336','20278923369','2017-07-05',13000,'','',1,35,1,1,3,1,1,4,3,1,90,0,1);
+INSERT INTO `persona` VALUES (97,'MarÃ­a Luz ','Martiarena','29753268','27297532687','2017-07-05',0,'','',1,35,5,2,3,1,1,4,1,2,91,0,1);
+INSERT INTO `persona` VALUES (98,'Maximiliano ','Pedraza','48976888','20489768889','2017-07-05',0,'','',1,35,5,1,1,1,1,2,1,3,91,0,1);
+INSERT INTO `persona` VALUES (99,'BelÃ©n','Pedraza','53987664','27539876647','2017-07-05',0,'','',1,35,5,2,1,1,1,1,1,3,91,0,1);
+INSERT INTO `persona` VALUES (100,'Gustavo','Montenegro','30198755','20301987559','2017-07-05',13000,'','',1,36,1,1,2,1,1,6,2,1,94,0,1);
+INSERT INTO `persona` VALUES (101,'Mariela','Ballatore','36987569','27369875697','2017-07-05',6000,'','',1,36,1,2,2,1,1,6,1,2,95,0,1);
+INSERT INTO `persona` VALUES (102,'Pedro','Montenegro','54779666','20547796669','2017-07-05',0,'','',1,36,5,1,1,1,1,1,1,3,95,0,1);
+INSERT INTO `persona` VALUES (103,'Edith','Ballatore','42998756','27429987567','2017-07-05',0,'','123456',1,36,5,2,6,1,1,5,1,7,95,0,1);
+INSERT INTO `persona` VALUES (104,'JosÃ© ','Quinteros','22789429','20227894299','2017-07-05',15000,'','',1,37,4,1,2,1,1,5,1,1,98,0,1);
+INSERT INTO `persona` VALUES (105,'Adriana','Pagani','23789456','27237894567','2017-07-05',0,'','',1,37,5,2,2,1,1,7,3,2,99,0,1);
+INSERT INTO `persona` VALUES (106,'JosÃ©','Quinteros','46879249','20468792499','2017-07-05',0,'','',1,37,5,1,1,1,1,2,1,3,99,0,1);
+INSERT INTO `persona` VALUES (107,'RaÃºl','Gordon','17564892','20175648929','2017-07-05',25000,'','',1,38,1,1,2,1,1,7,2,1,101,0,1);
+INSERT INTO `persona` VALUES (108,'Liliana','Pacheco','56298123','27562981237','2017-07-05',6000,'','',1,38,5,2,2,1,1,7,3,2,102,0,1);
+INSERT INTO `persona` VALUES (109,'Juan Pablo ','Gordon','29100356','20291003569','2017-07-05',0,'','',1,38,5,1,1,1,1,4,1,3,102,0,1);
+INSERT INTO `persona` VALUES (110,'RocÃ­o','Gordon','57896243','27578962437','2017-07-05',0,'','',1,38,5,2,1,1,1,1,1,5,102,0,1);
+INSERT INTO `persona` VALUES (111,'Rosana','Costa','24789561','27247895617','2017-07-05',15000,'','',1,39,2,2,5,1,1,7,2,1,105,0,1);
+INSERT INTO `persona` VALUES (112,'SofÃ­a','Stoppani','53986489','27539864897','2017-07-05',0,'','',1,39,5,2,1,1,1,4,1,3,106,0,1);
+INSERT INTO `persona` VALUES (113,'Marianela ','Stoppani','49789123','27497891237','2017-07-05',0,'','',1,39,5,2,1,1,1,1,1,3,106,0,1);
+INSERT INTO `persona` VALUES (114,'Rodolfo','Pedrotti','2687596','2026875969','2017-07-05',12000,'','',1,40,2,1,3,1,1,6,3,1,108,0,1);
+INSERT INTO `persona` VALUES (115,'Julia','Mattoni','19879204','27198792047','2017-07-05',3000,'','',1,40,3,2,3,1,1,4,1,2,109,0,1);
+INSERT INTO `persona` VALUES (116,'Marianela','Pedrotti','57896321','27578963217','2017-07-05',0,'','',1,40,5,2,1,1,1,1,1,3,109,0,1);
+INSERT INTO `persona` VALUES (117,'Navarro','Hilario','33877952','20338779525','2017-07-05',21000,'hnava86@hotmail.com','',1,41,2,1,3,1,1,7,2,1,111,0,1);
+INSERT INTO `persona` VALUES (118,'Carolina','Sappori','32054123','22320541233','2017-07-05',29000,'carosappori@yahoo.com','',1,41,1,2,3,2,1,7,1,2,112,0,1);
+INSERT INTO `persona` VALUES (119,'Antonio','Martinez','22012336','23220123368','2017-07-05',16900,'','',1,42,3,1,2,1,1,4,3,1,114,0,1);
+INSERT INTO `persona` VALUES (120,'Marta','Blanes','27895623','20278956235','2017-07-05',7000,'','',1,42,3,2,2,1,1,5,1,2,115,0,1);
+INSERT INTO `persona` VALUES (121,'MatÃ­as','Martinez','33250123','20332501235','2017-07-05',0,'','',1,42,4,2,1,1,1,4,1,3,115,0,1);
+INSERT INTO `persona` VALUES (122,'Marcos','Martinez','34100256','22341002566','2017-07-05',0,'','',1,42,5,1,2,1,1,4,1,3,115,0,1);
+INSERT INTO `persona` VALUES (123,'Aylen','Martinez','34562300','20345623003','2017-07-05',0,'','',1,42,4,2,1,1,1,3,1,3,115,0,1);
+INSERT INTO `persona` VALUES (124,'Antonia','Martinez','360123012','203601230125','2017-07-05',0,'','',1,42,5,2,1,1,1,3,1,3,115,0,1);
+INSERT INTO `persona` VALUES (125,'Ester','Blanes','7805774','2278057745','2017-07-05',6900,'','7805774',1,42,5,2,6,1,1,5,1,6,115,0,1);
+INSERT INTO `persona` VALUES (126,'Caro33lina','Fragueiro','35578785','27355787856','2017-07-05',5000,'carofragueiro@gmail.com','',1,43,4,2,2,1,1,1,1,1,118,0,1);
+INSERT INTO `persona` VALUES (127,'Carolina','Fragueiro','35578785','27355787856','2017-07-05',15000,'car@gmail.com','',1,44,5,2,2,1,1,7,2,1,120,0,1);
+INSERT INTO `persona` VALUES (128,'AgustÃ­n','Fragueiro','4000000','2040000003','2017-07-05',0,'','',1,44,5,1,1,1,1,1,1,3,121,0,1);
+INSERT INTO `persona` VALUES (129,'Elizabet','Fragueiro','21112362','27203623529','2017-07-05',0,'','',1,44,5,2,1,1,1,3,1,3,121,0,1);
+INSERT INTO `persona` VALUES (130,'Sebastian','Fragueiro','45236263','20456325896','2017-07-05',10000,'','',1,44,1,1,1,1,1,7,1,2,121,0,1);
+INSERT INTO `persona` VALUES (131,'Sebastian','Carbone','21456789','20214567896','2017-07-05',8000,'','',1,45,3,1,2,1,1,5,3,1,123,0,1);
+INSERT INTO `persona` VALUES (132,'Andrea','Icardi','32564785','12325647856','2017-07-05',0,'','',1,45,5,2,2,1,1,7,1,2,124,0,1);
+INSERT INTO `persona` VALUES (133,'Lidia','Zalazar','12365452','20123564523','2017-07-05',0,'','',1,46,5,2,3,1,1,4,1,1,126,0,1);
+INSERT INTO `persona` VALUES (134,'Santino','Zalazar','42536521','20425632512','2017-07-05',0,'','',1,46,5,1,1,1,1,1,1,3,127,0,1);
+INSERT INTO `persona` VALUES (135,'Sebastian','Zalazar','25632563','20256325632','2017-07-05',10000,'','',1,46,1,1,3,1,1,7,2,2,127,0,1);
+INSERT INTO `persona` VALUES (136,'Andrea','Icardi','25639589','12253654523','2017-07-05',15000,'','',1,62,1,2,4,1,1,5,1,1,130,0,1);
+INSERT INTO `persona` VALUES (137,'Luis','Icardi','45263362','20452633626','2017-07-05',0,'','',1,62,5,1,1,1,1,1,1,3,131,0,1);
+INSERT INTO `persona` VALUES (138,'Bautista','Icardi','48659326','20486956593','2017-07-05',0,'','',1,62,5,1,1,1,1,1,1,3,131,0,1);
+INSERT INTO `persona` VALUES (139,'Adolfo','Arbach','21345654','20213456546','2017-07-05',15000,'','',1,63,2,1,3,1,1,7,2,1,134,0,1);
+INSERT INTO `persona` VALUES (140,'Julieta','Dep','14562356','20146523652','2017-07-05',0,'','',1,63,5,2,3,1,1,5,1,2,135,0,1);
+INSERT INTO `persona` VALUES (141,'MatÃ­as','Sales','21345658','20214569876','2017-07-05',0,'','',1,63,5,1,1,1,1,3,1,3,135,0,1);
+INSERT INTO `persona` VALUES (142,'Guillermo','Frags','21456321','2012354659','2017-07-05',5000,'','',1,63,2,1,5,1,1,1,2,7,135,0,1);
+INSERT INTO `persona` VALUES (143,'Pablo','Tevez','12456987','20126547896','2017-07-05',0,'','',1,63,5,1,1,1,1,1,1,9,135,0,1);
+INSERT INTO `persona` VALUES (144,'RomÃ¡n','Comba','32562365','274567896','2017-07-05',0,'','',1,63,5,1,1,1,1,5,3,8,135,0,1);
+INSERT INTO `persona` VALUES (145,'Estefania','Gherra','30265985','20325623589','2017-07-05',10000,'','',1,64,5,2,1,1,1,7,2,1,137,0,1);
+INSERT INTO `persona` VALUES (146,'Liliana','Arraya','146589765','27146598756','2017-07-05',15000,'','',1,65,3,2,5,1,1,7,2,1,139,0,1);
+INSERT INTO `persona` VALUES (147,'MamÃ¡Liliana','Arraya','76589568','2776586549','2017-07-05',2000,'','22565487',1,65,5,2,6,1,1,7,1,6,140,0,1);
+INSERT INTO `persona` VALUES (148,'Federico','Castro','12546987','20125469876','2017-07-05',20000,'','',1,66,2,1,3,1,1,7,2,1,142,0,1);
+INSERT INTO `persona` VALUES (149,'Angeles','Villasuso','25645985','20256459876','2017-07-05',10000,'','',1,66,2,2,3,1,1,7,2,2,143,0,1);
+INSERT INTO `persona` VALUES (150,'Cecilia','Gomez','25648956','27153689546','2017-07-05',54000,'','',1,67,4,2,5,1,1,7,2,1,145,0,1);
+INSERT INTO `persona` VALUES (151,'Sofia','Navarro','30526526','27356256253','2017-07-05',2000,'','',1,67,4,2,1,1,1,7,2,3,146,0,1);
+INSERT INTO `persona` VALUES (152,'Sebastian','Carb','26598654','20265322145','2017-07-05',0,'','',1,67,5,1,3,1,1,1,1,4,146,0,1);
+INSERT INTO `persona` VALUES (153,'Pilar','Navarro','12654987','20126549876','2017-07-05',5000,'','',1,67,4,2,1,1,1,5,1,3,146,0,1);
+INSERT INTO `persona` VALUES (154,'MarÃ­a','Gomez','4658658','2746586589','2017-07-05',2000,'','5465456',1,67,5,2,5,1,1,7,1,6,146,0,1);
+INSERT INTO `persona` VALUES (155,'Florencia','Gomez','23654987','20326549879','2017-07-05',0,'','',1,67,5,2,1,1,1,7,1,8,146,0,1);
+INSERT INTO `persona` VALUES (156,'BebÃ©','Pololo','45658965','27456899856','2017-07-05',0,'','',1,67,5,1,1,1,1,1,1,5,146,0,1);
+INSERT INTO `persona` VALUES (157,'Paolo','Lopez','12546985','20125469876','2017-07-05',2000,'','2256454',1,68,5,1,1,1,1,1,1,1,148,0,1);
+INSERT INTO `persona` VALUES (158,'Daniela','RodrÃ­guez','14256987','27142569877','2017-07-05',3500,'','',1,69,3,2,5,1,1,1,1,1,150,0,1);
 INSERT INTO `persona` VALUES (159,'Diego Alejandro','Gordo','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,2,1,1,6,2,1,5,0,1);
 INSERT INTO `persona` VALUES (160,'fffffuuu','Gordo','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,2,1,1,6,2,1,5,0,1);
 INSERT INTO `persona` VALUES (161,'fffffuuu','Gordo','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,2,1,1,6,2,1,5,0,1);
@@ -1772,7 +1778,7 @@ INSERT INTO `techo` VALUES (40,2,0,1);
 INSERT INTO `techo` VALUES (41,2,0,1);
 INSERT INTO `techo` VALUES (42,2,0,1);
 INSERT INTO `techo` VALUES (43,2,1,1);
-INSERT INTO `techo` VALUES (44,5,0,1);
+INSERT INTO `techo` VALUES (44,2,0,1);
 INSERT INTO `techo` VALUES (45,2,0,1);
 INSERT INTO `techo` VALUES (46,2,0,1);
 INSERT INTO `techo` VALUES (47,5,0,1);
@@ -2424,4 +2430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-14 23:25:51
+-- Dump completed on 2017-09-16 14:34:26
