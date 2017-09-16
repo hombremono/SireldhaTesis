@@ -8,8 +8,6 @@ import ar.com.iua.modulo.business.Interfaces.IFamiliaService;
 import ar.com.iua.modulo.model.persistence.dao.IFamiliaDAO;
 import ar.com.iua.modulo.model.persistence.dao.IPersonaDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

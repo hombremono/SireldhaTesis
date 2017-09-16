@@ -11,7 +11,7 @@ import org.hibernate.annotations.Proxy;
 import java.util.Date;
 
 @Entity
-@Proxy(lazy = false)
+
 @Access(value = AccessType.FIELD)
 @Table(name = "familia")
 
