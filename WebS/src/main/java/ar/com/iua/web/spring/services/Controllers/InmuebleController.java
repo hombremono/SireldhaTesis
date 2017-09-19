@@ -17,6 +17,7 @@ import java.io.IOException;
 /**
  * Created by mnicolas on 05/07/17.
  */
+
 @RestController
 @RequestMapping(value = Constantes.URL_INMUEBLE)
 public class InmuebleController extends GenericController {
@@ -44,7 +45,6 @@ public class InmuebleController extends GenericController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Inmueble inmueble) throws IOException {
         return add(inmueble, inmuebleService, Constantes.URL_INMUEBLE);
-
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)

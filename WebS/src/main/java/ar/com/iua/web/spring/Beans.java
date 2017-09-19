@@ -140,7 +140,13 @@ public class Beans {
 	@Autowired
 	public IInmuebleDAO inmuebleDAO (final SessionFactory sessionFactory) { return new InmuebleDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public ITrabajoAutonomoDAO trabajoAutonomoDAO (final SessionFactory sessionFactory) { return new TrabajoAutonomoDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public ITrabajoDependenciaDAO trabajoDependenciaDAO (final SessionFactory sessionFactory) { return new TrabajoDependenciaDAO(sessionFactory);}
 
 	//---------------------------------------------------Services-------------------------------------------------------
 
@@ -198,6 +204,14 @@ public class Beans {
 											 final IPoseeCocinaDAO poseeCocinaDAO,final ILocalidadDAO localidadDAO)
 	{return new InmuebleService(dao,motivoCarecimientoDAO,materialParedDAO,materialTechoDAO,materialPisoDAO,poseeAguaDAO,procedenciaAguaDAO,
 								tipoBanoDAO,poseeLuzDAO,poseeCocinaDAO,localidadDAO);}
+
+	@Bean
+	@Autowired
+	public ITrabajoAutonomoService trabajoAutonomoService (final ITrabajoAutonomoDAO trabajoAutonomoDAO) {return new TrabajoAutonomoService(trabajoAutonomoDAO);}
+
+	@Bean
+	@Autowired
+	public ITrabajoDependenciaService trabajoDependenciaService (final ITrabajoDependenciaDAO trabajoDependenciaDAO) {return new TrabajoDependenciaService(trabajoDependenciaDAO);}
 
 
 }

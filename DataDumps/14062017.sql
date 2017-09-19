@@ -1756,7 +1756,7 @@ CREATE TABLE `techo` (
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_Techo`),
   KEY `fk_Techo_1_idx` (`idTipoTecho`),
-  CONSTRAINT `fk_techo_1` FOREIGN KEY (`idTipoTecho`) REFERENCES `materialtecho` (`idMaterialTecho`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_techo_1` FOREIGN KEY (`idTipoTecho`) REFERENCES `materialtecho` (id_MaterialTecho) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
