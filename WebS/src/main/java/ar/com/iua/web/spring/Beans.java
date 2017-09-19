@@ -148,6 +148,22 @@ public class Beans {
 	@Autowired
 	public ITrabajoDependenciaDAO trabajoDependenciaDAO (final SessionFactory sessionFactory) { return new TrabajoDependenciaDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IAlquilerDao alquilerDao (final SessionFactory sessionFactory) { return new AlquilerDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ITerrenoDao terrenoDao (final SessionFactory sessionFactory) { return new TerrenoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ISinInmuebleDAO sinInmuebleDAO (final SessionFactory sessionFactory) { return new SinInmuebleDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ICareceViviendaDAO careceViviendaDAO (final SessionFactory sessionFactory) { return new CareceViviendaDAO(sessionFactory);}
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -213,5 +229,20 @@ public class Beans {
 	@Autowired
 	public ITrabajoDependenciaService trabajoDependenciaService (final ITrabajoDependenciaDAO trabajoDependenciaDAO) {return new TrabajoDependenciaService(trabajoDependenciaDAO);}
 
+	@Bean
+	@Autowired
+	public ISinInmuebleService sinInmuebleService (final ISinInmuebleDAO sinInmuebleDAO) {return new SinInmuebleService(sinInmuebleDAO);}
+
+	@Bean
+	@Autowired
+	public ITerrenoService terrenoService (final ITerrenoDao terrenoDao) {return new TerrenoService(terrenoDao) ;}
+
+	@Bean
+	@Autowired
+	public IAlquilerService alquilerService (final IAlquilerDao alquilerDao) {return new AlquilerService(alquilerDao);}
+
+	@Bean
+	@Autowired
+	public ICareceViviendaService careceViviendaService (final ICareceViviendaDAO careceViviendaDAO) {return new CareceViviendaService(careceViviendaDAO);}
 
 }

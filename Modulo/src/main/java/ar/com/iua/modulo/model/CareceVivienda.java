@@ -11,7 +11,7 @@ import org.hibernate.annotations.Proxy;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "carecevivienda")
-public class CareceVivienda {
+public class CareceVivienda implements IModel{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -52,11 +52,16 @@ public class CareceVivienda {
         this.motivoCarecimiento = motivoCarecimiento;
     }
 
-    public boolean getActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setIsActive(boolean active) {
         isActive = active;
+    }
+
+    @Override
+    public int getId() {
+        return id_CareceVivienda;
     }
 }

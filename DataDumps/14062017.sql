@@ -619,7 +619,7 @@ CREATE TABLE `inmueble` (
   CONSTRAINT `fk_InmueblePoseeLuz` FOREIGN KEY (`idPoseeLuz`) REFERENCES `poseeluz` (`id_PoseeLuz`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_InmuebleServicioAgua` FOREIGN KEY (`idServicioAgua`) REFERENCES `servicioagua` (`id_ServicioAgua`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_InmuebleTecho` FOREIGN KEY (`idTecho`) REFERENCES `techo` (`id_Techo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -674,6 +674,7 @@ INSERT INTO `inmueble` VALUES (69,66,94,3,89,2,NULL,1,0,1,0,1);
 INSERT INTO `inmueble` VALUES (70,67,95,3,90,2,65,2,0,6,1,1);
 INSERT INTO `inmueble` VALUES (71,69,96,4,91,3,66,1,0,1,0,1);
 INSERT INTO `inmueble` VALUES (72,10,49,3,44,NULL,26,5,0,2,0,1);
+INSERT INTO `inmueble` VALUES (73,10,49,3,44,NULL,26,5,0,2,0,1);
 /*!40000 ALTER TABLE `inmueble` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -768,11 +769,10 @@ DROP TABLE IF EXISTS `materialtecho`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `materialtecho` (
-  `idMaterialTecho` int(11) NOT NULL AUTO_INCREMENT,
+  `id_MaterialTecho` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(60) NOT NULL,
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
-  `id_MaterialTecho` int(11) NOT NULL,
-  PRIMARY KEY (`idMaterialTecho`)
+  PRIMARY KEY (`id_MaterialTecho`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -782,13 +782,13 @@ CREATE TABLE `materialtecho` (
 
 LOCK TABLES `materialtecho` WRITE;
 /*!40000 ALTER TABLE `materialtecho` DISABLE KEYS */;
-INSERT INTO `materialtecho` VALUES (1,'Cubierta asfaltica/Membrana',1,0);
-INSERT INTO `materialtecho` VALUES (2,'Baldosa/Losa',1,0);
-INSERT INTO `materialtecho` VALUES (3,'Pizarra/Teja',1,0);
-INSERT INTO `materialtecho` VALUES (4,'Chapa de metal',1,0);
-INSERT INTO `materialtecho` VALUES (5,'Chapa de fibrocemento/Plastico',1,0);
-INSERT INTO `materialtecho` VALUES (6,'Chapa de carton',1,0);
-INSERT INTO `materialtecho` VALUES (7,'Palma/Tabla/Paja',1,0);
+INSERT INTO `materialtecho` VALUES (1,'Cubierta asfaltica/Membrana',1);
+INSERT INTO `materialtecho` VALUES (2,'Baldosa/Losa',1);
+INSERT INTO `materialtecho` VALUES (3,'Pizarra/Teja',1);
+INSERT INTO `materialtecho` VALUES (4,'Chapa de metal',1);
+INSERT INTO `materialtecho` VALUES (5,'Chapa de fibrocemento/Plastico',1);
+INSERT INTO `materialtecho` VALUES (6,'Chapa de carton',1);
+INSERT INTO `materialtecho` VALUES (7,'Palma/Tabla/Paja',1);
 /*!40000 ALTER TABLE `materialtecho` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1012,7 +1012,7 @@ CREATE TABLE `persona` (
   CONSTRAINT `fk_persona_7` FOREIGN KEY (`idNacionalidad`) REFERENCES `nacionalidad` (`id_Nacionalidad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_8` FOREIGN KEY (`idProfesion`) REFERENCES `profesion` (`id_Profesion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_persona_9` FOREIGN KEY (`idRolFamiliar`) REFERENCES `rolfamiliar` (`id_RolFamiliar`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1182,6 +1182,7 @@ INSERT INTO `persona` VALUES (158,'Daniela','RodrÃ­guez','14256987','271425698
 INSERT INTO `persona` VALUES (159,'Diego Alejandro','Gordo','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,2,1,1,6,2,1,5,0,1);
 INSERT INTO `persona` VALUES (160,'fffffuuu','Gordo','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,2,1,1,6,2,1,5,0,1);
 INSERT INTO `persona` VALUES (161,'fffffuuu','Gordo','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,2,1,1,6,2,1,5,0,1);
+INSERT INTO `persona` VALUES (162,'fffffuuu','rsfhfdgh','25469112','20254691128','2017-06-12',30000,'a@b',NULL,1,4,1,1,3,1,1,6,2,1,152,0,1);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1756,7 +1757,7 @@ CREATE TABLE `techo` (
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_Techo`),
   KEY `fk_Techo_1_idx` (`idTipoTecho`),
-  CONSTRAINT `fk_techo_1` FOREIGN KEY (`idTipoTecho`) REFERENCES `materialtecho` (id_MaterialTecho) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_techo_1` FOREIGN KEY (`idTipoTecho`) REFERENCES `materialtecho` (`id_MaterialTecho`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1839,7 +1840,7 @@ CREATE TABLE `telefono` (
   `numero` varchar(100) NOT NULL,
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_Telefono`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1999,6 +2000,7 @@ INSERT INTO `telefono` VALUES (148,0,'0',1);
 INSERT INTO `telefono` VALUES (149,1,'',1);
 INSERT INTO `telefono` VALUES (150,0,'',1);
 INSERT INTO `telefono` VALUES (151,0,'420342',1);
+INSERT INTO `telefono` VALUES (152,0,'0',1);
 /*!40000 ALTER TABLE `telefono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2189,7 +2191,7 @@ CREATE TABLE `trabajoautonomo` (
   PRIMARY KEY (`id_TrabajoAutonomo`),
   KEY `fk_TrabajoAutonomoPersona_idx` (`idPersona`),
   CONSTRAINT `fk_trabajoautonomo_1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`id_Persona`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2198,18 +2200,19 @@ CREATE TABLE `trabajoautonomo` (
 
 LOCK TABLES `trabajoautonomo` WRITE;
 /*!40000 ALTER TABLE `trabajoautonomo` DISABLE KEYS */;
-INSERT INTO `trabajoautonomo` VALUES (1,'0000-00-00',9,1);
-INSERT INTO `trabajoautonomo` VALUES (2,'0000-00-00',11,1);
-INSERT INTO `trabajoautonomo` VALUES (3,'0000-00-00',17,1);
-INSERT INTO `trabajoautonomo` VALUES (4,'0000-00-00',35,1);
-INSERT INTO `trabajoautonomo` VALUES (5,'0000-00-00',53,1);
-INSERT INTO `trabajoautonomo` VALUES (6,'0000-00-00',59,1);
-INSERT INTO `trabajoautonomo` VALUES (7,'0000-00-00',74,1);
-INSERT INTO `trabajoautonomo` VALUES (8,'0000-00-00',111,1);
-INSERT INTO `trabajoautonomo` VALUES (9,'0000-00-00',114,1);
-INSERT INTO `trabajoautonomo` VALUES (10,'0000-00-00',117,1);
-INSERT INTO `trabajoautonomo` VALUES (11,'0000-00-00',139,1);
-INSERT INTO `trabajoautonomo` VALUES (12,'0000-00-00',148,1);
+INSERT INTO `trabajoautonomo` VALUES (1,'2017-09-18',10,0);
+INSERT INTO `trabajoautonomo` VALUES (2,'2017-09-18',11,0);
+INSERT INTO `trabajoautonomo` VALUES (3,'2017-09-18',17,1);
+INSERT INTO `trabajoautonomo` VALUES (4,'2017-09-18',35,1);
+INSERT INTO `trabajoautonomo` VALUES (5,'2017-09-18',53,1);
+INSERT INTO `trabajoautonomo` VALUES (6,'2017-09-18',59,1);
+INSERT INTO `trabajoautonomo` VALUES (7,'2017-09-18',74,1);
+INSERT INTO `trabajoautonomo` VALUES (8,'2017-09-18',111,1);
+INSERT INTO `trabajoautonomo` VALUES (9,'2017-09-18',114,1);
+INSERT INTO `trabajoautonomo` VALUES (10,'2017-09-18',117,1);
+INSERT INTO `trabajoautonomo` VALUES (11,'2017-09-18',139,1);
+INSERT INTO `trabajoautonomo` VALUES (12,'2017-09-18',148,1);
+INSERT INTO `trabajoautonomo` VALUES (13,'2017-09-18',9,1);
 /*!40000 ALTER TABLE `trabajoautonomo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2235,7 +2238,7 @@ CREATE TABLE `trabajodependencia` (
   CONSTRAINT `fk_trabajodependencia_1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`id_Persona`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_trabajodependencia_2` FOREIGN KEY (`idDireccion`) REFERENCES `direccion` (`id_Direccion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_trabajodependencia_3` FOREIGN KEY (`idTelefono`) REFERENCES `telefono` (`id_Telefono`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2244,18 +2247,19 @@ CREATE TABLE `trabajodependencia` (
 
 LOCK TABLES `trabajodependencia` WRITE;
 /*!40000 ALTER TABLE `trabajodependencia` DISABLE KEYS */;
-INSERT INTO `trabajodependencia` VALUES (1,'Cartocor SA','0000-00-00',7,5,1,1);
-INSERT INTO `trabajodependencia` VALUES (2,'Escuela 9 de julio','0000-00-00',11,8,6,1);
-INSERT INTO `trabajodependencia` VALUES (3,'VW','0000-00-00',27,18,20,1);
-INSERT INTO `trabajodependencia` VALUES (4,'Lavadero La Gota Loca ','0000-00-00',39,25,32,1);
-INSERT INTO `trabajodependencia` VALUES (5,'MetalÃºrgica Danieli Hnos','0000-00-00',51,34,46,1);
-INSERT INTO `trabajodependencia` VALUES (6,'Watchman S.A','0000-00-00',70,45,70,1);
-INSERT INTO `trabajodependencia` VALUES (7,'Familia Salcedo ','0000-00-00',78,49,76,1);
-INSERT INTO `trabajodependencia` VALUES (8,'Casa particular','0000-00-00',88,54,93,1);
-INSERT INTO `trabajodependencia` VALUES (9,'Cartesiana SA','0000-00-00',92,56,96,1);
-INSERT INTO `trabajodependencia` VALUES (10,'Bertorello Inmobiliaria','0000-00-00',96,59,100,1);
-INSERT INTO `trabajodependencia` VALUES (11,'Tribunales Federales','0000-00-00',103,64,107,1);
-INSERT INTO `trabajodependencia` VALUES (12,'Tribunales','0000-00-00',132,79,136,1);
+INSERT INTO `trabajodependencia` VALUES (1,'Cartocor SA','2017-09-18',7,5,1,0);
+INSERT INTO `trabajodependencia` VALUES (2,'Escuela 9 de julio','2017-09-18',11,8,6,0);
+INSERT INTO `trabajodependencia` VALUES (3,'VW','2017-09-18',27,18,20,1);
+INSERT INTO `trabajodependencia` VALUES (4,'Lavadero La Gota Loca ','2017-09-18',39,25,32,1);
+INSERT INTO `trabajodependencia` VALUES (5,'MetalÃºrgica Danieli Hnos','2017-09-18',51,34,46,1);
+INSERT INTO `trabajodependencia` VALUES (6,'Watchman S.A','2017-09-18',70,45,70,1);
+INSERT INTO `trabajodependencia` VALUES (7,'Familia Salcedo ','2017-09-18',78,49,76,1);
+INSERT INTO `trabajodependencia` VALUES (8,'Casa particular','2017-09-18',88,54,93,1);
+INSERT INTO `trabajodependencia` VALUES (9,'Cartesiana SA','2017-09-18',92,56,96,1);
+INSERT INTO `trabajodependencia` VALUES (10,'Bertorello Inmobiliaria','2017-09-18',96,59,100,1);
+INSERT INTO `trabajodependencia` VALUES (11,'Tribunales Federales','2017-09-18',103,64,107,1);
+INSERT INTO `trabajodependencia` VALUES (12,'Tribunales','2017-09-18',132,79,136,1);
+INSERT INTO `trabajodependencia` VALUES (13,'Cartocor SA','2017-09-18',7,5,1,1);
 /*!40000 ALTER TABLE `trabajodependencia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2430,4 +2434,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-16 14:34:26
+-- Dump completed on 2017-09-18 22:23:29

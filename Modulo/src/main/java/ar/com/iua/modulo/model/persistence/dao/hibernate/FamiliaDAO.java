@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class FamiliaDAO extends GenericDAO <Familia,Integer> implements IFamiliaDAO{
 
     private static final long serialVersionUID = 1206356050999505599L;
-    private static Logger LOG = LoggerFactory.getLogger(UserDAO.class);
+    private static Logger LOG = LoggerFactory.getLogger(FamiliaDAO.class);
 
     public FamiliaDAO(SessionFactory sessionFactory) {
         super(sessionFactory);

@@ -13,7 +13,7 @@ import org.hibernate.annotations.Proxy;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "alquiler")
-public class Alquiler {
+public class Alquiler implements IModel{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_Alquiler;
@@ -80,5 +80,10 @@ public class Alquiler {
 
     public void setFamilia(Familia familia) {
         this.familia = familia;
+    }
+
+    @Override
+    public int getId() {
+        return id_Alquiler;
     }
 }
