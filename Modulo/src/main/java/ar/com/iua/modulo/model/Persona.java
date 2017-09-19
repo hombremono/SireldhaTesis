@@ -14,7 +14,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Proxy;
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "persona")
 public class Persona implements IModel {
@@ -40,56 +40,53 @@ public class Persona implements IModel {
     @Column(name="ingresoNeto", nullable = false)
     private float ingresoNeto;
 
-
     @Column(name="mail", nullable = false)
     private String mail;
-
 
     @Column(name="nroCarnetJubilacion")
     private String nroCarnetJubilacion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTipoDocumento", nullable = false)
     private TipoDocumento tipoDocumento;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idFamilia", nullable = false)
     private Familia familia;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idDependenciaLaboral", nullable = false)
     private SituacionLaboral situacionLaboral;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idSexo", nullable = false)
     private Sexo sexo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEstadoCivil", nullable = false)
     private EstadoCivil estadoCivil;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idNacionalidad", nullable = false)
     private Nacionalidad nacionalidad;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idLocalidad", nullable = false)
     private Localidad localidad;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idEstudios", nullable = false)
     private Estudios estudios;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idProfesion")
     private Profesion profesion;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idTelefono")
     private Telefono telefono;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idRolFamiliar", nullable = false)
     private RolFamiliar rolFamiliar;
 
