@@ -90,6 +90,10 @@ public class Persona implements IModel {
     @JoinColumn(name = "idRolFamiliar", nullable = false)
     private RolFamiliar rolFamiliar;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idTipoCapacidadConstructiva")
+    private TipoCapacidadConstructiva tipoCapacidadConstructiva;
+
     @Column(name="isActive", nullable = false)
     private boolean isActive;
 
@@ -264,5 +268,13 @@ public class Persona implements IModel {
     @Override
     public int getId() {
         return id_Persona;
+    }
+
+    public TipoCapacidadConstructiva getTipoCapacidadConstructiva() {
+        return tipoCapacidadConstructiva;
+    }
+
+    public void setTipoCapacidadConstructiva(TipoCapacidadConstructiva tipoCapacidadConstructiva) {
+        this.tipoCapacidadConstructiva = tipoCapacidadConstructiva;
     }
 }
