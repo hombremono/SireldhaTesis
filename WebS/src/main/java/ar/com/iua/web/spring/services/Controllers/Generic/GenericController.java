@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.net.URI;
 
@@ -51,10 +52,12 @@ public abstract class GenericController {
 
     protected ResponseEntity<Object> add (IModel model, IGenericService objService,String URL) throws IOException {
         try {
-            objService.save(model);
-            HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(new URI(URL + "/" + model.getId()));
-            return new ResponseEntity<Object>(headers, HttpStatus.CREATED);
+            Object target;
+            target = objService.save(model);
+            return new ResponseEntity<Object>(target, HttpStatus.CREATED);
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setLocation(new URI(URL + "/" + model.getId()));
+//            return new ResponseEntity<Object>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
