@@ -94,4 +94,9 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
             throw new ServiceException(e.getMessage(),e);
         }
     }
+
+    @Override
+    public Persona getByDni() throws ServiceException, NotFoundException {
+        return null;
+    }
 }
