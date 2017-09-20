@@ -82,7 +82,7 @@ public class Persona implements IModel {
     @JoinColumn(name = "idProfesion")
     private Profesion profesion;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "idTelefono")
     private Telefono telefono;
 
