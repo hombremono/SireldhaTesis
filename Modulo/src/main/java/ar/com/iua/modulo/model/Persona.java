@@ -40,6 +40,10 @@ public class Persona implements IModel {
     @Column(name="ingresoNeto", nullable = false)
     private float ingresoNeto;
 
+    @Column(name="discapacidad")
+    private boolean discapacidad;
+
+
     @Column(name="mail", nullable = false)
     private String mail;
 
@@ -276,5 +280,13 @@ public class Persona implements IModel {
 
     public void setTipoCapacidadConstructiva(TipoCapacidadConstructiva tipoCapacidadConstructiva) {
         this.tipoCapacidadConstructiva = tipoCapacidadConstructiva;
+    }
+
+    public boolean isDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
     }
 }
