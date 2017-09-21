@@ -16,6 +16,21 @@ angular.module('webS')
             },
             delete: function(id) {
                 return $http.delete(URL_API_BASE+"inmueble/"+id);
+            },
+            loadCombosInmueble:function(){
+                return $http.get(URL_API_BASE+"inmueble/loadCombos");
+            },
+            addTerreno:function(o){
+                return http.post(URL_API_BASE+"inmueble/terreno/",o);
+            },
+            addSinInmueble:function(o){
+                return $http.post(URL_API_BASE+"inmueble/sinInmueble/",o);
+            },
+            addAlquiler:function(o){
+                return $http.post(URL_API_BASE+"inmueble/alquiler/",o);
+            },
+            addCareceInmueble:function(o){
+                return $http.post(URL_API_BASE+"inmueble/careceVivienda/",o);
             }
         }
     }]);

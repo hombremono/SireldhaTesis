@@ -12,13 +12,19 @@ angular.module('webS')
                 return $http.put(URL_API_BASE+"hogar/",o);
             },
             add: function(o) {
-                return $http.post(URL_API_BASE+"hogar/",o);
+                return $http.post(URL_API_BASE+"familia/",o);
             },
             get: function(id) {
                 return $http.get(URL_API_BASE+"hogar/"+id);
             },
             delete: function(id) {
                 return $http.delete(URL_API_BASE+"hogar/"+id);
+            },
+            addTelefono: function(o){
+                return $http.post(URL_API_BASE+"dirtel/telefono/",o);
+            },
+            addDireccion: function(o){
+                return $http.post(URL_API_BASE+"dirtel/direccion",o);
             }
         };
     }]);

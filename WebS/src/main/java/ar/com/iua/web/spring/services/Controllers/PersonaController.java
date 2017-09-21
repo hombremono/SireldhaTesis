@@ -44,16 +44,16 @@ public class PersonaController extends GenericController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Persona persona) throws IOException {
-//        Telefono telefono = persona.getTelefono();
-//        try {
-//            if(telefono.getId_Telefono() <= 0) {
-//                telefono.setActive(true);
-//                persona.setTelefono(telefonoService.saveOrUpdate(telefono));
-//            }
-//        }catch (Exception e){
-//            LOG.error(e.getMessage(), e);
-//            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
+        Telefono telefono = persona.getTelefono();
+        try {
+            if(telefono.getId_Telefono() <= 0) {
+                telefono.setActive(true);
+                persona.setTelefono(telefonoService.saveOrUpdate(telefono));
+            }
+        }catch (Exception e){
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
 
         return add(persona,personaService,Constantes.URL_PERSONA);

@@ -1,35 +1,18 @@
-<!--<div class="container page-styling">-->
-    <!--<div class="header-wrapper">-->
-        <!--<div class="menu" ng-controller="MainController as ctrl">-->
-            <!--<div class="mini-menu">-->
-                <!--<label>-->
-                    <!--<select class="selectnav">-->
-                        <!--<option value="#" selected="">Nuestro Sistema</option>-->
-                        <!--<option value="#">Como Aplicar</option>-->
-                        <!--<option value="#">Propiedad Intelectual</option>-->
-                        <!--<option value="#">Iniciar</option>-->
-                    <!--</select>-->
-                <!--</label>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--
-        ACA VA EL CODIGO DE CADA PAGINA. HAY QUE CREAR DIRECTIVAS PARA AGRUPAR EL CODIGO DEL MENU Y DEL FOOTER, PARA NO REPETIRLO.
-    -->
-        <h2>Carga de Hogar</h2>
-        <form ng-submit="crearHogar(Hogar)" name="hogarForm" >
+
+
+<form ng-submit="crearHogar(Hogar)" name="hogarForm" >
+    <h3 title="info de hogar">Datos del Hogar</h3>
             <div class="form-group">
-                <label for="selectPlan">Seleccione el plan al que desea aplicar</label>
-                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.Id as plan.descripcion for plan in Planes"></select>
-            </div>
-            <h3>Datos del Hogar</h3>
-            <div class="form-group">
-                <label for="selectVivienda">Tipo de vivienda</label>
-                <select class="form-control input-md" id="selectVivienda" ng-model="Hogar.idVivienda" ng-options="vivienda.Id as vivienda.descripcion for vivienda in Viviendas"></select>
+                <label for="selectPlan"><span style="color:red">* </span>Seleccione el plan al que desea aplicar</label>
+                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.id_SolucionHabitacional as plan.descripcion for plan in Planes"></select>
             </div>
             <div class="form-group">
-                <label for="selectLocalidad">Localidad</label>
-                <select class="form-control input-md" id="selectLocalidad" ng-model="Hogar.idLocalidad" ng-options="localidad.Id as localidad.localidad for localidad in Localidades"></select>
+                <label for="selectVivienda"><span style="color:red">* </span>Tipo de vivienda</label>
+                <select class="form-control input-md" id="selectVivienda" ng-model="Hogar.idVivienda" ng-options="vivienda.id_SituacionInmueble as vivienda.descripcion for vivienda in Viviendas"></select>
+            </div>
+            <div class="form-group">
+                <label for="selectLocalidad"><span style="color:red">* </span>Localidad</label>
+                <select  class="form-control input-md" id="selectLocalidad" ng-model="Hogar.idLocalidad" ng-options="localidad.id_Localidad as localidad.localidad for localidad in Localidades"></select>
             </div>
             <div class="form-group">
                 <label for="inputBarrio">Barrio</label>
@@ -38,41 +21,39 @@
             <div id="divDireccion">
                 <h4>Direccion</h4>
                 <div class="form-group">
-                    <label for="inputCalle">Calle</label>
-                    <input class="form-control input-md" id="inputCalle" type="text" ng-model="Hogar.direccion.calle">
+                    <label for="inputCalle"><span style="color:red">*</span> Calle</label>
+                    <input  class="form-control input-md" id="inputCalle" type="text" ng-model="Hogar.direccion.calle">
                 </div>
                 <div class="form-group">
-                    <label for="inputNumero">Numero</label>
-                    <input class="form-control input-md" id="inputNumero" type="number" ng-model="Hogar.direccion.numero">
+                    <label for="inputNumero"><span style="color:red">*</span> Numero</label>
+                    <input  class="form-control input-md" id="inputNumero" type="number" ng-model="Hogar.direccion.numero">
                 </div>
                 <div class="form-group">
                     <label for="inputPiso">Piso y Departamento</label>
                     <input class="form-control input-md" id="inputPiso" type="text" ng-model="Hogar.direccion.pisoDepto">
                 </div>
             </div>
+    <div class="form-group">
+        <label for="fechaIncio"><span style="color:red">* </span>Incicio de residencia</label>
+        <input  class="form-control" id="fechaIncio" type="date" ng-model="Hogar.fechaInicio">
+    </div>
             <div class="form-group">
                 <label for="inputTelefono">Telefono</label>
                 <input class="form-control input-md" id="inputTelefono" type="text" ng-model="Hogar.telefono">
             </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="Hogar.celular" />
-                    Celular:
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" ng-model="Hogar.tarjeta" />
-                    El hogar cuenta con una o mas tajetas de credito:
-                </label>
-            </div>
-            <div class="form-group">
-                <label for="dpInicio">Incicio de residencia</label>
-                <md-datepicker id="dpInicio" ng-model="Hogar.fechaInicio" ></md-datepicker>
-            </div>
-            <button type="submit" class="btn btn-primary  pull-right">Siguiente</button>
-        </form>
+            <label class="checkbox"   ng-click="Hogar.celular = !Hogar.celular">
+                <input type="checkbox" value=""  data-toggle="checkbox" id="chkcel">Celular.
+            </label>
+            <label class="checkbox" ng-click="Hogar.tarjeta = !Hogar.tarjeta">
+                <input type="checkbox" value="" data-toggle="checkbox" id="chktjt">El Hogar cuenta con tarjetas de credito.
+            </label>
+    <!--<div class="alert alert-danger" ng-show="hogarForm.$invalid && hogarForm.$dirty">
+        <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
+    </div>
+    Revisar el tema de los popus de error que habia visto mono-->
 
+            <button type="submit" class="btn btn-primary  pull-right">Siguiente</button>
+</form>
 
 
 

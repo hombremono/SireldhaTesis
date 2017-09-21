@@ -5,7 +5,7 @@ function LoginFormController($rootScope, $scope, $log, $uibModalInstance, coreSe
 	$scope.user=user;
 	$scope.login = function () {
 		coreService.login(user).then(
-			function(resp){ 
+			function(resp){
 				if(resp.status===200) {
 					$rootScope.loginOpen=false;
 					$uibModalInstance.dismiss();
@@ -14,6 +14,7 @@ function LoginFormController($rootScope, $scope, $log, $uibModalInstance, coreSe
 								  if(resp.status===200 && resp.data.code==0) {
 									  $rootScope.user.name=resp.data.username;
 									  $rootScope.authenticated=true;
+                                      welcomeNotification(resp.data.username);
 								  } else {
 									  $rootScope.authenticated=false;
 									  $rootScope.openLoginForm();
@@ -27,4 +28,19 @@ function LoginFormController($rootScope, $scope, $log, $uibModalInstance, coreSe
 			}
 		);
 	  };
+    var welcomeNotification = function(nombre){
+    	debugger;
+        $.notify({
+            icon: "pe-7s-id",
+            message: 'Bienvenido '+nombre
+
+        },{
+            type: 'success',
+            timer: 4000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+    }
 }
