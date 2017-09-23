@@ -54,7 +54,7 @@ public class Persona implements IModel {
     @JoinColumn(name = "idTipoDocumento", nullable = false)
     private TipoDocumento tipoDocumento;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idFamilia", nullable = false)
     private Familia familia;
 

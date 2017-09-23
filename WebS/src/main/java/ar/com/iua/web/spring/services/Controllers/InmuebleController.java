@@ -4,6 +4,7 @@ import ar.com.iua.modulo.business.Interfaces.*;
 import ar.com.iua.modulo.business.model.InmuebleCombos;
 import ar.com.iua.modulo.model.*;
 import ar.com.iua.modulo.model.exception.NotFoundException;
+import ar.com.iua.modulo.model.persistence.dao.IDireccionDAO;
 import ar.com.iua.web.spring.services.Constantes;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
@@ -32,6 +33,10 @@ public class InmuebleController extends GenericController {
     private IAlquilerService alquilerService;
     @Autowired
     private ICareceViviendaService careceViviendaService;
+//    @Autowired
+//    private ITelefonoService telefonoService;
+    @Autowired
+    private IDireccionService direccionService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException {
@@ -152,6 +157,15 @@ public class InmuebleController extends GenericController {
 
     @RequestMapping(value = "/terreno/", method = RequestMethod.POST)
     public ResponseEntity<Object> addTerreno (@RequestBody Terreno terreno) throws IOException {
+        Direccion direccion = terreno.getDireccion();
+        try {
+            if(direccion.getId_Direccion() <= 0) {
+                direccion.setisActive(true);
+                terreno.setDireccion(direccionService.saveOrUpdate(direccion));            }
+        }catch (Exception e){
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return add(terreno, terrenoService, Constantes.URL_INMUEBLE);
     }
 

@@ -29,11 +29,18 @@ public class InmuebleService extends GenericService<Inmueble, Integer> implement
     private IPoseeCocinaDAO poseeCocinaDAO;
     private ILocalidadDAO localidadDAO;
 
+    private IParedDAO paredDAO;
+    private ITechoDAO techoDAO;
+    private IServicioAguaDAO servicioAguaDAO;
+    private IInmuebleDAO inmuebleDAO;
+
     public InmuebleService(IInmuebleDAO dao, IMotivoCarecimientoDAO motivoCarecimientoDAO, IMaterialParedDAO materialParedDAO,
                            IMaterialTechoDAO materialTechoDAO, IMaterialPisoDAO materialPisoDAO, IPoseeAguaDAO poseeAguaDAO,
                            IProcedenciaAguaDAO procedenciaAguaDAO, ITipoBanoDAO tipoBanoDAO, IPoseeLuzDAO poseeLuzDAO,
-                           IPoseeCocinaDAO poseeCocinaDAO, ILocalidadDAO localidadDAO) {
+                           IPoseeCocinaDAO poseeCocinaDAO, ILocalidadDAO localidadDAO, IParedDAO paredDAO, ITechoDAO techoDAO,
+                           IServicioAguaDAO servicioAguaDAO) {
         super(dao);
+        this.inmuebleDAO = dao;
         this.motivoCarecimientoDAO = motivoCarecimientoDAO;
         this.materialParedDAO = materialParedDAO;
         this.materialTechoDAO = materialTechoDAO;
@@ -44,7 +51,11 @@ public class InmuebleService extends GenericService<Inmueble, Integer> implement
         this.poseeLuzDAO = poseeLuzDAO;
         this.poseeCocinaDAO = poseeCocinaDAO;
         this.localidadDAO = localidadDAO;
+        this.paredDAO = paredDAO;
+        this.techoDAO = techoDAO;
+        this.servicioAguaDAO = servicioAguaDAO;
     }
+
 
     @Override
     public Inmueble load(int id, boolean getInactive) throws ServiceException, NotFoundException {
@@ -69,4 +80,18 @@ public class InmuebleService extends GenericService<Inmueble, Integer> implement
             throw new ServiceException(e.getMessage(),e);
         }
     }
+
+    public Inmueble save(Inmueble inmueble) throws ServiceException {
+        try {
+            inmueble.setTecho(techoDAO.saveOrUpdate(inmueble.getTecho()));
+            inmueble.setPared(paredDAO.saveOrUpdate(inmueble.getPared()));
+            inmueble.setServicioAgua(servicioAguaDAO.saveOrUpdate(inmueble.getServicioAgua()));
+            return inmuebleDAO.save(inmueble);
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+
 }

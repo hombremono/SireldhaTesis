@@ -164,6 +164,18 @@ public class Beans {
 	@Autowired
 	public ICareceViviendaDAO careceViviendaDAO (final SessionFactory sessionFactory) { return new CareceViviendaDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IParedDAO paredDAO (final SessionFactory sessionFactory) { return new ParedDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ITechoDAO techoDAO (final SessionFactory sessionFactory) { return new TechoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IServicioAguaDAO servicioAguaDAO (final SessionFactory sessionFactory) { return new ServicioAguaDAO(sessionFactory);}
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -217,9 +229,10 @@ public class Beans {
 	public IInmuebleService inmuebleService (final IInmuebleDAO dao, final IMotivoCarecimientoDAO motivoCarecimientoDAO, final IMaterialParedDAO materialParedDAO,
 											 final IMaterialTechoDAO materialTechoDAO, final IMaterialPisoDAO materialPisoDAO, final IPoseeAguaDAO poseeAguaDAO,
 											 final IProcedenciaAguaDAO procedenciaAguaDAO, final ITipoBanoDAO tipoBanoDAO, final IPoseeLuzDAO poseeLuzDAO,
-											 final IPoseeCocinaDAO poseeCocinaDAO,final ILocalidadDAO localidadDAO)
+											 final IPoseeCocinaDAO poseeCocinaDAO,final ILocalidadDAO localidadDAO,final IParedDAO paredDAO,final ITechoDAO techoDAO,
+											 final IServicioAguaDAO servicioAguaDAO)
 	{return new InmuebleService(dao,motivoCarecimientoDAO,materialParedDAO,materialTechoDAO,materialPisoDAO,poseeAguaDAO,procedenciaAguaDAO,
-								tipoBanoDAO,poseeLuzDAO,poseeCocinaDAO,localidadDAO);}
+								tipoBanoDAO,poseeLuzDAO,poseeCocinaDAO,localidadDAO,paredDAO,techoDAO,servicioAguaDAO);}
 
 	@Bean
 	@Autowired
