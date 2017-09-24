@@ -37,7 +37,7 @@ public class Inmueble implements IModel {
     private Familia familia;
 
     @OneToOne
-    @JoinColumn(name = "idPared")
+    @JoinColumn(name = "idPared" )
     private Pared pared;
 
     @OneToOne
