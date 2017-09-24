@@ -16,5 +16,5 @@ public interface IPersonaService extends IGenericService<Persona, Integer>,INoDe
     public Persona load(int id,boolean getInactive) throws ServiceException, NotFoundException;
     public void setInactive(int id) throws ServiceException, NotFoundException;
     public PersonaCombos loadCombos() throws ServiceException;
-    public Persona getByDni() throws ServiceException, NotFoundException;
+    public List<Persona> getByDni(String dni) throws ServiceException, NotFoundException;
 }

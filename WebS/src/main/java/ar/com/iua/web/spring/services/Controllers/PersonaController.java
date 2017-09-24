@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by mnicolas on 08/06/17.
@@ -81,6 +82,23 @@ public class PersonaController extends GenericController {
         }
     }
 
+    @RequestMapping(value = "/byDni/{dni}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getByDni (@PathVariable String dni) throws IOException {
+        try {
+            List<Persona> target =  personaService.getByDni(dni);
+            if(!target.isEmpty()){
+                return new ResponseEntity<Object>(target , HttpStatus.OK);
+            }else  {
+                return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+            }
+        } catch (NotFoundException nfe) {
+        return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+    }
+        catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 }

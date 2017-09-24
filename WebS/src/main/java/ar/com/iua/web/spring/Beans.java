@@ -174,7 +174,13 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IServicioAguaDAO servicioAguaDAO (final SessionFactory sessionFactory) { return new ServicioAguaDAO(sessionFactory);}
+	public IServicioAguaDAO servicioAguaDAO (final SessionFactory sessionFactory) { return new ServicioAguaDAO(sessionFactory);}	@Bean
+
+	@Autowired
+	public ICocinaDAO cocinaDAO (final SessionFactory sessionFactory) { return new CocinaDAO(sessionFactory);}	@Bean
+
+	@Autowired
+	public IPoseeBanoDAO poseeBanoDAO (final SessionFactory sessionFactory) { return new PoseeBanoDAO(sessionFactory);}
 
 	//---------------------------------------------------Services-------------------------------------------------------
 
@@ -206,33 +212,83 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IPersonaService personaService (final  IPersonaDAO personaDao,final ITipoCapacidadConstructivaDAO tipoCapacidadConstructivaDAO,
-										   final IEstadoCivilDAO estadoCivilDAO, final IEstudioDAO estudioDAO,
-										   final INacionalidadDAO nacionalidadDAO,final IProfesionDAO profesionDAO,
-										   final ISexoDAO sexoDAO, final ISituacionLaboralDAO situacionLaboralDAO,
-										   final ITipoDocumentoDAO tipoDocumentoDAO, final ILocalidadDAO localidadDAO,
+	public IPersonaService personaService (final  IPersonaDAO personaDao,
+										   final ITipoCapacidadConstructivaDAO tipoCapacidadConstructivaDAO,
+										   final IEstadoCivilDAO estadoCivilDAO,
+										   final IEstudioDAO estudioDAO,
+										   final INacionalidadDAO nacionalidadDAO,
+										   final IProfesionDAO profesionDAO,
+										   final ISexoDAO sexoDAO,
+										   final ISituacionLaboralDAO situacionLaboralDAO,
+										   final ITipoDocumentoDAO tipoDocumentoDAO,
+										   final ILocalidadDAO localidadDAO,
 										   final IRolFamiliarDAO rolFamiliarDAO){
-		return new PersonaService(personaDao,tipoCapacidadConstructivaDAO,estadoCivilDAO,estudioDAO,nacionalidadDAO,
-				profesionDAO, sexoDAO, situacionLaboralDAO, tipoDocumentoDAO, localidadDAO,rolFamiliarDAO); }
+		return new PersonaService(
+				personaDao,
+				tipoCapacidadConstructivaDAO,
+				estadoCivilDAO,
+				estudioDAO,
+				nacionalidadDAO,
+				profesionDAO,
+				sexoDAO,
+				situacionLaboralDAO,
+				tipoDocumentoDAO,
+				localidadDAO,
+				rolFamiliarDAO); }
 
 	@Bean
 	@Autowired
-	public IFamiliaService familiaService (final IFamiliaDAO familiaDao, final IPersonaDAO personaDao){ return new FamiliaService(familiaDao,personaDao); }
+	public IFamiliaService familiaService (final IFamiliaDAO familiaDao,
+										   final IPersonaDAO personaDao){
+		return new FamiliaService(
+				familiaDao,
+				personaDao); }
 
 	@Bean
 	@Autowired
-	public IHogarService hogarService (final ISolucionHabitacionalDAO daoSH,final ISituacionInmuebleDAO daoSI,final ILocalidadDAO daoL)
-	{ return new HogarService(daoSH,daoSI,daoL); }
+	public IHogarService hogarService (final ISolucionHabitacionalDAO daoSH,
+									   final ISituacionInmuebleDAO daoSI,
+									   final ILocalidadDAO daoL)
+	{ return new HogarService(
+			daoSH,
+			daoSI,
+			daoL); }
 
 	@Bean
 	@Autowired
-	public IInmuebleService inmuebleService (final IInmuebleDAO dao, final IMotivoCarecimientoDAO motivoCarecimientoDAO, final IMaterialParedDAO materialParedDAO,
-											 final IMaterialTechoDAO materialTechoDAO, final IMaterialPisoDAO materialPisoDAO, final IPoseeAguaDAO poseeAguaDAO,
-											 final IProcedenciaAguaDAO procedenciaAguaDAO, final ITipoBanoDAO tipoBanoDAO, final IPoseeLuzDAO poseeLuzDAO,
-											 final IPoseeCocinaDAO poseeCocinaDAO,final ILocalidadDAO localidadDAO,final IParedDAO paredDAO,final ITechoDAO techoDAO,
-											 final IServicioAguaDAO servicioAguaDAO)
-	{return new InmuebleService(dao,motivoCarecimientoDAO,materialParedDAO,materialTechoDAO,materialPisoDAO,poseeAguaDAO,procedenciaAguaDAO,
-								tipoBanoDAO,poseeLuzDAO,poseeCocinaDAO,localidadDAO,paredDAO,techoDAO,servicioAguaDAO);}
+	public IInmuebleService inmuebleService (final IInmuebleDAO dao,
+											 final IMotivoCarecimientoDAO motivoCarecimientoDAO,
+											 final IMaterialParedDAO materialParedDAO,
+											 final IMaterialTechoDAO materialTechoDAO,
+											 final IMaterialPisoDAO materialPisoDAO,
+											 final IPoseeAguaDAO poseeAguaDAO,
+											 final IProcedenciaAguaDAO procedenciaAguaDAO,
+											 final ITipoBanoDAO tipoBanoDAO,
+											 final IPoseeLuzDAO poseeLuzDAO,
+											 final IPoseeCocinaDAO poseeCocinaDAO,
+											 final ILocalidadDAO localidadDAO,
+											 final IParedDAO paredDAO,
+											 final ITechoDAO techoDAO,
+											 final IServicioAguaDAO servicioAguaDAO,
+											 final ICocinaDAO cocinaDAO,
+											 final IPoseeBanoDAO poseeBanoDAO)
+	{return new InmuebleService(
+			dao,
+			motivoCarecimientoDAO,
+			materialParedDAO,
+			materialTechoDAO,
+			materialPisoDAO,
+			poseeAguaDAO,
+			procedenciaAguaDAO,
+			tipoBanoDAO,
+			poseeLuzDAO,
+			poseeCocinaDAO,
+			localidadDAO,
+			paredDAO,
+			techoDAO,
+			servicioAguaDAO,
+			cocinaDAO,
+			poseeBanoDAO);}
 
 	@Bean
 	@Autowired

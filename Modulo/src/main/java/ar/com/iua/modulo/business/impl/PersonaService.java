@@ -9,9 +9,11 @@ import ar.com.iua.modulo.model.persistence.dao.*;
 import ar.com.iua.modulo.model.persistence.dao.hibernate.LocalidadDAO;
 import ar.com.iua.modulo.persistence.dao.IGenericDAO;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 
 
 /**
@@ -96,7 +98,15 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
     }
 
     @Override
-    public Persona getByDni() throws ServiceException, NotFoundException {
-        return null;
+    public List<Persona> getByDni(String dni) throws ServiceException, NotFoundException {
+        try {
+            List<Persona> Personas = personaDao.searchByCriteria(Restrictions.eq("nroDocumento", dni));
+            return  Personas;
+        } catch (PersistenceException e){
+            LOG.error(e.getMessage(),e);
+            throw new ServiceException(e.getMessage(),e);
+        }
     }
 }
+
+
