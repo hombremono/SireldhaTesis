@@ -2,6 +2,7 @@ angular.module('webS').controller('HogarController',
     [ '$scope', '$rootScope', '$sce', '$uibModal', 'hogarService', '$location', HogarController ]);
 function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $location) {
     $rootScope.idFamilia = 0;
+
     $scope.titulo = "Carga de Hogar";
     $scope.Hogar = {
         id:"",
@@ -94,6 +95,7 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
         hogarService.add(hogarReq).then(function(resp) {
 
              $rootScope.idFamilia = resp.data.id_Familia;
+             $rootScope.hogar = resp.data;
                 $location.path('/requestJF');
             }, function(respErr) {
                 console.log(respErr);

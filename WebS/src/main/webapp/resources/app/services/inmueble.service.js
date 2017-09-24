@@ -21,7 +21,7 @@ angular.module('webS')
                 return $http.get(URL_API_BASE+"inmueble/loadCombos");
             },
             addTerreno:function(o){
-                return http.post(URL_API_BASE+"inmueble/terreno/",o);
+                return $http.post(URL_API_BASE+"inmueble/terreno/",o);
             },
             addSinInmueble:function(o){
                 return $http.post(URL_API_BASE+"inmueble/sinInmueble/",o);

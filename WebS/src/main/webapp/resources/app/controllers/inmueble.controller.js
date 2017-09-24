@@ -12,8 +12,8 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             numero:"",
             pisoDepto:""
         },
-        valorFiscal:"",
-        superficie:"",
+        valorFiscal:0,
+        superficie:0,
         edificado:false,
         estado:"",
         motivoNoPosee:"",
@@ -23,25 +23,25 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             fin:"",
         },
         sinInmueble:"",
-        tipoPared:"",
+        tipoPared:0,
         revoque:false,
-        tipoTecho:"",
+        tipoTecho:0,
         cieloRazo:false,
-        tipoPiso:"",
+        tipoPiso:0,
         agua:false,
-        conexionAgua:"",
-        procedenciaAgua:"",
-        tipoBano:"",
-        poseeCadena:"",
-        banoCompartido:"",
+        conexionAgua:0,
+        procedenciaAgua:0,
+        tipoBano:0,
+        poseeCadena:false,
+        banoCompartido:false,
         luz:false,
         tipoLuz:"",
         cocina:false,
-        tipoCocina:"",
-        cocinaAgua:"",
-        cuartos:"",
-        camas:"",
-        zonaInsalubre:""
+        tipoCocina:0,
+        cocinaAgua:false,
+        cuartos:0,
+        camas:0,
+        zonaInsalubre:false
     };
     $scope.datosOK = false;
     var idFamilia =$rootScope.idFamilia;
@@ -114,12 +114,12 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             descripcion:"-SELECCIONE-"
         }];
         $scope.conexionesAgua=[{
-            id_poseeAgua:0,
+            id_PoseeAgua:0,
             descripcion:"-SELECCIONE-"
         }];
         $scope.procedenciasAgua=[{
             id_ProcedenciaAgua:0,
-            Descripcion:"-SELECCIONE-"
+            descripcion:"-SELECCIONE-"
         }];
         $scope.tiposBano=[{
             id_tipobano:0,
@@ -130,7 +130,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             descripcion:"-SELECCIONE-"
         }];
         $scope.tiposCocina=[{
-            id_TipoCocina:0,
+            id_PoseeCocina:0,
             descripcion:"-SELECCIONE-"
         }];
         $scope.Localidades=[{
@@ -148,15 +148,16 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             $scope.inmueble.tipoPared = $scope.tiposPared[0].id_MaterialPared;
             $scope.inmueble.tipoTecho = $scope.tiposTecho[0].id_MaterialTecho;
             $scope.inmueble.tipoPiso = $scope.tiposPiso[0].id_MaterialPiso;
-            $scope.inmueble.conexionAgua = $scope.conexionesAgua[0].id_poseeAgua;
+            $scope.inmueble.conexionAgua = $scope.conexionesAgua[0].id_PoseeAgua;
             $scope.inmueble.procedenciaAgua = $scope.procedenciasAgua[0].id_ProcedenciaAgua;
             $scope.inmueble.tipoBano = $scope.tiposBano[0].id_tipobano;
             $scope.inmueble.tipoLuz = $scope.tiposLuz[0].id_PoseeLuz;
-            $scope.inmueble.tipoCocina = $scope.tiposCocina[0].id_TipoCocina;
+            $scope.inmueble.tipoCocina = $scope.tiposCocina[0].id_PoseeCocina;
             $scope.inmueble.idLocalidad = $scope.Localidades[0].id_Localidad;
 
             $scope.inmueble.estado = $scope.estados[0].id_Estado;
             $scope.inmueble.motivoNoPosee = $scope.NoPosee[0].id_NoPosee;
+
 
         };
         inmuebleService.loadCombosInmueble().then(function(resp) {
@@ -188,6 +189,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         $scope.cargarInmueble = function() {
             //Validaciones
 
+
             valid = ejecutarValidaciones();
             if(valid){
                 var reqInmueble ={
@@ -199,30 +201,43 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                     },
                     "pared": {
                         "revoque": $scope.inmueble.revoque,
-                        "active": false,
-                        "tipoPared": $scope.inmueble.tipoPared
+                        "active": true,
+                        "tipoPared": {
+                            "id_MaterialPared": $scope.inmueble.tipoPared,
+                            "active": true
+                        }
                     },
                     "techo": {
                         "cieloRazo": $scope.inmueble.cieloRazo,
-                        "active": false,
-                        "tipoTecho": $scope.inmueble.tipoTecho
+                        "active": true,
+                        "tipoTecho": {
+                            "id_MaterialTecho": $scope.inmueble.tipoTecho,
+                            "active": true
+                        }
                     },
-                    "poseeLuz": $scope.inmueble.tipoLuz,
+                    "poseeLuz": {
+                        "id_PoseeLuz": $scope.inmueble.tipoLuz,
+                        "active": true
+                    },
                     "servicioAgua": {
-                        "poseeAgua": $scope.inmueble.conexionAgua,
-                        "procedenciaAgua": $scope.inmueble.procedenciaAgua,
-                        "active": false
+                        "poseeAgua": {
+                            "id_PoseeAgua": $scope.inmueble.conexionAgua,
+                            "active": true
+                        },
+                        "procedenciaAgua": {
+                            "id_ProcedenciaAgua": $scope.inmueble.procedenciaAgua,
+                            "active": true
+                        },
+                        "active": true
                     },
                     "active": true,
                     "piso": {
-                        "id_MaterialPiso": $scope.inmueble.id_MaterialPiso,
-                        "descripcion": $scope.tiposPiso[$scope.inmueble.id_MaterialPiso].descripcion,
+                        "id_MaterialPiso": $scope.inmueble.tipoPiso,
                         "active": true
                     }
-                }
-            inmuebleService.add($scope.reqInmueble).then(function(resp) {
-                $scope.cancelar();
-                $location.path('/loadFiles');
+                };
+            inmuebleService.add(reqInmueble).then(function(resp) {
+                debugger;
             }, function(respErr) {
                 console.log(respErr);
             });
@@ -256,7 +271,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 if($scope.inmueble.estado == 1){
                     var reqTerreno = {
                         "valorFiscal":$scope.inmueble.valorFiscal,
-                        "superficie":$scope.in.superficie,
+                        "superficie":$scope.inmueble.superficie,
                         "familia":{
                             "id_Familia":$rootScope.idFamilia
                         },
@@ -269,12 +284,12 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                             "longitud": 0,
                             "localidad": {
                                 "id_Localidad": $scope.inmueble.idLocalidad
-                            },
-
+                            }
                         },
-                        edificacion:$scope.inmueble.edificado
+                        "edificacion":$scope.inmueble.edificado
                     };
                     inmuebleService.addTerreno(reqTerreno).then(function(resp){
+
                         $scope.datosOK = true;
                     });
                 }
@@ -297,7 +312,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                             $scope.datosOK = true;
                         });
                     }
-                    else if($scope.inmueble.motivoNoPosee!=3){
+                    else if($scope.inmueble.motivoNoPosee==3){
                         var reqAlquiler= {
                                 "monto": $scope.inmueble.alquiler.cuota,
                                 "fechaDesde": $scope.inmueble.alquiler.inicio,
@@ -310,7 +325,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                                 $scope.datosOK = true;
                             });
                         }
-                    else if($scope.inmueble.motivoNoPosee!=7){
+                    else if($scope.inmueble.motivoNoPosee==7){
                         var reqCarece = {
                             "familia": {
                                 "id_Familia": $rootScope.idFamilia
@@ -343,6 +358,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 showNotification('Seleccione un tipo de TECHO!', 'danger');
                 result=false;
             }
+
             if($scope.inmueble.agua && $scope.inmueble.procedenciaAgua == 0)
             {
                 showNotification('Seleccione la prodecedencia del AGUA del inmueble', 'danger');

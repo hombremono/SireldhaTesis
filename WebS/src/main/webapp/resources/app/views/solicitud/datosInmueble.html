@@ -106,11 +106,11 @@
         <div ng-show="inmueble.agua">
             <div class="form-group">
                 <label for="selectConexionAgua">Tipo de Conexion</label>
-                <select class="form-control input-md" id="selectConexionAgua" ng-model="inmueble.conexionAgua" ng-options="conexionAgua.id_poseeAgua as conexionAgua.descripcion for conexionAgua in conexionesAgua"></select>
+                <select class="form-control input-md" id="selectConexionAgua" ng-model="inmueble.conexionAgua" ng-options="conexionAgua.id_PoseeAgua as conexionAgua.descripcion for conexionAgua in conexionesAgua"></select>
             </div>
             <div class="form-group">
                 <label for="selectProcedenciaAgua">Procedencia</label>
-                <select class="form-control input-md" id="selectProcedenciaAgua" ng-model="inmueble.procedenciaAgua" ng-options="procedenciaAgua.id_ProcedenciaAgua as procedenciaAgua.Descripcion for procedenciaAgua in procedenciasAgua"></select>
+                <select class="form-control input-md" id="selectProcedenciaAgua" ng-model="inmueble.procedenciaAgua" ng-options="procedenciaAgua.id_ProcedenciaAgua as procedenciaAgua.descripcion for procedenciaAgua in procedenciasAgua"></select>
             </div>
         </div>
         <label class="checkbox" ng-click="inmueble.bano = !inmueble.bano">
@@ -143,7 +143,7 @@
         <div ng-show="inmueble.cocina">
             <div class="form-group">
                 <label for="selectTCocina">Tipo Cocina</label>
-                <select class="form-control input-md" id="selectTCocina" ng-model="inmueble.tipoCocina" ng-options="tCocina.id_TipoCocina as tCocina.descripcion for tCocina in tiposCocina"></select>
+                <select class="form-control input-md" id="selectTCocina" ng-model="inmueble.tipoCocina" ng-options="tCocina.id_PoseeCocina as tCocina.descripcion for tCocina in tiposCocina"></select>
             </div>
             <label class="checkbox" ng-click="inmueble.cocinaAgua = !inmueble.cocinaAgua">
                 <input type="checkbox" value="" data-toggle="checkbox"><b>La cocina posee intalacion de agua funcional</b>
