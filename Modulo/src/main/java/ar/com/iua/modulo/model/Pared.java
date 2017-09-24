@@ -24,7 +24,7 @@ public class Pared {
 
     @OneToOne
     @JoinColumn(name = "idTipoPared")
-    private MaterialPiso materialPared;
+    private MaterialPared materialPared;
 
     @Column(name="isActive", nullable = false)
     private boolean isActive;
@@ -45,11 +45,11 @@ public class Pared {
         this.revoque = revoque;
     }
 
-    public MaterialPiso getTipoPared() {
+    public MaterialPared getTipoPared() {
         return materialPared;
     }
 
-    public void setTipoPared(MaterialPiso materialPared) {
+    public void setTipoPared(MaterialPared materialPared) {
         this.materialPared = materialPared;
     }
 
