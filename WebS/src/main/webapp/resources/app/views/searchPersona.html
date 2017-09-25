@@ -35,6 +35,27 @@
         initialize();
 
     </script>
+    <style>
+        .loader {
+            border: 12px solid #f3f3f3; /* Light grey */
+            border-top: 12px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #loadingWrapper {
+            text-align: center;
+        }
+        #loadingdiv {
+            display: inline-block;
+        }
+    </style>
 </head>
 <div id="lista de Personas" ng-show="!agregando && !editandoJF ">
     <nav class="navbar navbar-default navbar-fixed">
@@ -65,29 +86,37 @@
                 <div class="header">
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead>
-                <th>Dni</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                </thead>
-                <tbody>
-                <tr ng-repeat="integrante in resultadosBusqueda">
-                    <td>{{integrante.DNI}}</td>
-                    <td>{{integrante.nombre}}</td>
-                    <td>{{integrante.apellido}}</td>
-                    <td class="td-actions text-right">
-                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="editarPersona(integrante)" ng-show="integrante.DNI">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove" ng-click="eliminarPersona(integrante)" ng-show="integrante.relacionJF!=1 && integrante.DNI">
-                            <i class="fa fa-times"></i>
-                        </button>
-                    </td>
-                </tr>
+            <div ng-show="!loading">
+                <table class="table table-hover">
+                    <thead>
+                    <th>Dni</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="integrante in resultadosBusqueda">
+                        <td>{{integrante.DNI}}</td>
+                        <td>{{integrante.nombre}}</td>
+                        <td>{{integrante.apellido}}</td>
+                        <td class="td-actions text-right">
+                            <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="editarPersona(integrante)" ng-show="integrante.DNI">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove" ng-click="eliminarPersona(integrante)" ng-show="integrante.relacionJF!=1 && integrante.DNI">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </td>
+                    </tr>
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+
+            </div>
+            <div id="loadingWrapper">
+                <div id ="loadingdiv" class="loader" ng-show="loading"></div>
+            </div>
+
+
 
         </div>
     </div>

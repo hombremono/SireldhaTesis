@@ -9,6 +9,7 @@ $scope.editandoJF=false;
 
 $scope.titulo = "Familia";
 $scope.DNIBusqueda = "";
+$scope.loading = false;
 
 $scope.agregando = false;
 
@@ -1014,24 +1015,23 @@ $scope.agregarPersona = function(){
 $scope.eliminarPersona = function(integrante){
     if(confirm("Seguro que desea eliminar a "+integrante.nombre +" "+integrante.apellido+" de la familia?" ))
     {
+        $scope.loading = true;
         personaService.delete(integrante.id_Persona).then(function(resp){
             if(integrante.busqueda)
             {
-                $scope.resultadosBusqueda.forEach(function (item,index){
-                    if(item.id_Persona == integrante.id_Persona){
-                        $scope.resultadosBusqueda.splice(index,1);
-                        return false;
-                    }
-                }, function(respErr){
-                    console.log(respErr);
-                });
-                // $scope.resultadosBusqueda = [];
-                // personaService.getByDni($scope.DNIBusqueda).then(function(resp){
-                //
-                // });
 
-
+                    $scope.resultadosBusqueda.forEach(function (item,index){
+                        if(item.id_Persona == integrante.id_Persona){
+                            $scope.resultadosBusqueda.splice(index,1);
+                            return false;
+                        }
+                    }, function(respErr){
+                        console.log(respErr);
+                    });
+                $scope.loading = false;
             }
+
+
             else
             {
                 $scope.familia.integrantes.forEach(function (item,index){
