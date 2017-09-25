@@ -55,9 +55,6 @@ public abstract class GenericController {
             Object target;
             target = objService.save(model);
             return new ResponseEntity<Object>(target, HttpStatus.CREATED);
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setLocation(new URI(URL + "/" + model.getId()));
-//            return new ResponseEntity<Object>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -277,4 +277,32 @@ public class InmuebleController extends GenericController {
         }
     }
 
+    //-------------------------------------------COCINA-----------------------------------------------
+
+    @RequestMapping(value = "/cocina/", method = RequestMethod.POST)
+    public ResponseEntity<Object> addCocina (@RequestBody Cocina cocina) throws IOException {
+        try {
+            Cocina target;
+            target = inmuebleService.saveCocina(cocina);
+            return new ResponseEntity<Object>(target, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //-------------------------------------------BANO-----------------------------------------------
+
+    @RequestMapping(value = "/bano/", method = RequestMethod.POST)
+    public ResponseEntity<Object> addBano (@RequestBody PoseeBano bano) throws IOException {
+        try {
+            PoseeBano target;
+            target = inmuebleService.saveBano(bano);
+            return new ResponseEntity<Object>(target, HttpStatus.CREATED);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

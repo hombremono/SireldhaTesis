@@ -61,9 +61,9 @@ public class PoseeBano {
         this.compartido = compartido;
     }
 
-    public Inmueble getInmueble() {
-        return inmueble;
-    }
+//    public Inmueble getInmueble() {
+//        return inmueble;
+//    }
 
     public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;

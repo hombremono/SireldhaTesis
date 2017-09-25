@@ -5,6 +5,7 @@ package ar.com.iua.modulo.model;
  */
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import org.hibernate.annotations.Proxy;
 @Table(name = "inmueble")
 
 public class Inmueble implements IModel {
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_Inmueble;
@@ -55,6 +57,12 @@ public class Inmueble implements IModel {
     @OneToOne
     @JoinColumn(name = "idServicioAgua")
     private ServicioAgua servicioAgua;
+
+    @OneToMany (mappedBy = "inmueble")
+    private List<Cocina> cocina;
+//
+    @OneToMany (mappedBy = "inmueble")
+    private List<PoseeBano> poseeBano;
 
     public int getId_Inmueble() {
         return id_Inmueble;
@@ -142,6 +150,38 @@ public class Inmueble implements IModel {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public boolean isZonaInsalubre() {
+        return zonaInsalubre;
+    }
+
+    public void setZonaInsalubre(boolean zonaInsalubre) {
+        this.zonaInsalubre = zonaInsalubre;
+    }
+
+    public MaterialPiso getMaterialPiso() {
+        return materialPiso;
+    }
+
+    public void setMaterialPiso(MaterialPiso materialPiso) {
+        this.materialPiso = materialPiso;
+    }
+
+    public List<Cocina> getCocina() {
+        return cocina;
+    }
+
+    public void setCocina(List<Cocina> cocina) {
+        this.cocina = cocina;
+    }
+
+    public List<PoseeBano> getPoseeBano() {
+        return poseeBano;
+    }
+
+    public void setPoseeBano(List<PoseeBano> poseeBano) {
+        this.poseeBano = poseeBano;
     }
 
     @Column(name="isActive", nullable = false)

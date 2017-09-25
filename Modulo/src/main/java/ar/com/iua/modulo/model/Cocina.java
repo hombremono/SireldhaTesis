@@ -25,7 +25,7 @@ public class Cocina {
     @JoinColumn(name = "idTipoCocina")
     private TipoCocina tipoCocina;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_Inmueble")
     private Inmueble inmueble;
 
@@ -56,9 +56,9 @@ public class Cocina {
         this.tipoCocina = tipoCocina;
     }
 
-    public Inmueble getInmueble() {
-        return inmueble;
-    }
+//    public Inmueble getInmueble() {
+//        return inmueble;
+//    }
 
     public void setInmueble(Inmueble inmueble) {
         this.inmueble = inmueble;
