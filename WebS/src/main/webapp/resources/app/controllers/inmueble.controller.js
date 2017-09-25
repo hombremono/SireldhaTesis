@@ -41,7 +41,8 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         cocinaAgua:false,
         cuartos:0,
         camas:0,
-        zonaInsalubre:false
+        zonaInsalubre:false,
+        bano:false
     };
     $scope.datosOK = false;
     var idFamilia =$rootScope.idFamilia;
@@ -192,6 +193,22 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
 
             valid = ejecutarValidaciones();
             if(valid){
+
+                var inmubleConexAgua = null;
+                var inmuebleProdAgua = null;
+                var inmuebleBano = null;
+                var inmuebleCocina = null;
+                var inmuebleLuz = null;
+                if($scope.inmueble.agua){
+                    inmubleConexAgua = $scope.inmueble.conexionAgua;
+                    inmuebleProdAgua = $scope.inmueble.procedenciaAgua
+                }
+                if($scope.inmueble.luz){
+                    inmuebleLuz = $scope.inmueble.tipoLuz;
+                }
+                if($scope.inmueble.bano){
+                    inmuebleBano =$scope.inmueble.tipoBano;
+                }
                 var reqInmueble ={
                     "cantidadHabitaciones": $scope.inmueble.cuartos,
                     "cantidadCamas": $scope.inmueble.camas,
@@ -216,16 +233,16 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                         }
                     },
                     "poseeLuz": {
-                        "id_PoseeLuz": $scope.inmueble.tipoLuz,
+                        "id_PoseeLuz": inmuebleLuz,
                         "active": true
                     },
                     "servicioAgua": {
                         "poseeAgua": {
-                            "id_PoseeAgua": $scope.inmueble.conexionAgua,
+                            "id_PoseeAgua": inmubleConexAgua,
                             "active": true
                         },
                         "procedenciaAgua": {
-                            "id_ProcedenciaAgua": $scope.inmueble.procedenciaAgua,
+                            "id_ProcedenciaAgua": inmuebleProdAgua,
                             "active": true
                         },
                         "active": true
@@ -237,7 +254,79 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                     }
                 };
             inmuebleService.add(reqInmueble).then(function(resp) {
-                debugger;
+                var idInmueble = resp.data.id_Inmueble;
+                if($scope.inmueble.cocina && $scope.inmueble.bano)
+                {
+                    var reqCocina = {
+                        "instalacionDeAgua": $scope.inmueble.cocinaAgua,
+                        "tipoCocina": {
+                        "id_TipoCocina": $scope.inmueble.tipoCocina,
+                            "active": true
+                    },
+                        "active": true,
+                        "inmueble": {
+                        "id_Inmueble": idInmueble
+                    }
+
+                    };
+                    inmuebleService.addCocina(reqCocina).then(function(resp) {
+                            var reqBano = {
+                            "descargaInodoro": $scope.inmueble.descargaInodoro,
+                            "compartido": $scope.inmueble.banoCompartido,
+                            "tipoBano": {
+                            "id_tipobano": $scope.inmueble.tipoBano,
+                                "active": true
+                        },
+                            "active": true,
+                            "inmueble": {
+                            "id_Inmueble": idInmueble
+                        }
+
+                            };
+                            inmuebleService.addBano(reqBano).then(function (r) {
+                                solicitudTerminada();
+
+                            });
+
+                    });
+
+                }
+                else if($scope.inmueble.cocina){
+                    var reqCocina = {
+                        "instalacionDeAgua": $scope.inmueble.cocinaAgua,
+                        "tipoCocina": {
+                            "id_TipoCocina": $scope.inmueble.tipoCocina,
+                            "active": true
+                        },
+                        "active": true,
+                        "inmueble": {
+                            "id_Inmueble": idInmueble
+                        }
+
+                    };
+                    inmuebleService.addCocina(reqCocina).then(function(resp) {
+                        solicitudTerminada();
+                    });
+                }
+                else if($scope.inmueble.bano){
+                    var reqBano = {
+                        "descargaInodoro": $scope.inmueble.descargaInodoro,
+                        "compartido": $scope.inmueble.banoCompartido,
+                        "tipoBano": {
+                            "id_tipobano": $scope.inmueble.tipoBano,
+                            "active": true
+                        },
+                        "active": true,
+                        "inmueble": {
+                            "id_Inmueble": idInmueble
+                        }
+
+                    };
+                    inmuebleService.addBano(reqBano).then(function (r) {
+                        solicitudTerminada();
+
+                    });
+                }
             }, function(respErr) {
                 console.log(respErr);
             });
@@ -269,29 +358,43 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             if(result){
                 /*REVISARLO PARA USAR LOS CHECKS. MUCHO MAS SENCILLO.*/
                 if($scope.inmueble.estado == 1){
-                    var reqTerreno = {
-                        "valorFiscal":$scope.inmueble.valorFiscal,
-                        "superficie":$scope.inmueble.superficie,
-                        "familia":{
-                            "id_Familia":$rootScope.idFamilia
-                        },
-                        "direccion":{
-                            "calle": $scope.inmueble.direccion.calle,
-                            "numero": $scope.inmueble.direccion.numero,
-                            "dpto": $scope.inmueble.direccion.pisoDepto,
-                            "barrio": $scope.inmueble.barrio,
-                            "latitud": 0,
-                            "longitud": 0,
-                            "localidad": {
-                                "id_Localidad": $scope.inmueble.idLocalidad
-                            }
-                        },
-                        "edificacion":$scope.inmueble.edificado
-                    };
-                    inmuebleService.addTerreno(reqTerreno).then(function(resp){
+                    var addressInput = document.getElementById('adress-inmueble').value;
+                    var geocoder = new google.maps.Geocoder();
 
-                        $scope.datosOK = true;
+                    geocoder.geocode({address: addressInput}, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var myResult = results[0].geometry.location; // reference LatLng value
+                            var num = Number(results[0].address_components[0].long_name);
+                            var calle =results[0].address_components[1].long_name;
+                            var lat =results[0].geometry.location.lat();
+                            var lng =results[0].geometry.location.lng();
+                            var reqTerreno = {
+                                "valorFiscal":$scope.inmueble.valorFiscal,
+                                "superficie":$scope.inmueble.superficie,
+                                "familia":{
+                                    "id_Familia":$rootScope.idFamilia
+                                },
+                                "direccion":{
+                                    "calle": calle,
+                                    "numero": num,
+                                    "dpto": "",
+                                    "barrio": $scope.inmueble.barrio,
+                                    "latitud": lat,
+                                    "longitud": lng,
+                                    "localidad": {
+                                        "id_Localidad": $scope.inmueble.idLocalidad
+                                    }
+                                },
+                                "edificacion":$scope.inmueble.edificado
+                            };
+                            debugger;
+                            inmuebleService.addTerreno(reqTerreno).then(function(resp){
+
+                                $scope.datosOK = true;
+                            });
+                        }
                     });
+
                 }
                 if($scope.inmueble.estado == 2){
                     if($scope.inmueble.motivoNoPosee!=3 && $scope.inmueble.motivoNoPosee!=7)
@@ -400,6 +503,21 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 }
             });
         };
+        var solicitudTerminada = function(nombre){
+        $.notify({
+            icon: "pe-7s-smile",
+            message: 'Solicitud cargada con Exito!'
+
+        },{
+            type: 'success',
+            timer: 4000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+        $location.path('/');
+    };
 }
 
 

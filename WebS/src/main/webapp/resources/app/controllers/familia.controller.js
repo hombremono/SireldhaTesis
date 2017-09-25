@@ -8,6 +8,7 @@ var idFamilia =$rootScope.idFamilia;
 $scope.editandoJF=false;
 
 $scope.titulo = "Familia";
+$scope.DNIBusqueda = "";
 
 $scope.agregando = false;
 
@@ -42,7 +43,9 @@ $scope.persona ={
     discapacidad:"",
     idEdicion:0,
     editando:false,
-    idTelefono:0
+    idTelefono:0,
+    idFamilia:0,
+    busqueda:false
 };
 $scope.jefeDeFamilia={
     nombre:"",
@@ -63,6 +66,7 @@ $scope.jefeDeFamilia={
         fechaIngreso:"",
         idLocalidad:"",
         barrio:"",
+        direccionFull:"",
         direccion:{
             idDireccion:0,
             calle:"",
@@ -86,7 +90,9 @@ $scope.jefeDeFamilia={
     discapacidad:false,
     idEdicion:0,
     editando:false,
-    idTelefono:0
+    idTelefono:0,
+    idFamilia:0,
+    busqueda:false
 };
 //Inicilizacion de Combos
 $scope.tiposDni =[{
@@ -129,6 +135,9 @@ $scope.relacionJF =[{
     id_RolFamiliar:0,
     rolFamiliar:"-SELECCIONE-"
 }];
+
+//Combo de resultado de carga
+$scope.resultadosBusqueda=[];
 var defaultCombos = function(){
     $scope.persona.tipoDni = $scope.tiposDni[0].id_TipoDocumento;
     $scope.jefeDeFamilia.tipoDni = $scope.tiposDni[0].id_TipoDocumento;
@@ -190,7 +199,6 @@ if($rootScope.idJefe){
       {
           jubiladoChk = true;
       }
-      debugger;
       var integrante ={
           id_Persona:resp.data.id_Persona,
           nombre:resp.data.nombre,
@@ -332,39 +340,57 @@ $scope.addjefeDeFamilia = function(){
                     "fechaInicioActividades": $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades,
                     "active": true
                 };
-                var trabajoDependencia={
-                    "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
-                    "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
-                    "persona": {
-                        "id_Persona": $rootScope.idJefe
-                    },
-                    "telefono": {
-                        "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
-                        "celular": false,
-                        "active": true
-                    },
-                    "direccion": {
-                        "calle": $scope.jefeDeFamilia.trabajoDependencia.direccion.calle,
-                        "numero": $scope.jefeDeFamilia.trabajoDependencia.direccion.numero,
-                        "dpto": $scope.jefeDeFamilia.trabajoDependencia.direccion.pisoDepto,
-                        "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
-                        "latitud": 0,
-                        "longitud": 0,
-                        "localidad": {
-                            "id_Localidad": $scope.jefeDeFamilia.trabajoDependencia.idLocalidad,
-                            "localidad": "",
-                            "isActive": true
-                        },
-                        "isActive": true
-                    },
-                    "active": true
-                };
+
             if(resp.data.situacionLaboral.id_DependenciaLaboral == 1)
             {
-                 familiaService.addRelacionDep(trabajoDependencia).then(function(resp){
-                     $rootScope.idDependencia=resp.data.id_TrabajoDependencia;
-                     $location.path('/family');
-                 });
+
+                var addressInput = document.getElementById('adress-jf').value;
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({address: addressInput}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var myResult = results[0].geometry.location; // reference LatLng value
+                        var num = Number(results[0].address_components[0].long_name);
+                        var calle =results[0].address_components[1].long_name;
+                        var lat =results[0].geometry.location.lat();
+                        var lng =results[0].geometry.location.lng();
+                        var trabajoDependencia={
+                            "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
+                            "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
+                            "persona": {
+                                "id_Persona": $rootScope.idJefe
+                            },
+                            "telefono": {
+                                "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
+                                "celular": false,
+                                "active": true
+                            },
+                            "direccion": {
+                                "calle": calle,
+                                "numero": num,
+                                "dpto": addressInput,
+                                "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
+                                "latitud": lat,
+                                "longitud": lng,
+                                "localidad": {
+                                    "id_Localidad": $scope.jefeDeFamilia.trabajoDependencia.idLocalidad,
+                                    "localidad": "",
+                                    "isActive": true
+                                },
+                                "isActive": true
+                            },
+                            "active": true
+                        };
+                        familiaService.addRelacionDep(trabajoDependencia).then(function(resp){
+                            $rootScope.idDependencia=resp.data.id_TrabajoDependencia;
+                            $location.path('/family');
+                        });
+                    }
+                    else{
+                        alert("Se ha producido un error inesperado con el servicio de Google Maps.");
+                    }
+                });
+
             }
             else if(resp.data.situacionLaboral.id_DependenciaLaboral == 2)
             {
@@ -390,7 +416,7 @@ $scope.editjefeDeFamilia = function() {
     valid = ejecutarValidacionesJF();
     if(valid){
         var jefeReqEdit = {
-            "id_Persona":$rootScope.idJefe,
+            "id_Persona":$rootScope.idJefe || $scope.jefeDeFamilia.idEdicion,
             "nombre": $scope.jefeDeFamilia.nombre,
             "apellido":$scope.jefeDeFamilia.apellido ,
             "nroDocumento": $scope.jefeDeFamilia.DNI,
@@ -399,7 +425,7 @@ $scope.editjefeDeFamilia = function() {
             "ingresoNeto": $scope.jefeDeFamilia.ingresoNeto,
             "mail": $scope.jefeDeFamilia.mail,
             "tipoDocumento": {"id_TipoDocumento": $scope.jefeDeFamilia.tipoDni},
-            "familia": {"id_Familia": idFamilia},
+            "familia": {"id_Familia": idFamilia || $scope.jefeDeFamilia.idFamilia},
             "situacionLaboral": {"id_DependenciaLaboral": $scope.jefeDeFamilia.depLaboral},
             "sexo": {"id_Sexo": $scope.jefeDeFamilia.sexo},
             "estadoCivil": {"id_EstadoCivil": $scope.jefeDeFamilia.estadoCivil},
@@ -417,47 +443,42 @@ $scope.editjefeDeFamilia = function() {
                 "id_TipoCapacidadConstructiva":$scope.jefeDeFamilia.capConstructiva
             }
         };
+        if(!$rootScope.idJefe){
+            $rootScope.idJefe = $scope.jefeDeFamilia.idEdicion;
+        }
         personaService.update(jefeReqEdit).then(function(resp){
-                var trabajoAutonomo = {
-                    "persona": {
-                        "id_Persona": $rootScope.idJefe
-                    },
-                    "id_TrabajoAutonomo":$rootScope.idAutonomo,
-                    "fechaInicioActividades": $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades,
-                    "active": true
-                };
-                var trabajoDependencia={
-                    "id_TrabajoDependencia":$rootScope.idDependencia,
-                    "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
-                    "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
-                    "persona": {
-                        "id_Persona": $rootScope.idJefe
-                    },
-                    "telefono": {
-                        "id_Telefono":$scope.jefeDeFamilia.trabajoDependencia.idTelefono,
-                        "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
-                        "celular": false,
-                        "active": true
-                    },
-                    "direccion": {
-                        "id_Direccion": $scope.jefeDeFamilia.trabajoDependencia.direccion.idDireccion,
-                        "calle": $scope.jefeDeFamilia.trabajoDependencia.direccion.calle,
-                        "numero": $scope.jefeDeFamilia.trabajoDependencia.direccion.numero,
-                        "dpto": $scope.jefeDeFamilia.trabajoDependencia.direccion.pisoDepto,
-                        "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
-                        "latitud": 0,
-                        "longitud": 0,
-                        "localidad": {
-                            "id_Localidad": $scope.jefeDeFamilia.trabajoDependencia.idLocalidad,
-                            "localidad": "",
-                            "isActive": true
-                        },
-                        "isActive": true
-                    },
-                    "active": true
-                };
                 if(jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 1)
                 {
+                    var trabajoDependencia={
+                        "id_TrabajoDependencia":$rootScope.idDependencia,
+                        "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
+                        "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
+                        "persona": {
+                            "id_Persona": $rootScope.idJefe
+                        },
+                        "telefono": {
+                            "id_Telefono":$scope.jefeDeFamilia.trabajoDependencia.idTelefono,
+                            "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
+                            "celular": false,
+                            "active": true
+                        },
+                        "direccion": {
+                            "id_Direccion": $scope.jefeDeFamilia.trabajoDependencia.direccion.idDireccion,
+                            "calle": $scope.jefeDeFamilia.trabajoDependencia.direccion.calle,
+                            "numero": $scope.jefeDeFamilia.trabajoDependencia.direccion.numero,
+                            "dpto": $scope.jefeDeFamilia.trabajoDependencia.direccion.pisoDepto,
+                            "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
+                            "latitud": 0,
+                            "longitud": 0,
+                            "localidad": {
+                                "id_Localidad": $scope.jefeDeFamilia.trabajoDependencia.idLocalidad,
+                                "localidad": "",
+                                "isActive": true
+                            },
+                            "isActive": true
+                        },
+                        "active": true
+                    };
                     familiaService.updateRelacionDep(trabajoDependencia).then(function(resp){
                         $scope.familia.integrantes.forEach(function (item,index){
                             if(item.id_Persona == $rootScope.idJefe){
@@ -503,6 +524,14 @@ $scope.editjefeDeFamilia = function() {
                 }
                 else if(jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 2)
                 {
+                    var trabajoAutonomo = {
+                        "persona": {
+                            "id_Persona": $rootScope.idJefe
+                        },
+                        "id_TrabajoAutonomo":$rootScope.idAutonomo,
+                        "fechaInicioActividades": $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades,
+                        "active": true
+                    };
                     familiaService.updateAutonomo(trabajoAutonomo).then(function(resp){
                         $scope.familia.integrantes.forEach(function (item,index){
                             if(item.id_Persona == $rootScope.idJefe){
@@ -548,46 +577,95 @@ $scope.editjefeDeFamilia = function() {
 
                 }
                 else{
-                    $scope.familia.integrantes.forEach(function (item,index){
-                        if(item.id_Persona == $rootScope.idJefe){
-                            $scope.familia.integrantes.splice(index,1);
-                            return false;
-                        }
-                    });
-                    personaService.get($rootScope.idJefe).then(function(resp){
-                        var jubiladoChk = false;
-                        if(resp.data.nroCarnetJubilacion)
-                        {
-                            jubiladoChk = true;
-                        }
-                        var integrante ={
-                            id_Persona:resp.data.id_Persona,
-                            nombre:resp.data.nombre,
-                            apellido:resp.data.apellido,
-                            tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                            DNI:resp.data.nroDocumento,
-                            CUIL:resp.data.nroCuil,
-                            nacimiento:resp.data.fechaNacimiento,
-                            sexo:resp.data.sexo.id_Sexo,
-                            estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                            nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                            estudios:resp.data.estudios.id_Estudios,
-                            profesion:resp.data.profesion.id_Profesion,
-                            capConstructiva:resp.data.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
-                            depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                            relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                            DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                            ingresoNeto:resp.data.ingresoNeto,
-                            mail:resp.data.mail,
-                            telefono:resp.data.telefono.numero,
-                            jubilado:jubiladoChk,
-                            carnetJubilacion:resp.data.nroCarnetJubilacion,
-                            discapacidad:false,
-                            editando:false
-                        };
-                        $scope.familia.integrantes.push(integrante);
-                        $scope.editandoJF=false;
-                    });
+                    if($scope.jefeDeFamilia.busqueda)
+                    {
+                        $scope.resultadosBusqueda.forEach(function (item,index){
+                            if(item.id_Persona == $scope.jefeDeFamilia.idEdicion){
+                                debugger;
+                                $scope.resultadosBusqueda.splice(index,1);
+                                return false;
+                            }
+                        });
+                        personaService.get($scope.jefeDeFamilia.idEdicion).then(function(resp){
+                            var jubiladoChk = false;
+                            if(resp.data.nroCarnetJubilacion)
+                            {
+                                jubiladoChk = true;
+                            }
+                            var integrante ={
+                                id_Persona:resp.data.id_Persona,
+                                nombre:resp.data.nombre,
+                                apellido:resp.data.apellido,
+                                tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
+                                DNI:resp.data.nroDocumento,
+                                CUIL:resp.data.nroCuil,
+                                nacimiento:resp.data.fechaNacimiento,
+                                sexo:resp.data.sexo.id_Sexo,
+                                estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
+                                nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
+                                estudios:resp.data.estudios.id_Estudios,
+                                profesion:resp.data.profesion.id_Profesion,
+                                capConstructiva:resp.data.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
+                                depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
+                                relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
+                                DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
+                                ingresoNeto:resp.data.ingresoNeto,
+                                mail:resp.data.mail,
+                                telefono:resp.data.telefono.numero,
+                                jubilado:jubiladoChk,
+                                carnetJubilacion:resp.data.nroCarnetJubilacion,
+                                discapacidad:false,
+                                editando:false
+                            };
+                            $scope.resultadosBusqueda.push(integrante);
+                            $scope.editandoJF=false;
+                        });
+
+                    }
+                    else{
+                        $scope.familia.integrantes.forEach(function (item,index){
+                            if(item.id_Persona == $rootScope.idJefe){
+                                $scope.familia.integrantes.splice(index,1);
+                                return false;
+                            }
+                        });
+                        personaService.get($rootScope.idJefe).then(function(resp){
+                            var jubiladoChk = false;
+                            if(resp.data.nroCarnetJubilacion)
+                            {
+                                jubiladoChk = true;
+                            }
+                            var integrante ={
+                                id_Persona:resp.data.id_Persona,
+                                nombre:resp.data.nombre,
+                                apellido:resp.data.apellido,
+                                tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
+                                DNI:resp.data.nroDocumento,
+                                CUIL:resp.data.nroCuil,
+                                nacimiento:resp.data.fechaNacimiento,
+                                sexo:resp.data.sexo.id_Sexo,
+                                estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
+                                nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
+                                estudios:resp.data.estudios.id_Estudios,
+                                profesion:resp.data.profesion.id_Profesion,
+                                capConstructiva:resp.data.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
+                                depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
+                                relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
+                                DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
+                                ingresoNeto:resp.data.ingresoNeto,
+                                mail:resp.data.mail,
+                                telefono:resp.data.telefono.numero,
+                                jubilado:jubiladoChk,
+                                carnetJubilacion:resp.data.nroCarnetJubilacion,
+                                discapacidad:false,
+                                editando:false
+                            };
+                            $scope.familia.integrantes.push(integrante);
+                            $scope.editandoJF=false;
+                        });
+
+                    }
+
 
                 }
             },
@@ -599,7 +677,6 @@ $scope.editjefeDeFamilia = function() {
 $scope.addPersona = function() {
     valid = ejecutarValidaciones();
     if(valid) {
-        debugger;
         var reqPersona = {
             "nombre": $scope.persona.nombre,
             "apellido": $scope.persona.apellido,
@@ -637,7 +714,7 @@ $scope.addPersona = function() {
             "ingresoNeto": $scope.persona.ingresoNeto,
             "mail": $scope.persona.mail,
             "tipoDocumento": {"id_TipoDocumento": $scope.persona.tipoDni},
-            "familia": {"id_Familia": idFamilia},
+            "familia": {"id_Familia": idFamilia || $scope.persona.idFamilia},
             "situacionLaboral": {"id_DependenciaLaboral": $scope.persona.depLaboral},
             "sexo": {"id_Sexo": $scope.persona.sexo},
             "estadoCivil": {"id_EstadoCivil": $scope.persona.estadoCivil},
@@ -701,74 +778,146 @@ $scope.addPersona = function() {
                         inicioActividades:""
                     }
                 };*/
-                $scope.familia.integrantes.forEach(function (item,index){
-                    if(item.id_Persona == reqEdicion.id_Persona){
-                        $scope.familia.integrantes.splice(index,1);
-                        return false;
-                    }
-                });
-                personaService.get(reqEdicion.id_Persona).then(function(resp){
-                    var jubiladoChk = false;
-                    if(resp.data.nroCarnetJubilacion)
-                    {
-                        jubiladoChk = true;
-                    }
-                    debugger;
-                var integrante ={
-                        id_Persona:resp.data.id_Persona,
-                        nombre:resp.data.nombre,
-                        apellido:resp.data.apellido,
-                        tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                        DNI:resp.data.nroDocumento,
-                        CUIL:resp.data.nroCuil,
-                        nacimiento:resp.data.fechaNacimiento,
-                        sexo:resp.data.sexo.id_Sexo,
-                        estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                        nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                        estudios:resp.data.estudios.id_Estudios,
-                        profesion:resp.data.profesion.id_Profesion,
-                        capConstructiva:resp.data.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
-                        depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                        relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                        DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                        ingresoNeto:resp.data.ingresoNeto,
-                        mail:resp.data.mail,
-                        telefono:resp.data.telefono.numero,
-                        jubilado:jubiladoChk,
-                        carnetJubilacion:resp.data.nroCarnetJubilacion,
-                        discapacidad:false,
-                        editando:false
-                    }
-                    $scope.familia.integrantes.push(integrante);
-                    $scope.persona ={
-                        id_Persona:0,
-                        nombre:"",
-                        apellido:"",
-                        tipoDni:0,
-                        DNI:"",
-                        CUIL:"",
-                        nacimiento:"",
-                        sexo:0,
-                        estadoCivil:0,
-                        nacionalidad:0,
-                        estudios:0,
-                        profesion:0,
-                        capConstructiva:0,
-                        depLaboral:0,
-                        relacionJF:0,
-                        DescRelacionJF:"",
-                        ingresoNeto:"",
-                        mail:"",
-                        telefono:"",
-                        jubilado:"",
-                        carnetJubilacion:"",
-                        discapacidad:"",
-                        idEdicion:0,
-                        editando:false,
-                        idTelefono:0
-                    };
-                    $scope.agregando = false;
+                if($scope.persona.busqueda){
+                    $scope.resultadosBusqueda.forEach(function (item,index){
+                        if(item.id_Persona == reqEdicion.id_Persona){
+                            $scope.resultadosBusqueda.splice(index,1);
+                            return false;
+                        }
                     });
+                    personaService.get(reqEdicion.id_Persona).then(function(resp){
+                        var jubiladoChk = false;
+                        if(resp.data.nroCarnetJubilacion)
+                        {
+                            jubiladoChk = true;
+                        }
+                        var integrante ={
+                            id_Persona:resp.data.id_Persona,
+                            nombre:resp.data.nombre,
+                            apellido:resp.data.apellido,
+                            tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
+                            DNI:resp.data.nroDocumento,
+                            CUIL:resp.data.nroCuil,
+                            nacimiento:resp.data.fechaNacimiento,
+                            sexo:resp.data.sexo.id_Sexo,
+                            estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
+                            nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
+                            estudios:resp.data.estudios.id_Estudios,
+                            profesion:resp.data.profesion.id_Profesion,
+                            capConstructiva:resp.data.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
+                            depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
+                            relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
+                            DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
+                            ingresoNeto:resp.data.ingresoNeto,
+                            mail:resp.data.mail,
+                            telefono:resp.data.telefono.numero,
+                            jubilado:jubiladoChk,
+                            carnetJubilacion:resp.data.nroCarnetJubilacion,
+                            discapacidad:false,
+                            editando:false
+                        }
+                        $scope.resultadosBusqueda.push(integrante);
+                        $scope.persona ={
+                            id_Persona:0,
+                            nombre:"",
+                            apellido:"",
+                            tipoDni:0,
+                            DNI:"",
+                            CUIL:"",
+                            nacimiento:"",
+                            sexo:0,
+                            estadoCivil:0,
+                            nacionalidad:0,
+                            estudios:0,
+                            profesion:0,
+                            capConstructiva:0,
+                            depLaboral:0,
+                            relacionJF:0,
+                            DescRelacionJF:"",
+                            ingresoNeto:"",
+                            mail:"",
+                            telefono:"",
+                            jubilado:"",
+                            carnetJubilacion:"",
+                            discapacidad:"",
+                            idEdicion:0,
+                            editando:false,
+                            idTelefono:0
+                        };
+                        $scope.agregando = false;
+                    });
+                }
+                else{
+                    $scope.familia.integrantes.forEach(function (item,index){
+                        if(item.id_Persona == reqEdicion.id_Persona){
+                            $scope.familia.integrantes.splice(index,1);
+                            return false;
+                        }
+                    });
+                    personaService.get(reqEdicion.id_Persona).then(function(resp){
+                        var jubiladoChk = false;
+                        if(resp.data.nroCarnetJubilacion)
+                        {
+                            jubiladoChk = true;
+                        }
+                        var integrante ={
+                            id_Persona:resp.data.id_Persona,
+                            nombre:resp.data.nombre,
+                            apellido:resp.data.apellido,
+                            tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
+                            DNI:resp.data.nroDocumento,
+                            CUIL:resp.data.nroCuil,
+                            nacimiento:resp.data.fechaNacimiento,
+                            sexo:resp.data.sexo.id_Sexo,
+                            estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
+                            nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
+                            estudios:resp.data.estudios.id_Estudios,
+                            profesion:resp.data.profesion.id_Profesion,
+                            capConstructiva:resp.data.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
+                            depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
+                            relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
+                            DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
+                            ingresoNeto:resp.data.ingresoNeto,
+                            mail:resp.data.mail,
+                            telefono:resp.data.telefono.numero,
+                            jubilado:jubiladoChk,
+                            carnetJubilacion:resp.data.nroCarnetJubilacion,
+                            discapacidad:false,
+                            editando:false
+                        }
+                        $scope.familia.integrantes.push(integrante);
+                        $scope.persona ={
+                            id_Persona:0,
+                            nombre:"",
+                            apellido:"",
+                            tipoDni:0,
+                            DNI:"",
+                            CUIL:"",
+                            nacimiento:"",
+                            sexo:0,
+                            estadoCivil:0,
+                            nacionalidad:0,
+                            estudios:0,
+                            profesion:0,
+                            capConstructiva:0,
+                            depLaboral:0,
+                            relacionJF:0,
+                            DescRelacionJF:"",
+                            ingresoNeto:"",
+                            mail:"",
+                            telefono:"",
+                            jubilado:"",
+                            carnetJubilacion:"",
+                            discapacidad:"",
+                            idEdicion:0,
+                            editando:false,
+                            idTelefono:0
+                        };
+                        $scope.agregando = false;
+                    });
+
+                }
+
 
 
             });
@@ -780,7 +929,6 @@ $scope.addPersona = function() {
                 {
                     jubiladoChk = true;
                 }
-                debugger;
                 var integrante ={
                     id_Persona:resp.data.id_Persona,
                     nombre:resp.data.nombre,
@@ -858,32 +1006,53 @@ $scope.addPersona = function() {
             });
         }
  }};
-
 $scope.agregarPersona = function(){
     resetPersona();
     $scope.agregando = true;
 
 };
 $scope.eliminarPersona = function(integrante){
-
     if(confirm("Seguro que desea eliminar a "+integrante.nombre +" "+integrante.apellido+" de la familia?" ))
     {
         personaService.delete(integrante.id_Persona).then(function(resp){
-           $scope.familia.integrantes.forEach(function (item,index){
-             if(item.id_Persona == integrante.id_Persona){
-                 $scope.familia.integrantes.splice(index,1);
-                 return false;
-             }
-           }, function(respErr){
-               console.log(respErr);
-           });
+            if(integrante.busqueda)
+            {
+                $scope.resultadosBusqueda.forEach(function (item,index){
+                    if(item.id_Persona == integrante.id_Persona){
+                        $scope.resultadosBusqueda.splice(index,1);
+                        return false;
+                    }
+                }, function(respErr){
+                    console.log(respErr);
+                });
+                // $scope.resultadosBusqueda = [];
+                // personaService.getByDni($scope.DNIBusqueda).then(function(resp){
+                //
+                // });
+
+
+            }
+            else
+            {
+                $scope.familia.integrantes.forEach(function (item,index){
+                    if(item.id_Persona == integrante.id_Persona){
+                        $scope.familia.integrantes.splice(index,1);
+                        return false;
+                    }
+                }, function(respErr){
+                    console.log(respErr);
+                });
+            }
+
         });
     }
 };
 $scope.editarPersona = function(integrante){
     if(integrante.relacionJF!=1)
     {
+        debugger;
         $scope.persona.editando=true;
+        $scope.persona.idFamilia = idFamilia || integrante.id_Familia,
         $scope.persona.nombre = integrante.nombre;
         $scope.persona.apellido = integrante.apellido;
         $scope.persona.tipoDni = integrante.tipoDni;
@@ -907,10 +1076,17 @@ $scope.editarPersona = function(integrante){
         $scope.persona.discapacidad = integrante.discapacidad;
         $scope.persona.idEdicion = integrante.id_Persona;
         $scope.agregando = true;
+        if(integrante.busqueda)
+        {
+            $scope.persona.busqueda = true;
+        }
     }
+
     else
     {
         $scope.jefeDeFamilia.editando=true;
+        $scope.jefeDeFamilia.idFamilia = idFamilia || integrante.id_Familia,
+        $scope.jefeDeFamilia.idEdicion = integrante.id_Persona;
         $scope.jefeDeFamilia.nombre = integrante.nombre;
         $scope.jefeDeFamilia.apellido = integrante.apellido;
         $scope.jefeDeFamilia.tipoDni = integrante.tipoDni;
@@ -932,19 +1108,28 @@ $scope.editarPersona = function(integrante){
         $scope.jefeDeFamilia.jubilado = integrante.jubilado;
         $scope.jefeDeFamilia.carnetJubilacion = integrante.carnetJubilacion;
         $scope.jefeDeFamilia.discapacidad = integrante.discapacidad;
-        $scope.jefeDeFamilia.trabajoDependencia.empresa = integrante.trabajoDependencia.empresa;
-        $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso = new Date(Number(integrante.trabajoDependencia.fechaIngreso));
-        $scope.jefeDeFamilia.trabajoDependencia.idLocalidad = integrante.trabajoDependencia.idLocalidad;
-        $scope.jefeDeFamilia.trabajoDependencia.barrio = integrante.trabajoDependencia.barrio;
+        if(integrante.depLaboral==1){
+            $scope.jefeDeFamilia.trabajoDependencia.empresa = integrante.trabajoDependencia.empresa;
+            $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso = new Date(Number(integrante.trabajoDependencia.fechaIngreso));
+            $scope.jefeDeFamilia.trabajoDependencia.idLocalidad = integrante.trabajoDependencia.idLocalidad;
+            $scope.jefeDeFamilia.trabajoDependencia.barrio = integrante.trabajoDependencia.barrio;
 
-        $scope.jefeDeFamilia.trabajoDependencia.direccion.idDireccion = integrante.trabajoDependencia.direccion.idDireccion;
-        $scope.jefeDeFamilia.trabajoDependencia.direccion.calle = integrante.trabajoDependencia.direccion.calle;
-        $scope.jefeDeFamilia.trabajoDependencia.direccion.numero = Number(integrante.trabajoDependencia.direccion.numero);
-        $scope.jefeDeFamilia.trabajoDependencia.direccion.pisoDepto = integrante.trabajoDependencia.direccion.pisoDepto;
-        $scope.jefeDeFamilia.trabajoDependencia.telefono = Number(integrante.trabajoDependencia.telefono);
-        $scope.jefeDeFamilia.trabajoDependencia.idTelefono = integrante.trabajoDependencia.idTelefono;
-        $scope.jefeDeFamilia.trabajoDependencia.celular = integrante.trabajoDependencia.celular;
-        $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades = new Date(Number(integrante.trabajoAutonomo.inicioActividades));
+            $scope.jefeDeFamilia.trabajoDependencia.direccion.idDireccion = integrante.trabajoDependencia.direccion.idDireccion;
+            //$scope.jefeDeFamilia.trabajoDependencia.direccion.calle = integrante.trabajoDependencia.direccion.calle;
+            //$scope.jefeDeFamilia.trabajoDependencia.direccion.numero = Number(integrante.trabajoDependencia.direccion.numero);
+            $scope.jefeDeFamilia.trabajoDependencia.direccionFull = integrante.trabajoDependencia.direccion.pisoDepto;
+            $scope.jefeDeFamilia.trabajoDependencia.telefono = Number(integrante.trabajoDependencia.telefono);
+            $scope.jefeDeFamilia.trabajoDependencia.idTelefono = integrante.trabajoDependencia.idTelefono;
+            $scope.jefeDeFamilia.trabajoDependencia.celular = integrante.trabajoDependencia.celular;
+        }
+        else if(integrante.depLaboral==2){
+            $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades = new Date(Number(integrante.trabajoAutonomo.inicioActividades));
+
+        }
+        if(integrante.busqueda)
+        {
+            $scope.jefeDeFamilia.busqueda = true;
+        }
         $scope.editandoJF = true;
     }
 };
@@ -962,7 +1147,135 @@ $scope.addFamilia = function(){
     });
 
 };
+$scope.buscarPersona = function() {
+    $scope.resultadosBusqueda=[];
+    personaService.getByDni($scope.DNIBusqueda).then(function (resp) {
+        resp.data.forEach(function (item,index){
+           if(item.rolFamiliar.id_RolFamiliar!=1){
+               var jubiladoChk = false;
+               if (item.nroCarnetJubilacion) {
+                   jubiladoChk = true;
+               }
+               var integrante = {
+                   id_Persona: item.id_Persona,
+                   id_Familia:item.familia.id_Familia,
+                   nombre: item.nombre,
+                   apellido: item.apellido,
+                   tipoDni: item.tipoDocumento.id_TipoDocumento,
+                   DNI: item.nroDocumento,
+                   CUIL: item.nroCuil,
+                   nacimiento: item.fechaNacimiento,
+                   sexo: item.sexo.id_Sexo,
+                   estadoCivil: item.estadoCivil.id_EstadoCivil,
+                   nacionalidad: item.nacionalidad.id_Nacionalidad,
+                   estudios: item.estudios.id_Estudios,
+                   profesion: item.profesion.id_Profesion,
+                   capConstructiva:item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
+                   depLaboral: item.situacionLaboral.id_DependenciaLaboral,
+                   relacionJF: item.rolFamiliar.id_RolFamiliar,
+                   DescRelacionJF: item.rolFamiliar.rolFamiliar,
+                   ingresoNeto: item.ingresoNeto,
+                   mail: item.mail,
+                   telefono: item.telefono.numero,
+                   idTelefono:item.telefono.id_Telefono,
+                   jubilado: jubiladoChk,
+                   carnetJubilacion: item.nroCarnetJubilacion,
+                   discapacidad: false,
+                   editando: false,
+                   busqueda:true
+               };
+               $scope.resultadosBusqueda.push(integrante);
+           }
+           else{
+               var jubiladoChk = false;
+               if(item.nroCarnetJubilacion)
+               {
+                   jubiladoChk = true;
+               }
+               var integrante ={
+                   id_Persona:item.id_Persona,
+                   id_Familia:item.familia.id_Familia,
+                   nombre:item.nombre,
+                   apellido:item.apellido,
+                   tipoDni:item.tipoDocumento.id_TipoDocumento,
+                   DNI:item.nroDocumento,
+                   CUIL:item.nroCuil,
+                   nacimiento:item.fechaNacimiento,
+                   sexo:item.sexo.id_Sexo,
+                   estadoCivil:item.estadoCivil.id_EstadoCivil,
+                   nacionalidad:item.nacionalidad.id_Nacionalidad,
+                   estudios:item.estudios.id_Estudios,
+                   profesion:item.profesion.id_Profesion,
+                   capConstructiva:item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva,
+                   depLaboral:item.situacionLaboral.id_DependenciaLaboral,
+                   relacionJF:item.rolFamiliar.id_RolFamiliar,
+                   DescRelacionJF:item.rolFamiliar.rolFamiliar,
+                   ingresoNeto:item.ingresoNeto,
+                   mail:item.mail,
+                   idTelefono:item.telefono.id_Telefono,
+                   telefono:item.telefono.numero,
+                   jubilado:jubiladoChk,
+                   carnetJubilacion:item.nroCarnetJubilacion,
+                   discapacidad:false,
+                   editando:false,
+                   trabajoDependencia:{
+                       empresa:"",
+                       fechaIngreso:"",
+                       idLocalidad:"",
+                       barrio:"",
+                       direccion:{
+                           idDireccion:0,
+                           calle:"",
+                           numero:"",
+                           pisoDepto:""
+                       },
+                       idTelefono:0,
+                       telefono:"",
+                       celular:false
+                   },
+                   trabajoAutonomo:{
+                       inicioActividades:""
+                   },
+                   busqueda:true
+               };
+               if(item.situacionLaboral.id_DependenciaLaboral == 1 && item.rolFamiliar.id_RolFamiliar ==1)
+               {
+                   familiaService.getRelacionDep($rootScope.idDependencia).then(function(resp){
+                       integrante.trabajoDependencia.empresa = resp.data.empresa;
+                       integrante.trabajoDependencia.fechaIngreso = resp.data.fechaIngreso;
+                       integrante.trabajoDependencia.idLocalidad = resp.data.direccion.localidad.id_Localidad;
+                       integrante.trabajoDependencia.barrio = resp.data.direccion.barrio;
+                       integrante.trabajoDependencia.direccion.idDireccion = resp.data.direccion.id_Direccion;
+                       integrante.trabajoDependencia.direccion.calle = resp.data.direccion.calle;
+                       integrante.trabajoDependencia.direccion.numero = resp.data.direccion.numero;
+                       integrante.trabajoDependencia.direccion.pisoDepto = resp.data.direccion.dpto;
+                       integrante.trabajoDependencia.telefono = resp.data.telefono.numero;
+                       integrante.trabajoDependencia.idTelefono = resp.data.telefono.id_Telefono;
+                       $scope.resultadosBusqueda.push(integrante);
+                   });
+               }
+               else if(item.situacionLaboral.id_DependenciaLaboral == 2 && item.rolFamiliar.id_RolFamiliar ==1)
+               {
+                   familiaService.getAutonomo($rootScope.idAutonomo).then(function(resp){
+                       integrante.trabajoAutonomo.inicioActividades = resp.data.fechaInicioActividades;
+                       $scope.resultadosBusqueda.push(integrante);
+                   });
+               }
+               else
+               {
+                   $scope.resultadosBusqueda.push(integrante);
+               }
+           }
+        });
 
+
+
+
+    });
+}
+$scope.paginaInicial = function () {
+    $location.path('/');
+}
 var ejecutarValidacionesJF = function(){
     var result = true;
     if($scope.jefeDeFamilia.nombre == "")
@@ -1163,6 +1476,7 @@ var resetPersona = function () {
             discapacidad:""
         };
     };
+
 
 }
 

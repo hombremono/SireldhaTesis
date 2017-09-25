@@ -31,7 +31,14 @@ angular.module('webS')
             },
             addCareceInmueble:function(o){
                 return $http.post(URL_API_BASE+"inmueble/careceVivienda/",o);
+            },
+            addCocina: function(o){
+                return $http.post(URL_API_BASE+"inmueble/cocina/",o);
+            },
+            addBano:function(o){
+                return $http.post(URL_API_BASE+"inmueble/bano/",o);
             }
+
         }
     }]);
 

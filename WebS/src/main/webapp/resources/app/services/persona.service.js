@@ -16,6 +16,9 @@ angular.module('webS')
             },
             delete: function(id) {
                 return $http.delete(URL_API_BASE+"persona/"+id);
+            },
+            getByDni:function(dni){
+                return $http.get(URL_API_BASE+"persona/byDni/"+dni);
             }
         }
     }]);

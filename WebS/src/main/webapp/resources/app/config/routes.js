@@ -40,12 +40,16 @@ angular.module('webS')
           controller: 'InmuebleController'
       })
       .when('/loadFiles', {
-          templateUrl: 'views/solicitud/cargarArchivos.html',
+          templateUrl: 'views/solicitud/filesUpload.html',
           controller: 'FileController'
       })
       .when('/review', {
           templateUrl: 'views/solicitud/review.html',
           controller: 'ReviewController'
+      })
+      .when('/search', {
+          templateUrl: 'views/searchPersona.html',
+          controller: 'FamiliaController'
       })
     .otherwise({
       redirectTo: '/'

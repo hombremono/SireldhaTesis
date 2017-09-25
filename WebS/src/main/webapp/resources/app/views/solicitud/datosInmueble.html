@@ -1,4 +1,42 @@
-<!--//--------------------------------------------------------------------------------------------------------------------------------------//
+<head>
+    <script>
+        var placeSearch, autocomplete;
+
+        function initialize() {
+            // Create the autocomplete object, restricting the search
+            // to geographical location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** @type {HTMLInputElement} */
+                (document.getElementById('adress-inmueble')), {
+                    types: ['geocode']
+                });
+
+            google.maps.event.addDomListener(document.getElementById('adress-inmueble'), 'focus', geolocate);
+        }
+
+        function geolocate() {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    var geolocation = new google.maps.LatLng(
+                        position.coords.latitude, position.coords.longitude);
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete.setBounds(circle.getBounds());
+
+                    // Log autocomplete bounds here
+                    console.log(autocomplete.getBounds());
+                });
+            }
+        }
+        initialize();
+
+    </script>
+</head><!--//-----
+---------------------------------------------------------------------------------------------------------------------------------//
 //-----------------------------------------------POSESION INMUEBLE ------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------------------------->
 <div id="datosInmueble" ng-show="!datosOK">
@@ -17,20 +55,24 @@
                 <input class="form-control input-md" id="inputBarrio" type="text" ng-model="inmueble.barrio">
         </div>
         <div>
-                <h5>Direccion</h5>
 
-                <div class="form-group">
-                <label for="inputCalle">Calle</label>
-                <input class="form-control input-md" id="inputCalle" type="text" ng-model="inmueble.direccion.calle">
-                </div>
-                <div class="form-group">
-                <label for="inputNumero">Numero</label>
-                <input class="form-control input-md" id="inputNumero" type="number" ng-model="inmueble.direccion.numero">
-                </div>
-                <div class="form-group">
-                <label for="inputPiso">Piso y Departamento</label>
-                <input class="form-control input-md" id="inputPiso" type="text" ng-model="inmueble.direccion.pisoDepto">
-                </div>
+            <div class="form-group">
+                <label for="adress-inmueble">Direccion</label>
+                <input id="adress-inmueble" placeholder="Ingrese su direccion" type="text" class="form-control input-md" ></input>
+            </div>
+
+                <!--<div class="form-group">-->
+                <!--<label for="inputCalle">Calle</label>-->
+                <!--<input class="form-control input-md" id="inputCalle" type="text" ng-model="inmueble.direccion.calle">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label for="inputNumero">Numero</label>-->
+                <!--<input class="form-control input-md" id="inputNumero" type="number" ng-model="inmueble.direccion.numero">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                <!--<label for="inputPiso">Piso y Departamento</label>-->
+                <!--<input class="form-control input-md" id="inputPiso" type="text" ng-model="inmueble.direccion.pisoDepto">-->
+                <!--</div>-->
         </div>
                 <div class="form-group">
                 <label for="inputValorF">Valor Fiscal</label>

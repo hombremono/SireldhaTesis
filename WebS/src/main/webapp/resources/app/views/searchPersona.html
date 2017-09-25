@@ -36,76 +36,68 @@
 
     </script>
 </head>
+<div id="lista de Personas" ng-show="!agregando && !editandoJF ">
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Buscar Persona</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
 
-<!--//--------------------------------------------------------------------------------------------------------------------------------------//
-//-----------------------------------------------TABLA PERSONA ------------------------------------------------------------------------//
-//----------------------------------------------------------------------------------------------------------------------------------->
-<div id="tablaFamilia" ng-show="!agregando && !editandoJF ">
-<nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Integrantes de la Familia</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="">
-                                <i class="pe-7s-add-user" ng-click="agregarPersona()"></i>
-								<p class="hidden-lg hidden-md" >Agregar nuevo integrante</p>
-                            </a>
-                        </li>
-                        <!--<li>-->
-                           <!--<a href="">-->
-                                <!--<i class="fa fa-search"></i>-->
-								<!--<p class="hidden-lg hidden-md">Buscar integrante</p>-->
-                            <!--</a>-->
-                        <!--</li>-->
-                    </ul>
+                </ul>
 
+            </div>
+        </div>
+    </nav>
+
+    <div >
+        <div class="input-group ">
+            <input type="text" class="form-control input-md" placeholder="Ingrese DNI de la persona" ng-model="DNIBusqueda" />
+            <span class="input-group-btn">
+                        <button class="btn btn-info btn-md" type="button" ng-click="buscarPersona()">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </span>
+        </div>
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="header">
                 </div>
             </div>
-        </nav>
+            <table class="table table-hover">
+                <thead>
+                <th>Dni</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="integrante in resultadosBusqueda">
+                    <td>{{integrante.DNI}}</td>
+                    <td>{{integrante.nombre}}</td>
+                    <td>{{integrante.apellido}}</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="editarPersona(integrante)" ng-show="integrante.DNI">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove" ng-click="eliminarPersona(integrante)" ng-show="integrante.relacionJF!=1 && integrante.DNI">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td>
+                </tr>
 
-<div >
-<div class="col-md-12">
-    <div class="card card-plain">
-        <div class="header">
+                </tbody>
+            </table>
+
         </div>
     </div>
-        <table class="table table-hover">
-            <thead>
-            <th>Dni</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Relacion con el Jefe/a de Familia</th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="integrante in familia.integrantes">
-                <td>{{integrante.DNI}}</td>
-                <td>{{integrante.nombre}}</td>
-                <td>{{integrante.apellido}}</td>
-                <td>{{integrante.DescRelacionJF}}</td>
-                <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="editarPersona(integrante)">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove" ng-click="eliminarPersona(integrante)" ng-show="integrante.relacionJF!=1" >
-                        <i class="fa fa-times"></i>
-                    </button>
-                </td>
-            </tr>
 
-            </tbody>
-        </table>
-
+    <div >
+        <button type="button"  title="" class="btn btn-default"ng-click="paginaInicial()">Volver
+        </button>
     </div>
 </div>
 
-<div >
-    <button type="button"  title="" class="btn btn-default"ng-click="addFamilia()">Guardar Familia
-    </button>
-</div>
-</div>
 
 
 <!--//--------------------------------------------------------------------------------------------------------------------------------------//
@@ -360,3 +352,6 @@
 
 
 </div>
+
+
+

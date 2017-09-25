@@ -1,5 +1,41 @@
+<head>
+    <script>
+        var placeSearch, autocomplete;
 
+        function initialize() {
+            // Create the autocomplete object, restricting the search
+            // to geographical location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                /** @type {HTMLInputElement} */
+                (document.getElementById('adress-hogar')), {
+                    types: ['geocode']
+                });
 
+            google.maps.event.addDomListener(document.getElementById('adress-hogar'), 'focus', geolocate);
+        }
+
+        function geolocate() {
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+
+                    var geolocation = new google.maps.LatLng(
+                        position.coords.latitude, position.coords.longitude);
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete.setBounds(circle.getBounds());
+
+                    // Log autocomplete bounds here
+                    console.log(autocomplete.getBounds());
+                });
+            }
+        }
+        initialize();
+
+    </script>
+</head>
 <form ng-submit="crearHogar(Hogar)" name="hogarForm" >
     <h3 title="info de hogar">Datos del Hogar</h3>
             <div class="form-group">
@@ -19,19 +55,22 @@
                 <input class="form-control input-md" id="inputBarrio" type="text" ng-model="Hogar.barrio">
             </div>
             <div id="divDireccion">
-                <h4>Direccion</h4>
                 <div class="form-group">
-                    <label for="inputCalle"><span style="color:red">*</span> Calle</label>
-                    <input  class="form-control input-md" id="inputCalle" type="text" ng-model="Hogar.direccion.calle">
+                    <label for="adress-hogar"><span style="color:red">* </span>Direccion</label>
+                    <input id="adress-hogar" placeholder="Ingrese su direccion" type="text" class="form-control input-md" ng-model="Hogar.direccionFull"></input>
                 </div>
-                <div class="form-group">
-                    <label for="inputNumero"><span style="color:red">*</span> Numero</label>
-                    <input  class="form-control input-md" id="inputNumero" type="number" ng-model="Hogar.direccion.numero">
-                </div>
-                <div class="form-group">
-                    <label for="inputPiso">Piso y Departamento</label>
-                    <input class="form-control input-md" id="inputPiso" type="text" ng-model="Hogar.direccion.pisoDepto">
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label for="inputCalle"><span style="color:red">*</span> Calle</label>-->
+                    <!--<input  class="form-control input-md" id="inputCalle" type="text" ng-model="Hogar.direccion.calle">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="inputNumero"><span style="color:red">*</span> Numero</label>-->
+                    <!--<input  class="form-control input-md" id="inputNumero" type="number" ng-model="Hogar.direccion.numero">-->
+                <!--</div>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="inputPiso">Piso y Departamento</label>-->
+                    <!--<input class="form-control input-md" id="inputPiso" type="text" ng-model="Hogar.direccion.pisoDepto">-->
+                <!--</div>-->
             </div>
     <div class="form-group">
         <label for="fechaIncio"><span style="color:red">* </span>Incicio de residencia</label>
@@ -47,13 +86,19 @@
             <label class="checkbox" ng-click="Hogar.tarjeta = !Hogar.tarjeta">
                 <input type="checkbox" value="" data-toggle="checkbox" id="chktjt">El Hogar cuenta con tarjetas de credito.
             </label>
-    <!--<div class="alert alert-danger" ng-show="hogarForm.$invalid && hogarForm.$dirty">
-        <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-    </div>
-    Revisar el tema de los popus de error que habia visto mono-->
 
             <button type="submit" class="btn btn-primary  pull-right">Siguiente</button>
 </form>
+
+
+
+
+
+
+
+
+
+
 
 
 
