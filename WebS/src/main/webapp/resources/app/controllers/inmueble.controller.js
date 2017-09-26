@@ -200,11 +200,29 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 var inmuebleCocina = null;
                 var inmuebleLuz = null;
                 if($scope.inmueble.agua){
-                    inmubleConexAgua = $scope.inmueble.conexionAgua;
-                    inmuebleProdAgua = $scope.inmueble.procedenciaAgua
+                    inmubleConexAgua = {
+                        "poseeAgua": {
+                            "id_PoseeAgua": inmubleConexAgua,
+                            "active": true
+                        },
+                        "procedenciaAgua": {
+                            "id_ProcedenciaAgua": inmuebleProdAgua,
+                            "active": true
+                        },
+                        "active": true
+                    };
+                }
+                else{
+                    inmubleConexAgua=null;
                 }
                 if($scope.inmueble.luz){
-                    inmuebleLuz = $scope.inmueble.tipoLuz;
+                    inmuebleLuz = {
+                        "id_PoseeLuz": inmuebleLuz,
+                        "active": true
+                    };
+                }
+                else{
+                    inmuebleLuz = null;
                 }
                 if($scope.inmueble.bano){
                     inmuebleBano =$scope.inmueble.tipoBano;
@@ -232,21 +250,8 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                             "active": true
                         }
                     },
-                    "poseeLuz": {
-                        "id_PoseeLuz": inmuebleLuz,
-                        "active": true
-                    },
-                    "servicioAgua": {
-                        "poseeAgua": {
-                            "id_PoseeAgua": inmubleConexAgua,
-                            "active": true
-                        },
-                        "procedenciaAgua": {
-                            "id_ProcedenciaAgua": inmuebleProdAgua,
-                            "active": true
-                        },
-                        "active": true
-                    },
+                    "poseeLuz":inmuebleLuz ,
+                    "servicioAgua":inmubleConexAgua ,
                     "active": true,
                     "piso": {
                         "id_MaterialPiso": $scope.inmueble.tipoPiso,
@@ -326,6 +331,9 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                         solicitudTerminada();
 
                     });
+                }
+                else{
+                    solicitudTerminada();
                 }
             }, function(respErr) {
                 console.log(respErr);
