@@ -351,8 +351,19 @@ $scope.addjefeDeFamilia = function(){
                 geocoder.geocode({address: addressInput}, function(results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var myResult = results[0].geometry.location; // reference LatLng value
-                        var num = Number(results[0].address_components[0].long_name);
-                        var calle =results[0].address_components[1].long_name;
+                        var num;
+                        var calle;
+                        if(isNaN(results[0].address_components[0].long_name)){
+                            var direccion = addressInput.substr(0,addressInput.indexOf(','));
+                            var partes = direccion.split(/[\s,]+/);
+                            var numero =partes [partes .length-1];
+                            num = Number(numero);
+                            calle =results[0].address_components[0].long_name;
+
+                        }else{
+                            num = Number(results[0].address_components[0].long_name);
+                            calle =results[0].address_components[1].long_name;
+                        }
                         var lat =results[0].geometry.location.lat();
                         var lng =results[0].geometry.location.lng();
                         var trabajoDependencia={

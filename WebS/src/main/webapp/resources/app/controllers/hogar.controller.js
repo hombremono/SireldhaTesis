@@ -132,7 +132,6 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
     //---------MAPS
     var getCoordenadas = function () {
             var deferred = $.Deferred();
-            debugger;
             var addressInput = document.getElementById('adress-hogar').value;
             var geocoder = new google.maps.Geocoder();
             var result = true;
@@ -140,8 +139,17 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
             geocoder.geocode({address: addressInput}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     var myResult = results[0].geometry.location; // reference LatLng value
-                    $scope.Hogar.direccion.numero = Number(results[0].address_components[0].long_name);
-                    $scope.Hogar.direccion.calle =results[0].address_components[1].long_name;
+                    if(isNaN(results[0].address_components[0].long_name)){
+                        var direccion = addressInput.substr(0,addressInput.indexOf(','));
+                        var partes = direccion.split(/[\s,]+/);
+                        var numero =partes [partes .length-1];
+                        $scope.Hogar.direccion.numero = Number(numero);
+                        $scope.Hogar.direccion.calle =results[0].address_components[0].long_name;
+
+                    }else{
+                        $scope.Hogar.direccion.numero = Number(results[0].address_components[0].long_name);
+                        $scope.Hogar.direccion.calle =results[0].address_components[1].long_name;
+                    }
                     $scope.Hogar.direccion.latitud =results[0].geometry.location.lat();
                     $scope.Hogar.direccion.longitud =results[0].geometry.location.lng();
                     if ($scope.Hogar.idLocalidad == 0) {
