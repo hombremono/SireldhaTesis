@@ -143,7 +143,10 @@ public class InmuebleService extends GenericService<Inmueble, Integer> implement
         try {
             inmueble.setTecho(techoDAO.saveOrUpdate(inmueble.getTecho()));
             inmueble.setPared(paredDAO.saveOrUpdate(inmueble.getPared()));
-            inmueble.setServicioAgua(servicioAguaDAO.saveOrUpdate(inmueble.getServicioAgua()));
+            if(inmueble.getServicioAgua() != null) {
+                inmueble.setServicioAgua(servicioAguaDAO.saveOrUpdate(inmueble.getServicioAgua()));
+            }
+
             return inmuebleDAO.save(inmueble);
         } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
