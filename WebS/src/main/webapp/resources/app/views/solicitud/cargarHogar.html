@@ -43,7 +43,7 @@
                 <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.id_SolucionHabitacional as plan.descripcion for plan in Planes"></select>
             </div>
             <div class="form-group">
-                <label for="selectVivienda"><span style="color:red">* </span>Tipo de vivienda</label>
+                <label for="selectVivienda"><span style="color:red">* </span>Tipo de vivienda en la que reside actualmente</label>
                 <select class="form-control input-md" id="selectVivienda" ng-model="Hogar.idVivienda" ng-options="vivienda.id_SituacionInmueble as vivienda.descripcion for vivienda in Viviendas"></select>
             </div>
             <div class="form-group">
@@ -73,19 +73,21 @@
                 <!--</div>-->
             </div>
     <div class="form-group">
-        <label for="fechaIncio"><span style="color:red">* </span>Incicio de residencia</label>
+        <label for="fechaIncio"><span style="color:red">* </span>Inicio de residencia en la localidad</label>
         <input  class="form-control" id="fechaIncio" type="date" ng-model="Hogar.fechaInicio">
     </div>
             <div class="form-group">
-                <label for="inputTelefono">Telefono</label>
-                <input class="form-control input-md" id="inputTelefono" type="text" ng-model="Hogar.telefono">
+                <label for="inputTelefono">Teléfono</label>
+                <input class="form-control input-md" id="inputTelefono" type="text" ng-model="Hogar.telefono" placeholder="0351 15423568">
             </div>
-            <label class="checkbox"   ng-click="Hogar.celular = !Hogar.celular">
-                <input type="checkbox" value=""  data-toggle="checkbox" id="chkcel">Celular.
-            </label>
-            <label class="checkbox" ng-click="Hogar.tarjeta = !Hogar.tarjeta">
-                <input type="checkbox" value="" data-toggle="checkbox" id="chktjt">El Hogar cuenta con tarjetas de credito.
-            </label>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5" id="chkTar" ng-click="Hogar.celular = !Hogar.celular"/>
+        <label for="chkTar">Existe en el hogar al menos un teléfono celular.</label>
+    </div>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5" id="chkCel" ng-click="Hogar.tarjeta = !Hogar.tarjeta"/>
+        <label for="chkCel">El hogar cuenta con una o más tarjetas de crédito.</label>
+    </div>
 
             <button type="submit" class="btn btn-primary  pull-right">Siguiente</button>
 </form>

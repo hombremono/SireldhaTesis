@@ -85,7 +85,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         },
         {
             id_NoPosee:5,
-            descripcion:"Prestamo - Comodato del Estado"
+            descripcion:"Prestamo - Comodato por Trabajo"
         },
         {
             id_NoPosee:6,

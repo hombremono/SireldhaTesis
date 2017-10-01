@@ -86,10 +86,10 @@
                 <div class="header">
                 </div>
             </div>
-            <div ng-show="!loading">
+            <div ng-show="!loading && resultadosBusqueda.length">
                 <table class="table table-hover">
                     <thead>
-                    <th>Dni</th>
+                    <th>Documento</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     </thead>
@@ -107,7 +107,6 @@
                             </button>
                         </td>
                     </tr>
-
                     </tbody>
                 </table>
 
@@ -146,17 +145,17 @@
             <input class="form-control input-md" type="text" ng-model="persona.apellido" id="inputApellido" />
         </div>
         <div class="form-group">
-            <label for="selectDNI"><span style="color:red">* </span>Tipo DNI</label>
+            <label for="selectDNI"><span style="color:red">* </span>Tipo de documento</label>
             <select class="form-control input-md" id="selectDNI" ng-model="persona.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
         </div>
         <div class="form-group">
-            <label for="inputDNI"><span style="color:red">* </span>Nro DNI:</label>
+            <label for="inputDNI"><span style="color:red">* </span>Número de documento:</label>
             <input class="form-control input-md" type="number" ng-model="persona.DNI"   id="inputDNI" />
         </div>
         <div class="form-group">
             <label for="inputCUIL"><span style="color:red">* </span>CUIL:</label>
             <input class="form-control input-md" type="number" ng-model="persona.CUIL"
-                   ng-maxlength="12" ng-pattern="/^[0-9]*$/" id="inputCUIL" />
+                   ng-maxlength="12" placeholder="20365598657" ng-pattern="/^[0-9]*$/" id="inputCUIL" />
         </div>
         <div class="form-group">
             <label for="fechaNac"><span style="color:red">* </span>Fecha de Nacimiento</label>
@@ -179,7 +178,7 @@
             <select class="form-control input-md" id="selectEstudios" ng-model="persona.estudios" ng-options="est.id_Estudios as est.estudios for est in estudios"></select>
         </div>
         <div class="form-group">
-            <label for="selectProfesion"><span style="color:red">* </span>Profesion</label>
+            <label for="selectProfesion"><span style="color:red">* </span>Profesión</label>
             <select class="form-control input-md" id="selectProfesion" ng-model="persona.profesion" ng-options="profesion.id_Profesion as profesion.profesion for profesion in profesiones"></select>
         </div>
         <div class="form-group">
@@ -195,35 +194,31 @@
             <select class="form-control input-md" id="selecetRelacionJF" ng-model="persona.relacionJF" ng-options="rjf.id_RolFamiliar as rjf.rolFamiliar for rjf in relacionJF"></select>
         </div>
         <div class="form-group">
-            <label for="inputIngresoN">Ingreso Neto</label>
-            <input class="form-control input-md" type="number" ng-model="persona.ingresoNeto"  ng-minlength="3"
-                   ng-pattern="/^[0-9]*$/" id="inputIngresoN" />
+            <label for="inputIngresoN">Ingreso Neto</label></br>
+            <span style="color: #848484">El ingreso es mensual y por persona. Incluye ingresos por jubilación.</span>
+            <input class="form-control input-md" type="number" ng-model="persona.ingresoNeto"   id="inputIngresoN" />
         </div>
         <div class="form-group">
             <label for="inputMail">Mail</label>
             <input class="form-control input-md" type="email" ng-model="persona.mail" id="inputMail" />
         </div>
         <div class="form-group">
-            <label for="inputTel">Telefono</label>
+            <label for="inputTel">Teléfono</label>
             <input class="form-control input-md" type="number" ng-model="persona.telefono" ng-pattern="/^[0-9]*$/" id="inputTel" />
         </div>
-        <div class="checkbox">
-            <label>
-                <b>Jubilado</b>
-                <input class="pull-right" type="checkbox" ng-model="persona.jubilado" />
-            </label>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="chkJub" ng-click="persona.jubilado = !persona.jubilado"/>
+            <label for="chkJub">Jubilado.</label>
         </div>
         <div id="esJubilado" ng-show="persona.jubilado">
-            <div class="form-group">
+            <div class="form-group" style="margin-left:30px;">
                 <label for="inputCarnet">Nro Carnet</label>
                 <input class="form-control input-md" type="text" ng-model="persona.carnetJubilacion" id="inputCarnet" />
             </div>
         </div>
-        <div class="checkbox">
-            <label>
-                <b>La persona presenta alguna discapacidad</b>
-                <input class="pull-right" type="checkbox" ng-model="persona.discapacidad" />
-            </label>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="chkDis" ng-click="persona.discapacidad = !persona.discapacidad"/>
+            <label for="chkDis">La persona presenta alguna discapacidad.</label>
         </div>
         <fieldset class="form-group">
             <input type="submit" class="btn btn-primary" value="Continuar" />
@@ -249,18 +244,18 @@
             <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.apellido" id="inputApellidojf" />
         </div>
         <div class="form-group">
-            <label for="selectDNIjf"><span style="color:red">* </span>Tipo DNI</label>
+            <label for="selectDNIjf"><span style="color:red">* </span>Tipo de documento</label>
             <select class="form-control input-md" id="selectDNIjf" ng-model="jefeDeFamilia.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
         </div>
         <div class="form-group">
-            <label for="inputDNIjf"><span style="color:red">* </span>Nro DNI:</label>
+            <label for="inputDNIjf"><span style="color:red">* </span>Número de documento:</label>
             <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.DNI"
                    ng-maxlength="9" ng-pattern="/^[0-9]*$/" id="inputDNIjf" />
         </div>
         <div class="form-group">
             <label for="inputCUILjf"><span style="color:red">* </span>CUIL:</label>
             <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.CUIL"
-                   ng-maxlength="12" ng-pattern="/^[0-9]*$/" id="inputCUILjf" />
+                   ng-maxlength="12" placeholder="20365598657" ng-pattern="/^[0-9]*$/" id="inputCUILjf" />
         </div>
         <div class="form-group">
             <label for="fechaNacjf"><span style="color:red">* </span>Fecha de Nacimiento</label>
@@ -283,7 +278,7 @@
             <select class="form-control input-md" id="selectEstudiosjf" ng-model="jefeDeFamilia.estudios" ng-options="est.id_Estudios as est.estudios for est in estudios"></select>
         </div>
         <div class="form-group">
-            <label for="selectProfesionjf"><span style="color:red">* </span>Profesion</label>
+            <label for="selectProfesionjf"><span style="color:red">* </span>Profesión</label>
             <select class="form-control input-md" id="selectProfesionjf" ng-model="jefeDeFamilia.profesion" ng-options="profesion.id_Profesion as profesion.profesion for profesion in profesiones"></select>
         </div>
         <div class="form-group">
@@ -295,7 +290,7 @@
             <select class="form-control input-md" id="selectDepLaboraljf" ng-model="jefeDeFamilia.depLaboral" ng-options="dl.id_DependenciaLaboral as dl.dependenciaLaboral for dl in depLaborales"></select>
         </div>
         <div id="trabajoAutonomo" ng-show="jefeDeFamilia.depLaboral === 2" style="margin-left:30px;">
-            <h5>Trabajador Autonomo</h5>
+            <h5>Trabajador autónomo</h5>
             <div class="form-group">
                 <label for="inicioAct">Fecha de Inicio de Actividades</label>
                 <input  class="form-control" id="inicioAct" type="date" ng-model="jefeDeFamilia.trabajoAutonomo.inicioActividades">
@@ -306,7 +301,8 @@
         <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
 
         <div id="trabajoDependencia" ng-show="jefeDeFamilia.depLaboral === 1" style="margin-left:30px;">
-            <h5>Trabajador en Relacion de Dependencia</h5>
+            <h5>Trabajador en Relación de Dependencia</h5>
+            <h3>Datos de empresa / empleador</h3>
             <div class="form-group">
                 <label for="inputEmpresaDep">Empresa</label>
                 <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.trabajoDependencia.empresa" id="inputEmpresaDep"/>
@@ -343,36 +339,38 @@
                 <!--</div>-->
             </div>
             <div class="form-group">
-                <label for="inputTelDep">Telefono</label>
+                <label for="inputTelDep">Teléfono</label>
                 <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.trabajoDependencia.telefono" id="inputTelDep"/>
             </div>
         </div>
         <!---->
         <div class="form-group">
-            <label for="inputIngresoNjf">Ingreso Neto</label>
-            <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.ingresoNeto"  ng-minlength="3"
-                   ng-pattern="/^[0-9]*$/" id="inputIngresoNjf" />
+            <label for="inputIngresoNjf">Ingreso Neto</label></br>
+            <span style="color: #848484">El ingreso es mensual y por persona. Incluye ingresos por jubilación.</span>
+            <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.ingresoNeto"  id="inputIngresoNjf" />
         </div>
         <div class="form-group">
             <label for="inputMailjf">Mail</label>
             <input class="form-control input-md" type="email" ng-model="jefeDeFamilia.mail" id="inputMailjf" />
         </div>
         <div class="form-group">
-            <label for="inputTeljf">Telefono</label>
+            <label for="inputTeljf">Teléfono</label>
             <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.telefono" ng-pattern="/^[0-9]*$/" id="inputTeljf" />
         </div>
-        <label class="checkbox" ng-click="jefeDeFamilia.jubilado = !jefeDeFamilia.jubilado">
-            <input type="checkbox" value="" data-toggle="checkbox">Jubilado.
-        </label>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="chkJubJF" ng-click="jefeDeFamilia.jubilado = !jefeDeFamilia.jubilado"/>
+            <label for="chkJubJF">Jubilado.</label>
+        </div>
         <div class="form-group" ng-show="jefeDeFamilia.jubilado">
             <div class="form-group" style="margin-left: 30px">
-                <label for="inputCarnetjf">Nro Carnet</label>
-                <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.carnetJubilacion" id="inputCarnetjf" />
+                <label for="inputCarnet">Nro Carnet</label>
+                <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.carnetJubilacion" id="inputCarnetJF" />
             </div>
         </div>
-        <label class="checkbox" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad">
-            <input type="checkbox" value="" data-toggle="checkbox">La persona presenta alguna discapacidad.
-        </label>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>
+            <label for="chkDisJF">La persona presenta alguna discapacidad.</label>
+        </div>
 
         <fieldset class="form-group">
             <input type="submit" class="btn btn-primary" value="Aceptar" />
