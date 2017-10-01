@@ -53,7 +53,7 @@ public abstract class GenericController {
     protected ResponseEntity<Object> add (IModel model, IGenericService objService,String URL) throws IOException {
         try {
             Object target;
-            target = objService.save(model);
+            target = objService.saveOrUpdate(model);
             return new ResponseEntity<Object>(target, HttpStatus.CREATED);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);

@@ -47,9 +47,15 @@ public class PersonaController extends GenericController {
     public ResponseEntity<Object> add (@RequestBody Persona persona) throws IOException {
         Telefono telefono = persona.getTelefono();
         try {
-            if(telefono.getId_Telefono() <= 0) {
+            List<Persona> listaPersonas  = personaService.getByDni(persona.getNroDocumento());
+            if (!listaPersonas.isEmpty()){
+                persona.setId_Persona(listaPersonas.get(0).getId_Persona());
+            }
+            if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
                 telefono.setActive(true);
                 persona.setTelefono(telefonoService.saveOrUpdate(telefono));
+            } else {
+                persona.setTelefono(null);
             }
         }catch (Exception e){
             LOG.error(e.getMessage(), e);
