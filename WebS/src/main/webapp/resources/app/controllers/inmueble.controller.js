@@ -42,7 +42,8 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         cuartos:0,
         camas:0,
         zonaInsalubre:false,
-        bano:false
+        bano:false,
+        superficieEdificada:""
     };
     $scope.datosOK = false;
     var idFamilia =$rootScope.idFamilia;

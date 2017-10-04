@@ -173,11 +173,18 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
                         result = false;
                     }
                     if(result){
+                        var telefonoReq;
                         //Variables para los Req de los Id
-                        var telefonoReq = {
-                            "celular": $scope.Hogar.celular,
-                            "numero": $scope.Hogar.telefono
+                        if($scope.Hogar.telefono){
+                            telefonoReq = {
+                                "celular": $scope.Hogar.celular,
+                                "numero": $scope.Hogar.telefono
+                            };
+                        }
+                        else {
+                            telefonoReq = null;
                         };
+
                         var direccionReq = {
                             "calle": $scope.Hogar.direccion.calle,
                             "numero": $scope.Hogar.direccion.numero,

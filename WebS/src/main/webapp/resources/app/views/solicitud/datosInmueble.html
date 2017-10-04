@@ -86,6 +86,12 @@
             <input type="checkbox" name="fieldset-5" id="chkEdificacion" ng-click="inmueble.edificado = !inmueble.edificado"/>
             <label for="chkEdificacion">Hay Edificacion en el terreno.</label>
         </div>
+        <div id="superficieEdificada" ng-show="inmueble.edificado">
+            <div class="form-group" style="margin-left:30px;">
+                <label for="inputSuperficieEdificada">Superficie edificada</label>
+                <input class="form-control input-md" type="text" ng-model="inmueble.superficieEdificada" id="inputSuperficieEdificada" />
+            </div>
+        </div>
 
         </div>
                 <div id="noPoseeInmueble" ng-show="inmueble.estado == 2">

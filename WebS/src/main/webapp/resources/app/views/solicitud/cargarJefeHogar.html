@@ -174,9 +174,23 @@
                 <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.carnetJubilacion" id="inputCarnetJF" />
             </div>
     </div>
+        <!--<div class="styled-input-single" >-->
+            <!--<input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>-->
+            <!--<label for="chkDisJF">La persona presenta alguna discapacidad.</label>-->
+        <!--</div>-->
+        <div class="form-group">
+            <label for="selectDiscapacidad">La persona presenta alguna discapacidad.</label>
+            <select class="form-control input-md" id="selectDiscapacidad" ng-model="jefeDeFamilia.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
+        </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>
-            <label for="chkDisJF">La persona presenta alguna discapacidad.</label>
+            <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-click="jefeDeFamilia.enfermedad = !jefeDeFamilia.enfermedad"/>
+            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
+        </div>
+        <div id="personaEnferma" ng-show="jefeDeFamilia.enfermedad">
+            <div class="form-group" style="margin-left:30px;">
+                <label for="inputEnfermedad">Cual?</label>
+                <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.enfermedadDescripcion" id="inputEnfermedad" />
+            </div>
         </div>
 
 

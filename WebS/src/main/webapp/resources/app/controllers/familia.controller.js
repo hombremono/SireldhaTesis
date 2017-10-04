@@ -46,7 +46,10 @@ $scope.persona ={
     editando:false,
     idTelefono:0,
     idFamilia:0,
-    busqueda:false
+    busqueda:false,
+    discapacidadCombo:0,
+    enfermedad:"",
+    enfermedadDescripcion:""
 };
 $scope.jefeDeFamilia={
     nombre:"",
@@ -93,7 +96,10 @@ $scope.jefeDeFamilia={
     editando:false,
     idTelefono:0,
     idFamilia:0,
-    busqueda:false
+    busqueda:false,
+    discapacidadCombo:0,
+    enfermedad:"",
+    enfermedadDescripcion:""
 };
 //Inicilizacion de Combos
 $scope.tiposDni =[{
@@ -137,6 +143,26 @@ $scope.relacionJF =[{
     rolFamiliar:"-SELECCIONE-"
 }];
 
+//Temporal Placebo Colection
+$scope.discapacidades=[
+    {
+    id_Discapacidad:0,
+    descripcion:"-SELECCIONE-"
+},{
+        id_Discapacidad:1,
+        descripcion:"No tiene"
+    },{
+        id_Discapacidad:2,
+        descripcion:"Sensorial"
+    },{
+        id_Discapacidad:3,
+        descripcion:"Motora"
+    },{
+        id_Discapacidad:4,
+        descripcion:"Cognitivo/intelectual"
+    }
+    ];
+
 //Combo de resultado de carga
 $scope.resultadosBusqueda=[];
 var defaultCombos = function(){
@@ -166,6 +192,9 @@ var defaultCombos = function(){
 
     $scope.persona.relacionJF = $scope.relacionJF[0].id_RolFamiliar;
     $scope.jefeDeFamilia.trabajoDependencia.idLocalidad = $scope.Localidades[0].id_Localidad;
+
+    $scope.persona.discapacidadCombo = $scope.discapacidades[0].id_Discapacidad;
+    $scope.jefeDeFamilia.discapacidadCombo = $scope.discapacidades[0].id_Discapacidad;
 };
 var cargarCombo = function(combo, coleccion){
         coleccion.forEach(function(value) {
@@ -196,9 +225,21 @@ var valid;
 if($rootScope.idJefe){
   personaService.get($rootScope.idJefe).then(function(resp){
       var jubiladoChk = false;
+      var telefonoInt;
+      var idTelefonoInt;
       if(resp.data.nroCarnetJubilacion)
       {
           jubiladoChk = true;
+      }
+      var telefonoInt;
+      var idTelefonoInt;
+      if(resp.data.telefono){
+          telefonoInt = resp.data.telefono.numero;
+          idTelefonoInt = resp.data.telefono.id_Telefono;
+      }
+      else {
+          telefonoInt = "";
+          idTelefonoInt = -1;
       }
       var integrante ={
           id_Persona:resp.data.id_Persona,
@@ -219,8 +260,8 @@ if($rootScope.idJefe){
           DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
           ingresoNeto:resp.data.ingresoNeto,
           mail:resp.data.mail,
-          idTelefono:resp.data.telefono.id_Telefono,
-          telefono:resp.data.telefono.numero,
+          idTelefono: telefonoInt,
+          telefono: idTelefonoInt,
           jubilado:jubiladoChk,
           carnetJubilacion:resp.data.nroCarnetJubilacion,
           discapacidad:false,
@@ -258,8 +299,8 @@ if($rootScope.idJefe){
               integrante.trabajoDependencia.direccion.calle = resp.data.direccion.calle;
               integrante.trabajoDependencia.direccion.numero = resp.data.direccion.numero;
               integrante.trabajoDependencia.direccion.pisoDepto = resp.data.direccion.dpto;
-              integrante.trabajoDependencia.telefono = resp.data.telefono.numero;
-              integrante.trabajoDependencia.idTelefono = resp.data.telefono.id_Telefono;
+              integrante.trabajoDependencia.telefono = resp.data.telefono.numero || "";
+              integrante.trabajoDependencia.idTelefono = resp.data.telefono.id_Telefono || "";
               $scope.familia.integrantes.push(integrante);
           });
       }
@@ -280,6 +321,16 @@ if($rootScope.idJefe){
 $scope.addjefeDeFamilia = function(){
     valid = ejecutarValidacionesJF();
     if(valid){
+        var telefonoReq;
+        if($scope.jefeDeFamilia.telefono != ""){
+            telefonoReq = {
+                "celular":$scope.jefeDeFamilia.celular || false,
+                "numero":$scope.jefeDeFamilia.telefono}
+        }
+        else {
+            telefonoReq = null;
+        }
+
         var jefeReq = {
             "nombre": $scope.jefeDeFamilia.nombre,
             "apellido":$scope.jefeDeFamilia.apellido ,
@@ -297,9 +348,7 @@ $scope.addjefeDeFamilia = function(){
             "localidad": {"id_Localidad":1},
             "estudios": {"id_Estudios": $scope.jefeDeFamilia.estudios},
             "profesion": {"id_Profesion": $scope.jefeDeFamilia.profesion},
-            "telefono": {
-                "celular":$scope.jefeDeFamilia.celular || false,
-                "numero":$scope.jefeDeFamilia.telefono},
+            "telefono": telefonoReq,
             "rolFamiliar": {"id_RolFamiliar": 1},
             "active": true,
             "tipoCapacidadConstructiva":{
@@ -366,17 +415,24 @@ $scope.addjefeDeFamilia = function(){
                         }
                         var lat =results[0].geometry.location.lat();
                         var lng =results[0].geometry.location.lng();
+                        var telefonoTrabajo;
+                        if($scope.jefeDeFamilia.trabajoDependencia.telefono){
+                            telefonoTrabajo = {
+                                "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
+                                "celular": false,
+                                "active": true
+                            };
+                        }
+                        else{
+                            telefonoTrabajo=null;
+                        }
                         var trabajoDependencia={
                             "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
                             "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
                             "persona": {
                                 "id_Persona": $rootScope.idJefe
                             },
-                            "telefono": {
-                                "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
-                                "celular": false,
-                                "active": true
-                            },
+                            "telefono":telefonoTrabajo ,
                             "direccion": {
                                 "calle": calle,
                                 "numero": num,
@@ -424,9 +480,20 @@ $scope.addjefeDeFamilia = function(){
     }
 
 };
+//Revisar Telefono.
 $scope.editjefeDeFamilia = function() {
     valid = ejecutarValidacionesJF();
     if(valid){
+        var telefonoJefeEdit;
+        if($scope.jefeDeFamilia.idTelefono){
+            telefonoJefeEdit = {
+                "id_Telefono":$scope.jefeDeFamilia.idTelefono,
+                "celular":$scope.jefeDeFamilia.celular,
+                "numero":$scope.jefeDeFamilia.telefono};
+        }
+        else{
+            telefonoJefeEdit=null;
+        }
         var jefeReqEdit = {
             "id_Persona":$rootScope.idJefe || $scope.jefeDeFamilia.idEdicion,
             "nombre": $scope.jefeDeFamilia.nombre,
@@ -445,10 +512,7 @@ $scope.editjefeDeFamilia = function() {
             "localidad": {"id_Localidad":1},
             "estudios": {"id_Estudios": $scope.jefeDeFamilia.estudios},
             "profesion": {"id_Profesion": $scope.jefeDeFamilia.profesion},
-            "telefono": {
-                "id_Telefono":$scope.jefeDeFamilia.idTelefono,
-                "celular":$scope.jefeDeFamilia.celular,
-                "numero":$scope.jefeDeFamilia.telefono},
+            "telefono":telefonoJefeEdit ,
             "rolFamiliar": {"id_RolFamiliar": 1},
             "active": true,
             "tipoCapacidadConstructiva":{
@@ -461,6 +525,19 @@ $scope.editjefeDeFamilia = function() {
         personaService.update(jefeReqEdit).then(function(resp){
                 if(jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 1)
                 {
+                    var telefonoTrabajo;
+                    if($scope.jefeDeFamilia.trabajoDependencia.idTelefono){
+                        telefonoTrabajo = {
+                            "id_Telefono":$scope.jefeDeFamilia.trabajoDependencia.idTelefono || "",
+                            "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono || "",
+                            "celular": false,
+                            "active": true
+                        };
+                    }
+                    else
+                    {
+                        telefonoTrabajo=null;
+                    }
                     var trabajoDependencia={
                         "id_TrabajoDependencia":$rootScope.idDependencia,
                         "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
@@ -468,12 +545,7 @@ $scope.editjefeDeFamilia = function() {
                         "persona": {
                             "id_Persona": $rootScope.idJefe
                         },
-                        "telefono": {
-                            "id_Telefono":$scope.jefeDeFamilia.trabajoDependencia.idTelefono,
-                            "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
-                            "celular": false,
-                            "active": true
-                        },
+                        "telefono":telefonoTrabajo ,
                         "direccion": {
                             "id_Direccion": $scope.jefeDeFamilia.trabajoDependencia.direccion.idDireccion,
                             "calle": $scope.jefeDeFamilia.trabajoDependencia.direccion.calle,
@@ -523,7 +595,7 @@ $scope.editjefeDeFamilia = function() {
                                 DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                                 ingresoNeto:resp.data.ingresoNeto,
                                 mail:resp.data.mail,
-                                telefono:resp.data.telefono.numero,
+                                telefono:resp.data.telefono.numero || "",
                                 jubilado:jubiladoChk,
                                 carnetJubilacion:resp.data.nroCarnetJubilacion,
                                 discapacidad:false,
@@ -576,7 +648,7 @@ $scope.editjefeDeFamilia = function() {
                                 DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                                 ingresoNeto:resp.data.ingresoNeto,
                                 mail:resp.data.mail,
-                                telefono:resp.data.telefono.numero,
+                                telefono:resp.data.telefono.numero || "",
                                 jubilado:jubiladoChk,
                                 carnetJubilacion:resp.data.nroCarnetJubilacion,
                                 discapacidad:false,
@@ -623,7 +695,7 @@ $scope.editjefeDeFamilia = function() {
                                 DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                                 ingresoNeto:resp.data.ingresoNeto,
                                 mail:resp.data.mail,
-                                telefono:resp.data.telefono.numero,
+                                telefono:resp.data.telefono.numero || "",
                                 jubilado:jubiladoChk,
                                 carnetJubilacion:resp.data.nroCarnetJubilacion,
                                 discapacidad:false,
@@ -666,7 +738,7 @@ $scope.editjefeDeFamilia = function() {
                                 DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                                 ingresoNeto:resp.data.ingresoNeto,
                                 mail:resp.data.mail,
-                                telefono:resp.data.telefono.numero,
+                                telefono:resp.data.telefono.numero || "",
                                 jubilado:jubiladoChk,
                                 carnetJubilacion:resp.data.nroCarnetJubilacion,
                                 discapacidad:false,
@@ -686,9 +758,31 @@ $scope.editjefeDeFamilia = function() {
             });
     }
 };
+//Revisar Telefono en Editar
 $scope.addPersona = function() {
     valid = ejecutarValidaciones();
     if(valid) {
+        var telefonoPersona;
+        var telefonoPersonaEdit;
+        if($scope.persona.telefono){
+            telefonoPersona = {
+                "celular": $scope.persona.celular,
+                "numero": $scope.persona.telefono
+            };
+        }
+        else if($scope.persona.telefono && $scope.persona.idTelefono) {
+            telefonoPersonaEdit = {
+                "id_Telefono":$scope.persona.idTelefono,
+                "celular": $scope.persona.celular,
+                "numero": $scope.persona.telefono
+            };
+        }
+        else if($scope.persona.telefono && !$scope.persona.idTelefono){
+            //telefonoPersonaEdit se deberia agregar el telefono cuando es put y no va el id.
+        }
+        else if(!$scope.persona.telefono){
+            telefonoPersona =null;
+        }
         var reqPersona = {
             "nombre": $scope.persona.nombre,
             "apellido": $scope.persona.apellido,
@@ -706,10 +800,7 @@ $scope.addPersona = function() {
             "localidad": {"id_Localidad": 1},
             "estudios": {"id_Estudios": $scope.persona.estudios},
             "profesion": {"id_Profesion": $scope.persona.profesion},
-            "telefono": {
-                "celular": $scope.persona.celular,
-                "numero": $scope.persona.telefono
-            },
+            "telefono": telefonoPersona ,
             "rolFamiliar": {"id_RolFamiliar": $scope.persona.relacionJF},
             "active": true,
             "tipoCapacidadConstructiva":{
@@ -734,11 +825,7 @@ $scope.addPersona = function() {
             "localidad": {"id_Localidad": 1},
             "estudios": {"id_Estudios": $scope.persona.estudios},
             "profesion": {"id_Profesion": $scope.persona.profesion},
-            "telefono": {
-                "id_Telefono":$scope.persona.idTelefono,
-                "celular": $scope.persona.celular,
-                "numero": $scope.persona.telefono
-            },
+            "telefono": telefonoPersonaEdit ,
             "rolFamiliar": {"id_RolFamiliar": $scope.persona.relacionJF},
             "active": true,
             "tipoCapacidadConstructiva":{
@@ -803,6 +890,16 @@ $scope.addPersona = function() {
                         {
                             jubiladoChk = true;
                         }
+                        var telefonoInt;
+                        var idTelefonoInt;
+                        if(resp.data.telefono){
+                            telefonoInt = resp.data.telefono.numero;
+                            idTelefonoInt = resp.data.telefono.id_Telefono;
+                        }
+                        else {
+                            telefonoInt = "";
+                            idTelefonoInt = -1;
+                        }
                         var integrante ={
                             id_Persona:resp.data.id_Persona,
                             nombre:resp.data.nombre,
@@ -822,7 +919,7 @@ $scope.addPersona = function() {
                             DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                             ingresoNeto:resp.data.ingresoNeto,
                             mail:resp.data.mail,
-                            telefono:resp.data.telefono.numero,
+                            telefono:telefonoInt,
                             jubilado:jubiladoChk,
                             carnetJubilacion:resp.data.nroCarnetJubilacion,
                             discapacidad:false,
@@ -872,6 +969,16 @@ $scope.addPersona = function() {
                         {
                             jubiladoChk = true;
                         }
+                        var telefonoInt;
+                        var idTelefonoInt;
+                        if(resp.data.telefono){
+                            telefonoInt = resp.data.telefono.numero;
+                            idTelefonoInt = resp.data.telefono.id_Telefono;
+                        }
+                        else {
+                            telefonoInt = "";
+                            idTelefonoInt = -1;
+                        }
                         var integrante ={
                             id_Persona:resp.data.id_Persona,
                             nombre:resp.data.nombre,
@@ -891,7 +998,7 @@ $scope.addPersona = function() {
                             DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                             ingresoNeto:resp.data.ingresoNeto,
                             mail:resp.data.mail,
-                            telefono:resp.data.telefono.numero,
+                            telefono:telefonoInt,
                             jubilado:jubiladoChk,
                             carnetJubilacion:resp.data.nroCarnetJubilacion,
                             discapacidad:false,
@@ -941,6 +1048,16 @@ $scope.addPersona = function() {
                 {
                     jubiladoChk = true;
                 }
+                var telefonoInt;
+                var idTelefonoInt;
+                if(resp.data.telefono){
+                    telefonoInt = resp.data.telefono.numero;
+                    idTelefonoInt = resp.data.telefono.id_Telefono;
+                }
+                else {
+                    telefonoInt = "";
+                    idTelefonoInt = -1;
+                }
                 var integrante ={
                     id_Persona:resp.data.id_Persona,
                     nombre:resp.data.nombre,
@@ -960,8 +1077,8 @@ $scope.addPersona = function() {
                     DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
                     ingresoNeto:resp.data.ingresoNeto,
                     mail:resp.data.mail,
-                    idTelefono:resp.data.telefono.id_Telefono,
-                    telefono:resp.data.telefono.numero,
+                    idTelefono:idTelefonoInt,
+                    telefono:telefonoInt,
                     jubilado:jubiladoChk,
                     carnetJubilacion:resp.data.nroCarnetJubilacion,
                     discapacidad:false,
@@ -1173,6 +1290,16 @@ $scope.buscarPersona = function() {
                     if (item.nroCarnetJubilacion) {
                         jubiladoChk = true;
                     }
+                    var telefonoInt;
+                    var idTelefonoInt;
+                    if(item.telefono){
+                        telefonoInt = item.telefono.numero;
+                        idTelefonoInt = item.telefono.id_Telefono;
+                    }
+                    else {
+                        telefonoInt = "";
+                        idTelefonoInt = -1;
+                    }
                     var integrante = {
                         id_Persona: item.id_Persona,
                         id_Familia:item.familia.id_Familia,
@@ -1193,8 +1320,8 @@ $scope.buscarPersona = function() {
                         DescRelacionJF: item.rolFamiliar.rolFamiliar,
                         ingresoNeto: item.ingresoNeto,
                         mail: item.mail,
-                        telefono: item.telefono.numero,
-                        idTelefono:item.telefono.id_Telefono,
+                        telefono:  idTelefonoInt,
+                        idTelefono: telefonoInt,
                         jubilado: jubiladoChk,
                         carnetJubilacion: item.nroCarnetJubilacion,
                         discapacidad: false,
@@ -1208,6 +1335,16 @@ $scope.buscarPersona = function() {
                     if(item.nroCarnetJubilacion)
                     {
                         jubiladoChk = true;
+                    }
+                    var telefonoInt;
+                    var idTelefonoInt;
+                    if(item.telefono){
+                        telefonoInt = item.telefono.numero;
+                        idTelefonoInt = item.telefono.id_Telefono;
+                    }
+                    else {
+                        telefonoInt = "";
+                        idTelefonoInt = -1;
                     }
                     var integrante ={
                         id_Persona:item.id_Persona,
@@ -1229,8 +1366,8 @@ $scope.buscarPersona = function() {
                         DescRelacionJF:item.rolFamiliar.rolFamiliar,
                         ingresoNeto:item.ingresoNeto,
                         mail:item.mail,
-                        idTelefono:item.telefono.id_Telefono,
-                        telefono:item.telefono.numero,
+                        idTelefono:idTelefonoInt,
+                        telefono:telefonoInt,
                         jubilado:jubiladoChk,
                         carnetJubilacion:item.nroCarnetJubilacion,
                         discapacidad:false,
