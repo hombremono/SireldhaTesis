@@ -2,6 +2,7 @@ package ar.com.iua.web.spring.services.Controllers;
 
 import ar.com.iua.modulo.business.Interfaces.IDireccionService;
 import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
+import ar.com.iua.modulo.business.exception.ServiceException;
 import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Telefono;
@@ -58,16 +59,20 @@ public class FamiliaController extends GenericController {
         Direccion direccion = familia.getDireccion();
 
         try {
-            if(telefono.getId_Telefono() <= 0) {
+            if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
                 telefono.setActive(true);
                 familia.setTelefono(telService.saveOrUpdate(telefono));
+            } else {
+                familia.setTelefono(null);
             }
-            if(direccion.getId_Direccion() <= 0) {
+            if(direccion != null && direccion.getId_Direccion() <= 0) {
                 direccion.setisActive(true);
                 familia.setDireccion(dirService.saveOrUpdate(direccion));
+            } else {
+                familia.setDireccion(null);
             }
+
         }catch (Exception e) {
-            LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return add(familia,familiaService,Constantes.URL_FAMILIA);
@@ -76,6 +81,26 @@ public class FamiliaController extends GenericController {
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity<Object> update (@RequestBody Familia familia) throws IOException {
+        Telefono telefono = familia.getTelefono();
+        Direccion direccion = familia.getDireccion();
+
+        try {
+            if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
+                telefono.setActive(true);
+                familia.setTelefono(telService.saveOrUpdate(telefono));
+            } else {
+                familia.setTelefono(null);
+            }
+            if(direccion != null && direccion.getId_Direccion() <= 0) {
+                direccion.setisActive(true);
+                familia.setDireccion(dirService.saveOrUpdate(direccion));
+            } else {
+                familia.setDireccion(null);
+            }
+
+        }catch (Exception e) {
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return update(familia,familiaService);
     }
 
@@ -100,4 +125,5 @@ public class FamiliaController extends GenericController {
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

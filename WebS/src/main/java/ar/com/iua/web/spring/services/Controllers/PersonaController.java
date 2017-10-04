@@ -69,6 +69,18 @@ public class PersonaController extends GenericController {
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity<Object> update (@RequestBody Persona persona) throws IOException {
+        Telefono telefono = persona.getTelefono();
+        try {
+            if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
+                telefono.setActive(true);
+                persona.setTelefono(telefonoService.saveOrUpdate(telefono));
+            } else {
+                persona.setTelefono(null);
+            }
+        }catch (Exception e){
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         return update(persona,personaService);
     }
 
