@@ -41,9 +41,8 @@ public class Persona implements IModel {
     @Column(name="ingresoNeto", nullable = false)
     private float ingresoNeto;
 
-    @Column(name="discapacidad")
-    private boolean discapacidad;
-
+//    @Column(name="discapacidad")
+//    private boolean discapacidad;
 
     @Column(name="mail", nullable = false)
     private String mail;
@@ -95,19 +94,22 @@ public class Persona implements IModel {
     @JoinColumn(name = "idRolFamiliar", nullable = false)
     private RolFamiliar rolFamiliar;
 
-
     @OneToMany (mappedBy = "persona")
     private List<CapacidadConstructiva> capacidadesConstructivas;
 
+    @Column(name="enfermedadCronica")
+    private Boolean enfermedadCronica;
 
-    /**    @OneToMany (mappedBy = "inmueble")
-    private List<Cocina> cocina;*/
+    @Column(name="descripcionEnfermedad")
+    private String descripcionEnfermedad;
 
-
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idDiscapacidad")
+    private Discapacidad discapacidad;
 
     @Column(name="isActive", nullable = false)
     private boolean isActive;
+
 
     public RolFamiliar getRolFamiliar() {
         return rolFamiliar;
@@ -290,11 +292,27 @@ public class Persona implements IModel {
         this.capacidadesConstructivas = capacidadesConstructivas;
     }
 
-    public boolean isDiscapacidad() {
+    public Boolean getEnfermedadCronica() {
+        return enfermedadCronica;
+    }
+
+    public void setEnfermedadCronica(Boolean enfermedadCronica) {
+        this.enfermedadCronica = enfermedadCronica;
+    }
+
+    public String getDescripcionEnfermedad() {
+        return descripcionEnfermedad;
+    }
+
+    public void setDescripcionEnfermedad(String descripcionEnfermedad) {
+        this.descripcionEnfermedad = descripcionEnfermedad;
+    }
+
+    public Discapacidad getDiscapacidad() {
         return discapacidad;
     }
 
-    public void setDiscapacidad(boolean discapacidad) {
+    public void setDiscapacidad(Discapacidad discapacidad) {
         this.discapacidad = discapacidad;
     }
 }
