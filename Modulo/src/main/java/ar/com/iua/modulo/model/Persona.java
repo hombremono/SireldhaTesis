@@ -4,6 +4,7 @@ package ar.com.iua.modulo.model;
  * Created by fran_ on 1/4/2017.
  */
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -94,9 +95,16 @@ public class Persona implements IModel {
     @JoinColumn(name = "idRolFamiliar", nullable = false)
     private RolFamiliar rolFamiliar;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idTipoCapacidadConstructiva")
-    private TipoCapacidadConstructiva tipoCapacidadConstructiva;
+
+    @OneToMany (mappedBy = "persona")
+    private List<CapacidadConstructiva> capacidadesConstructivas;
+
+
+    /**    @OneToMany (mappedBy = "inmueble")
+    private List<Cocina> cocina;*/
+
+
+
 
     @Column(name="isActive", nullable = false)
     private boolean isActive;
@@ -274,12 +282,12 @@ public class Persona implements IModel {
         return id_Persona;
     }
 
-    public TipoCapacidadConstructiva getTipoCapacidadConstructiva() {
-        return tipoCapacidadConstructiva;
+    public List<CapacidadConstructiva> getCapacidadesConstructivas() {
+        return capacidadesConstructivas;
     }
 
-    public void setTipoCapacidadConstructiva(TipoCapacidadConstructiva tipoCapacidadConstructiva) {
-        this.tipoCapacidadConstructiva = tipoCapacidadConstructiva;
+    public void setCapacidadesConstructivas(List<CapacidadConstructiva> capacidadesConstructivas) {
+        this.capacidadesConstructivas = capacidadesConstructivas;
     }
 
     public boolean isDiscapacidad() {
