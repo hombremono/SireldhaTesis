@@ -48,8 +48,11 @@ public class PersonaController extends GenericController {
         Telefono telefono = persona.getTelefono();
         try {
             List<Persona> listaPersonas  = personaService.getByDni(persona.getNroDocumento());
-            if (!listaPersonas.isEmpty()){
-                persona.setId_Persona(listaPersonas.get(0).getId_Persona());
+            if (!listaPersonas.isEmpty() && persona.getId() <= 0){
+                return new ResponseEntity<Object>(new SimpleResponse(-1, "La persona con el nro de " +
+                        "documento que esta tratando de cargar ya se encuentra en la base de datos"), HttpStatus.CONFLICT);
+
+               // persona.setId_Persona(listaPersonas.get(0).getId_Persona());
             }
             if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
                 telefono.setActive(true);
