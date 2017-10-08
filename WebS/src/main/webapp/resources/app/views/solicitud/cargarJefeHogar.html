@@ -87,10 +87,65 @@
             <label for="selectProfesion"><span style="color:red">* </span>Profesión</label>
             <select class="form-control input-md" id="selectProfesion" ng-model="jefeDeFamilia.profesion" ng-options="profesion.id_Profesion as profesion.profesion for profesion in profesiones"></select>
         </div>
-        <div class="form-group">
-            <label for="selectCapC"><span style="color:red">* </span>Capacidad Constructiva</label>
-            <select class="form-control input-md" id="selectCapC" ng-model="jefeDeFamilia.capConstructiva" ng-options="cc.id_TipoCapacidadConstructiva as cc.descripcion for cc in capConstructivas"></select>
+        <div id="capConstructivas">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkPintor" ng-click="jefeDeFamilia.capacidadesConstructivas.pintor = !jefeDeFamilia.capacidadesConstructivas.pintor"/>
+                        <label for="chkPintor">Pintor</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkPocero" ng-click="jefeDeFamilia.capacidadesConstructivas.pocero = !jefeDeFamilia.capacidadesConstructivas.pocero"/>
+                        <label for="chkPocero">Pocero</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkCeramista" ng-click="jefeDeFamilia.capacidadesConstructivas.ceramista = !jefeDeFamilia.capacidadesConstructivas.ceramista"/>
+                        <label for="chkCeramista">Ceramista</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkTechador" ng-click="jefeDeFamilia.capacidadesConstructivas.techador = !jefeDeFamilia.capacidadesConstructivas.techador"/>
+                        <label for="chkTechador">Techador</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkYesero" ng-click="jefeDeFamilia.capacidadesConstructivas.yesero = !jefeDeFamilia.capacidadesConstructivas.yesero"/>
+                        <label for="chkYesero">Yesero</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkSoldador" ng-click="jefeDeFamilia.capacidadesConstructivas.soldador = !jefeDeFamilia.capacidadesConstructivas.soldador" />
+                        <label for="chkSoldador">Soldador</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkOpMaq" ng-click="jefeDeFamilia.capacidadesConstructivas.opMaq = !jefeDeFamilia.capacidadesConstructivas.opMaq"/>
+                        <label for="chkOpMaq">Operador de maquinaria</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="styled-input-single" >
+                        <input type="checkbox" name="fieldset-5" id="chkVidriero" ng-click="jefeDeFamilia.capacidadesConstructivas.vidriero = !jefeDeFamilia.capacidadesConstructivas.vidriero"/>
+                        <label for="chkVidriero">Vidriero</label>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="form-group">
             <label for="selectDepLaboral"><span style="color:red">* </span>Dependencia Laboral</label>
             <select class="form-control input-md" id="selectDepLaboral" ng-model="jefeDeFamilia.depLaboral" ng-options="dl.id_DependenciaLaboral as dl.dependenciaLaboral for dl in depLaborales"></select>
