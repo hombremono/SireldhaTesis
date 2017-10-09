@@ -406,9 +406,9 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                                         "id_Localidad": $scope.inmueble.idLocalidad
                                     }
                                 },
-                                "edificacion":$scope.inmueble.edificado
+                                "edificacion":$scope.inmueble.edificado,
+                                "superficieEdificada":$scope.inmueble.superficieEdificada
                             };
-                            debugger;
                             inmuebleService.addTerreno(reqTerreno).then(function(resp){
 
                                 $scope.datosOK = true;
