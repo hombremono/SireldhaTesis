@@ -1,7 +1,9 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.business.Interfaces.ICapacidadConstructivaService;
 import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
 import ar.com.iua.modulo.business.model.PersonaCombos;
+import ar.com.iua.modulo.model.CapacidadConstructiva;
 import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Telefono;
 import ar.com.iua.modulo.model.exception.NotFoundException;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +32,8 @@ public class PersonaController extends GenericController {
     private IPersonaService personaService;
     @Autowired
     private ITelefonoService telefonoService;
+    @Autowired
+    private ICapacidadConstructivaService capacidadConstructivaService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException{
@@ -51,7 +56,6 @@ public class PersonaController extends GenericController {
             if (!listaPersonas.isEmpty() && persona.getId() <= 0){
                 return new ResponseEntity<Object>(new SimpleResponse(-1, "La persona con el nro de " +
                         "documento que esta tratando de cargar ya se encuentra en la base de datos"), HttpStatus.CONFLICT);
-
                // persona.setId_Persona(listaPersonas.get(0).getId_Persona());
             }
             if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
@@ -60,14 +64,24 @@ public class PersonaController extends GenericController {
             } else {
                 persona.setTelefono(null);
             }
+            Persona response = personaService.saveOrUpdate(persona);
+
+
+
+            List<CapacidadConstructiva> capacidadesContructivas = persona.getCapacidadesConstructivas();
+            if(!capacidadesContructivas.isEmpty()){
+                List<CapacidadConstructiva> nuevaListaCC = new ArrayList<CapacidadConstructiva>();
+                for (CapacidadConstructiva capacidadConstructiva:capacidadesContructivas){
+                    capacidadConstructiva.setPersona(response);
+                    nuevaListaCC.add(capacidadConstructivaService.saveOrUpdate(capacidadConstructiva));
+                }
+                persona.setCapacidadesConstructivas(nuevaListaCC);
+            }
+            return new ResponseEntity<Object>(response, HttpStatus.CREATED);
         }catch (Exception e){
             LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
-        return add(persona,personaService,Constantes.URL_PERSONA);
-
     }
 
     @RequestMapping(value = "/", method = RequestMethod.PUT)

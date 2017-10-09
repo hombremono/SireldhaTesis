@@ -314,4 +314,8 @@ public class Beans {
 	@Autowired
 	public ICareceViviendaService careceViviendaService (final ICareceViviendaDAO careceViviendaDAO) {return new CareceViviendaService(careceViviendaDAO);}
 
+	@Bean
+	@Autowired
+	public ICapacidadConstructivaService capacidadConstructivaService (final ICapacidadConstructivaDAO capacidadConstructivaDAO) {return new CapacidadConstructivaService(capacidadConstructivaDAO);}
+
 }
