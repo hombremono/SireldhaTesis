@@ -48,7 +48,7 @@ $scope.persona ={
     idFamilia:0,
     busqueda:false,
     discapacidadCombo:0,
-    enfermedad:"",
+    enfermedad:false,
     enfermedadDescripcion:"",
     capacidadesConstructivas:{
         pintor:false,
@@ -108,7 +108,7 @@ $scope.jefeDeFamilia={
     idFamilia:0,
     busqueda:false,
     discapacidadCombo:0,
-    enfermedad:"",
+    enfermedad:false,
     enfermedadDescripcion:"",
     capacidadesConstructivas:{
         pintor:false,
@@ -438,8 +438,7 @@ $scope.addjefeDeFamilia = function(){
             "telefono": telefonoReq,
             "rolFamiliar": {"id_RolFamiliar": 1},
             "active": true,
-
-            "Discapacidad":{
+            "discapacidad":{
                 "id_Discapacidad":$scope.jefeDeFamilia.discapacidadCombo
             },
             "enfermedadCronica":$scope.jefeDeFamilia.enfermedad,
@@ -588,7 +587,7 @@ $scope.editjefeDeFamilia = function() {
             "rolFamiliar": {"id_RolFamiliar": 1},
             "active": true,
 
-            "Discapacidad":{
+            "discapacidad":{
                 "id_Discapacidad":$scope.jefeDeFamilia.discapacidadCombo
             },
             "enfermedadCronica":$scope.jefeDeFamilia.enfermedad,
@@ -1191,7 +1190,7 @@ $scope.addPersona = function() {
             "rolFamiliar": {"id_RolFamiliar": $scope.persona.relacionJF},
             "active": true,
 
-            "Discapacidad":{
+            "discapacidad":{
                 "id_Discapacidad":$scope.persona.discapacidadCombo
             },
             "enfermedadCronica":$scope.persona.enfermedad,
@@ -1499,7 +1498,7 @@ $scope.addPersona = function() {
                 "rolFamiliar": {"id_RolFamiliar": $scope.persona.relacionJF},
                 "active": true,
 
-                "Discapacidad":{
+                "discapacidad":{
                     "id_Discapacidad":$scope.persona.discapacidadCombo
                 },
                 "enfermedadCronica":$scope.persona.enfermedad,
