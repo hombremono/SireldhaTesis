@@ -40,9 +40,9 @@
 //-----------------------------------------------POSESION INMUEBLE ------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------------------------->
 <div id="datosInmueble" ng-show="!datosOK">
-    <h3 title="info de hogar">Posesion de inmueble</h3>
+    <h3 title="info de hogar">Posesión de inmueble</h3>
     <div class="form-group">
-        <label for="selectPosesionInmueble"><span style="color:red">* </span>El Hogar Posee Inmueble propio</label>
+        <label for="selectPosesionInmueble"><span style="color:red">* </span>El hogar posee inmueble propio</label>
         <select class="form-control input-md" id="selectPosesionInmueble" ng-model="inmueble.estado" ng-options="e.id_Estado as e.Descripcion for e in estados"></select>
     </div>
     <div id="posseInmuble" ng-show="inmueble.estado == 1" style="margin-left: 30px">
@@ -57,34 +57,22 @@
         <div>
 
             <div class="form-group">
-                <label for="adress-inmueble">Direccion</label>
+                <label for="adress-inmueble">Dirección</label>
                 <input id="adress-inmueble" placeholder="Ingrese su direccion" type="text" class="form-control input-md" ></input>
             </div>
-
-                <!--<div class="form-group">-->
-                <!--<label for="inputCalle">Calle</label>-->
-                <!--<input class="form-control input-md" id="inputCalle" type="text" ng-model="inmueble.direccion.calle">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                <!--<label for="inputNumero">Numero</label>-->
-                <!--<input class="form-control input-md" id="inputNumero" type="number" ng-model="inmueble.direccion.numero">-->
-                <!--</div>-->
-                <!--<div class="form-group">-->
-                <!--<label for="inputPiso">Piso y Departamento</label>-->
-                <!--<input class="form-control input-md" id="inputPiso" type="text" ng-model="inmueble.direccion.pisoDepto">-->
-                <!--</div>-->
         </div>
+                <div class="form-group">
+                    <label for="inputSuperficie">Superficie del terreno(m2)</label>
+                    <input class="form-control input-md" id="inputSuperficie" type="number" ng-model="inmueble.superficie">
+                </div>
                 <div class="form-group">
                 <label for="inputValorF">Valor fiscal en $</label>
                 <input class="form-control input-md" id="inputValorF" type="number" ng-model="inmueble.valorFiscal">
                 </div>
-                <div class="form-group">
-                <label for="inputSuperficie">Superficie del terreno(m2)</label>
-                <input class="form-control input-md" id="inputSuperficie" type="number" ng-model="inmueble.superficie">
-                </div>
+
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkEdificacion" ng-click="inmueble.edificado = !inmueble.edificado"/>
-            <label for="chkEdificacion">Hay Edificacion en el terreno.</label>
+            <label for="chkEdificacion">Hay edificación en el terreno.</label>
         </div>
         <div id="superficieEdificada" ng-show="inmueble.edificado">
             <div class="form-group" style="margin-left:30px;">
@@ -96,18 +84,18 @@
         </div>
                 <div id="noPoseeInmueble" ng-show="inmueble.estado == 2">
                     <div class="form-group">
-                        <label for="selectNoPosee"><span style="color:red">* </span>Tipo de hogar que posee</label>
+                        <label for="selectNoPosee"><span style="color:red">* </span>Tipo de hogar en el que reside</label>
                         <select class="form-control input-md" id="selectNoPosee" ng-model="inmueble.motivoNoPosee" ng-options="np.id_NoPosee as np.descripcion for np in NoPosee"></select>
                     </div>
 
                         <div id="alquila" style="margin-left: 30px" ng-show="inmueble.motivoNoPosee == 3">
                             <h5>Datos de Alquiler</h5>
                             <div class="form-group">
-                            <label for="inputAlquiler">Cuota de Alquiler</label>
+                            <label for="inputAlquiler">Monto de alquiler mensual en $</label>
                             <input class="form-control input-md" id="inputAlquiler" type="number" ng-model="inmueble.alquiler.cuota">
                             </div>
                             <div class="form-group">
-                            <label for="inicioAlq">Fecha de inicio de Alquiler</label>
+                            <label for="inicioAlq">Fecha de inicio de alquiler</label>
                             <input  class="form-control" id="inicioAlq" type="date" ng-model="inmueble.alquiler.inicio">
                             </div>
                             <div class="form-group">
@@ -117,14 +105,14 @@
                         </div>
                         <div id="noPosee" ng-show="inmueble.motivoNoPosee ==7" style="margin-left: 30px">
                             <div class="form-group">
-                                <label for="selectCarecimiento">Motivo de Carecimiento</label>
+                                <label for="selectCarecimiento">Motivo de carencia</label>
                                 <select class="form-control input-md" id="selectCarecimiento" ng-model="inmueble.sinInmueble" ng-options="motivo.id_MotivoCarecimiento as motivo.descripcion for motivo in motivosFalta"></select>
                             </div>
                         </div>
 
         </div>
         <br>
-        <button class="btn btn-success" type="button" id="btnCargaInmueble" ng-click="verificarPosesion()">Siguiente</button>
+        <button class="btn btn-primary" pull-right type="button" id="btnCargaInmueble" ng-click="verificarPosesion()">Siguiente</button>
     </div>
 <!--//--------------------------------------------------------------------------------------------------------------------------------------//
 //-----------------------------------------------ESTADO INMUEBLE ------------------------------------------------------------------------//
@@ -133,32 +121,32 @@
     <h3 title="info de hogar">Condiciones del inmueble</h3>
     <form>
         <div class="form-group">
-            <label for="selectMPared">Material Pared</label>
+            <label for="selectMPared">Material pared</label>
             <select class="form-control input-md" id="selectMPared" ng-model="inmueble.tipoPared" ng-options="tipoP.id_MaterialPared as tipoP.descripcion for tipoP in tiposPared"></select>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkRevoque" ng-click="inmueble.revoque = !inmueble.revoque"/>
+            <input type="checkbox" name="fieldset-5" id="chkRevoque" ng-model="inmueble.revoque"/>
             <label for="chkRevoque">Las paredes poseen revoque.</label>
         </div>
         <div class="form-group">
-            <label for="selectMTecho">Material Techo</label>
+            <label for="selectMTecho">Material techo</label>
             <select class="form-control input-md" id="selectMTecho" ng-model="inmueble.tipoTecho" ng-options="tipoT.id_MaterialTecho as tipoT.descripcion for tipoT in tiposTecho"></select>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkCieloRazzo" ng-click="inmueble.cieloRazo = !inmueble.cieloRazo"/>
-            <label for="chkCieloRazzo">El techo posee revestimiento interior/Cielo razo.</label>
+            <input type="checkbox" name="fieldset-5" id="chkCieloRazzo" ng-click="inmueble.cieloRazo"/>
+            <label for="chkCieloRazzo">El techo posee revestimiento interior/cielo razo.</label>
         </div>
         <div class="form-group">
-            <label for="selectMPiso">Material Piso</label>
+            <label for="selectMPiso">Material piso</label>
             <select class="form-control input-md" id="selectMPiso" ng-model="inmueble.tipoPiso" ng-options="tipoPiso.id_MaterialPiso as tipoPiso.descripcion for tipoPiso in tiposPiso"></select>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkAgua" ng-click="inmueble.agua = !inmueble.agua"/>
-            <label for="chkAgua">Posee Agua.</label>
+            <input type="checkbox" name="fieldset-5" id="chkAgua" ng-model="inmueble.agua"/>
+            <label for="chkAgua">Posee agua.</label>
         </div>
         <div ng-show="inmueble.agua" style="margin-left:30px;">
             <div class="form-group">
-                <label for="selectConexionAgua">Tipo de Conexion</label>
+                <label for="selectConexionAgua">Tipo de conexión</label>
                 <select class="form-control input-md" id="selectConexionAgua" ng-model="inmueble.conexionAgua" ng-options="conexionAgua.id_PoseeAgua as conexionAgua.descripcion for conexionAgua in conexionesAgua"></select>
             </div>
             <div class="form-group">
@@ -167,8 +155,8 @@
             </div>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkBano" ng-click="inmueble.bano = !inmueble.bano"/>
-            <label for="chkBano">Posee Baño.</label>
+            <input type="checkbox" name="fieldset-5" id="chkBano" ng-model="inmueble.bano"/>
+            <label for="chkBano">Posee baño.</label>
         </div>
         <div ng-show="inmueble.bano" style="margin-left:30px;">
             <div class="form-group">
@@ -176,40 +164,40 @@
                 <select class="form-control input-md" id="selectTBano" ng-model="inmueble.tipoBano" ng-options="tBano.id_tipobano as tBano.descripcion for tBano in tiposBano"></select>
             </div>
             <div class="styled-input-single" >
-                <input type="checkbox" name="fieldset-5" id="chkCadena" ng-click="inmueble.poseeCadena = !inmueble.poseeCadena"/>
+                <input type="checkbox" name="fieldset-5" id="chkCadena" ng-model="inmueble.poseeCadena"/>
                 <label for="chkCadena">Posee botón/cadena/mochila para limpieza del inodoro.</label>
             </div>
             <div class="styled-input-single" >
-                <input type="checkbox" name="fieldset-5" id="chkCompartido" ng-click="inmueble.banoCompartido = !inmueble.banoCompartido"/>
+                <input type="checkbox" name="fieldset-5" id="chkCompartido" ng-model="inmueble.banoCompartido"/>
                 <label for="chkCompartido">Baño compartido.</label>
             </div>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkLuz" ng-click="inmueble.luz = !inmueble.luz"/>
+            <input type="checkbox" name="fieldset-5" id="chkLuz" ng-model="inmueble.luz"/>
             <label for="chkLuz">Posee Luz.</label>
         </div>
         <div ng-show="inmueble.luz" style="margin-left:30px;">
             <div class="form-group">
-                <label for="selectTLuz">Conexion Luz</label>
+                <label for="selectTLuz">Conexión Luz</label>
                 <select class="form-control input-md" id="selectTLuz" ng-model="inmueble.tipoLuz" ng-options="tLuz.id_PoseeLuz as tLuz.descripcion for tLuz in tiposLuz"></select>
             </div>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkCocina" ng-click="inmueble.cocina = !inmueble.cocina"/>
-            <label for="chkCocina">Posee Cocina.</label>
+            <input type="checkbox" name="fieldset-5" id="chkCocina" ng-model="inmueble.cocina"/>
+            <label for="chkCocina">Posee cocina.</label>
         </div>
         <div ng-show="inmueble.cocina" style="margin-left:30px;">
             <div class="form-group">
-                <label for="selectTCocina">Tipo Cocina</label>
+                <label for="selectTCocina">Tipo cocina</label>
                 <select class="form-control input-md" id="selectTCocina" ng-model="inmueble.tipoCocina" ng-options="tCocina.id_PoseeCocina as tCocina.descripcion for tCocina in tiposCocina"></select>
             </div>
             <div class="styled-input-single" >
-                <input type="checkbox" name="fieldset-5" id="chkCocinaAgua" ng-click="inmueble.cocinaAgua = !inmueble.cocinaAgua"/>
-                <label for="chkCocinaAgua">La cocina posee intalacion de agua funcional.</label>
+                <input type="checkbox" name="fieldset-5" id="chkCocinaAgua" ng-model="inmueble.cocinaAgua"/>
+                <label for="chkCocinaAgua">La cocina posee intalación de agua funcional.</label>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputCuartos"><span style="color:red">* </span>Cantidad de Cuartos</label>
+            <label for="inputCuartos"><span style="color:red">* </span>Cantidad de cuartos</label>
             <input class="form-control input-md" type="text" ng-model="inmueble.cuartos" id="inputCuartos" />
         </div>
         <div class="form-group">
@@ -217,11 +205,12 @@
             <input class="form-control input-md" type="text" ng-model="inmueble.camas" id="inputCamas" />
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkInsalubre" ng-click="inmueble.zonaInsalubre = !inmueble.zonaInsalubre"/>
+            <input type="checkbox" name="fieldset-5" id="chkInsalubre" ng-model="inmueble.zonaInsalubre"/>
             <label for="chkInsalubre">La vivienda se encuentra en zona insalubre.</label>
         </div>
     </form>
-    <button class="btn btn-success" type="button" id="btnCargaEstado" ng-click="cargarInmueble()">Siguiente</button>
+
+    <button class="btn btn-primary"  pull-right type="button" id="btnCargaEstado" ng-click="cargarInmueble()">Siguiente</button>
 </div>
 </div>
 
