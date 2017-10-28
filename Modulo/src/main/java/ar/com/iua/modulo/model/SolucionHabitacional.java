@@ -4,6 +4,7 @@ package ar.com.iua.modulo.model;
  * Created by fran_ on 1/4/2017.
  */
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -24,6 +25,14 @@ public class SolucionHabitacional {
 
     @Column(name="isActive", nullable = false)
     private boolean isActive;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "SolucionHabitacional_SituacionInmueble",
+            joinColumns = { @JoinColumn(name = "id_SolucionHabitacional") },
+            inverseJoinColumns = { @JoinColumn(name = "id_SituacionInmueble") }
+    )
+    private List<SituacionInmueble> situacionInmuebleList;
 
     public int getId_SolucionHabitacional() {
         return id_SolucionHabitacional;
@@ -47,5 +56,13 @@ public class SolucionHabitacional {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public List<SituacionInmueble> getSituacionInmuebleList() {
+        return situacionInmuebleList;
+    }
+
+    public void setSituacionInmuebleList(List<SituacionInmueble> situacionInmuebleList) {
+        this.situacionInmuebleList = situacionInmuebleList;
     }
 }

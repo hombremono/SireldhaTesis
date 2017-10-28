@@ -25,6 +25,7 @@ public class SituacionInmueble {
    @Column(name="isActive", nullable = false)
     private boolean isActive;
 
+
     public int getId_SituacionInmueble() {
         return id_SituacionInmueble;
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="adecwordpress_a@localhost" uuid="b6eb5abc-7d17-4de5-ada0-fa6767886991">
+    <data-source source="LOCAL" name="web3@localhost" uuid="a67062af-64df-41b5-9d40-2af9d5eed1a6">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost/adecwordpress_a</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/web3</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
@@ -15,11 +15,11 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="web3@localhost" uuid="a67062af-64df-41b5-9d40-2af9d5eed1a6">
+    <data-source source="LOCAL" name="BD DEPLOY" uuid="10dad0c0-5726-4ae6-bb5a-a50ecb5e7345">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/web3</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost/web3</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
