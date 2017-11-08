@@ -1,14 +1,10 @@
 package ar.com.iua.web.spring.services.Controllers;
 
-import ar.com.iua.modulo.business.Interfaces.ICapacidadConstructivaService;
-import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
+import ar.com.iua.modulo.business.Interfaces.*;
+import ar.com.iua.modulo.business.impl.SubsidioService;
 import ar.com.iua.modulo.business.model.PersonaCombos;
-import ar.com.iua.modulo.model.CapacidadConstructiva;
-import ar.com.iua.modulo.model.Direccion;
-import ar.com.iua.modulo.model.Telefono;
+import ar.com.iua.modulo.model.*;
 import ar.com.iua.modulo.model.exception.NotFoundException;
-import ar.com.iua.modulo.model.Persona;
-import ar.com.iua.modulo.business.Interfaces.IPersonaService;
 import ar.com.iua.web.spring.services.Constantes;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
@@ -34,6 +30,10 @@ public class PersonaController extends GenericController {
     private ITelefonoService telefonoService;
     @Autowired
     private ICapacidadConstructivaService capacidadConstructivaService;
+    @Autowired
+    private ISubsidioService subsidioService;
+    @Autowired
+    private ISituacionesEspecialesService situacionesEspecialesService;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException{
@@ -51,7 +51,13 @@ public class PersonaController extends GenericController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Persona persona) throws IOException {
         Telefono telefono = persona.getTelefono();
+
         try {
+            Subsidio subsidio = persona.getSubsidio() != null ? subsidioService.saveOrUpdate(persona.getSubsidio()) : null;
+            SituacionesEspeciales situacionesEspeciales = persona.getSituacionesEspeciales() != null ?
+                  situacionesEspecialesService.saveOrUpdate(persona.getSituacionesEspeciales()) : null;
+            persona.setSubsidio(subsidio);
+            persona.setSituacionesEspeciales(situacionesEspeciales);
             List<Persona> listaPersonas  = personaService.getByDni(persona.getNroDocumento());
             if (!listaPersonas.isEmpty() && persona.getId() <= 0){
                 return new ResponseEntity<Object>(new SimpleResponse(-1, "La persona con el nro de " +
@@ -65,11 +71,8 @@ public class PersonaController extends GenericController {
                 persona.setTelefono(null);
             }
             Persona response = personaService.saveOrUpdate(persona);
-
-
-
             List<CapacidadConstructiva> capacidadesContructivas = persona.getCapacidadesConstructivas();
-            if(!capacidadesContructivas.isEmpty()){
+            if(capacidadesContructivas !=null && !capacidadesContructivas.isEmpty()){
                 List<CapacidadConstructiva> nuevaListaCC = new ArrayList<CapacidadConstructiva>();
                 for (CapacidadConstructiva capacidadConstructiva:capacidadesContructivas){
                     capacidadConstructiva.setPersona(response);
@@ -77,6 +80,7 @@ public class PersonaController extends GenericController {
                 }
                 persona.setCapacidadesConstructivas(nuevaListaCC);
             }
+
             return new ResponseEntity<Object>(response, HttpStatus.CREATED);
         }catch (Exception e){
             LOG.error(e.getMessage(), e);
@@ -87,7 +91,14 @@ public class PersonaController extends GenericController {
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity<Object> update (@RequestBody Persona persona) throws IOException {
         Telefono telefono = persona.getTelefono();
+
         try {
+            Persona personaActual = personaService.load(persona.getId_Persona(), false);
+            Subsidio subsidio = persona.getSubsidio() != null ? subsidioService.saveOrUpdate(persona.getSubsidio()) : personaActual.getSubsidio();
+            SituacionesEspeciales situacionesEspeciales = persona.getSituacionesEspeciales() != null ?
+                    situacionesEspecialesService.saveOrUpdate(persona.getSituacionesEspeciales()) : personaActual.getSituacionesEspeciales();
+            persona.setSubsidio(subsidio);
+            persona.setSituacionesEspeciales(situacionesEspeciales);
             if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
                 telefono.setActive(true);
                 persona.setTelefono(telefonoService.saveOrUpdate(telefono));

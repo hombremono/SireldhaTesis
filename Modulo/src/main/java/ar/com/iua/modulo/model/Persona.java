@@ -110,6 +110,17 @@ public class Persona implements IModel {
     @Column(name="isActive", nullable = false)
     private boolean isActive;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private Subsidio subsidio;
+
+    @Column(name="adjudicatarioPlanEstatal")
+    private boolean adjudicatarioPlanEstatal;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private SituacionesEspeciales situacionesEspeciales;
+
+
+
 
     public RolFamiliar getRolFamiliar() {
         return rolFamiliar;
@@ -314,5 +325,29 @@ public class Persona implements IModel {
 
     public void setDiscapacidad(Discapacidad discapacidad) {
         this.discapacidad = discapacidad;
+    }
+
+    public Subsidio getSubsidio() {
+        return subsidio;
+    }
+
+    public void setSubsidio(Subsidio subsidio) {
+        this.subsidio = subsidio;
+    }
+
+    public boolean isAdjudicatarioPlanEstatal() {
+        return adjudicatarioPlanEstatal;
+    }
+
+    public void setAdjudicatarioPlanEstatal(boolean adjudicatarioPlanEstatal) {
+        this.adjudicatarioPlanEstatal = adjudicatarioPlanEstatal;
+    }
+
+    public SituacionesEspeciales getSituacionesEspeciales() {
+        return situacionesEspeciales;
+    }
+
+    public void setSituacionesEspeciales(SituacionesEspeciales situacionesEspeciales) {
+        this.situacionesEspeciales = situacionesEspeciales;
     }
 }

@@ -35,13 +35,16 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
     private ITipoDocumentoDAO tipoDocumentoDAO;
     private ILocalidadDAO localidadDAO;
     private IRolFamiliarDAO rolFamiliarDAO;
+    private ISubsidioDAO subsidioDAO;
+    private ISituacionesEspecialesDAO situacionesEspecialesDAO;
 
 
 
     public PersonaService(IPersonaDAO personaDao, ITipoCapacidadConstructivaDAO capacidadConstructivaDAO,
                           IEstadoCivilDAO estadoCivilDAO, IEstudioDAO estudioDAO, INacionalidadDAO nacionalidadDAO,
                           IProfesionDAO profesionDAO, ISexoDAO sexoDAO, ISituacionLaboralDAO situacionLaboralDAO,
-                          ITipoDocumentoDAO tipoDocumentoDAO, ILocalidadDAO localidadDAO, IRolFamiliarDAO rolFamiliarDAO) {
+                          ITipoDocumentoDAO tipoDocumentoDAO, ILocalidadDAO localidadDAO, IRolFamiliarDAO rolFamiliarDAO,
+                          ISubsidioDAO subsidioDAO, ISituacionesEspecialesDAO situacionesEspecialesDAO) {
         super(personaDao);
         this.personaDao = personaDao;
         this.capacidadConstructivaDAO = capacidadConstructivaDAO;
@@ -54,6 +57,8 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
         this.tipoDocumentoDAO = tipoDocumentoDAO;
         this.localidadDAO = localidadDAO;
         this.rolFamiliarDAO = rolFamiliarDAO;
+        this.subsidioDAO = subsidioDAO;
+        this.situacionesEspecialesDAO = situacionesEspecialesDAO;
     }
 
     @Override
@@ -87,9 +92,11 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
     public PersonaCombos loadCombos() throws ServiceException {
         try {
             PersonaCombos combos =
-                    new PersonaCombos(tipoDocumentoDAO.list(),sexoDAO.list(),estadoCivilDAO.list(),
-                            nacionalidadDAO.list(),estudioDAO.list(),profesionDAO.list(),
-                            capacidadConstructivaDAO.list(),situacionLaboralDAO.list(), localidadDAO.list(),rolFamiliarDAO.list());
+                    new PersonaCombos(tipoDocumentoDAO.list(),
+                            sexoDAO.list(),estadoCivilDAO.list(),
+                            nacionalidadDAO.list(),estudioDAO.list(),
+                            profesionDAO.list(),capacidadConstructivaDAO.list(),
+                            situacionLaboralDAO.list(),localidadDAO.list(),rolFamiliarDAO.list());
             return combos;
         } catch (PersistenceException e){
             LOG.error(e.getMessage(),e);

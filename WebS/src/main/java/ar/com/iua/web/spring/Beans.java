@@ -174,15 +174,36 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IServicioAguaDAO servicioAguaDAO (final SessionFactory sessionFactory) { return new ServicioAguaDAO(sessionFactory);}	@Bean
+	public IServicioAguaDAO servicioAguaDAO (final SessionFactory sessionFactory)
+	{ return new ServicioAguaDAO(sessionFactory);}
 
+	@Bean
 	@Autowired
-	public ICocinaDAO cocinaDAO (final SessionFactory sessionFactory) { return new CocinaDAO(sessionFactory);}	@Bean
+	public ICocinaDAO cocinaDAO (final SessionFactory sessionFactory) { return new CocinaDAO(sessionFactory);}
 
+	@Bean
 	@Autowired
 	public IPoseeBanoDAO poseeBanoDAO (final SessionFactory sessionFactory) { return new PoseeBanoDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public ISubsidioDAO subsidioDAO (final SessionFactory sessionFactory) { return new SubsidioDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public ISituacionesEspecialesDAO situacionesEspecialesDAO (final SessionFactory sessionFactory)
+	{ return new SituacionesEspecialesDAO(sessionFactory);}
+
 	//---------------------------------------------------Services-------------------------------------------------------
+
+	@Bean
+	@Autowired
+	public ISubsidioService subsidioService(final ISubsidioDAO subsidioDAO) { return new SubsidioService(subsidioDAO);}
+
+	@Bean
+	@Autowired
+	public ISituacionesEspecialesService situacionesEspecialesService(final ISituacionesEspecialesDAO situacionesEspecialesDAO)
+	{ return new SituacionesEspecialesService(situacionesEspecialesDAO);}
 
 	@Bean
 	@Autowired
@@ -222,7 +243,9 @@ public class Beans {
 										   final ISituacionLaboralDAO situacionLaboralDAO,
 										   final ITipoDocumentoDAO tipoDocumentoDAO,
 										   final ILocalidadDAO localidadDAO,
-										   final IRolFamiliarDAO rolFamiliarDAO){
+										   final IRolFamiliarDAO rolFamiliarDAO,
+										   final ISubsidioDAO subsidioDAO,
+										   final ISituacionesEspecialesDAO situacionesEspecialesDAO){
 		return new PersonaService(
 				personaDao,
 				tipoCapacidadConstructivaDAO,
@@ -234,7 +257,9 @@ public class Beans {
 				situacionLaboralDAO,
 				tipoDocumentoDAO,
 				localidadDAO,
-				rolFamiliarDAO); }
+				rolFamiliarDAO,
+				subsidioDAO,
+				situacionesEspecialesDAO); }
 
 	@Bean
 	@Autowired
