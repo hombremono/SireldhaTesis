@@ -59,7 +59,17 @@ $scope.persona ={
         soldador:false,
         vidriero:false,
         opMaq:false
-    }
+    },
+    subsidio:{
+        nacional:false,
+        provincial:false,
+        municipal:false
+    },
+    combatienteMalvinas:false,
+    violenciaFamiliar:false,
+    sindicalista:false,
+    asocCivil:false
+
 };
 $scope.jefeDeFamilia={
     nombre:"",
@@ -119,7 +129,16 @@ $scope.jefeDeFamilia={
         soldador:false,
         vidriero:false,
         opMaq:false
-    }
+    },
+    subsidio:{
+        nacional:false,
+        provincial:false,
+        municipal:false
+    },
+    combatienteMalvinas:false,
+    violenciaFamiliar:false,
+    sindicalista:false,
+    asocCivil:false
 };
 //Inicilizacion de Combos
 $scope.tiposDni =[{
@@ -403,7 +422,7 @@ if($rootScope.idJefe){
       }
 
   });
-};
+}
 $scope.addjefeDeFamilia = function(){
     valid = ejecutarValidacionesJF();
     if(valid){
@@ -447,96 +466,99 @@ $scope.addjefeDeFamilia = function(){
 
         };
         personaService.add(jefeReq).then(function(resp){
-            $rootScope.idJefe =resp.data.id_Persona;
-
-
-            if(resp.data.situacionLaboral.id_DependenciaLaboral == 1)
+            if(resp.status == 409)
             {
+                showNotification(resp.data.message, 'danger');
+            }
+            else {
+                $rootScope.idJefe = resp.data.id_Persona;
 
-                var addressInput = document.getElementById('adress-jf').value;
-                var geocoder = new google.maps.Geocoder();
 
-                geocoder.geocode({address: addressInput}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var myResult = results[0].geometry.location; // reference LatLng value
-                        var num;
-                        var calle;
-                        if(isNaN(results[0].address_components[0].long_name)){
-                            var direccion = addressInput.substr(0,addressInput.indexOf(','));
-                            var partes = direccion.split(/[\s,]+/);
-                            var numero =partes [partes .length-1];
-                            num = Number(numero);
-                            calle =results[0].address_components[0].long_name;
+                if (resp.data.situacionLaboral.id_DependenciaLaboral == 1) {
 
-                        }else{
-                            num = Number(results[0].address_components[0].long_name);
-                            calle =results[0].address_components[1].long_name;
-                        }
-                        var lat =results[0].geometry.location.lat();
-                        var lng =results[0].geometry.location.lng();
-                        var telefonoTrabajo;
-                        if($scope.jefeDeFamilia.trabajoDependencia.telefono){
-                            telefonoTrabajo = {
-                                "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
-                                "celular": false,
-                                "active": true
-                            };
-                        }
-                        else{
-                            telefonoTrabajo=null;
-                        }
-                        var trabajoDependencia={
-                            "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
-                            "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
-                            "persona": {
-                                "id_Persona": $rootScope.idJefe
-                            },
-                            "telefono":telefonoTrabajo ,
-                            "direccion": {
-                                "calle": calle,
-                                "numero": num,
-                                "dpto": addressInput,
-                                "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
-                                "latitud": lat,
-                                "longitud": lng,
-                                "localidad": {
-                                    "id_Localidad": $scope.jefeDeFamilia.trabajoDependencia.idLocalidad,
-                                    "localidad": "",
+                    var addressInput = document.getElementById('adress-jf').value;
+                    var geocoder = new google.maps.Geocoder();
+
+                    geocoder.geocode({address: addressInput}, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            var myResult = results[0].geometry.location; // reference LatLng value
+                            var num;
+                            var calle;
+                            if (isNaN(results[0].address_components[0].long_name)) {
+                                var direccion = addressInput.substr(0, addressInput.indexOf(','));
+                                var partes = direccion.split(/[\s,]+/);
+                                var numero = partes [partes.length - 1];
+                                num = Number(numero);
+                                calle = results[0].address_components[0].long_name;
+
+                            } else {
+                                num = Number(results[0].address_components[0].long_name);
+                                calle = results[0].address_components[1].long_name;
+                            }
+                            var lat = results[0].geometry.location.lat();
+                            var lng = results[0].geometry.location.lng();
+                            var telefonoTrabajo;
+                            if ($scope.jefeDeFamilia.trabajoDependencia.telefono) {
+                                telefonoTrabajo = {
+                                    "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
+                                    "celular": false,
+                                    "active": true
+                                };
+                            }
+                            else {
+                                telefonoTrabajo = null;
+                            }
+                            var trabajoDependencia = {
+                                "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
+                                "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
+                                "persona": {
+                                    "id_Persona": $rootScope.idJefe
+                                },
+                                "telefono": telefonoTrabajo,
+                                "direccion": {
+                                    "calle": calle,
+                                    "numero": num,
+                                    "dpto": addressInput,
+                                    "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
+                                    "latitud": lat,
+                                    "longitud": lng,
+                                    "localidad": {
+                                        "id_Localidad": $scope.jefeDeFamilia.trabajoDependencia.idLocalidad,
+                                        "localidad": "",
+                                        "isActive": true
+                                    },
                                     "isActive": true
                                 },
-                                "isActive": true
-                            },
-                            "active": true
-                        };
-                        familiaService.addRelacionDep(trabajoDependencia).then(function(resp){
-                            $rootScope.idDependencia=resp.data.id_TrabajoDependencia;
-                            $location.path('/family');
-                        });
-                    }
-                    else{
-                        alert("Se ha producido un error inesperado con el servicio de Google Maps.");
-                    }
-                });
+                                "active": true
+                            };
+                            familiaService.addRelacionDep(trabajoDependencia).then(function (resp) {
+                                $rootScope.idDependencia = resp.data.id_TrabajoDependencia;
+                                $location.path('/family');
+                            });
+                        }
+                        else {
+                            alert("Se ha producido un error inesperado con el servicio de Google Maps.");
+                        }
+                    });
 
-            }
-            else if(resp.data.situacionLaboral.id_DependenciaLaboral == 2)
-            {
-                var trabajoAutonomo = {
-                    "persona": {
-                        "id_Persona": $rootScope.idJefe
-                    },
-                    "fechaInicioActividades": $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades,
-                    "active": true
-                };
-                familiaService.addAutonomo(trabajoAutonomo).then(function(resp){
-                    $rootScope.idAutonomo=resp.data.id_TrabajoAutonomo;
+                }
+                else if (resp.data.situacionLaboral.id_DependenciaLaboral == 2) {
+                    var trabajoAutonomo = {
+                        "persona": {
+                            "id_Persona": $rootScope.idJefe
+                        },
+                        "fechaInicioActividades": $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades,
+                        "active": true
+                    };
+                    familiaService.addAutonomo(trabajoAutonomo).then(function (resp) {
+                        $rootScope.idAutonomo = resp.data.id_TrabajoAutonomo;
+                        $location.path('/family');
+                    });
+
+                }
+                else {
                     $location.path('/family');
-                });
-
-            }
-            else
-            {
-                $location.path('/family');
+                }
             }
 
         },
@@ -598,37 +620,39 @@ $scope.editjefeDeFamilia = function() {
             $rootScope.idJefe = $scope.jefeDeFamilia.idEdicion;
         }
         personaService.update(jefeReqEdit).then(function(resp){
-                if(jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 1)
-                {
+            if(resp.status == 409)
+            {
+                showNotification(resp.data.message, 'danger');
+            }
+            else {
+                if (jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 1) {
                     var telefonoTrabajo;
-                    if($scope.jefeDeFamilia.trabajoDependencia.idTelefono!=0){
+                    if ($scope.jefeDeFamilia.trabajoDependencia.idTelefono != 0) {
                         telefonoTrabajo = {
-                            "id_Telefono":$scope.jefeDeFamilia.trabajoDependencia.idTelefono,
+                            "id_Telefono": $scope.jefeDeFamilia.trabajoDependencia.idTelefono,
                             "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
                             "celular": false,
                             "active": true
                         };
                     }
-                    else if($scope.jefeDeFamilia.trabajoDependencia.idTelefono==0 && $scope.jefeDeFamilia.trabajoDependencia.telefono)
-                    {
+                    else if ($scope.jefeDeFamilia.trabajoDependencia.idTelefono == 0 && $scope.jefeDeFamilia.trabajoDependencia.telefono) {
                         telefonoTrabajo = {
                             "numero": $scope.jefeDeFamilia.trabajoDependencia.telefono,
                             "celular": false,
                             "active": true
                         };
                     }
-                    else
-                    {
-                        telefonoTrabajo=null;
+                    else {
+                        telefonoTrabajo = null;
                     }
-                    var trabajoDependencia={
-                        "id_TrabajoDependencia":$rootScope.idDependencia,
+                    var trabajoDependencia = {
+                        "id_TrabajoDependencia": $rootScope.idDependencia,
                         "empresa": $scope.jefeDeFamilia.trabajoDependencia.empresa,
                         "fechaIngreso": $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso,
                         "persona": {
                             "id_Persona": $rootScope.idJefe
                         },
-                        "telefono":telefonoTrabajo ,
+                        "telefono": telefonoTrabajo,
                         "direccion": {
                             "id_Direccion": $scope.jefeDeFamilia.trabajoDependencia.direccion.idDireccion,
                             "calle": $scope.jefeDeFamilia.trabajoDependencia.direccion.calle,
@@ -646,500 +670,495 @@ $scope.editjefeDeFamilia = function() {
                         },
                         "active": true
                     };
-                    familiaService.updateRelacionDep(trabajoDependencia).then(function(resp){
-                        $scope.familia.integrantes.forEach(function (item,index){
-                            if(item.id_Persona == $rootScope.idJefe){
-                                $scope.familia.integrantes.splice(index,1);
+                    familiaService.updateRelacionDep(trabajoDependencia).then(function (resp) {
+                        $scope.familia.integrantes.forEach(function (item, index) {
+                            if (item.id_Persona == $rootScope.idJefe) {
+                                $scope.familia.integrantes.splice(index, 1);
                                 return false;
                             }
                         });
                         //todo Falta obtener el id de la relacion de dependencia.
-                        personaService.get($rootScope.idJefe).then(function(resp){
+                        personaService.get($rootScope.idJefe).then(function (resp) {
                             var jubiladoChk = false;
-                            if(resp.data.nroCarnetJubilacion)
-                            {
+                            if (resp.data.nroCarnetJubilacion) {
                                 jubiladoChk = true;
                             }
                             var integrante;
-                            if(resp.data.telefono){
-                                integrante ={
-                                    id_Persona:resp.data.id_Persona,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                            if (resp.data.telefono) {
+                                integrante = {
+                                    id_Persona: resp.data.id_Persona,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     idTelefono: resp.data.telefono.id_Telefono,
                                     telefono: resp.data.telefono.numero,
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
                             else {
-                                integrante ={
-                                    id_Persona:resp.data.id_Persona,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                                integrante = {
+                                    id_Persona: resp.data.id_Persona,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     telefono: "",
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
-                            getCapCons(resp.data.capacidadesConstructivas,integrante);
+                            getCapCons(resp.data.capacidadesConstructivas, integrante);
                             $scope.familia.integrantes.push(integrante);
-                            $scope.editandoJF=false;
+                            $scope.editandoJF = false;
                         });
                     });
                 }
-                else if(jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 2)
-                {
+                else if (jefeReqEdit.situacionLaboral.id_DependenciaLaboral == 2) {
                     var trabajoAutonomo = {
                         "persona": {
                             "id_Persona": $rootScope.idJefe
                         },
-                        "id_TrabajoAutonomo":$rootScope.idAutonomo,
+                        "id_TrabajoAutonomo": $rootScope.idAutonomo,
                         "fechaInicioActividades": $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades,
                         "active": true
                     };
-                    familiaService.updateAutonomo(trabajoAutonomo).then(function(resp){
-                        $scope.familia.integrantes.forEach(function (item,index){
-                            if(item.id_Persona == $rootScope.idJefe){
-                                $scope.familia.integrantes.splice(index,1);
+                    familiaService.updateAutonomo(trabajoAutonomo).then(function (resp) {
+                        $scope.familia.integrantes.forEach(function (item, index) {
+                            if (item.id_Persona == $rootScope.idJefe) {
+                                $scope.familia.integrantes.splice(index, 1);
                                 return false;
                             }
                         });
                         //todo falta obtener el id del trabajo autonomo
-                        personaService.get($rootScope.idJefe).then(function(resp){
+                        personaService.get($rootScope.idJefe).then(function (resp) {
                             var jubiladoChk = false;
-                            if(resp.data.nroCarnetJubilacion)
-                            {
+                            if (resp.data.nroCarnetJubilacion) {
                                 jubiladoChk = true;
                             }
                             var integrante;
-                            if(resp.data.telefono){
-                                integrante ={
-                                    id_Persona:resp.data.id_Persona,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                            if (resp.data.telefono) {
+                                integrante = {
+                                    id_Persona: resp.data.id_Persona,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     idTelefono: resp.data.telefono.id_Telefono,
                                     telefono: resp.data.telefono.numero,
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
                             else {
-                                integrante ={
-                                    id_Persona:resp.data.id_Persona,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                                integrante = {
+                                    id_Persona: resp.data.id_Persona,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     telefono: "",
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
-                            getCapCons(resp.data.capacidadesConstructivas,integrante);
+                            getCapCons(resp.data.capacidadesConstructivas, integrante);
                             $scope.familia.integrantes.push(integrante);
-                            $scope.editandoJF=false;
+                            $scope.editandoJF = false;
                         });
                     });
 
                 }
-                else{
-                    if($scope.jefeDeFamilia.busqueda)
-                    {
-                        $scope.resultadosBusqueda.forEach(function (item,index){
-                            if(item.id_Persona == $scope.jefeDeFamilia.idEdicion){
-                                $scope.resultadosBusqueda.splice(index,1);
+                else {
+                    if ($scope.jefeDeFamilia.busqueda) {
+                        $scope.resultadosBusqueda.forEach(function (item, index) {
+                            if (item.id_Persona == $scope.jefeDeFamilia.idEdicion) {
+                                $scope.resultadosBusqueda.splice(index, 1);
                                 return false;
                             }
                         });
-                        personaService.get($scope.jefeDeFamilia.idEdicion).then(function(resp){
+                        personaService.get($scope.jefeDeFamilia.idEdicion).then(function (resp) {
                             var jubiladoChk = false;
-                            if(resp.data.nroCarnetJubilacion)
-                            {
+                            if (resp.data.nroCarnetJubilacion) {
                                 jubiladoChk = true;
                             }
                             var integrante;
-                            if(resp.data.telefono){
-                                integrante ={
-                                    id_Persona:resp.data.id_Persona,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                            if (resp.data.telefono) {
+                                integrante = {
+                                    id_Persona: resp.data.id_Persona,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     idTelefono: resp.data.telefono.id_Telefono,
                                     telefono: resp.data.telefono.numero,
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    trabajoDependencia:{
-                                        empresa:"",
-                                        fechaIngreso:"",
-                                        idLocalidad:"",
-                                        barrio:"",
-                                        direccion:{
-                                            idDireccion:0,
-                                            calle:"",
-                                            numero:"",
-                                            pisoDepto:""
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    trabajoDependencia: {
+                                        empresa: "",
+                                        fechaIngreso: "",
+                                        idLocalidad: "",
+                                        barrio: "",
+                                        direccion: {
+                                            idDireccion: 0,
+                                            calle: "",
+                                            numero: "",
+                                            pisoDepto: ""
                                         },
-                                        idTelefono:0,
-                                        telefono:"",
-                                        celular:false
+                                        idTelefono: 0,
+                                        telefono: "",
+                                        celular: false
                                     },
-                                    trabajoAutonomo:{
-                                        inicioActividades:""
+                                    trabajoAutonomo: {
+                                        inicioActividades: ""
                                     },
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
                             else {
-                                integrante ={
-                                    id_Persona:resp.data.id_Persona,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                                integrante = {
+                                    id_Persona: resp.data.id_Persona,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     telefono: "",
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    trabajoDependencia:{
-                                        empresa:"",
-                                        fechaIngreso:"",
-                                        idLocalidad:"",
-                                        barrio:"",
-                                        direccion:{
-                                            idDireccion:0,
-                                            calle:"",
-                                            numero:"",
-                                            pisoDepto:""
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    trabajoDependencia: {
+                                        empresa: "",
+                                        fechaIngreso: "",
+                                        idLocalidad: "",
+                                        barrio: "",
+                                        direccion: {
+                                            idDireccion: 0,
+                                            calle: "",
+                                            numero: "",
+                                            pisoDepto: ""
                                         },
-                                        idTelefono:0,
-                                        telefono:"",
-                                        celular:false
+                                        idTelefono: 0,
+                                        telefono: "",
+                                        celular: false
                                     },
-                                    trabajoAutonomo:{
-                                        inicioActividades:""
+                                    trabajoAutonomo: {
+                                        inicioActividades: ""
                                     },
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
-                            getCapCons(resp.data.capacidadesConstructivas,integrante);
+                            getCapCons(resp.data.capacidadesConstructivas, integrante);
                             //todo falta logica de trabajos. Resolver problema con los id antes.
                             $scope.resultadosBusqueda.push(integrante);
-                            $scope.editandoJF=false;
+                            $scope.editandoJF = false;
                         });
                     }
-                    else{
-                        $scope.familia.integrantes.forEach(function (item,index){
-                            if(item.id_Persona == $rootScope.idJefe){
-                                $scope.familia.integrantes.splice(index,1);
+                    else {
+                        $scope.familia.integrantes.forEach(function (item, index) {
+                            if (item.id_Persona == $rootScope.idJefe) {
+                                $scope.familia.integrantes.splice(index, 1);
                                 return false;
                             }
                         });
-                        personaService.get($rootScope.idJefe).then(function(resp){
+                        personaService.get($rootScope.idJefe).then(function (resp) {
                             var jubiladoChk = false;
-                            if(resp.data.nroCarnetJubilacion)
-                            {
+                            if (resp.data.nroCarnetJubilacion) {
                                 jubiladoChk = true;
                             }
                             var integrante;
-                            if(resp.data.telefono){
-                                integrante ={
-                                    id_Persona:resp.$rootScope.idJefe,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                            if (resp.data.telefono) {
+                                integrante = {
+                                    id_Persona: $rootScope.idJefe,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     idTelefono: resp.data.telefono.id_Telefono,
                                     telefono: resp.data.telefono.numero,
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    trabajoDependencia:{
-                                        empresa:"",
-                                        fechaIngreso:"",
-                                        idLocalidad:"",
-                                        barrio:"",
-                                        direccion:{
-                                            idDireccion:0,
-                                            calle:"",
-                                            numero:"",
-                                            pisoDepto:""
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    trabajoDependencia: {
+                                        empresa: "",
+                                        fechaIngreso: "",
+                                        idLocalidad: "",
+                                        barrio: "",
+                                        direccion: {
+                                            idDireccion: 0,
+                                            calle: "",
+                                            numero: "",
+                                            pisoDepto: ""
                                         },
-                                        idTelefono:0,
-                                        telefono:"",
-                                        celular:false
+                                        idTelefono: 0,
+                                        telefono: "",
+                                        celular: false
                                     },
-                                    trabajoAutonomo:{
-                                        inicioActividades:""
+                                    trabajoAutonomo: {
+                                        inicioActividades: ""
                                     },
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
                             else {
-                                integrante ={
-                                    id_Persona:resp.$rootScope.idJefe,
-                                    nombre:resp.data.nombre,
-                                    apellido:resp.data.apellido,
-                                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                                    DNI:resp.data.nroDocumento,
-                                    CUIL:resp.data.nroCuil,
-                                    nacimiento:resp.data.fechaNacimiento,
-                                    sexo:resp.data.sexo.id_Sexo,
-                                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                                    estudios:resp.data.estudios.id_Estudios,
-                                    profesion:resp.data.profesion.id_Profesion,
+                                integrante = {
+                                    id_Persona: $rootScope.idJefe,
+                                    nombre: resp.data.nombre,
+                                    apellido: resp.data.apellido,
+                                    tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                    DNI: resp.data.nroDocumento,
+                                    CUIL: resp.data.nroCuil,
+                                    nacimiento: resp.data.fechaNacimiento,
+                                    sexo: resp.data.sexo.id_Sexo,
+                                    estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                    nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                    estudios: resp.data.estudios.id_Estudios,
+                                    profesion: resp.data.profesion.id_Profesion,
 
-                                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                                    ingresoNeto:resp.data.ingresoNeto,
-                                    mail:resp.data.mail,
+                                    depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                    relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                    DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                    ingresoNeto: resp.data.ingresoNeto,
+                                    mail: resp.data.mail,
                                     telefono: "",
-                                    jubilado:jubiladoChk,
-                                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                                    discapacidad:false,
-                                    editando:false,
-                                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica:resp.data.enfermedadCronica,
-                                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                                    trabajoDependencia:{
-                                        empresa:"",
-                                        fechaIngreso:"",
-                                        idLocalidad:"",
-                                        barrio:"",
-                                        direccion:{
-                                            idDireccion:0,
-                                            calle:"",
-                                            numero:"",
-                                            pisoDepto:""
+                                    jubilado: jubiladoChk,
+                                    carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                    discapacidad: false,
+                                    editando: false,
+                                    discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                    trabajoDependencia: {
+                                        empresa: "",
+                                        fechaIngreso: "",
+                                        idLocalidad: "",
+                                        barrio: "",
+                                        direccion: {
+                                            idDireccion: 0,
+                                            calle: "",
+                                            numero: "",
+                                            pisoDepto: ""
                                         },
-                                        idTelefono:0,
-                                        telefono:"",
-                                        celular:false
+                                        idTelefono: 0,
+                                        telefono: "",
+                                        celular: false
                                     },
-                                    trabajoAutonomo:{
-                                        inicioActividades:""
+                                    trabajoAutonomo: {
+                                        inicioActividades: ""
                                     },
-                                    capacidadesConstructivas:{
-                                        pintor:false,
-                                        pocero:false,
-                                        techador:false,
-                                        ceramista:false,
-                                        yesero:false,
-                                        soldador:false,
-                                        vidriero:false,
-                                        opMaq:false
+                                    capacidadesConstructivas: {
+                                        pintor: false,
+                                        pocero: false,
+                                        techador: false,
+                                        ceramista: false,
+                                        yesero: false,
+                                        soldador: false,
+                                        vidriero: false,
+                                        opMaq: false
                                     }
                                 };
                             }
-                            getCapCons(resp.data.capacidadesConstructivas,integrante);
+                            getCapCons(resp.data.capacidadesConstructivas, integrante);
                             $scope.familia.integrantes.push(integrante);
-                            $scope.editandoJF=false;
+                            $scope.editandoJF = false;
                         });
 
                     }
 
 
                 }
+            }
             },
             function(respErr){
                 console.log(respErr);
@@ -1200,264 +1219,225 @@ $scope.addPersona = function() {
 
 
             personaService.update(reqEdicion).then(function (resp) {
-                //FUNCIONA.
-                /*var integrante ={
-                    id_Persona:resp.data.id_Persona,
-                    nombre:resp.data.nombre,
-                    apellido:resp.data.apellido,
-                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                    DNI:resp.data.nroDocumento,
-                    CUIL:resp.data.nroCuil,
-                    nacimiento:resp.data.fechaNacimiento,
-                    sexo:resp.data.sexo.id_Sexo,
-                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                    estudios:resp.data.estudios.id_Estudios,
-                    profesion:resp.data.profesion.id_Profesion,
-                    capConstructiva:0,
-                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                    relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                    DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                    ingresoNeto:resp.data.ingresoNeto,
-                    mail:resp.data.mail,
-                    idTelefono:resp.data.telefono.id_Telefono,
-                    telefono:resp.data.telefono.numero,
-                    jubilado:jubiladoChk,
-                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                    discapacidad:false,
-                    editando:false,
-                    trabajoDependencia:{
-                        empresa:"",
-                        fechaIngreso:"",
-                        idLocalidad:"",
-                        barrio:"",
-                        direccion:{
-                            calle:"",
-                            numero:"",
-                            pisoDepto:""
-                        },
-                        telefono:"",
-                        celular:false
-                    },
-                    trabajoAutonomo:{
-                        inicioActividades:""
-                    }
-                };*/
-                if($scope.persona.busqueda){
-                    $scope.resultadosBusqueda.forEach(function (item,index){
-                        if(item.id_Persona == reqEdicion.id_Persona){
-                            $scope.resultadosBusqueda.splice(index,1);
-                            return false;
-                        }
-                    });
-                    personaService.get(reqEdicion.id_Persona).then(function(resp){
-                        var jubiladoChk = false;
-                        if(resp.data.nroCarnetJubilacion)
-                        {
-                            jubiladoChk = true;
-                        }
-                        var telefonoInt;
-                        var idTelefonoInt;
-                        if(resp.data.telefono){
-                            telefonoInt = resp.data.telefono.numero;
-                            idTelefonoInt = resp.data.telefono.id_Telefono;
-                        }
-                        else {
-                            telefonoInt = "";
-                            idTelefonoInt = -1;
-                        }
-                        var integrante ={
-                            id_Persona:resp.data.id_Persona,
-                            nombre:resp.data.nombre,
-                            apellido:resp.data.apellido,
-                            tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                            DNI:resp.data.nroDocumento,
-                            CUIL:resp.data.nroCuil,
-                            nacimiento:resp.data.fechaNacimiento,
-                            sexo:resp.data.sexo.id_Sexo,
-                            estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                            nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                            estudios:resp.data.estudios.id_Estudios,
-                            profesion:resp.data.profesion.id_Profesion,
-
-                            depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                            relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                            DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                            ingresoNeto:resp.data.ingresoNeto,
-                            mail:resp.data.mail,
-                            telefono:telefonoInt,
-                            idTelefono:idTelefonoInt,
-                            jubilado:jubiladoChk,
-                            carnetJubilacion:resp.data.nroCarnetJubilacion,
-                            discapacidad:false,
-                            discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                            enfermedadCronica:resp.data.enfermedadCronica,
-                            enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                            editando:false,
-                            capacidadesConstructivas:{
-                                pintor:false,
-                                pocero:false,
-                                techador:false,
-                                ceramista:false,
-                                yesero:false,
-                                soldador:false,
-                                vidriero:false,
-                                opMaq:false
-                            }
-
-                        };
-                        getCapCons(resp.data.capacidadesConstructivas,integrante);
-                        $scope.resultadosBusqueda.push(integrante);
-                        $scope.persona ={
-                            id_Persona:0,
-                            nombre:"",
-                            apellido:"",
-                            tipoDni:0,
-                            DNI:"",
-                            CUIL:"",
-                            nacimiento:"",
-                            sexo:0,
-                            estadoCivil:0,
-                            nacionalidad:0,
-                            estudios:0,
-                            profesion:0,
-
-                            depLaboral:0,
-                            relacionJF:0,
-                            DescRelacionJF:"",
-                            ingresoNeto:"",
-                            mail:"",
-                            telefono:"",
-                            jubilado:"",
-                            carnetJubilacion:"",
-                            discapacidad:"",
-                            idEdicion:0,
-                            editando:false,
-                            idTelefono:0,
-                            discapacidadCombo:0,
-                            enfermedadCronica:false,
-                            enfermedadDescripcion:"",
-                            capacidadesConstructivas:{
-                                pintor:false,
-                                pocero:false,
-                                techador:false,
-                                ceramista:false,
-                                yesero:false,
-                                soldador:false,
-                                vidriero:false,
-                                opMaq:false
-                            }
-                        };
-                        $scope.agregando = false;
-                    });
+                if(resp.status == 409)
+                {
+                    showNotification(resp.data.message, 'danger');
                 }
-                else{
-                    $scope.familia.integrantes.forEach(function (item,index){
-                        if(item.id_Persona == reqEdicion.id_Persona){
-                            $scope.familia.integrantes.splice(index,1);
-                            return false;
-                        }
-                    });
-                    personaService.get(reqEdicion.id_Persona).then(function(resp){
-                        var jubiladoChk = false;
-                        if(resp.data.nroCarnetJubilacion)
-                        {
-                            jubiladoChk = true;
-                        }
-                        var telefonoInt;
-                        var idTelefonoInt;
-                        if(resp.data.telefono){
-                            telefonoInt = Number(resp.data.telefono.numero);
-                            idTelefonoInt = resp.data.telefono.id_Telefono;
-                        }
-                        else {
-                            telefonoInt = "";
-                            idTelefonoInt = 0;
-                        }
-                        var integrante ={
-                            id_Persona:resp.data.id_Persona,
-                            nombre:resp.data.nombre,
-                            apellido:resp.data.apellido,
-                            tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                            DNI:resp.data.nroDocumento,
-                            CUIL:resp.data.nroCuil,
-                            nacimiento:resp.data.fechaNacimiento,
-                            sexo:resp.data.sexo.id_Sexo,
-                            estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                            nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                            estudios:resp.data.estudios.id_Estudios,
-                            profesion:resp.data.profesion.id_Profesion,
-
-                            depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                            relacionJF:resp.data.rolFamiliar.id_RolFamiliar,
-                            DescRelacionJF:resp.data.rolFamiliar.rolFamiliar,
-                            ingresoNeto:resp.data.ingresoNeto,
-                            mail:resp.data.mail,
-                            telefono:telefonoInt,
-                            idTelefono:idTelefonoInt,
-                            jubilado:jubiladoChk,
-                            carnetJubilacion:resp.data.nroCarnetJubilacion,
-                            discapacidad:false,
-                            discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                            enfermedadCronica:resp.data.enfermedadCronica,
-                            enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                            editando:false,
-                            capacidadesConstructivas:{
-                                pintor:false,
-                                pocero:false,
-                                techador:false,
-                                ceramista:false,
-                                yesero:false,
-                                soldador:false,
-                                vidriero:false,
-                                opMaq:false
+                else {
+                    if ($scope.persona.busqueda) {
+                        $scope.resultadosBusqueda.forEach(function (item, index) {
+                            if (item.id_Persona == reqEdicion.id_Persona) {
+                                $scope.resultadosBusqueda.splice(index, 1);
+                                return false;
                             }
-                        };
-                        getCapCons(resp.data.capacidadesConstructivas,integrante);
-                        $scope.familia.integrantes.push(integrante);
-                        $scope.persona ={
-                            id_Persona:0,
-                            nombre:"",
-                            apellido:"",
-                            tipoDni:0,
-                            DNI:"",
-                            CUIL:"",
-                            nacimiento:"",
-                            sexo:0,
-                            estadoCivil:0,
-                            nacionalidad:0,
-                            estudios:0,
-                            profesion:0,
-
-                            depLaboral:0,
-                            relacionJF:0,
-                            DescRelacionJF:"",
-                            ingresoNeto:"",
-                            mail:"",
-                            telefono:"",
-                            jubilado:"",
-                            carnetJubilacion:"",
-                            discapacidad:"",
-                            idEdicion:0,
-                            editando:false,
-                            idTelefono:0,
-                            discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                            enfermedadCronica:resp.data.enfermedadCronica,
-                            enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                            capacidadesConstructivas:{
-                                pintor:false,
-                                pocero:false,
-                                techador:false,
-                                ceramista:false,
-                                yesero:false,
-                                soldador:false,
-                                vidriero:false,
-                                opMaq:false
+                        });
+                        personaService.get(reqEdicion.id_Persona).then(function (resp) {
+                            var jubiladoChk = false;
+                            if (resp.data.nroCarnetJubilacion) {
+                                jubiladoChk = true;
                             }
-                        };
-                        $scope.agregando = false;
-                    });
+                            var telefonoInt;
+                            var idTelefonoInt;
+                            if (resp.data.telefono) {
+                                telefonoInt = resp.data.telefono.numero;
+                                idTelefonoInt = resp.data.telefono.id_Telefono;
+                            }
+                            else {
+                                telefonoInt = "";
+                                idTelefonoInt = -1;
+                            }
+                            var integrante = {
+                                id_Persona: resp.data.id_Persona,
+                                nombre: resp.data.nombre,
+                                apellido: resp.data.apellido,
+                                tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                DNI: resp.data.nroDocumento,
+                                CUIL: resp.data.nroCuil,
+                                nacimiento: resp.data.fechaNacimiento,
+                                sexo: resp.data.sexo.id_Sexo,
+                                estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                estudios: resp.data.estudios.id_Estudios,
+                                profesion: resp.data.profesion.id_Profesion,
 
+                                depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                ingresoNeto: resp.data.ingresoNeto,
+                                mail: resp.data.mail,
+                                telefono: telefonoInt,
+                                idTelefono: idTelefonoInt,
+                                jubilado: jubiladoChk,
+                                carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                discapacidad: false,
+                                discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                enfermedadCronica: resp.data.enfermedadCronica,
+                                enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                editando: false,
+                                capacidadesConstructivas: {
+                                    pintor: false,
+                                    pocero: false,
+                                    techador: false,
+                                    ceramista: false,
+                                    yesero: false,
+                                    soldador: false,
+                                    vidriero: false,
+                                    opMaq: false
+                                }
+
+                            };
+                            getCapCons(resp.data.capacidadesConstructivas, integrante);
+                            $scope.resultadosBusqueda.push(integrante);
+                            $scope.persona = {
+                                id_Persona: 0,
+                                nombre: "",
+                                apellido: "",
+                                tipoDni: 0,
+                                DNI: "",
+                                CUIL: "",
+                                nacimiento: "",
+                                sexo: 0,
+                                estadoCivil: 0,
+                                nacionalidad: 0,
+                                estudios: 0,
+                                profesion: 0,
+
+                                depLaboral: 0,
+                                relacionJF: 0,
+                                DescRelacionJF: "",
+                                ingresoNeto: "",
+                                mail: "",
+                                telefono: "",
+                                jubilado: "",
+                                carnetJubilacion: "",
+                                discapacidad: "",
+                                idEdicion: 0,
+                                editando: false,
+                                idTelefono: 0,
+                                discapacidadCombo: 0,
+                                enfermedadCronica: false,
+                                enfermedadDescripcion: "",
+                                capacidadesConstructivas: {
+                                    pintor: false,
+                                    pocero: false,
+                                    techador: false,
+                                    ceramista: false,
+                                    yesero: false,
+                                    soldador: false,
+                                    vidriero: false,
+                                    opMaq: false
+                                }
+                            };
+                            $scope.agregando = false;
+                        });
+                    }
+                    else {
+                        $scope.familia.integrantes.forEach(function (item, index) {
+                            if (item.id_Persona == reqEdicion.id_Persona) {
+                                $scope.familia.integrantes.splice(index, 1);
+                                return false;
+                            }
+                        });
+                        personaService.get(reqEdicion.id_Persona).then(function (resp) {
+                            var jubiladoChk = false;
+                            if (resp.data.nroCarnetJubilacion) {
+                                jubiladoChk = true;
+                            }
+                            var telefonoInt;
+                            var idTelefonoInt;
+                            if (resp.data.telefono) {
+                                telefonoInt = Number(resp.data.telefono.numero);
+                                idTelefonoInt = resp.data.telefono.id_Telefono;
+                            }
+                            else {
+                                telefonoInt = "";
+                                idTelefonoInt = 0;
+                            }
+                            var integrante = {
+                                id_Persona: resp.data.id_Persona,
+                                nombre: resp.data.nombre,
+                                apellido: resp.data.apellido,
+                                tipoDni: resp.data.tipoDocumento.id_TipoDocumento,
+                                DNI: resp.data.nroDocumento,
+                                CUIL: resp.data.nroCuil,
+                                nacimiento: resp.data.fechaNacimiento,
+                                sexo: resp.data.sexo.id_Sexo,
+                                estadoCivil: resp.data.estadoCivil.id_EstadoCivil,
+                                nacionalidad: resp.data.nacionalidad.id_Nacionalidad,
+                                estudios: resp.data.estudios.id_Estudios,
+                                profesion: resp.data.profesion.id_Profesion,
+
+                                depLaboral: resp.data.situacionLaboral.id_DependenciaLaboral,
+                                relacionJF: resp.data.rolFamiliar.id_RolFamiliar,
+                                DescRelacionJF: resp.data.rolFamiliar.rolFamiliar,
+                                ingresoNeto: resp.data.ingresoNeto,
+                                mail: resp.data.mail,
+                                telefono: telefonoInt,
+                                idTelefono: idTelefonoInt,
+                                jubilado: jubiladoChk,
+                                carnetJubilacion: resp.data.nroCarnetJubilacion,
+                                discapacidad: false,
+                                discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                enfermedadCronica: resp.data.enfermedadCronica,
+                                enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                editando: false,
+                                capacidadesConstructivas: {
+                                    pintor: false,
+                                    pocero: false,
+                                    techador: false,
+                                    ceramista: false,
+                                    yesero: false,
+                                    soldador: false,
+                                    vidriero: false,
+                                    opMaq: false
+                                }
+                            };
+                            getCapCons(resp.data.capacidadesConstructivas, integrante);
+                            $scope.familia.integrantes.push(integrante);
+                            $scope.persona = {
+                                id_Persona: 0,
+                                nombre: "",
+                                apellido: "",
+                                tipoDni: 0,
+                                DNI: "",
+                                CUIL: "",
+                                nacimiento: "",
+                                sexo: 0,
+                                estadoCivil: 0,
+                                nacionalidad: 0,
+                                estudios: 0,
+                                profesion: 0,
+
+                                depLaboral: 0,
+                                relacionJF: 0,
+                                DescRelacionJF: "",
+                                ingresoNeto: "",
+                                mail: "",
+                                telefono: "",
+                                jubilado: "",
+                                carnetJubilacion: "",
+                                discapacidad: "",
+                                idEdicion: 0,
+                                editando: false,
+                                idTelefono: 0,
+                                discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
+                                enfermedadCronica: resp.data.enfermedadCronica,
+                                enfermedadDescripcion: resp.data.descripcionEnfermedad,
+                                capacidadesConstructivas: {
+                                    pintor: false,
+                                    pocero: false,
+                                    techador: false,
+                                    ceramista: false,
+                                    yesero: false,
+                                    soldador: false,
+                                    vidriero: false,
+                                    opMaq: false
+                                }
+                            };
+                            $scope.agregando = false;
+                        });
+
+                    }
                 }
 
 
@@ -1506,111 +1486,70 @@ $scope.addPersona = function() {
                 "capacidadesConstructivas":capConst
             };
             personaService.add(reqPersona).then(function(resp) {
-
-                var jubiladoChk = false;
-                if(resp.data.nroCarnetJubilacion)
+                if(resp.status == 409)
                 {
-                    jubiladoChk = true;
+                    showNotification(resp.data.message, 'danger');
                 }
-                var telefonoInt;
-                var idTelefonoInt;
-                if(resp.data.telefono){
-                    telefonoInt = Number(resp.data.telefono.numero);
-                    idTelefonoInt = resp.data.telefono.id_Telefono;
-                }
-                else {
-                    telefonoInt = "";
-                    idTelefonoInt = 0;
-                }
-                var integrante ={
-                    id_Persona:resp.data.id_Persona,
-                    nombre:resp.data.nombre,
-                    apellido:resp.data.apellido,
-                    tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
-                    DNI:resp.data.nroDocumento,
-                    CUIL:resp.data.nroCuil,
-                    nacimiento:resp.data.fechaNacimiento,
-                    sexo:resp.data.sexo.id_Sexo,
-                    estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
-                    nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
-                    estudios:resp.data.estudios.id_Estudios,
-                    profesion:resp.data.profesion.id_Profesion,
-
-                    depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
-                    relacionJF:"",
-                    DescRelacionJF:"",
-                    ingresoNeto:resp.data.ingresoNeto,
-                    mail:resp.data.mail,
-                    idTelefono:idTelefonoInt,
-                    telefono:telefonoInt,
-                    jubilado:jubiladoChk,
-                    carnetJubilacion:resp.data.nroCarnetJubilacion,
-                    discapacidad:false,
-                    editando:false,
-                    discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-                    enfermedadCronica:resp.data.enfermedadCronica,
-                    enfermedadDescripcion:resp.data.descripcionEnfermedad,
-                    trabajoDependencia:{
-                        empresa:"",
-                        fechaIngreso:"",
-                        idLocalidad:"",
-                        barrio:"",
-                        direccion:{
-                            calle:"",
-                            numero:"",
-                            pisoDepto:""
-                        },
-                        telefono:"",
-                        celular:false
-                    },
-                    trabajoAutonomo:{
-                        inicioActividades:""
-                    },
-                    capacidadesConstructivas:{
-                        pintor:false,
-                        pocero:false,
-                        techador:false,
-                        ceramista:false,
-                        yesero:false,
-                        soldador:false,
-                        vidriero:false,
-                        opMaq:false
+                else{
+                    var jubiladoChk = false;
+                    if(resp.data.nroCarnetJubilacion)
+                    {
+                        jubiladoChk = true;
                     }
-                };
-                personaService.get(integrante.id_Persona).then(function(resp){
-                   integrante.relacionJF=resp.data.rolFamiliar.id_RolFamiliar;
-                    integrante.DescRelacionJF=resp.data.rolFamiliar.rolFamiliar;
-                    getCapCons(resp.data.capacidadesConstructivas,integrante);
-                    $scope.familia.integrantes.push(integrante);
-                    $scope.persona ={
-                        id_Persona:0,
-                        nombre:"",
-                        apellido:"",
-                        tipoDni:0,
-                        DNI:"",
-                        CUIL:"",
-                        nacimiento:"",
-                        sexo:0,
-                        estadoCivil:0,
-                        nacionalidad:0,
-                        estudios:0,
-                        profesion:0,
+                    var telefonoInt;
+                    var idTelefonoInt;
+                    if(resp.data.telefono){
+                        telefonoInt = Number(resp.data.telefono.numero);
+                        idTelefonoInt = resp.data.telefono.id_Telefono;
+                    }
+                    else {
+                        telefonoInt = "";
+                        idTelefonoInt = 0;
+                    }
+                    var integrante ={
+                        id_Persona:resp.data.id_Persona,
+                        nombre:resp.data.nombre,
+                        apellido:resp.data.apellido,
+                        tipoDni:resp.data.tipoDocumento.id_TipoDocumento,
+                        DNI:resp.data.nroDocumento,
+                        CUIL:resp.data.nroCuil,
+                        nacimiento:resp.data.fechaNacimiento,
+                        sexo:resp.data.sexo.id_Sexo,
+                        estadoCivil:resp.data.estadoCivil.id_EstadoCivil,
+                        nacionalidad:resp.data.nacionalidad.id_Nacionalidad,
+                        estudios:resp.data.estudios.id_Estudios,
+                        profesion:resp.data.profesion.id_Profesion,
 
-                        depLaboral:0,
-                        relacionJF:0,
+                        depLaboral:resp.data.situacionLaboral.id_DependenciaLaboral,
+                        relacionJF:"",
                         DescRelacionJF:"",
-                        ingresoNeto:"",
-                        mail:"",
-                        telefono:"",
-                        jubilado:"",
-                        carnetJubilacion:"",
-                        discapacidad:"",
-                        idEdicion:0,
+                        ingresoNeto:resp.data.ingresoNeto,
+                        mail:resp.data.mail,
+                        idTelefono:idTelefonoInt,
+                        telefono:telefonoInt,
+                        jubilado:jubiladoChk,
+                        carnetJubilacion:resp.data.nroCarnetJubilacion,
+                        discapacidad:false,
                         editando:false,
-                        idTelefono:0,
-                        discapacidadCombo:0,
-                        enfermedadCronica:false,
-                        enfermedadDescripcion:"",
+                        discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
+                        enfermedadCronica:resp.data.enfermedadCronica,
+                        enfermedadDescripcion:resp.data.descripcionEnfermedad,
+                        trabajoDependencia:{
+                            empresa:"",
+                            fechaIngreso:"",
+                            idLocalidad:"",
+                            barrio:"",
+                            direccion:{
+                                calle:"",
+                                numero:"",
+                                pisoDepto:""
+                            },
+                            telefono:"",
+                            celular:false
+                        },
+                        trabajoAutonomo:{
+                            inicioActividades:""
+                        },
                         capacidadesConstructivas:{
                             pintor:false,
                             pocero:false,
@@ -1622,11 +1561,60 @@ $scope.addPersona = function() {
                             opMaq:false
                         }
                     };
-                    $scope.agregando = false;
-                });
+                    personaService.get(integrante.id_Persona).then(function(resp){
+                        integrante.relacionJF=resp.data.rolFamiliar.id_RolFamiliar;
+                        integrante.DescRelacionJF=resp.data.rolFamiliar.rolFamiliar;
+                        getCapCons(resp.data.capacidadesConstructivas,integrante);
+                        $scope.familia.integrantes.push(integrante);
+                        $scope.persona ={
+                            id_Persona:0,
+                            nombre:"",
+                            apellido:"",
+                            tipoDni:0,
+                            DNI:"",
+                            CUIL:"",
+                            nacimiento:"",
+                            sexo:0,
+                            estadoCivil:0,
+                            nacionalidad:0,
+                            estudios:0,
+                            profesion:0,
+
+                            depLaboral:0,
+                            relacionJF:0,
+                            DescRelacionJF:"",
+                            ingresoNeto:"",
+                            mail:"",
+                            telefono:"",
+                            jubilado:"",
+                            carnetJubilacion:"",
+                            discapacidad:"",
+                            idEdicion:0,
+                            editando:false,
+                            idTelefono:0,
+                            discapacidadCombo:0,
+                            enfermedadCronica:false,
+                            enfermedadDescripcion:"",
+                            capacidadesConstructivas:{
+                                pintor:false,
+                                pocero:false,
+                                techador:false,
+                                ceramista:false,
+                                yesero:false,
+                                soldador:false,
+                                vidriero:false,
+                                opMaq:false
+                            }
+                        };
+                        $scope.agregando = false;
+                    });
+
+
+                }
 
 
             }, function(respErr) {
+
                 console.log(respErr);
             });
         }
@@ -1948,7 +1936,7 @@ $scope.buscarPersona = function() {
 };
 $scope.paginaInicial = function () {
     $location.path('/');
-}
+};
 var ejecutarValidacionesJF = function(){
     var result = true;
     if($scope.jefeDeFamilia.nombre == "")
@@ -2137,36 +2125,30 @@ var resetPersona = function () {
 var mapearCapCons = function(entidad){
     var capConstructivas=[];
     var pintor ={
-        "id_CapacidadConstructiva": 1,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 1
         },
         "active": true
     };
     var pocero ={
-
-        "id_CapacidadConstructiva": 2,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 2
         },
         "active": true
     };
     var ceramista={
-        "id_CapacidadConstructiva": 3,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 3
         },
         "active": true
     };
     var techador= {
-        "id_CapacidadConstructiva": 4,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 4
         },
         "active": true
     };
     var yesero ={
-        "id_CapacidadConstructiva": 5,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 5
         },
@@ -2180,14 +2162,12 @@ var mapearCapCons = function(entidad){
         "active": true
     };
     var opMaq = {
-        "id_CapacidadConstructiva": 7,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 7
         },
         "active": true
     };
     var vidriero = {
-        "id_CapacidadConstructiva": 8,
         "tipoCapacidadConstructiva": {
             "id_TipoCapacidadConstructiva": 8
         },

@@ -56,11 +56,11 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         },
         {
             id_Estado:1,
-            Descripcion:"Posee Inmueble"
+            Descripcion:"Posee inmueble"
         },
         {
             id_Estado:2,
-            Descripcion:"No Posee Inmueble"
+            Descripcion:"No posee inmueble"
         }
     ];
     $scope.NoPosee =[
@@ -82,19 +82,19 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         },
         {
             id_NoPosee:4,
-            descripcion:"Prestamo - Comodato del Estado"
+            descripcion:"Prestamo - comodato del estado"
         },
         {
             id_NoPosee:5,
-            descripcion:"Prestamo - Comodato por Trabajo"
+            descripcion:"Prestamo - comodato por trabajo"
         },
         {
             id_NoPosee:6,
-            descripcion:"Prestamo - Comodato por parte de un Pariente"
+            descripcion:"Prestamo - comodato por parte de un pariente"
         },
         {
             id_NoPosee:7,
-            descripcion:"No posee Inmueble"
+            descripcion:"Situación de calle"
         }
     ];
 
@@ -459,11 +459,13 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                             }
                         };
                         inmuebleService.addCareceInmueble(reqCarece).then(function(resp){
-                            $scope.datosOK = true;
+                            solicitudTerminada();
+
                         });
                     }
                 }
             }
+
         };
         var ejecutarValidaciones = function(){
             var result = true;
