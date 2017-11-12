@@ -303,13 +303,34 @@
             <select class="form-control input-md" id="selectDiscapacidadP" ng-model="persona.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkEnfermedadP" ng-click="persona.enfermedad = !persona.enfermedad"/>
-            <label for="chkEnfermedadP">La persona sufre una enfermedad cronica.</label>
+            <input type="checkbox" name="fieldset-5"  id="chkPlanEstatal" ng-model="persona.adjudicatarioPlanEstatal"/>
+            <label for="chkPlanEstatal">¿Ha sido adjudicatario de viviendas u operatorias financiadas por el estado? </label>
         </div>
-        <div id="personaEnferma" ng-show="persona.enfermedad">
+        <h5>Existencia de situaciones especiales</h5>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5"  id="chkComMalvinas" ng-model="persona.situacionesEspeciales.excombatiente"/>
+            <label for="chkComMalvinas">Excombatiente de Malvinas</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5"  id="chkViolencia" ng-model="persona.situacionesEspeciales.victimaViolencia"/>
+            <label for="chkViolencia">Víctima de violencia de género y/o violencia familiar</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5"  id="chkSindicalista" ng-model="persona.situacionesEspeciales.asociacionGremio"/>
+            <label for="chkSindicalista">Asociación a sindicatos y/o gremios</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5"  id="chkAsocCivil" ng-model="persona.situacionesEspeciales.asociacionEntidadPublica"/>
+            <label for="chkAsocCivil">Asociación a entidades de bien público (Ej. Bomberos, Policía)</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="persona.situacionesEspeciales.enfermedadCronica"/>
+            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
+        </div>
+        <div id="personaEnferma" ng-show="persona.situacionesEspeciales.enfermedadCronica">
             <div class="form-group" style="margin-left:30px;">
-                <label for="inputEnfermedadP">Cual?</label>
-                <input class="form-control input-md" type="text" ng-model="persona.enfermedadDescripcion" id="inputEnfermedadP" />
+                <label for="inputEnfermedad">Cual?</label>
+                <input class="form-control input-md" type="text" ng-model="persona.enfermedadDescripcion" id="inputEnfermedad" />
             </div>
         </div>
         <fieldset class="form-group">
@@ -545,50 +566,36 @@
             <label for="selectDiscapacidad">La persona presenta alguna discapacidad.</label>
             <select class="form-control input-md" id="selectDiscapacidad" ng-model="jefeDeFamilia.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
         </div>
-
+        <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5"  id="chkPlanEstatal" ng-model="jefeDeFamilia.adjudicatarioPlanEstatal"/>
+        <label for="chkPlanEstatal">¿Ha sido adjudicatario de viviendas u operatorias financiadas por el estado? </label>
+    </div>
 
         <h5>Existencia de situaciones especiales</h5>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkComMalvinasP" ng-model="jefeDeFamilia.combatienteMalvinas"/>
-            <label for="chkComMalvinasP">Excombatiente de Malvinas</label>
+            <input type="checkbox" name="fieldset-5"  id="chkComMalvinas" ng-model="jefeDeFamilia.situacionesEspeciales.excombatiente"/>
+            <label for="chkComMalvinas">Excombatiente de Malvinas</label>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkViolenciaP" ng-model="jefeDeFamilia.violenciaFamiliar"/>
-            <label for="chkViolenciaP">Víctima de violencia de género y/o violencia familiar</label>
-        </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkSindicalistaP" ng-model="jefeDeFamilia.sindicalista"/>
-            <label for="chkSindicalistaP">Asociación a sindicatos y/o gremios</label>
-        </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkAsocCivilP" ng-model="jefeDeFamilia.asocCivil"/>
-            <label for="chkAsocCivilP">Asociación a entidades de bien público (Ej. Bomberos, Policía)</label>
-        </div>
-        <h5>Existencia de situaciones especiales</h5>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkComMalvinas" ng-model="persona.combatienteMalvinas"/>
-            <label for="chkComMalvinasP">Excombatiente de Malvinas</label>
-        </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkViolencia" ng-model="persona.violenciaFamiliar"/>
+            <input type="checkbox" name="fieldset-5"  id="chkViolencia" ng-model="jefeDeFamilia.situacionesEspeciales.victimaViolencia"/>
             <label for="chkViolencia">Víctima de violencia de género y/o violencia familiar</label>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkSindicalista" ng-model="persona.sindicalista"/>
+            <input type="checkbox" name="fieldset-5"  id="chkSindicalista" ng-model="jefeDeFamilia.situacionesEspeciales.asociacionGremio"/>
             <label for="chkSindicalista">Asociación a sindicatos y/o gremios</label>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkAsocCivil" ng-model="persona.asocCivil"/>
+            <input type="checkbox" name="fieldset-5"  id="chkAsocCivil" ng-model="jefeDeFamilia.situacionesEspeciales.asociacionEntidadPublica"/>
             <label for="chkAsocCivil">Asociación a entidades de bien público (Ej. Bomberos, Policía)</label>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="persona.enfermedad"/>
+            <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="jefeDeFamilia.situacionesEspeciales.enfermedadCronica"/>
             <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
         </div>
-        <div id="personaEnfermaP" ng-show="persona.enfermedad">
+        <div id="personaEnferma" ng-show="jefeDeFamilia.situacionesEspeciales.enfermedadCronica">
             <div class="form-group" style="margin-left:30px;">
                 <label for="inputEnfermedad">Cual?</label>
-                <input class="form-control input-md" type="text" ng-model="persona.enfermedadDescripcion" id="inputEnfermedad" />
+                <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.enfermedadDescripcion" id="inputEnfermedad" />
             </div>
         </div>
 

@@ -40,7 +40,7 @@
     <h3 title="info de hogar">Datos del Hogar</h3>
             <div class="form-group">
                 <label for="selectPlan"><span style="color:red">* </span>Seleccione el plan al que desea aplicar</label>
-                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.id_SolucionHabitacional as plan.descripcion for plan in Planes"></select>
+                <select class="form-control input-md" id="selectPlan" ng-model="Hogar.idPlan" ng-options="plan.id_SolucionHabitacional as plan.descripcion for plan in Planes" ng-change="actualizarVivienda(Hogar.idPlan,Planes)"></select>
             </div>
             <div class="form-group">
                 <label for="selectVivienda"><span style="color:red">* </span>Tipo de vivienda en la que reside actualmente</label>

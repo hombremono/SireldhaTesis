@@ -60,16 +60,19 @@ $scope.persona ={
         vidriero:false,
         opMaq:false
     },
-    subsidio:{
-        nacional:false,
-        provincial:false,
-        municipal:false
+    subsidio: {
+        nacional: false,
+        provincial: false,
+        municipal: false
     },
-    combatienteMalvinas:false,
-    violenciaFamiliar:false,
-    sindicalista:false,
-    asocCivil:false
-
+    adjudicatarioPlanEstatal: false,
+    situacionesEspeciales: {
+        enfermedadCronica: false,
+        excombatiente: false,
+        victimaViolencia: false,
+        asociacionGremio: false,
+        asociacionEntidadPublica: false
+    }
 };
 $scope.jefeDeFamilia={
     nombre:"",
@@ -130,15 +133,19 @@ $scope.jefeDeFamilia={
         vidriero:false,
         opMaq:false
     },
-    subsidio:{
-        nacional:false,
-        provincial:false,
-        municipal:false
+    subsidio: {
+        nacional: false,
+        provincial: false,
+        municipal: false
     },
-    combatienteMalvinas:false,
-    violenciaFamiliar:false,
-    sindicalista:false,
-    asocCivil:false
+    adjudicatarioPlanEstatal: false,
+    situacionesEspeciales: {
+        enfermedadCronica: false,
+        excombatiente: false,
+        victimaViolencia: false,
+        asociacionGremio: false,
+        asociacionEntidadPublica: false
+    }
 };
 //Inicilizacion de Combos
 $scope.tiposDni =[{
@@ -293,7 +300,7 @@ if($rootScope.idJefe){
               discapacidad:false,
               editando:false,
               discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-              enfermedadCronica:resp.data.enfermedadCronica,
+              enfermedadCronica:false,
               enfermedadDescripcion:resp.data.descripcionEnfermedad,
               trabajoDependencia:{
                   empresa:"",
@@ -322,6 +329,19 @@ if($rootScope.idJefe){
                   soldador:false,
                   vidriero:false,
                   opMaq:false
+              },
+              subsidio: {
+                  nacional: resp.data.subsidio.nacional,
+                  provincial: resp.data.subsidio.provincial,
+                  municipal: resp.data.subsidio.municipal
+              },
+              adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+              situacionesEspeciales: {
+                  enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                  excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                  victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                  asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                  asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
               }
           };
       }
@@ -351,7 +371,7 @@ if($rootScope.idJefe){
               discapacidad:false,
               editando:false,
               discapacidadCombo:resp.data.discapacidad.id_Discapacidad,
-              enfermedadCronica:resp.data.enfermedadCronica,
+              enfermedadCronica:false,
               enfermedadDescripcion:resp.data.descripcionEnfermedad,
               trabajoDependencia:{
                   empresa:"",
@@ -380,6 +400,19 @@ if($rootScope.idJefe){
                   soldador:false,
                   vidriero:false,
                   opMaq:false
+              },
+              subsidio: {
+                  nacional: resp.data.subsidio.nacional,
+                  provincial: resp.data.subsidio.provincial,
+                  municipal: resp.data.subsidio.municipal
+              },
+              adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+              situacionesEspeciales: {
+                  enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                  excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                  victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                  asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                  asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
               }
           };
       }
@@ -462,7 +495,21 @@ $scope.addjefeDeFamilia = function(){
             },
             "enfermedadCronica":$scope.jefeDeFamilia.enfermedad,
             "descripcionEnfermedad":$scope.jefeDeFamilia.enfermedadDescripcion,
-            "capacidadesConstructivas":capConst
+            "capacidadesConstructivas":capConst,
+            "subsidio": {
+                "nacional": $scope.jefeDeFamilia.subsidio.nacional,
+                "provincial": $scope.jefeDeFamilia.subsidio.provincial,
+                "municipal": $scope.jefeDeFamilia.subsidio.municipal
+            },
+            "adjudicatarioPlanEstatal": $scope.jefeDeFamilia.adjudicatarioPlanEstatal,
+            "situacionesEspeciales": {
+                "enfermedadCronica": $scope.jefeDeFamilia.situacionesEspeciales.enfermedadCronica,
+                "excombatiente": $scope.jefeDeFamilia.situacionesEspeciales.excombatiente,
+                "victimaViolencia": $scope.jefeDeFamilia.situacionesEspeciales.victimaViolencia,
+                "asociacionGremio": $scope.jefeDeFamilia.situacionesEspeciales.asociacionGremio,
+                "asociacionEntidadPublica": $scope.jefeDeFamilia.situacionesEspeciales.asociacionEntidadPublica
+            }
+
 
         };
         personaService.add(jefeReq).then(function(resp){
@@ -614,7 +661,20 @@ $scope.editjefeDeFamilia = function() {
             },
             "enfermedadCronica":$scope.jefeDeFamilia.enfermedad,
             "descripcionEnfermedad":$scope.jefeDeFamilia.enfermedadDescripcion,
-            "capacidadesConstructivas":capConst
+            "capacidadesConstructivas":capConst,
+            "subsidio": {
+                "nacional": $scope.jefeDeFamilia.subsidio.nacional,
+                "provincial": $scope.jefeDeFamilia.subsidio.provincial,
+                "municipal": $scope.jefeDeFamilia.subsidio.municipal
+            },
+            "adjudicatarioPlanEstatal": $scope.jefeDeFamilia.adjudicatarioPlanEstatal,
+            "situacionesEspeciales": {
+                "enfermedadCronica": $scope.jefeDeFamilia.situacionesEspeciales.enfermedadCronica,
+                "excombatiente": $scope.jefeDeFamilia.situacionesEspeciales.excombatiente,
+                "victimaViolencia": $scope.jefeDeFamilia.situacionesEspeciales.victimaViolencia,
+                "asociacionGremio": $scope.jefeDeFamilia.situacionesEspeciales.asociacionGremio,
+                "asociacionEntidadPublica": $scope.jefeDeFamilia.situacionesEspeciales.asociacionEntidadPublica
+            }
         };
         if(!$rootScope.idJefe){
             $rootScope.idJefe = $scope.jefeDeFamilia.idEdicion;
@@ -821,7 +881,7 @@ $scope.editjefeDeFamilia = function() {
                                     discapacidad: false,
                                     editando: false,
                                     discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadCronica: false,
                                     enfermedadDescripcion: resp.data.descripcionEnfermedad,
                                     capacidadesConstructivas: {
                                         pintor: false,
@@ -832,6 +892,19 @@ $scope.editjefeDeFamilia = function() {
                                         soldador: false,
                                         vidriero: false,
                                         opMaq: false
+                                    },
+                                    subsidio: {
+                                        nacional: resp.data.subsidio.nacional,
+                                        provincial: resp.data.subsidio.provincial,
+                                        municipal: resp.data.subsidio.municipal
+                                    },
+                                    adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+                                    situacionesEspeciales: {
+                                        enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                                        excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                                        victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                                        asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                                        asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
                                     }
                                 };
                             }
@@ -861,7 +934,7 @@ $scope.editjefeDeFamilia = function() {
                                     discapacidad: false,
                                     editando: false,
                                     discapacidadCombo: resp.data.discapacidad.id_Discapacidad,
-                                    enfermedadCronica: resp.data.enfermedadCronica,
+                                    enfermedadCronica: false,
                                     enfermedadDescripcion: resp.data.descripcionEnfermedad,
                                     capacidadesConstructivas: {
                                         pintor: false,
@@ -872,6 +945,19 @@ $scope.editjefeDeFamilia = function() {
                                         soldador: false,
                                         vidriero: false,
                                         opMaq: false
+                                    },
+                                    subsidio: {
+                                        nacional: resp.data.subsidio.nacional,
+                                        provincial: resp.data.subsidio.provincial,
+                                        municipal: resp.data.subsidio.municipal
+                                    },
+                                    adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+                                    situacionesEspeciales: {
+                                        enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                                        excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                                        victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                                        asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                                        asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
                                     }
                                 };
                             }
@@ -952,6 +1038,19 @@ $scope.editjefeDeFamilia = function() {
                                         soldador: false,
                                         vidriero: false,
                                         opMaq: false
+                                    },
+                                    subsidio: {
+                                        nacional: resp.data.subsidio.nacional,
+                                        provincial: resp.data.subsidio.provincial,
+                                        municipal: resp.data.subsidio.municipal
+                                    },
+                                    adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+                                    situacionesEspeciales: {
+                                        enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                                        excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                                        victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                                        asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                                        asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
                                     }
                                 };
                             }
@@ -1010,6 +1109,19 @@ $scope.editjefeDeFamilia = function() {
                                         soldador: false,
                                         vidriero: false,
                                         opMaq: false
+                                    },
+                                    subsidio: {
+                                        nacional: resp.data.subsidio.nacional,
+                                        provincial: resp.data.subsidio.provincial,
+                                        municipal: resp.data.subsidio.municipal
+                                    },
+                                    adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+                                    situacionesEspeciales: {
+                                        enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                                        excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                                        victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                                        asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                                        asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
                                     }
                                 };
                             }
@@ -1214,7 +1326,21 @@ $scope.addPersona = function() {
             },
             "enfermedadCronica":$scope.persona.enfermedad,
             "descripcionEnfermedad":$scope.persona.enfermedadDescripcion,
-            "capacidadesConstructivas":capConst
+            "capacidadesConstructivas":capConst,
+            "subsidio": {
+                "nacional": $scope.persona.subsidio.nacional,
+                "provincial": $scope.persona.subsidio.provincial,
+                "municipal": $scope.persona.subsidio.municipal
+            },
+            "adjudicatarioPlanEstatal": $scope.persona.adjudicatarioPlanEstatal,
+            "situacionesEspeciales": {
+                "enfermedadCronica": $scope.persona.situacionesEspeciales.enfermedadCronica,
+                "excombatiente": $scope.persona.situacionesEspeciales.excombatiente,
+                "victimaViolencia": $scope.persona.situacionesEspeciales.victimaViolencia,
+                "asociacionGremio": $scope.persona.situacionesEspeciales.asociacionGremio,
+                "asociacionEntidadPublica": $scope.persona.situacionesEspeciales.asociacionEntidadPublica
+            }
+
         };
 
 
@@ -1390,6 +1516,19 @@ $scope.addPersona = function() {
                                     soldador: false,
                                     vidriero: false,
                                     opMaq: false
+                                },
+                                subsidio: {
+                                    nacional: resp.data.subsidio.nacional,
+                                    provincial: resp.data.subsidio.provincial,
+                                    municipal: resp.data.subsidio.municipal
+                                },
+                                adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+                                situacionesEspeciales: {
+                                    enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                                    excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                                    victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                                    asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                                    asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
                                 }
                             };
                             getCapCons(resp.data.capacidadesConstructivas, integrante);
@@ -1432,6 +1571,19 @@ $scope.addPersona = function() {
                                     soldador: false,
                                     vidriero: false,
                                     opMaq: false
+                                },
+                                subsidio: {
+                                    nacional: false,
+                                    provincial: false,
+                                    municipal: false
+                                },
+                                adjudicatarioPlanEstatal: false,
+                                situacionesEspeciales: {
+                                    enfermedadCronica: false,
+                                    excombatiente: false,
+                                    victimaViolencia: false,
+                                    asociacionGremio: false,
+                                    asociacionEntidadPublica: false
                                 }
                             };
                             $scope.agregando = false;
@@ -1483,7 +1635,20 @@ $scope.addPersona = function() {
                 },
                 "enfermedadCronica":$scope.persona.enfermedad,
                 "descripcionEnfermedad":$scope.persona.enfermedadDescripcion,
-                "capacidadesConstructivas":capConst
+                "capacidadesConstructivas":capConst,
+                "subsidio": {
+                    "nacional": $scope.persona.subsidio.nacional,
+                    "provincial": $scope.persona.subsidio.provincial,
+                    "municipal": $scope.persona.subsidio.municipal
+                },
+                "adjudicatarioPlanEstatal": $scope.persona.adjudicatarioPlanEstatal,
+                "situacionesEspeciales": {
+                    "enfermedadCronica": $scope.persona.situacionesEspeciales.enfermedadCronica,
+                    "excombatiente": $scope.persona.situacionesEspeciales.excombatiente,
+                    "victimaViolencia": $scope.persona.situacionesEspeciales.victimaViolencia,
+                    "asociacionGremio": $scope.persona.situacionesEspeciales.asociacionGremio,
+                    "asociacionEntidadPublica": $scope.persona.situacionesEspeciales.asociacionEntidadPublica
+                }
             };
             personaService.add(reqPersona).then(function(resp) {
                 if(resp.status == 409)
@@ -1559,6 +1724,19 @@ $scope.addPersona = function() {
                             soldador:false,
                             vidriero:false,
                             opMaq:false
+                        },
+                        subsidio: {
+                            nacional: resp.data.subsidio.nacional,
+                            provincial: resp.data.subsidio.provincial,
+                            municipal: resp.data.subsidio.municipal
+                        },
+                        adjudicatarioPlanEstatal: resp.data.adjudicatarioPlanEstatal,
+                        situacionesEspeciales: {
+                            enfermedadCronica: resp.data.situacionesEspeciales.enfermedadCronica,
+                            excombatiente: resp.data.situacionesEspeciales.excombatiente,
+                            victimaViolencia: resp.data.situacionesEspeciales.victimaViolencia,
+                            asociacionGremio: resp.data.situacionesEspeciales.asociacionGremio,
+                            asociacionEntidadPublica: resp.data.situacionesEspeciales.asociacionEntidadPublica
                         }
                     };
                     personaService.get(integrante.id_Persona).then(function(resp){
@@ -1604,6 +1782,19 @@ $scope.addPersona = function() {
                                 soldador:false,
                                 vidriero:false,
                                 opMaq:false
+                            },
+                            subsidio: {
+                                nacional: false,
+                                provincial: false,
+                                municipal: false
+                            },
+                            adjudicatarioPlanEstatal: false,
+                            situacionesEspeciales: {
+                                enfermedadCronica: false,
+                                excombatiente: false,
+                                victimaViolencia: false,
+                                asociacionGremio: false,
+                                asociacionEntidadPublica: false
                             }
                         };
                         $scope.agregando = false;
@@ -1690,7 +1881,7 @@ $scope.editarPersona = function(integrante){
         $scope.persona.discapacidad = integrante.discapacidad;
         $scope.persona.idEdicion = integrante.id_Persona;
         $scope.persona.discapacidadCombo = integrante.discapacidadCombo;
-        $scope.persona.enfermedadCronica = integrante.enfermedadCronica;
+        $scope.persona.enfermedadCronica = false;
         $scope.persona.descripcionEnfermedad = integrante.descripcionEnfermedad;
         $scope.persona.capacidadesConstructivas = integrante.capacidadesConstructivas;
         $scope.agregando = true;
@@ -1698,6 +1889,16 @@ $scope.editarPersona = function(integrante){
         {
             $scope.persona.busqueda = true;
         }
+        $scope.persona.subsidio.nacional = integrante.subsidio.nacional;
+        $scope.persona.subsidio.provincial = integrante.subsidio.provincial;
+        $scope.persona.subsidio.municipal = integrante.subsidio.municipal;
+        $scope.persona.adjudicatarioPlanEstatal = integrante.adjudicatarioPlanEstatal;
+        $scope.persona.situacionesEspeciales.enfermedadCronica = integrante.situacionesEspeciales.enfermedadCronica;
+        $scope.persona.situacionesEspeciales.excombatiente = integrante.situacionesEspeciales.excombatiente;
+        $scope.persona.situacionesEspeciales.victimaViolencia = integrante.situacionesEspeciales.victimaViolencia;
+        $scope.persona.situacionesEspeciales.asociacionGremio = integrante.situacionesEspeciales.asociacionGremio;
+        $scope.persona.situacionesEspeciales.asociacionEntidadPublica = integrante.situacionesEspeciales.asociacionEntidadPublica;
+
 
     }
 
@@ -1726,8 +1927,17 @@ $scope.editarPersona = function(integrante){
         $scope.jefeDeFamilia.capacidadesConstructivas = integrante.capacidadesConstructivas;
 
         $scope.jefeDeFamilia.discapacidadCombo = integrante.discapacidadCombo;
-        $scope.jefeDeFamilia.enfermedadCronica = integrante.enfermedadCronica;
+        $scope.jefeDeFamilia.enfermedadCronica = false;
         $scope.jefeDeFamilia.descripcionEnfermedad = integrante.descripcionEnfermedad;
+        $scope.jefeDeFamilia.subsidio.nacional = integrante.subsidio.nacional;
+        $scope.jefeDeFamilia.subsidio.provincial = integrante.subsidio.provincial;
+        $scope.jefeDeFamilia.subsidio.municipal = integrante.subsidio.municipal;
+        $scope.jefeDeFamilia.adjudicatarioPlanEstatal = integrante.adjudicatarioPlanEstatal;
+        $scope.jefeDeFamilia.situacionesEspeciales.enfermedadCronica = integrante.situacionesEspeciales.enfermedadCronica;
+        $scope.jefeDeFamilia.situacionesEspeciales.excombatiente = integrante.situacionesEspeciales.excombatiente;
+        $scope.jefeDeFamilia.situacionesEspeciales.victimaViolencia = integrante.situacionesEspeciales.victimaViolencia;
+        $scope.jefeDeFamilia.situacionesEspeciales.asociacionGremio = integrante.situacionesEspeciales.asociacionGremio;
+        $scope.jefeDeFamilia.situacionesEspeciales.asociacionEntidadPublica = integrante.situacionesEspeciales.asociacionEntidadPublica;
         //Para que no ponga cero en el input
         if(integrante.telefono!="")
         {$scope.jefeDeFamilia.telefono = Number(integrante.telefono);}
@@ -1774,7 +1984,6 @@ $scope.addFamilia = function(){
     $rootScope.hogar.ingresoNetoFamiliar = ingresoNetoFamiliar;
     var familyReq = $rootScope.hogar;
     familiaService.update(familyReq).then(function(resp){
-        debugger;
         var v = resp.data;
         $location.path('/requestProperty');
     });
@@ -2208,28 +2417,28 @@ var mapearCapCons = function(entidad){
 };
 var getCapCons = function(respCapCons, entidad){
 respCapCons.forEach(function (item,index){
-        if(item.id_TipoCapacidadConstructiva == 1){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 1){
             entidad.capacidadesConstructivas.pintor = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 2){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 2){
             entidad.capacidadesConstructivas.pocero = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 3){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 3){
             entidad.capacidadesConstructivas.ceramista = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 4){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 4){
             entidad.capacidadesConstructivas.techador = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 5){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 5){
             entidad.capacidadesConstructivas.yesero = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 6){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 6){
             entidad.capacidadesConstructivas.soldador = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 7){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 7){
             entidad.capacidadesConstructivas.opMaq = true;
         }
-        if(item.id_TipoCapacidadConstructiva == 8){
+        if(item.tipoCapacidadConstructiva.id_TipoCapacidadConstructiva == 8){
             entidad.capacidadesConstructivas.vidriero = true;
         }
     });

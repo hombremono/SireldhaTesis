@@ -38,7 +38,7 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
     hogarService.loadCombos().then(function (resp) {
         datos = resp.data;
         cargarCombo($scope.Planes, datos.solucionesHabitacionales);
-        cargarCombo($scope.Viviendas, datos.situacionesInmuebles);
+        //cargarCombo($scope.Viviendas, datos.situacionesInmuebles);
         cargarCombo($scope.Localidades, datos.localidades);
         $scope.Hogar.idVivienda = $scope.Viviendas[0].id_SituacionInmueble;
         $scope.Hogar.idPlan = $scope.Planes[0].id_SolucionHabitacional;
@@ -48,6 +48,26 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
         $scope.datos = [];
         $scope.opt.wait = false;
     });
+    $scope.actualizarVivienda = function(planId,planes){
+      if(planId == 0){
+          $scope.Viviendas = [{
+              id_SituacionInmueble: 0,
+              descripcion: "-SELECCIONE-"
+          }];
+      }
+      else{
+          $scope.Viviendas = [{
+              id_SituacionInmueble: 0,
+              descripcion: "-SELECCIONE-"
+          }];
+          planes.forEach(function (item) {
+              if(item.id_SolucionHabitacional == planId){
+                  cargarCombo($scope.Viviendas, item.situacionInmuebleList);
+              }
+                  });
+      }
+
+    };
 
 
     var cargarCombo = function (combo, coleccion) {
