@@ -39,6 +39,10 @@ angular.module('webS')
           templateUrl: 'views/solicitud/datosInmueble.html',
           controller: 'InmuebleController'
       })
+      .when('/requestPropertyCons', {
+          templateUrl: 'views/solicitud/conservacionInmueble.html',
+          controller: 'InmuebleController'
+      })
       .when('/loadFiles', {
           templateUrl: 'views/solicitud/filesUpload.html',
           controller: 'FileController'
@@ -50,6 +54,14 @@ angular.module('webS')
       .when('/search', {
           templateUrl: 'views/searchPersona.html',
           controller: 'FamiliaController'
+      })
+      .when('/searchFamily', {
+          templateUrl: 'views/searchFamily.html',
+          controller: 'FamiliaController'
+      })
+      .when('/newPlan', {
+          templateUrl: 'views/plan/agregarPlan.html',
+          controller: 'PlanController'
       })
     .otherwise({
       redirectTo: '/'

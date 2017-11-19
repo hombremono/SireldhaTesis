@@ -125,8 +125,12 @@
             <select class="form-control input-md" id="selectMPared" ng-model="inmueble.tipoPared" ng-options="tipoP.id_MaterialPared as tipoP.descripcion for tipoP in tiposPared"></select>
         </div>
         <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkRevoque" ng-model="inmueble.revoque"/>
-            <label for="chkRevoque">Las paredes poseen revoque.</label>
+            <input type="checkbox" name="fieldset-5" id="chkRevoqueInt" ng-model="inmueble.revoqueInt"/>
+            <label for="chkRevoqueInt">Las paredes poseen revoque interior.</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="chkRevoqueExt" ng-model="inmueble.revoqueExt"/>
+            <label for="chkRevoqueExt">Las paredes poseen revoque exterior.</label>
         </div>
         <div class="form-group">
             <label for="selectMTecho">Material techo</label>
@@ -146,13 +150,14 @@
         </div>
         <div ng-show="inmueble.agua" style="margin-left:30px;">
             <div class="form-group">
-                <label for="selectConexionAgua">Tipo de conexión</label>
-                <select class="form-control input-md" id="selectConexionAgua" ng-model="inmueble.conexionAgua" ng-options="conexionAgua.id_PoseeAgua as conexionAgua.descripcion for conexionAgua in conexionesAgua"></select>
-            </div>
-            <div class="form-group">
                 <label for="selectProcedenciaAgua">Procedencia</label>
                 <select class="form-control input-md" id="selectProcedenciaAgua" ng-model="inmueble.procedenciaAgua" ng-options="procedenciaAgua.id_ProcedenciaAgua as procedenciaAgua.descripcion for procedenciaAgua in procedenciasAgua"></select>
             </div>
+            <div class="form-group">
+                <label for="selectConexionAgua">Tipo de conexión</label>
+                <select class="form-control input-md" id="selectConexionAgua" ng-model="inmueble.conexionAgua" ng-options="conexionAgua.id_PoseeAgua as conexionAgua.descripcion for conexionAgua in conexionesAgua"></select>
+            </div>
+
         </div>
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkBano" ng-model="inmueble.bano"/>
@@ -170,6 +175,10 @@
             <div class="styled-input-single" >
                 <input type="checkbox" name="fieldset-5" id="chkCompartido" ng-model="inmueble.banoCompartido"/>
                 <label for="chkCompartido">Baño compartido.</label>
+            </div>
+            <div class="styled-input-single" >
+                <input type="checkbox" name="fieldset-5" id="chkBanoAgua" ng-model="inmueble.banoAguaFuncional"/>
+                <label for="chkBanoAgua">El baño posee instalación de agua funcional.</label>
             </div>
         </div>
         <div class="styled-input-single" >
@@ -198,6 +207,7 @@
         </div>
         <div class="form-group">
             <label for="inputCuartos"><span style="color:red">* </span>Cantidad de cuartos</label>
+            <span style="color: #848484">Deben considerarse sólo los cuartos de dormir, excluyendo espacios comunes, cocina y baño.</span>
             <input class="form-control input-md" type="text" ng-model="inmueble.cuartos" id="inputCuartos" />
         </div>
         <div class="form-group">
@@ -206,7 +216,7 @@
         </div>
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkInsalubre" ng-model="inmueble.zonaInsalubre"/>
-            <label for="chkInsalubre">La vivienda se encuentra en zona insalubre.</label>
+            <label for="chkInsalubre">La vivienda se encuentra en zona no apta para urbanización residencial.</label>
         </div>
     </form>
 

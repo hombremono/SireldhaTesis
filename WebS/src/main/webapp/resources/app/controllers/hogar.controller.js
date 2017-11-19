@@ -59,7 +59,7 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
           $scope.Viviendas = [{
               id_SituacionInmueble: 0,
               descripcion: "-SELECCIONE-"
-          }];
+          }];244
           planes.forEach(function (item) {
               if(item.id_SolucionHabitacional == planId){
                   cargarCombo($scope.Viviendas, item.situacionInmuebleList);

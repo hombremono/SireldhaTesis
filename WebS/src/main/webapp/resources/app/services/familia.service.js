@@ -41,6 +41,9 @@ angular.module('webS')
             },
             updateAutonomo:function(o){
                 return $http.put(URL_API_BASE+"trabajo/autonomo/",o);
+            },
+            searchFamily:function(o){
+                return $http.get(URL_API_BASE+"familia/getFamilyByDni",o);
             }
 
         }

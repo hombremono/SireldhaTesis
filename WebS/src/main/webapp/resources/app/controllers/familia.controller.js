@@ -512,7 +512,9 @@ $scope.addjefeDeFamilia = function(){
 
 
         };
+        debugger;
         personaService.add(jefeReq).then(function(resp){
+            debugger;
             if(resp.status == 409)
             {
                 showNotification(resp.data.message, 'danger');
@@ -1989,6 +1991,22 @@ $scope.addFamilia = function(){
     });
 
 };
+$scope.editFamilia = function(){
+    var ingresoNetoFamiliar =0;
+    $scope.familia.integrantes.forEach(function (item,index){
+        ingresoNetoFamiliar +=item.ingresoNeto;
+    });
+    familiaService.get(idFamilia).then(function(resp){
+        var familyReq = resp.data;
+        familiaService.update(familyReq).then(function(resp){
+            var v = resp.data;
+            $scope.familia.integrantes=[];
+            $location.path('/');
+    })
+
+
+    });
+};
 $scope.buscarPersona = function() {
     $scope.resultadosBusqueda=[];
     personaService.getByDni($scope.DNIBusqueda).then(function (resp) {
@@ -2142,6 +2160,90 @@ $scope.buscarPersona = function() {
             });
         }
     });
+};
+$scope.buscarFamilia = function(){
+    $scope.familia.integrantes=[];
+    // familiaService.searchFamily($scope.DNIBusqueda).then(function(resp){
+    personaService.getByDni($scope.DNIBusqueda).then(function (resp) {
+
+        if(resp.status == 404){
+            showNotification('No existe persona con ese DNI en la base de datos', 'warning');
+        }
+        else{
+            idFamilia = resp.data[0].familia.id_Familia;
+            resp.data.forEach(function (item,index){
+                var jubiladoChk = false;
+                if (item.nroCarnetJubilacion) {
+                    jubiladoChk = true;
+                }
+                var telefonoInt;
+                var idTelefonoInt;
+                if (item.telefono) {
+                    telefonoInt = Number(item.telefono.numero);
+                    idTelefonoInt = item.telefono.id_Telefono;
+                }
+                else {
+                    telefonoInt = "";
+                    idTelefonoInt = 0;
+                }
+                var integrante = {
+                    id_Persona: item.id_Persona,
+                    nombre: item.nombre,
+                    apellido: item.apellido,
+                    tipoDni: item.tipoDocumento.id_TipoDocumento,
+                    DNI: item.nroDocumento,
+                    CUIL: item.nroCuil,
+                    nacimiento: item.fechaNacimiento,
+                    sexo: item.sexo.id_Sexo,
+                    estadoCivil: item.estadoCivil.id_EstadoCivil,
+                    nacionalidad: item.nacionalidad.id_Nacionalidad,
+                    estudios: item.estudios.id_Estudios,
+                    profesion: item.profesion.id_Profesion,
+
+                    depLaboral: item.situacionLaboral.id_DependenciaLaboral,
+                    relacionJF: item.rolFamiliar.id_RolFamiliar,
+                    DescRelacionJF: item.rolFamiliar.rolFamiliar,
+                    ingresoNeto: item.ingresoNeto,
+                    mail: item.mail,
+                    telefono: telefonoInt,
+                    idTelefono: idTelefonoInt,
+                    jubilado: jubiladoChk,
+                    carnetJubilacion: item.nroCarnetJubilacion,
+                    discapacidad: false,
+                    discapacidadCombo: item.discapacidad.id_Discapacidad,
+                    enfermedadCronica: item.enfermedadCronica,
+                    enfermedadDescripcion: item.descripcionEnfermedad,
+                    editando: false,
+                    capacidadesConstructivas: {
+                        pintor: false,
+                        pocero: false,
+                        techador: false,
+                        ceramista: false,
+                        yesero: false,
+                        soldador: false,
+                        vidriero: false,
+                        opMaq: false
+                    },
+                    subsidio: {
+                        nacional: item.subsidio.nacional,
+                        provincial: item.subsidio.provincial,
+                        municipal: item.subsidio.municipal
+                    },
+                    adjudicatarioPlanEstatal: item.adjudicatarioPlanEstatal,
+                    situacionesEspeciales: {
+                        enfermedadCronica: item.situacionesEspeciales.enfermedadCronica,
+                        excombatiente: item.situacionesEspeciales.excombatiente,
+                        victimaViolencia: item.situacionesEspeciales.victimaViolencia,
+                        asociacionGremio: item.situacionesEspeciales.asociacionGremio,
+                        asociacionEntidadPublica: item.situacionesEspeciales.asociacionEntidadPublica
+                    }
+                };
+                getCapCons(item.capacidadesConstructivas, integrante);
+                    $scope.familia.integrantes.push(integrante);
+            });
+        }
+
+    })
 };
 $scope.paginaInicial = function () {
     $location.path('/');

@@ -1,15 +1,216 @@
-<!DOCTYPE html>
-<div ng-controller="PlanController as ctrl">
-    <h1><p>Alta de Planes</p></h1>
-    <h2>Ingrese los datos del plan que desea agregar</h2>
-    <form ng-submit="ctrl.plan.addPlan(plan)">
-        <label>Nombre:</label>
-        <input class="form-control input-md" type="text" ng-model="ctrl.plan.nombre" required/>
-        <label>Descripcion:</label>
-        <textarea class="form-control input-md" type="text" ng-model="ctrl.plan.descripcion" />
-         <fieldset class="form-group">
-            <input type="submit" class="btn btn-primary" value="Agregar" />
-        </fieldset>
-    </form>
+<hr ng-submit="crearPlan(Plan)" name="planForm" >
+    <h3 title="info de hogar">Crear Plan</h3>
+    <div class="form-group">
+        <label for="inputNombrePlan"><span style="color:red">* </span>Ingrese el nombre del plan</label>
+        <input class="form-control input-md" id="inputNombrePlan" type="text" ng-model="Plan.nombre">
+    </div>
+    <div class="form-group">
+        <label for="selectFinanciamiento"><span style="color:red">* </span>Origen del financiamiento</label>
+        <select class="form-control input-md" id="selectFinanciamiento" ng-model="Plan.financiamiento" ng-options="fin.id as fin.descripcion for fin in Financiamientos"></select>
+    </div>
+    <div class="form-group">
+        <label for="selectPlan"><span style="color:red">* </span>Tipo de plan</label>
+        <select class="form-control input-md" id="selectPlan" ng-model="Plan.tipo" ng-options="tipo.id as tipo.descripcion for tipo in Tipos"></select>
+    </div>
+    <hr>
+<!--SITUACION REGISTRO-->
+<div>
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Situación en el registro</h3>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" ng-show="mostrarSitRegistro" ng-click="mostrarSitRegistro=false">Ocultar Sección</button>
+            <button class="btn btn-primary" ng-show="!mostrarSitRegistro" ng-click="mostrarSitRegistro=true">Mostrar Sección</button>
+        </div>
+    </div>
+    <div ng-show="mostrarSitRegistro">
+        <div ng-show="sitRegistro.items.length">
+            <table class="table">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Item</th>
+                    <th>Puntaje</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="item in sitRegistro.items">
+                    <td>{{item.categoria}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td><input class="form-control input-md" type="text" ng-model="item.puntaje"/></td>
+                    <td>
+                        <button type="button" class="btn btn-danger" ng-click="quitarItem(item,sitRegistro.items,comboSitRegistro.items)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="sitRegistroSelect">Seleccion el elemento que desea agregar</label>
+                    <select class="form-control input-md" id="sitRegistroSelect" ng-model="temp.item" ng-options="combo.id as combo.descripcion for combo in comboSitRegistro.items" ></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger" ng-click="addItem(temp.item,sitRegistro.items,'Situación en el registro',comboSitRegistro.items)">Agregar
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger" ng-click="addAll(comboSitRegistro.items,sitRegistro.items,'Situación en el registro')">Agregar Todos
+                </button>
+            </div>
+        </div>
+
+
+    </div>
 </div>
-</html>
+<!--SITUACION HOGAR-->
+
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Situación del hogar</h3>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" ng-show="mostrarSitHogar" ng-click="mostrarSitHogar=false">Ocultar Sección</button>
+            <button class="btn btn-primary" ng-show="!mostrarSitHogar" ng-click="mostrarSitHogar=true">Mostrar Sección</button>
+        </div>
+    </div>
+<div ng-show="mostrarSitHogar">
+        <div ng-show="sitHogar.items.length">
+            <table class="table">
+                <tr>
+                    <th>Categoria</th>
+                    <th>Item</th>
+                    <th>Puntaje</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="item in sitHogar.items">
+                    <td>{{item.categoria}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td><input class="form-control input-md" type="text" ng-model="item.puntaje"/></td>
+                    <td>
+                        <button type="button" class="btn btn-danger" ng-click="quitarItem(item,sitHogar.items,comboSitHogar.items)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="sitHogarSelect">Seleccion el elemento que desea agregar</label>
+                    <select class="form-control input-md" id="sitHogarSelect" ng-model="temp.itemHogar" ng-options="combo.id as combo.descripcion for combo in comboSitHogar.items" ></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemHogar,sitHogar.items,'Situación en el Hogar',comboSitHogar.items)">Agregar
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-danger" ng-click="addAll(comboSitHogar.items,sitHogar.items,'Situación en el Hogar')">Agregar Todos
+                </button>
+            </div>
+        </div>
+
+
+<hr>
+<!--SITUACION LOCALIDAD-->
+<div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="sitLocalidadSelect">Localidad</label>
+                <select class="form-control input-md" id="sitLocalidadSelect" ng-model="temp.itemLocalidad" ng-options="combo.id as combo.descripcion for combo in comboSitLocalidad.items" ></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemLocalidad,sitHogar.items,'Localidad',comboSitLocalidad.items)">Agregar
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" ng-click="addAll(comboSitLocalidad.items,sitHogar.items,'Localidad')">Agregar Todos
+            </button>
+        </div>
+    </div>
+</div>
+<hr>
+<!--SITUACION EDAD-->
+<div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="sitEdadJefeSelect">Edad jefe/a de EdadJefe</label>
+                <select class="form-control input-md" id="sitEdadJefeSelect" ng-model="temp.itemEdadJefe" ng-options="combo.id as combo.descripcion for combo in comboSitEdadJefe.items" ></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemEdadJefe,sitHogar.items,'Edad Jefe/a',comboSitEdadJefe.items)">Agregar
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" ng-click="addAll(comboSitEdadJefe.items,sitHogar.items,'Edad Jefe/a')">Agregar Todos
+            </button>
+        </div>
+    </div>
+</div>
+<hr>
+<!--SITUACION CAP CONS-->
+<div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="sitCapConstSelect">Capacidad constructiva</label>
+                <select class="form-control input-md" id="sitCapConstSelect" ng-model="temp.itemCapCons" ng-options="combo.id as combo.descripcion for combo in comboSitCapConst.items" ></select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemCapCons,sitHogar.items,'Capacidad constructiva',comboSitCapConst.items)">Agregar
+            </button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-danger" ng-click="addAll(comboSitCapConst.items,sitHogar.items,'Capacidad constructiva')">Agregar Todos
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+    <button type="submit" class="btn btn-primary  pull-right">Crear</button>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

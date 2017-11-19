@@ -24,7 +24,8 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         },
         sinInmueble:"",
         tipoPared:0,
-        revoque:false,
+        revoqueInt:false,
+        revoqueExt:false,
         tipoTecho:0,
         cieloRazo:false,
         tipoPiso:0,
@@ -43,8 +44,20 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         camas:0,
         zonaInsalubre:false,
         bano:false,
-        superficieEdificada:""
+        superficieEdificada:"",
+        banoAguaFuncional:false
     };
+    $scope.conservacion ={
+        paredGoteras:false,
+        paredGrietas:false,
+        techoGoteras:false,
+        techoGrietas:false,
+        instAgua:0,
+        instGas:0,
+        instElec:0,
+        instCloac:0
+    };
+
     $scope.datosOK = false;
     var idFamilia =$rootScope.idFamilia;
 
@@ -139,6 +152,28 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             id_Localidad:0,
             localidad:"-SELECCIONE-"
         }];
+        $scope.combosConservacion=[
+            {
+            id_Combo:0,
+                descripcion:"-SELECCIONE-"
+            },
+            {
+                id_Combo:1,
+                descripcion:"Bueno"
+            },
+            {
+                id_Combo:2,
+                descripcion:"Regular"
+            },
+            {
+                id_Combo:3,
+                descripcion:"Deficiente"
+            }
+        ];
+    $scope.conservacion.instAgua = $scope.combosConservacion[0].id_Combo;
+    $scope.conservacion.instGas = $scope.combosConservacion[0].id_Combo;
+    $scope.conservacion.instElec = $scope.combosConservacion[0].id_Combo;
+    $scope.conservacion.instCloac = $scope.combosConservacion[0].id_Combo;
         var cargarCombo = function(combo, coleccion){
             var resultado = [];
             coleccion.forEach(function(value) {
@@ -159,6 +194,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
 
             $scope.inmueble.estado = $scope.estados[0].id_Estado;
             $scope.inmueble.motivoNoPosee = $scope.NoPosee[0].id_NoPosee;
+
 
 
         };

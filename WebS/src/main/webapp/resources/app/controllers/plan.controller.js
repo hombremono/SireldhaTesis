@@ -1,18 +1,197 @@
-/**
+2/**
  * Created by fran_ on 12/6/2017.
  */
 angular.module('webS').controller('PlanController',
     [ '$scope', '$sce', '$uibModal','$location', 'planService', PlanController ]);
 function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
-    $scope.plan = {
-        id:"",
-        Nombre:"",
-        Descripcion:""
+    $scope.Plan = {
+        nombre:"",
+        financiamiento:0,
+        tipo:0
     };
-    $scope.planes =[];
+    //Listas de Combos
+    $scope.Financiamientos = [
+        {
+        id: 0,
+        descripcion: "-SELECCIONE-"
+        },
+        {
+            id: 1,
+            descripcion: "NACIONAL"
+        },
+        {
+            id: 2,
+            descripcion: "PROVINCIAL"
+        },
+        {
+            id: 3,
+            descripcion: "MUNICIPAL"
+        }
+
+    ];
+    $scope.Plan.financiamiento = $scope.Financiamientos[0].id;
+    $scope.Tipos = [
+        {
+            id: 0,
+            descripcion: "-SELECCIONE-"
+        },
+        {
+            id: 1,
+            descripcion: "TERRENO"
+        },
+        {
+            id: 2,
+            descripcion: "VIVIENDA NUEVA"
+        },
+        {
+            id: 3,
+            descripcion: "MEJORAMIENTO Y/O AMPLIACION"
+        },
+        {
+            id: 4,
+            descripcion: "REGULARIZACION"
+        }
+        ];
+    $scope.Plan.tipo = $scope.Tipos[0].id;
 
 
+    //Situaciones
+    $scope.sitRegistro = {
+        items:[]
+    };
+    $scope.sitHogar = {
+        items:[]
+    };
+
+    //COMBOS
+    $scope.comboSitHogar = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Antigüedad de la inscripción en el registro"
+            },
+            {
+                id: 2,
+                descripcion: "Documentación probatoria completa"
+            }]
+    };
+    $scope.comboSitLocalidad = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Antigüedad de la inscripción en el registro"
+            },
+            {
+                id: 2,
+                descripcion: "Documentación probatoria completa"
+            }]
+    };
+    $scope.comboSitEdadJefe = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Antigüedad de la inscripción en el registro"
+            },
+            {
+                id: 2,
+                descripcion: "Documentación probatoria completa"
+            }]
+    };
+    $scope.comboSitCapCons = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Antigüedad de la inscripción en el registro"
+            },
+            {
+                id: 2,
+                descripcion: "Documentación probatoria completa"
+            }]
+    };
+    $scope.comboSitRegistro = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Antigüedad de la inscripción en el registro"
+            },
+            {
+                id: 2,
+                descripcion: "Documentación probatoria completa"
+            }]
+    };
+    $scope.temp ={
+        item : $scope.comboSitRegistro.items[0].id,
+        itemHogar: $scope.comboSitHogar.items[0].id,
+        itemLocalidad: $scope.comboSitLocalidad.items[0].id,
+        itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
+        itemCapCons: $scope.comboSitCapCons.items[0].id,
+    };
+
+    //FUNCIONES
+    $scope.addItem = function(id,coleccion,categoria,combo){
+        combo.forEach(function (element, index) {
+            if (element.id == id && element.id !=0) {
+                var item={
+                    categoria:categoria,
+                    descripcion:element.descripcion,
+                    puntaje:0
+                };
+                coleccion.push(item);
+            }
+        });
+
+
+
+    };
+    $scope.quitarItem = function(item,coleccion,combo){
+        coleccion.forEach(function (element, index) {
+            if (element == item) {
+                coleccion.splice(element, 1);
+            }
+        });
+    };
+    $scope.addAll = function(combo,coleccion,categoria){
+        combo.forEach(function (elemento, index) {
+            if(elemento.id !=0){
+                var item ={
+                    categoria:categoria,
+                    descripcion:elemento.descripcion,
+                    puntaje:0
+                };
+                coleccion.push(item);
+            }
+
+        });
+
+    };
+    //Variables n' Stuff
+    $scope.mostrarSitRegistro = true;
+    $scope.mostarSitHogar =true;
+}
+
+
+/*
     //Agregando y wait van a servir para el loading.
     $scope.opt = {
         agregando: false,
@@ -119,19 +298,8 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
                 $scope.cancelar();
             }
         );
-    }
+    }/*
 }
 
-angular.module('webS').controller('AddPlanController', function ($uibModalInstance, instancia) {
-    var $ctrl = this;
-    $ctrl.instancia = instancia;
 
-    $ctrl.ok = function () {
-        $uibModalInstance.close($ctrl.instancia);
-    };
-    $ctrl.cancel = function () {
-        $uibModalInstance.dismiss();
-    };
-});
-
-
+*/
