@@ -14,7 +14,6 @@ public class AlquilerDAO extends GenericDAO<Alquiler,Integer> implements IAlquil
 
     private static final long serialVersionUID = 1206356050999505599L;
     private static Logger LOG = LoggerFactory.getLogger(AlquilerDAO.class);
-
     public AlquilerDAO(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

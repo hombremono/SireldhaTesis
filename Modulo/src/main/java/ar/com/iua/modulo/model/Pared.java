@@ -20,14 +20,20 @@ public class Pared {
     private int id_Pared;
 
     @Column(name="revoque", nullable = false)
-    private boolean revoque;
+    private boolean revoque = false;
+
+    @Column(name="humedad", nullable = false)
+    private boolean humedad = false;
+
+    @Column(name="grietas", nullable = false)
+    private boolean grietas = false;
 
     @OneToOne
     @JoinColumn(name = "idTipoPared")
     private MaterialPared materialPared;
 
     @Column(name="isActive", nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
 
     public int getId_Pared() {
         return id_Pared;
@@ -59,5 +65,29 @@ public class Pared {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public boolean isHumedad() {
+        return humedad;
+    }
+
+    public void setHumedad(boolean humedad) {
+        this.humedad = humedad;
+    }
+
+    public boolean isGrietas() {
+        return grietas;
+    }
+
+    public void setGrietas(boolean grietas) {
+        this.grietas = grietas;
+    }
+
+    public MaterialPared getMaterialPared() {
+        return materialPared;
+    }
+
+    public void setMaterialPared(MaterialPared materialPared) {
+        this.materialPared = materialPared;
     }
 }

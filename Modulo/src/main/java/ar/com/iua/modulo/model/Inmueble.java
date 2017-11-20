@@ -58,9 +58,26 @@ public class Inmueble implements IModel {
     @JoinColumn(name = "idServicioAgua")
     private ServicioAgua servicioAgua;
 
+    @OneToOne
+    @JoinColumn(name = "instalacionAgua")
+    private InstalacionInmueble instalacionAgua;
+
+    @OneToOne
+    @JoinColumn(name = "instalacionGas")
+    private InstalacionInmueble instalacionGas;
+
+    @OneToOne
+    @JoinColumn(name = "instalacionCloacal")
+    private InstalacionInmueble instalacionCloacal;
+
+    @OneToOne
+    @JoinColumn(name = "instalacionElectrica")
+    private InstalacionInmueble instalacionElectrica;
+
+
     @OneToMany (mappedBy = "inmueble")
     private List<Cocina> cocina;
-//
+
     @OneToMany (mappedBy = "inmueble")
     private List<PoseeBano> poseeBano;
 
@@ -190,5 +207,37 @@ public class Inmueble implements IModel {
     @Override
     public int getId() {
         return id_Inmueble;
+    }
+
+    public InstalacionInmueble getInstalacionAgua() {
+        return instalacionAgua;
+    }
+
+    public void setInstalacionAgua(InstalacionInmueble instalacionAgua) {
+        this.instalacionAgua = instalacionAgua;
+    }
+
+    public InstalacionInmueble getInstalacionGas() {
+        return instalacionGas;
+    }
+
+    public void setInstalacionGas(InstalacionInmueble instalacionGas) {
+        this.instalacionGas = instalacionGas;
+    }
+
+    public InstalacionInmueble getInstalacionCloacal() {
+        return instalacionCloacal;
+    }
+
+    public void setInstalacionCloacal(InstalacionInmueble instalacionCloacal) {
+        this.instalacionCloacal = instalacionCloacal;
+    }
+
+    public InstalacionInmueble getInstalacionElectrica() {
+        return instalacionElectrica;
+    }
+
+    public void setInstalacionElectrica(InstalacionInmueble instalacionElectrica) {
+        this.instalacionElectrica = instalacionElectrica;
     }
 }

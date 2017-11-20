@@ -24,10 +24,16 @@ public class Techo {
     private MaterialTecho materialTecho;
 
     @Column(name="isActive", nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
+
+    @Column(name="humedad", nullable = false)
+    private boolean humedad = false;
+
+    @Column(name="grietas", nullable = false)
+    private boolean grietas = false;
 
     @Column(name="CieloRazo", nullable = false)
-    private boolean cieloRazo;
+    private boolean cieloRazo = false;
 
     public int getId_Techo() {
         return id_Techo;
@@ -59,5 +65,29 @@ public class Techo {
 
     public void setCieloRazo(boolean cieloRazo) {
         this.cieloRazo = cieloRazo;
+    }
+
+    public MaterialTecho getMaterialTecho() {
+        return materialTecho;
+    }
+
+    public void setMaterialTecho(MaterialTecho materialTecho) {
+        this.materialTecho = materialTecho;
+    }
+
+    public boolean isHumedad() {
+        return humedad;
+    }
+
+    public void setHumedad(boolean humedad) {
+        this.humedad = humedad;
+    }
+
+    public boolean isGrietas() {
+        return grietas;
+    }
+
+    public void setGrietas(boolean grietas) {
+        this.grietas = grietas;
     }
 }
