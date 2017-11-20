@@ -19,8 +19,11 @@ public class Pared {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_Pared;
 
-    @Column(name="revoque", nullable = false)
-    private boolean revoque = false;
+    @Column(name="revoqueInterior", nullable = false)
+    private boolean revoqueInterior= false;
+
+    @Column(name="revoqueExterior", nullable = false)
+    private boolean revoqueExterior = false;
 
     @Column(name="humedad", nullable = false)
     private boolean humedad = false;
@@ -43,12 +46,20 @@ public class Pared {
         this.id_Pared = id_Pared;
     }
 
-    public boolean isRevoque() {
-        return revoque;
+    public boolean isRevoqueInterior() {
+        return revoqueInterior;
     }
 
-    public void setRevoque(boolean revoque) {
-        this.revoque = revoque;
+    public void setRevoqueInterior(boolean revoqueInterior) {
+        this.revoqueInterior = revoqueInterior;
+    }
+
+    public boolean isRevoqueExterior() {
+        return revoqueExterior;
+    }
+
+    public void setRevoqueExterior(boolean revoqueExterior) {
+        this.revoqueExterior = revoqueExterior;
     }
 
     public MaterialPared getTipoPared() {
