@@ -1,6 +1,7 @@
 package ar.com.iua.web.spring.services.Controllers;
 
 import ar.com.iua.modulo.business.Interfaces.IDireccionService;
+import ar.com.iua.modulo.business.Interfaces.IPersonaService;
 import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
 import ar.com.iua.modulo.business.exception.ServiceException;
 import ar.com.iua.modulo.model.Direccion;
@@ -34,6 +35,8 @@ public class FamiliaController extends GenericController {
     private IDireccionService dirService;
     @Autowired
     private ITelefonoService telService;
+    @Autowired
+    private IPersonaService personaService;
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -105,7 +108,7 @@ public class FamiliaController extends GenericController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> delte (@PathVariable int id) throws IOException {
+    public ResponseEntity<Object> delete(@PathVariable int id) throws IOException {
         return setInactive(id,familiaService);
     }
 
@@ -118,6 +121,25 @@ public class FamiliaController extends GenericController {
             }else  {
                 return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
             }
+        } catch (NotFoundException nfe) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/integrantesByDni/{dni}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getIntegrantes (@PathVariable String dni) throws IOException {
+        try {
+            List<Persona> listaJefes = personaService.getByDni(dni);
+            if(!listaJefes.isEmpty()){
+                List<Persona> integrantes = familiaService.getIntegrantes(listaJefes.get(0).getFamilia().getId_Familia());
+                if(!integrantes.isEmpty()){
+                    return new ResponseEntity<Object>(integrantes , HttpStatus.OK);
+                }
+            }
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         } catch (NotFoundException nfe) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         } catch (Exception e) {
