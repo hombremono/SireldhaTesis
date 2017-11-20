@@ -67,13 +67,6 @@ public class Techo {
         this.cieloRazo = cieloRazo;
     }
 
-    public MaterialTecho getMaterialTecho() {
-        return materialTecho;
-    }
-
-    public void setMaterialTecho(MaterialTecho materialTecho) {
-        this.materialTecho = materialTecho;
-    }
 
     public boolean isHumedad() {
         return humedad;

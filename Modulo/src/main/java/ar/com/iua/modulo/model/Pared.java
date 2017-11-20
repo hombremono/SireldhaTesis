@@ -94,11 +94,5 @@ public class Pared {
         this.grietas = grietas;
     }
 
-    public MaterialPared getMaterialPared() {
-        return materialPared;
-    }
 
-    public void setMaterialPared(MaterialPared materialPared) {
-        this.materialPared = materialPared;
-    }
 }
