@@ -73,11 +73,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             },
             {
                 id: 1,
-                descripcion: "Antigüedad de la inscripción en el registro"
-            },
-            {
-                id: 2,
-                descripcion: "Documentación probatoria completa"
+                descripcion: "Inicio de residencia"
             }]
     };
     $scope.comboSitLocalidad = {
@@ -88,11 +84,11 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             },
             {
                 id: 1,
-                descripcion: "Antigüedad de la inscripción en el registro"
+                descripcion: "Laborde"
             },
             {
                 id: 2,
-                descripcion: "Documentación probatoria completa"
+                descripcion: "Córdoba"
             }]
     };
     $scope.comboSitEdadJefe = {
@@ -103,11 +99,20 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             },
             {
                 id: 1,
-                descripcion: "Antigüedad de la inscripción en el registro"
+                descripcion: "18-25"
             },
             {
                 id: 2,
-                descripcion: "Documentación probatoria completa"
+                descripcion: "26-35"
+            },
+            {
+                id: 3,
+                descripcion: "36-50"
+            }
+            ,
+            {
+                id: 4,
+                descripcion: "50+"
             }]
     };
     $scope.comboSitCapCons = {
@@ -118,12 +123,25 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             },
             {
                 id: 1,
-                descripcion: "Antigüedad de la inscripción en el registro"
+                descripcion: "Pintor"
             },
             {
                 id: 2,
-                descripcion: "Documentación probatoria completa"
-            }]
+                descripcion: "Pocero"
+            },
+            {
+                id: 3,
+                descripcion: "Ceramista"
+            },
+            {
+                id: 4,
+                descripcion: "Techador"
+            },
+            {
+                id: 5,
+                descripcion: "Yesero"
+            }
+        ]
     };
     $scope.comboSitRegistro = {
         items: [

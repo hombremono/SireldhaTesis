@@ -512,7 +512,6 @@ $scope.addjefeDeFamilia = function(){
 
 
         };
-        debugger;
         personaService.add(jefeReq).then(function(resp){
             debugger;
             if(resp.status == 409)
@@ -2163,8 +2162,7 @@ $scope.buscarPersona = function() {
 };
 $scope.buscarFamilia = function(){
     $scope.familia.integrantes=[];
-    // familiaService.searchFamily($scope.DNIBusqueda).then(function(resp){
-    personaService.getByDni($scope.DNIBusqueda).then(function (resp) {
+    familiaService.searchFamily($scope.DNIBusqueda).then(function(resp){
 
         if(resp.status == 404){
             showNotification('No existe persona con ese DNI en la base de datos', 'warning');

@@ -45,7 +45,15 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         zonaInsalubre:false,
         bano:false,
         superficieEdificada:"",
-        banoAguaFuncional:false
+        banoAguaFuncional:false,
+        instalacionAgua:0,
+        instalacionGas:0,
+        instalacionCloacal:0,
+        instalacionElectrica:0,
+        techoGrietas:false,
+        techoHumedad:false,
+        paredGrietas:false,
+        paredHumedad:false
     };
     $scope.conservacion ={
         paredGoteras:false,
@@ -57,8 +65,10 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         instElec:0,
         instCloac:0
     };
+    $scope.inmuebleReq   ={};
 
     $scope.datosOK = false;
+    $scope.estadoOK = false;
     var idFamilia =$rootScope.idFamilia;
 
     //Carga de Opciones
@@ -170,10 +180,12 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 descripcion:"Deficiente"
             }
         ];
-    $scope.conservacion.instAgua = $scope.combosConservacion[0].id_Combo;
-    $scope.conservacion.instGas = $scope.combosConservacion[0].id_Combo;
-    $scope.conservacion.instElec = $scope.combosConservacion[0].id_Combo;
-    $scope.conservacion.instCloac = $scope.combosConservacion[0].id_Combo;
+    $scope.inmueble.instalacionAgua = $scope.combosConservacion[0].id_Combo;
+    $scope.inmueble.instalacionGas = $scope.combosConservacion[0].id_Combo;
+    $scope.inmueble.instalacionElectrica = $scope.combosConservacion[0].id_Combo;
+    $scope.inmueble.instalacionCloacal = $scope.combosConservacion[0].id_Combo;
+
+
         var cargarCombo = function(combo, coleccion){
             var resultado = [];
             coleccion.forEach(function(value) {
@@ -230,7 +242,6 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
 
             valid = ejecutarValidaciones();
             if(valid){
-
                 var inmubleConexAgua = null;
                 var inmuebleProdAgua = null;
                 var inmuebleBano = null;
@@ -277,7 +288,11 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                         "tipoPared": {
                             "id_MaterialPared": $scope.inmueble.tipoPared,
                             "active": true
-                        }
+                        },
+                        "grietas":$scope.inmueble.paredGrietas,
+                        "humedad":$scope.inmueble.paredHumedad,
+                        "revoqueInterior":$scope.inmueble.revoqueInt,
+                        "revoqueExterior:":$scope.inmueble.revoqueExt
                     },
                     "techo": {
                         "cieloRazo": $scope.inmueble.cieloRazo,
@@ -285,7 +300,9 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                         "tipoTecho": {
                             "id_MaterialTecho": $scope.inmueble.tipoTecho,
                             "active": true
-                        }
+                        },
+                        "grietas":$scope.inmueble.techoGrietas,
+                        "humedad":$scope.inmueble.techoHumedad
                     },
                     "poseeLuz":inmuebleLuz ,
                     "servicioAgua":inmubleConexAgua ,
@@ -293,7 +310,19 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                     "piso": {
                         "id_MaterialPiso": $scope.inmueble.tipoPiso,
                         "active": true
-                    }
+                    },
+                    "instalacionAgua":{
+                        "id_InstalacionInmueble":$scope.inmueble.instalacionAgua
+                    },
+                    "instalacionGas":{
+                        "id_InstalacionInmueble":$scope.inmueble.instalacionGas
+                    },
+                    "instalacionCloacal":{
+                    "id_InstalacionInmueble":$scope.inmueble.instalacionCloacal
+                },
+                    "instalacionElectrica":{
+                    "id_InstalacionInmueble":$scope.inmueble.instalacionElectrica
+                }
                 };
             inmuebleService.add(reqInmueble).then(function(resp) {
                 var idInmueble = resp.data.id_Inmueble;
@@ -382,6 +411,10 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         };
         $scope.cargarEstado = function(){
             $scope.datosOK  = verificarPosesion();
+        };
+        $scope.condicionInmueble =function(){
+            $scope.datosOK = false;
+            $scope.estadoOK = true;
         };
         $scope.verificarPosesion = function(){
             var result = true;
