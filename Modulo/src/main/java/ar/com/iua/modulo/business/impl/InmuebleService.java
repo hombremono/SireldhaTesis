@@ -139,7 +139,7 @@ public class InmuebleService extends GenericService<Inmueble, Integer> implement
         }
     }
 
-    public Inmueble save(Inmueble inmueble) throws ServiceException {
+    public Inmueble saveOrUpdate(Inmueble inmueble) throws ServiceException {
         try {
             inmueble.setTecho(techoDAO.saveOrUpdate(inmueble.getTecho()));
             inmueble.setPared(paredDAO.saveOrUpdate(inmueble.getPared()));
@@ -147,7 +147,7 @@ public class InmuebleService extends GenericService<Inmueble, Integer> implement
                 inmueble.setServicioAgua(servicioAguaDAO.saveOrUpdate(inmueble.getServicioAgua()));
             }
 
-            return inmuebleDAO.save(inmueble);
+            return inmuebleDAO.saveOrUpdate(inmueble);
         } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
             throw new ServiceException(e.getMessage(), e);

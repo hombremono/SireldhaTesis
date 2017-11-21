@@ -45,7 +45,7 @@ angular.module('webS')
       })
       .when('/loadFiles', {
           templateUrl: 'views/solicitud/filesUpload.html',
-          controller: 'FileController'
+          controller: 'FilesController'
       })
       .when('/review', {
           templateUrl: 'views/solicitud/review.html',

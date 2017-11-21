@@ -226,10 +226,11 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
                             "active": true,
                             "antiguedadResidencia": getYears($scope.Hogar.fechaInicio)
                         };
+                        $rootScope.hogar = hogarReq;
                         hogarService.add(hogarReq).then(function (resp) {
-                            debugger;
                             $rootScope.idFamilia = resp.data.id_Familia;
-                            $rootScope.hogar = resp.data;
+                            $rootScope.hogar.id_Familia = resp.data.id_Familia;
+
                             $location.path('/requestJF');
                         }, function (respErr) {
                             console.log(respErr);

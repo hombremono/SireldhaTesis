@@ -39,7 +39,7 @@
 ---------------------------------------------------------------------------------------------------------------------------------//
 //-----------------------------------------------POSESION INMUEBLE ------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------------------------->
-<div id="datosInmueble" ng-show="!datosOK">
+<div id="datosInmueble" ng-show="!datosOK && !estadoOK">
     <h3 title="info de hogar">Posesión de inmueble</h3>
     <div class="form-group">
         <label for="selectPosesionInmueble"><span style="color:red">* </span>El hogar posee inmueble propio</label>
@@ -117,7 +117,7 @@
 <!--//--------------------------------------------------------------------------------------------------------------------------------------//
 //-----------------------------------------------ESTADO INMUEBLE ------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------------------------->
-<div id="estadoInmueble" ng-show="datosOK">
+<div id="estadoInmueble" ng-show="datosOK && !estadoOK">
     <h3 title="info de hogar">Condiciones del inmueble</h3>
     <form>
         <div class="form-group">
@@ -220,7 +220,54 @@
         </div>
     </form>
 
+    <button class="btn btn-primary"  pull-right type="button" id="btnCondInmueble" ng-click="condicionInmueble()">Siguiente</button>
+</div>
+<!--//--------------------------------------------------------------------------------------------------------------------------------------//
+//-----------------------------------------------CONDICION INMUEBLE ------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------------------------------------->
+<div id="condicionInmueble" ng-show="estadoOK">
+    <h3 title="info de hogar">Conservación del inmueble</h3>
+    <form>
+
+        <h5>Estado de conservación de las paredes</h5>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="cheParedGoteras" ng-model="inmueble.paredHumedad"/>
+            <label for="cheParedGoteras">Tiene humedades y/o goteras</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="cheParedGrietas" ng-model="inmueble.paredGrietas"/>
+            <label for="cheParedGrietas">Tiene grietas y/o rajaduras</label>
+        </div>
+        <h5>Estado de conservación del techo</h5>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="cheTechoGoteras" ng-model="inmueble.techoHumedad"/>
+            <label for="cheTechoGoteras">Tiene humedades y/o goteras</label>
+        </div>
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5" id="cheTechoGrietas" ng-model="inmueble.techoGrietas"/>
+            <label for="cheTechoGrietas">Tiene grietas y/o rajaduras</label>
+        </div>
+        <div class="form-group">
+            <label for="selectInstAgua">Estado de conservación de las intalaciones de agua</label>
+            <select class="form-control input-md" id="selectInstAgua" ng-model="inmueble.instalacionAgua" ng-options="combo.id_Combo as combo.descripcion for combo in combosConservacion"></select>
+        </div>
+        <div class="form-group">
+            <label for="selectInstGas">Estado de conservación de las intalaciones de gas</label>
+            <select class="form-control input-md" id="selectInstGas" ng-model="inmueble.instalacionGas" ng-options="combo.id_Combo as combo.descripcion for combo in combosConservacion"></select>
+        </div>
+        <div class="form-group">
+            <label for="selectInstElec">Estado de conservación de las intalaciones eléctricas</label>
+            <select class="form-control input-md" id="selectInstElec" ng-model="inmueble.instalacionElectrica" ng-options="combo.id_Combo as combo.descripcion for combo in combosConservacion"></select>
+        </div>
+        <div class="form-group">
+            <label for="selectInstCloac">Estado de conservación de las intalaciones cloacales</label>
+            <select class="form-control input-md" id="selectInstCloac" ng-model="inmueble.instalacionCloacal" ng-options="combo.id_Combo as combo.descripcion for combo in combosConservacion"></select>
+        </div>
+
+
+    </form>
     <button class="btn btn-primary"  pull-right type="button" id="btnCargaEstado" ng-click="cargarInmueble()">Siguiente</button>
+
 </div>
 </div>
 
