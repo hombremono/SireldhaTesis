@@ -5,6 +5,13 @@ angular.module('webS').controller('PlanController',
     [ '$scope', '$sce', '$uibModal','$location', 'planService', PlanController ]);
 function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
+    $scope.Planes=[
+        {
+            nombre:"Plan de Prueba",
+            financiamiento:1,
+            tipo:3
+        }
+    ];
     $scope.Plan = {
         nombre:"",
         financiamiento:0,
@@ -55,6 +62,11 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         ];
     $scope.Plan.tipo = $scope.Tipos[0].id;
 
+    //Global Variables
+    $scope.agregandoPlan = false;
+    //Variables n' Stuff
+    $scope.mostrarSitRegistro = true;
+    $scope.mostrarSitHogar =true;
 
     //Situaciones
     $scope.sitRegistro = {
@@ -85,10 +97,21 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             {
                 id: 1,
                 descripcion: "Laborde"
+            }]
+    };
+    $scope.comboSitGenero = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Femenino"
             },
             {
                 id: 2,
-                descripcion: "Córdoba"
+                descripcion: "Masculino"
             }]
     };
     $scope.comboSitEdadJefe = {
@@ -164,6 +187,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         itemLocalidad: $scope.comboSitLocalidad.items[0].id,
         itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
         itemCapCons: $scope.comboSitCapCons.items[0].id,
+        itemGenero: $scope.comboSitGenero.items[0].id
     };
 
     //FUNCIONES
@@ -173,7 +197,8 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
                 var item={
                     categoria:categoria,
                     descripcion:element.descripcion,
-                    puntaje:0
+                    puntaje:0,
+                    required:false
                 };
                 coleccion.push(item);
             }
@@ -203,9 +228,24 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         });
 
     };
-    //Variables n' Stuff
-    $scope.mostrarSitRegistro = true;
-    $scope.mostarSitHogar =true;
+    $scope.addPlan = function(plan){
+        $scope.Planes.push(plan);
+        $scope.Plan = {
+            nombre:"",
+            financiamiento:0,
+            tipo:0
+        };
+        $scope.temp ={
+            item : $scope.comboSitRegistro.items[0].id,
+            itemHogar: $scope.comboSitHogar.items[0].id,
+            itemLocalidad: $scope.comboSitLocalidad.items[0].id,
+            itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
+            itemCapCons: $scope.comboSitCapCons.items[0].id,
+            itemGenero: $scope.comboSitGenero.items[0].id
+        };
+        $scope.agregandoPlan = false;
+    }
+
 }
 
 
