@@ -63,6 +63,10 @@ angular.module('webS')
           templateUrl: 'views/plan/agregarPlan.html',
           controller: 'PlanController'
       })
+      .when('/printPdf', {
+          templateUrl: 'views/solicitud/pdfPrint.html',
+          controller: 'PdfController'
+      })
     .otherwise({
       redirectTo: '/'
     });

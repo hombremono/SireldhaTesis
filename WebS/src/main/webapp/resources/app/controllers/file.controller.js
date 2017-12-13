@@ -1,22 +1,36 @@
 angular.module('webS').controller('FilesController',
-    [ '$scope', '$sce', '$uibModal','$location', 'fileService', FilesController ]);
-function FilesController($scope, $sce, $uibModal, $location, fileService) {
+    [ '$http','URL_API_BASE','$scope', '$sce', '$uibModal','$location', 'fileService', FilesController]);
+function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $location, fileService) {
 
-  $scope.files = [];
+    $scope.files = [];
+    $scope.archivos = [];
   $scope.uploadFile = function(){
-        var file = $scope.myFile;
-      fileService.addFiles(file).then(function(resp) {
-          var v = resp.data
-          debugger;
-      }, function(respErr) {
-          var v = respErr;
-          debugger;
-      });
+      $scope.files=document.getElementById("myFileField").files;
+      for (var i = 0; i < $scope.files.length; i++){
+          var formData = new FormData();
+          formData.append('section', 'general');
+          formData.append('action', 'previewImg');
+          formData.append('file', $scope.files[i]);
+          $.ajax({
+              url: "/WebS/api/v1/files/",
+              data: formData,
+              file:$scope.files[i],
+              type: "POST",
+              contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+              processData: false // NEEDED, DON'T OMIT THIS
+              // ... Other options like success and etc
+          }).then(function(response) {
+              var data = response.data;
+              var status = response.status;
+              console.log(data);
+          });
 
-    };
+      };
+  };
   $scope.finish = function(){
     $location.path('/review');
   };
+
 };
 
 

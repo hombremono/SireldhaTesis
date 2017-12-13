@@ -6,9 +6,42 @@
     <!--{{file.name}}-->
 <!--</p>-->
 
+<h3 title="carga de archivos">Carga de archivos.</h3>
 
-    <input type = "file"  file-model = "myFile"/>
-    <button ng-click = "uploadFile()">Upload File</button>
+<div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-warning-sign"></span> Atención!</h3>
+    </div>
+    <div class="panel-body">
+        La persona que carga tiene la responsabilidad de controlar que el solicitante presente la totalidad de los archivs necesarios.
+    </div>
+</div>
+<br>
+<h4>Seleecion de archivos</h4>
+<div class="row">
+    <div class="col-md-6">
+        <input type="file" id="myFileField" name="myFile" multiple class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+        <small id="fileHelp" class="form-text text-muted">Seleccione todos los archivos que desee cargar.</small>
+    </div>
+    <div class="col-md-3"><h5>Lista de archivos necesarios.</h5>
+        <ul>
+            <li>Certficado de nacimiento de cada integrante.</li>
+            <li>Copia de documento de cada integrante.</li>
+            <li>Otros....</li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <ul>
+            <li>Certficado de matrimonio.</li>
+            <li>Escritura.</li>
+            <li>Otros....</li>
+        </ul>
+    </div>
+</div>
+
+<button class="btn btn-primary" ng-click = "uploadFile()">Upload File</button>
+
+
 
 
 

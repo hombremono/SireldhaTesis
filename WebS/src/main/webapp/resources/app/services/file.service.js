@@ -2,6 +2,7 @@ angular.module('webS')
     .factory('fileService',['$http','URL_API_BASE',function($http, URL_API_BASE,ajaxService) {
         return {
             addFiles: function(data) {
+                debugger;
                         var data = {}; //file object
 
                         var fd = new FormData();

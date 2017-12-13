@@ -63,6 +63,15 @@
     <script type="text/javascript" src="lib/angular-spinner/angular-spinner.min.js"></script>
     <script type="text/javascript" src="lib/angular-loading-spinner/angular-loading-spinner.js"></script>
 
+    <!--PDF JS-->
+    <script type="text/javascript" src="lib/jsPDF-1.3.2/jspdf.js"></script>
+    <script type="text/javascript" src="lib/jsPDF-1.3.2/plugins/from_html.js"></script>
+    <script type="text/javascript" src="lib/jsPDF-1.3.2/plugins/split_text_to_size.js"></script>
+    <script type="text/javascript" src="lib/jsPDF-1.3.2/plugins/standard_fonts_metrics.js"></script>
+    <script type="text/javascript" src="lib/jsPDF-1.3.2/plugins/autoprint.js"></script>
+
+
+
     <script type="text/javascript" 	src="app.js"></script>
     <script type="text/javascript" 	src="config/interceptors.js"></script>
     <script type="text/javascript" 	src="config/routes.js"></script>
@@ -77,6 +86,7 @@
     <!--<script type="text/javascript" 	src="controllers/localidad.controller.js"></script>-->
     <script type="text/javascript" 	src="controllers/plan.controller.js"></script>
     <!--<script type="text/javascript" 	src="controllers/review.controller.js"></script>-->
+    <script type="text/javascript" 	src="controllers/pdf.controller.js"></script>
 
 
     <script type="text/javascript" 	src="services/users.service.js"></script>
@@ -106,7 +116,7 @@
     <div class="main-panel">
 
         <div class="content">
-            <div class="container page-styling">
+            <div class=" page-styling" >
                 <main ng-view=""></main>
             </div>
         </div>
