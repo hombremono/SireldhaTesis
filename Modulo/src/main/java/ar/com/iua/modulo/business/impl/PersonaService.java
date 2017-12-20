@@ -37,6 +37,7 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
     private IRolFamiliarDAO rolFamiliarDAO;
     private ISubsidioDAO subsidioDAO;
     private ISituacionesEspecialesDAO situacionesEspecialesDAO;
+    private IDiscapacidadDAO discapacidadDAO;
 
 
 
@@ -44,7 +45,7 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
                           IEstadoCivilDAO estadoCivilDAO, IEstudioDAO estudioDAO, INacionalidadDAO nacionalidadDAO,
                           IProfesionDAO profesionDAO, ISexoDAO sexoDAO, ISituacionLaboralDAO situacionLaboralDAO,
                           ITipoDocumentoDAO tipoDocumentoDAO, ILocalidadDAO localidadDAO, IRolFamiliarDAO rolFamiliarDAO,
-                          ISubsidioDAO subsidioDAO, ISituacionesEspecialesDAO situacionesEspecialesDAO) {
+                          ISubsidioDAO subsidioDAO, ISituacionesEspecialesDAO situacionesEspecialesDAO, IDiscapacidadDAO discapacidadDAO) {
         super(personaDao);
         this.personaDao = personaDao;
         this.capacidadConstructivaDAO = capacidadConstructivaDAO;
@@ -59,6 +60,7 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
         this.rolFamiliarDAO = rolFamiliarDAO;
         this.subsidioDAO = subsidioDAO;
         this.situacionesEspecialesDAO = situacionesEspecialesDAO;
+        this.discapacidadDAO = discapacidadDAO;
     }
 
     @Override
@@ -96,7 +98,8 @@ public class PersonaService extends GenericService<Persona, Integer> implements 
                             sexoDAO.list(),estadoCivilDAO.list(),
                             nacionalidadDAO.list(),estudioDAO.list(),
                             profesionDAO.list(),capacidadConstructivaDAO.list(),
-                            situacionLaboralDAO.list(),localidadDAO.list(),rolFamiliarDAO.list());
+                            situacionLaboralDAO.list(),localidadDAO.list(),rolFamiliarDAO.list(),
+                            discapacidadDAO.list());
             return combos;
         } catch (PersistenceException e){
             LOG.error(e.getMessage(),e);

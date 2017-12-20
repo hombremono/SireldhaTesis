@@ -35,6 +35,7 @@ public class PersonaController extends GenericController {
     @Autowired
     private ISituacionesEspecialesService situacionesEspecialesService;
 
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException{
         try {

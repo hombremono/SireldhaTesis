@@ -29,6 +29,7 @@ public class PersonaCombos implements Serializable {
     private List<SituacionLaboral> situacionesLaborales;
     private List<Localidad> localidades;
     private List<RolFamiliar> rolesFamiliares;
+    private List<Discapacidad> discapacidades;
 
 
     public PersonaCombos(List<TipoDocumento> tiposDocumentos,
@@ -36,7 +37,7 @@ public class PersonaCombos implements Serializable {
                          List<Nacionalidad> nacionalidades, List<Estudios> estudios,
                          List<Profesion> profesiones, List<TipoCapacidadConstructiva> capacidadesConstructivas,
                          List<SituacionLaboral> situacionesLaborales, List<Localidad> localidades,
-                         List<RolFamiliar> rolesFamiliares) {
+                         List<RolFamiliar> rolesFamiliares, List<Discapacidad> discapacidades) {
         this.tiposDocumentos = tiposDocumentos;
         this.generos = generos;
         this.estadosCiviles = estadosCiviles;
@@ -47,6 +48,7 @@ public class PersonaCombos implements Serializable {
         this.situacionesLaborales = situacionesLaborales;
         this.localidades = localidades;
         this.rolesFamiliares = rolesFamiliares;
+        this.discapacidades = discapacidades;
     }
 
     public List<Localidad> getLocalidades() {
@@ -127,5 +129,13 @@ public class PersonaCombos implements Serializable {
 
     public void setSituacionesLaborales(List<SituacionLaboral> situacionesLaborales) {
         this.situacionesLaborales = situacionesLaborales;
+    }
+
+    public List<Discapacidad> getDiscapacidades() {
+        return discapacidades;
+    }
+
+    public void setDiscapacidades(List<Discapacidad> discapacidades) {
+        this.discapacidades = discapacidades;
     }
 }

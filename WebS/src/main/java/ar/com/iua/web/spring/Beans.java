@@ -194,6 +194,11 @@ public class Beans {
 	public ISituacionesEspecialesDAO situacionesEspecialesDAO (final SessionFactory sessionFactory)
 	{ return new SituacionesEspecialesDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IDiscapacidadDAO discapacidadDAO (final SessionFactory sessionFactory)
+	{ return new DiscapacidadDAO(sessionFactory);}
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -245,7 +250,8 @@ public class Beans {
 										   final ILocalidadDAO localidadDAO,
 										   final IRolFamiliarDAO rolFamiliarDAO,
 										   final ISubsidioDAO subsidioDAO,
-										   final ISituacionesEspecialesDAO situacionesEspecialesDAO){
+										   final ISituacionesEspecialesDAO situacionesEspecialesDAO,
+										   final IDiscapacidadDAO discapacidadDAO){
 		return new PersonaService(
 				personaDao,
 				tipoCapacidadConstructivaDAO,
@@ -259,7 +265,8 @@ public class Beans {
 				localidadDAO,
 				rolFamiliarDAO,
 				subsidioDAO,
-				situacionesEspecialesDAO); }
+				situacionesEspecialesDAO,
+				discapacidadDAO); }
 
 	@Bean
 	@Autowired
