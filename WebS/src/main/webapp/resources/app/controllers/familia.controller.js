@@ -188,24 +188,11 @@ $scope.relacionJF =[{
     id_RolFamiliar:0,
     rolFamiliar:"-SELECCIONE-"
 }];
-
-//Temporal Placebo Colection
 $scope.discapacidades=[
     {
     id_Discapacidad:0,
     descripcion:"-SELECCIONE-"
-    },{
-        id_Discapacidad:1,
-        descripcion:"No tiene"
-    },{
-        id_Discapacidad:2,
-        descripcion:"Sensorial"
-    },{
-        id_Discapacidad:3,
-        descripcion:"Motora"
-    },{
-        id_Discapacidad:4,
-        descripcion:"Cognitivo/intelectual"}
+    }
     ];
 
 //Combo de resultado de carga
@@ -258,6 +245,7 @@ familiaService.loadCombosPersona().then(function(resp) {
         cargarCombo($scope.depLaborales,datos.situacionesLaborales);
         cargarCombo($scope.Localidades,datos.localidades);
         cargarCombo($scope.relacionJF,datos.rolesFamiliares);
+        cargarCombo($scope.discapacidades, datos.discapacidades);
         //Seteado de elemento 0
         defaultCombos();
     }, function(respErr) {
@@ -528,6 +516,7 @@ $scope.addjefeDeFamilia = function(){
                     var geocoder = new google.maps.Geocoder();
 
                     geocoder.geocode({address: addressInput}, function (results, status) {
+                        debugger;
                         if (status == google.maps.GeocoderStatus.OK) {
                             var myResult = results[0].geometry.location; // reference LatLng value
                             var num;
@@ -2325,6 +2314,11 @@ var ejecutarValidacionesJF = function(){
         showNotification('Ingrese un Ingreso Neto valido', 'danger');
             result=false;
     }
+    if($scope.jefeDeFamilia.discapacidadCombo == 0)
+    {
+        showNotification('Seleccione una discapacidad valida. ', 'danger');
+        result=false;
+    }
     return result;
 
 };
@@ -2389,6 +2383,11 @@ var ejecutarValidaciones = function(){
     {
         showNotification('Seleccione una relacion con el Jefe/a de familia', 'danger');
             result=false;
+    }
+    if($scope.persona.discapacidadCombo == 0)
+    {
+        showNotification('Seleccione una discapacidad valida. ', 'danger');
+        result=false;
     }
     return result;
 

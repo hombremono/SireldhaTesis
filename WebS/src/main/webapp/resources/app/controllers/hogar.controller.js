@@ -152,9 +152,16 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
     //---------MAPS
     var getCoordenadas = function () {
             var deferred = $.Deferred();
+        var result = true;
             var addressInput = document.getElementById('adress-hogar').value;
+        var reN = new RegExp("^[0-9]*$");
+        var reL = new RegExp("^[a-zA-Z, ]*$");
+        if ((reN.test(addressInput))||(reL.test(addressInput))) {
+            showNotification('Ingrese una dirección valida!', 'danger');
+            result = false;
+        }
             var geocoder = new google.maps.Geocoder();
-            var result = true;
+
 
             geocoder.geocode({address: addressInput}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
