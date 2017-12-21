@@ -515,8 +515,8 @@ $scope.addjefeDeFamilia = function(){
                     var addressInput = document.getElementById('adress-jf').value;
                     var geocoder = new google.maps.Geocoder();
 
+
                     geocoder.geocode({address: addressInput}, function (results, status) {
-                        debugger;
                         if (status == google.maps.GeocoderStatus.OK) {
                             var myResult = results[0].geometry.location; // reference LatLng value
                             var num;
@@ -555,7 +555,7 @@ $scope.addjefeDeFamilia = function(){
                                 "direccion": {
                                     "calle": calle,
                                     "numero": num,
-                                    "dpto": addressInput,
+                                    "dpto": "",
                                     "barrio": $scope.jefeDeFamilia.trabajoDependencia.barrio,
                                     "latitud": lat,
                                     "longitud": lng,
@@ -568,6 +568,7 @@ $scope.addjefeDeFamilia = function(){
                                 },
                                 "active": true
                             };
+                            debugger;
                             familiaService.addRelacionDep(trabajoDependencia).then(function (resp) {
                                 $rootScope.idDependencia = resp.data.id_TrabajoDependencia;
                                 $location.path('/family');
@@ -2309,15 +2310,25 @@ var ejecutarValidacionesJF = function(){
             result=false;
     }
     //----
-    if($scope.jefeDeFamilia.ingresoNeto == "" || $scope.jefeDeFamilia.ingresoNeto <= 0  )
-    {
-        showNotification('Ingrese un Ingreso Neto valido', 'danger');
-            result=false;
-    }
+    // if($scope.jefeDeFamilia.ingresoNeto == "" || $scope.jefeDeFamilia.ingresoNeto < 0  )
+    // {
+    //     showNotification('Ingrese un Ingreso Neto valido', 'danger');
+    //         result=false;
+    // }
     if($scope.jefeDeFamilia.discapacidadCombo == 0)
     {
         showNotification('Seleccione una discapacidad valida. ', 'danger');
         result=false;
+    }
+    if($scope.jefeDeFamilia.depLaboral==1){
+        var direccion = document.getElementById('adress-jf').value;
+        var reN = new RegExp("^[0-9]*$");
+        var reL = new RegExp("^[a-zA-Z, ]*$");
+        if ((reN.test(direccion))||(reL.test(direccion))) {
+            showNotification('Ingrese una dirección valida!', 'danger');
+            result = false;
+
+        }
     }
     return result;
 
@@ -2389,6 +2400,11 @@ var ejecutarValidaciones = function(){
         showNotification('Seleccione una discapacidad valida. ', 'danger');
         result=false;
     }
+    // if($scope.persona.ingresoNeto == "" || $scope.persona.ingresoNeto < 0  )
+    // {
+    //     showNotification('Ingrese un Ingreso Neto valido', 'danger');
+    //     result=false;
+    // }
     return result;
 
 };

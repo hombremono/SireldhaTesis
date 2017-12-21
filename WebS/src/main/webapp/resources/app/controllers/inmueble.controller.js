@@ -240,7 +240,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             //Validaciones
 
 
-            valid = ejecutarValidaciones();
+            valid = ejecutarValidacionesConservacion();
             if(valid){
                 var inmubleConexAgua = null;
                 var inmuebleProdAgua = null;
@@ -413,8 +413,10 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             $scope.datosOK  = verificarPosesion();
         };
         $scope.condicionInmueble =function(){
-            $scope.datosOK = false;
-            $scope.estadoOK = true;
+            if(ejecutarValidaciones()){
+                $scope.datosOK = false;
+                $scope.estadoOK = true;
+            }
         };
         $scope.verificarPosesion = function(){
             var result = true;
@@ -433,10 +435,27 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 showNotification('Seleccione por que el hogar carece de inmueble', 'danger');
                 result=false;
             }
+            if($scope.inmueble.estado==1)
+            {
+                var direccion = document.getElementById('adress-inmueble').value;
+                var reN = new RegExp("^[0-9]*$");
+                var reL = new RegExp("^[a-zA-Z, ]*$");
+                if ((reN.test(direccion))||(reL.test(direccion))) {
+                    showNotification('Ingrese una dirección valida!', 'danger');
+                    result = false;
+                }
+            }
+
             if(result){
                 /*REVISARLO PARA USAR LOS CHECKS. MUCHO MAS SENCILLO.*/
                 if($scope.inmueble.estado == 1){
                     var addressInput = document.getElementById('adress-inmueble').value;
+                    var reN = new RegExp("^[0-9]*$");
+                    var reL = new RegExp("^[a-zA-Z, ]*$");
+                    if ((reN.test(addressInput))||(reL.test(addressInput))) {
+                        showNotification('Ingrese una dirección valida!', 'danger');
+
+                    }
                     var geocoder = new google.maps.Geocoder();
 
                     geocoder.geocode({address: addressInput}, function(results, status) {
@@ -577,6 +596,30 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             if($scope.inmueble.camas == "")
             {
                 showNotification('Ingrese una cantidad de CAMAS valida!', 'danger');
+                result=false;
+            }
+            return result;
+        };
+        var ejecutarValidacionesConservacion = function(){
+            var result = true;
+            if($scope.inmueble.instalacionAgua == 0)
+            {
+                showNotification('Seleccione un estado de conservación de las instalaciones de AGUA', 'danger');
+                result=false;
+            }
+            if($scope.inmueble.instalacionGas == 0)
+            {
+                showNotification('Seleccione un estado de conservación de las instalaciones de GAS', 'danger');
+                result=false;
+            }
+            if($scope.inmueble.instalacionElectrica == 0)
+            {
+                showNotification('Seleccione un estado de conservación de las instalaciones ELECTRICAS', 'danger');
+                result=false;
+            }
+            if($scope.inmueble.instalacionCloacal == 0)
+            {
+                showNotification('Seleccione un estado de conservación de las instalaciones CLOACALES', 'danger');
                 result=false;
             }
             return result;
