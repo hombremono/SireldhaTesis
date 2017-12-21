@@ -30,6 +30,19 @@ function PdfController( $http, URL_API_BASE, $scope, $sce, $uibModal, $location)
 
         //doc.autoPrint();
         window.open(doc.output('bloburl'), '_blank');
+        $.notify({
+            icon: "pe-7s-smile",
+            message: 'Solicitud cargada con Exito!'
+
+        },{
+            type: 'success',
+            timer: 4000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+        $location.path('/');
     };
 
 };

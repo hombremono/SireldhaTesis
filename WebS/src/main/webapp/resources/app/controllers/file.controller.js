@@ -4,9 +4,9 @@ function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $locatio
 
     $scope.files = [];
     $scope.archivos = [];
-  $scope.uploadFile = function(){
-      $scope.files=document.getElementById("myFileField").files;
-      for (var i = 0; i < $scope.files.length; i++){
+  $scope.uploadFile = function() {
+      $scope.files = document.getElementById("myFileField").files;
+      for (var i = 0; i < $scope.files.length; i++) {
           var formData = new FormData();
           formData.append('section', 'general');
           formData.append('action', 'previewImg');
@@ -14,17 +14,18 @@ function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $locatio
           $.ajax({
               url: "/WebS/api/v1/files/",
               data: formData,
-              file:$scope.files[i],
+              file: $scope.files[i],
               type: "POST",
               contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
               processData: false // NEEDED, DON'T OMIT THIS
               // ... Other options like success and etc
-          }).then(function(response) {
+          }).then(function (response) {
               var data = response.data;
               var status = response.status;
               console.log(data);
-          });
+              $location.path('/printPdf');
 
+          });
       };
   };
   $scope.finish = function(){

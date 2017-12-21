@@ -639,18 +639,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
             });
         };
         var cargaArchivos = function(nombre){
-        // $.notify({
-        //     icon: "pe-7s-smile",
-        //     message: 'Solicitud cargada con Exito!'
-        //
-        // },{
-        //     type: 'success',
-        //     timer: 4000,
-        //     placement: {
-        //         from: 'top',
-        //         align: 'right'
-        //     }
-        // });
+
         $location.path('/loadFiles');
     };
 }
