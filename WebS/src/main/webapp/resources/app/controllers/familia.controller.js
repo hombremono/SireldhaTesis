@@ -2390,6 +2390,11 @@ var ejecutarValidacionesJF = function(){
         showNotification('Ingrese un DNI valido', 'danger');
             result=false;
     }
+    if($scope.jefeDeFamilia.CUIL=="" || $scope.jefeDeFamilia.CUIL==undefined)
+    {
+        showNotification('Ingrese un CUIL valido, revise la cantidad de digitos','danger');
+        result=false;
+    }
     if($scope.jefeDeFamilia.nacimiento == "" || ($scope.jefeDeFamilia.nacimiento.getFullYear() > 10000))
     {
         showNotification('Ingrese una fecha de nacimiento valida', 'danger');
@@ -2486,6 +2491,11 @@ var ejecutarValidaciones = function(){
     {
         showNotification('Ingrese un DNI valido', 'danger');
             result=false;
+    }
+    if($scope.persona.CUIL.toString().length > 14)
+    {
+        showNotification('Ingrese un CUIL valido','danger');
+        result=false;
     }
     if($scope.persona.nacimiento == "" ||($scope.persona.nacimiento.getFullYear() > 10000))
     {
