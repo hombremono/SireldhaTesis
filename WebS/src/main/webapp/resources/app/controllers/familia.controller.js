@@ -2492,9 +2492,9 @@ var ejecutarValidaciones = function(){
         showNotification('Ingrese un DNI valido', 'danger');
             result=false;
     }
-    if($scope.persona.CUIL.toString().length > 14)
+    if($scope.persona.CUIL=="" || $scope.persona.CUIL==undefined)
     {
-        showNotification('Ingrese un CUIL valido','danger');
+        showNotification('Ingrese un CUIL valido, revise la cantidad de digitos','danger');
         result=false;
     }
     if($scope.persona.nacimiento == "" ||($scope.persona.nacimiento.getFullYear() > 10000))
