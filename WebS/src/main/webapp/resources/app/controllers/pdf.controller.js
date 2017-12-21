@@ -2,6 +2,7 @@ angular.module('webS').controller('PdfController',
     [ '$http','URL_API_BASE','$scope', '$sce', '$uibModal','$location', PdfController]);
 function PdfController( $http, URL_API_BASE, $scope, $sce, $uibModal, $location) {
 
+    $scope.clave = Math.floor(Math.random() * 10) + 2365984;
     $scope.createPDF = function(){
         var doc = new jsPDF("landscape", "mm", "a4");
         var elementHandler = {

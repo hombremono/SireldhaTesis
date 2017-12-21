@@ -355,7 +355,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
 
                             };
                             inmuebleService.addBano(reqBano).then(function (r) {
-                                solicitudTerminada();
+                                cargaArchivos();
 
                             });
 
@@ -376,7 +376,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
 
                     };
                     inmuebleService.addCocina(reqCocina).then(function(resp) {
-                        solicitudTerminada();
+                        cargaArchivos();
                     });
                 }
                 else if($scope.inmueble.bano){
@@ -394,12 +394,12 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
 
                     };
                     inmuebleService.addBano(reqBano).then(function (r) {
-                        solicitudTerminada();
+                        cargaArchivos();
 
                     });
                 }
                 else{
-                    solicitudTerminada();
+                    cargaArchivos();
                 }
             }, function(respErr) {
                 console.log(respErr);
@@ -547,7 +547,7 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                             }
                         };
                         inmuebleService.addCareceInmueble(reqCarece).then(function(resp){
-                            solicitudTerminada();
+                            cargaArchivos();
 
                         });
                     }
@@ -638,20 +638,20 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                 }
             });
         };
-        var solicitudTerminada = function(nombre){
-        $.notify({
-            icon: "pe-7s-smile",
-            message: 'Solicitud cargada con Exito!'
-
-        },{
-            type: 'success',
-            timer: 4000,
-            placement: {
-                from: 'top',
-                align: 'right'
-            }
-        });
-        $location.path('/');
+        var cargaArchivos = function(nombre){
+        // $.notify({
+        //     icon: "pe-7s-smile",
+        //     message: 'Solicitud cargada con Exito!'
+        //
+        // },{
+        //     type: 'success',
+        //     timer: 4000,
+        //     placement: {
+        //         from: 'top',
+        //         align: 'right'
+        //     }
+        // });
+        $location.path('/loadFiles');
     };
 }
 

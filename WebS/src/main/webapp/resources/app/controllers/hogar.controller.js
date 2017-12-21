@@ -195,10 +195,11 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
                         showNotification('Se requiere agregar una Direccion', 'danger');
                         result = false;
                     }
-                    if ($scope.Hogar.fechaInicio == "") {
-                        showNotification('Se requiere ingresar una fehca de Inicio de residencia', 'danger');
+                    if ($scope.Hogar.fechaInicio == "" || ($scope.Hogar.fechaInicio.getFullYear() > 10000)) {
+                        showNotification('Ingrese una fecha de Inicio de residencia valida', 'danger');
                         result = false;
                     }
+                    debugger;
                     if(result){
                         var telefonoReq;
                         //Variables para los Req de los Id

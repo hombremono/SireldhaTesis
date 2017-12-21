@@ -2236,6 +2236,138 @@ $scope.buscarFamilia = function(){
 $scope.paginaInicial = function () {
     $location.path('/');
 };
+$scope.tablaDeFamilia = function(){
+        $scope.persona ={
+            id_Persona:0,
+            nombre:"",
+            apellido:"",
+            tipoDni:0,
+            DNI:"",
+            CUIL:"",
+            nacimiento:"",
+            sexo:0,
+            estadoCivil:0,
+            nacionalidad:0,
+            estudios:0,
+            profesion:0,
+
+            depLaboral:0,
+            relacionJF:0,
+            DescRelacionJF:"",
+            ingresoNeto:0,
+            mail:"",
+            telefono:"",
+            jubilado:"",
+            carnetJubilacion:"",
+            Discapacidad:"",
+            idEdicion:0,
+            editando:false,
+            idTelefono:0,
+            idFamilia:0,
+            busqueda:false,
+            discapacidadCombo:0,
+            enfermedad:false,
+            enfermedadDescripcion:"",
+            capacidadesConstructivas:{
+                pintor:false,
+                pocero:false,
+                techador:false,
+                ceramista:false,
+                yesero:false,
+                soldador:false,
+                vidriero:false,
+                opMaq:false
+            },
+            subsidio: {
+                nacional: false,
+                provincial: false,
+                municipal: false
+            },
+            adjudicatarioPlanEstatal: false,
+            situacionesEspeciales: {
+                enfermedadCronica: false,
+                excombatiente: false,
+                victimaViolencia: false,
+                asociacionGremio: false,
+                asociacionEntidadPublica: false
+            }
+        };
+        $scope.jefeDeFamilia={
+            nombre:"",
+            apellido:"",
+            tipoDni:"",
+            DNI:"",
+            CUIL:"",
+            nacimiento:"",
+            sexo:"",
+            estadoCivil:"",
+            nacionalidad:"",
+            estudios:"",
+            profesion:"",
+
+            depLaboral:"",
+            trabajoDependencia:{
+                empresa:"",
+                fechaIngreso:"",
+                idLocalidad:"",
+                barrio:"",
+                direccionFull:"",
+                direccion:{
+                    idDireccion:0,
+                    calle:"",
+                    numero:"",
+                    pisoDepto:""
+                },
+                idTelefono:0,
+                telefono:"",
+                celular:false
+            },
+            trabajoAutonomo:{
+                inicioActividades:""
+            },
+            ingresoNeto:0,
+            mail:"",
+            telefono:"",
+            jubilado:false,
+            relacionJF:99,
+            DescRelacionJF:"Jefe/a de Familia",
+            carnetJubilacion:"",
+            discapacidad:false,
+            idEdicion:0,
+            editando:false,
+            idTelefono:0,
+            idFamilia:0,
+            busqueda:false,
+            discapacidadCombo:0,
+            enfermedad:false,
+            enfermedadDescripcion:"",
+            capacidadesConstructivas:{
+                pintor:false,
+                pocero:false,
+                techador:false,
+                ceramista:false,
+                yesero:false,
+                soldador:false,
+                vidriero:false,
+                opMaq:false
+            },
+            subsidio: {
+                nacional: false,
+                provincial: false,
+                municipal: false
+            },
+            adjudicatarioPlanEstatal: false,
+            situacionesEspeciales: {
+                enfermedadCronica: false,
+                excombatiente: false,
+                victimaViolencia: false,
+                asociacionGremio: false,
+                asociacionEntidadPublica: false
+            }
+        };
+        $scope.agregando = false;
+        $scope.editandoJF = false;
+    }
 var ejecutarValidacionesJF = function(){
     var result = true;
     if($scope.jefeDeFamilia.nombre == "")
@@ -2253,12 +2385,12 @@ var ejecutarValidacionesJF = function(){
         showNotification('Seleccione un tipo de DNI valido', 'danger');
             result=false;
     }
-    if($scope.jefeDeFamilia.DNI == "")
+    if($scope.jefeDeFamilia.DNI == "" || $scope.jefeDeFamilia.DNI.toString().length > 9)
     {
         showNotification('Ingrese un DNI valido', 'danger');
             result=false;
     }
-    if($scope.jefeDeFamilia.nacimiento == "")
+    if($scope.jefeDeFamilia.nacimiento == "" || ($scope.jefeDeFamilia.nacimiento.getFullYear() > 10000))
     {
         showNotification('Ingrese una fecha de nacimiento valida', 'danger');
             result=false;
@@ -2299,12 +2431,12 @@ var ejecutarValidacionesJF = function(){
         showNotification('Ingrese una empresa', 'danger');
             result=false;
     }
-    if($scope.jefeDeFamilia.depLaboral == 1 && $scope.jefeDeFamilia.trabajoDependencia.fechaIngreso=="")
+    if($scope.jefeDeFamilia.depLaboral == 1 && (($scope.jefeDeFamilia.trabajoDependencia.fechaIngreso=="")|| ($scope.jefeDeFamilia.trabajoDependencia.fechaIngreso.getFullYear() > 10000)))
     {
         showNotification('Ingrese una fecha de ingreso laboral valida', 'danger');
             result=false;
     }
-    if($scope.jefeDeFamilia.depLaboral ==2 && $scope.jefeDeFamilia.trabajoAutonomo.inicioActividades=="")
+    if($scope.jefeDeFamilia.depLaboral ==2 && ($scope.jefeDeFamilia.trabajoAutonomo.inicioActividades=="" ||($scope.jefeDeFamilia.trabajoAutonomo.inicioActividades.getFullYear() > 10000)))
     {
         showNotification('Seleccione una fecha de inicio de actividades valida', 'danger');
             result=false;
@@ -2350,12 +2482,12 @@ var ejecutarValidaciones = function(){
         showNotification('Seleccione un tipo de DNI valido', 'danger');
             result=false;
     }
-    if($scope.persona.DNI == "")
+    if($scope.persona.DNI == "" || $scope.persona.DNI.toString().length)
     {
         showNotification('Ingrese un DNI valido', 'danger');
             result=false;
     }
-    if($scope.persona.nacimiento == "")
+    if($scope.persona.nacimiento == "" ||($scope.persona.nacimiento.getFullYear() > 10000))
     {
         showNotification('Ingrese una fecha de nacimiento valida', 'danger');
             result=false;
@@ -2558,6 +2690,7 @@ respCapCons.forEach(function (item,index){
         }
     });
 }
+
 
 
 }

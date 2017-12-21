@@ -2,9 +2,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-<p id="ignorePDF">don't print this to pdf</p>
+<p id="ignorePDF">Impresión de clave</p>
 <div>
-    <p size="3" color="red">print this to pdf</p>
+    <div ng-show="false">
+        <p>{{clave}}
+        </p>
+    </div>
 </div>
 <button id="pdfButton" class="btn btn-primary" ng-click = "createPDF()">CreatePDF</button>
 </body>

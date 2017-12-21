@@ -146,11 +146,11 @@
         </div>
         <div class="form-group">
             <label for="selectDNI"><span style="color:red">* </span>Tipo de documento</label>
-            <select class="form-control input-md" id="selectDNI" ng-model="persona.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
+            <select class="form-control input-md"  id="selectDNI" ng-model="persona.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
         </div>
         <div class="form-group">
             <label for="inputDNI"><span style="color:red">* </span>Número de documento:</label>
-            <input class="form-control input-md" type="number" ng-model="persona.DNI"   id="inputDNI" />
+            <input class="form-control input-md" type="number"  ng-model="persona.DNI"   id="inputDNI" />
         </div>
         <div class="form-group">
             <label for="inputCUIL"><span style="color:red">* </span>CUIL:</label>
@@ -358,12 +358,12 @@
         </div>
         <div class="form-group">
             <label for="selectDNI"><span style="color:red">* </span>Tipo de documento</label>
-            <select class="form-control input-md" id="selectDNI" ng-model="jefeDeFamilia.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
+            <select class="form-control input-md"  id="selectDNI" ng-model="jefeDeFamilia.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
         </div>
         <div class="form-group">
             <label for="inputDNI"><span style="color:red">* </span>Número de documento</label>
             <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.DNI"
-                   ng-maxlength="9" ng-pattern="/^[0-9]*$/" id="inputDNI" />
+                   ng-pattern="/^[0-9]*$/"  id="inputDNI" />
         </div>
         <div class="form-group">
             <label for="inputCUIL"><span style="color:red">* </span>CUIL:</label>

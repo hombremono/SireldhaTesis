@@ -49,7 +49,7 @@
         <label>Tipo DNI:</label>
         <select ng-options="item as item.descripcion for item in ctrl.tiposDni track by item.id" ng-model="ctrl.persona.tipoDni"></select>
         <label>Nro. DNI:</label>
-        <input class="form-control input-md" type="number" ng-model="ctrl.persona.DNI" required ng-minlength="7"
+        <input class="form-control input-md" type="number" maxlength="9" ng-model="ctrl.persona.DNI" required ng-minlength="7"
                ng-maxlength="9" ng-pattern="/^[0-9]*$/"/>
         <label>CUIL:</label>
         <input class="form-control input-md" type="number" ng-model="ctrl.persona.CUIL" required ng-minlength="10"

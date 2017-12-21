@@ -28,7 +28,7 @@ function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $locatio
       };
   };
   $scope.finish = function(){
-    $location.path('/review');
+    $location.path('/printPdf');
   };
 
 };
