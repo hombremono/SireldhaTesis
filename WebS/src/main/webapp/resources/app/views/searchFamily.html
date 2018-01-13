@@ -65,7 +65,7 @@
                 <div class="header">
                 </div>
             </div>
-            <div ng-show="!loading && familia.integrantes.length">
+            <div ng-show="!loading && familia.integrantes.length && buscando">
                 <div id="tablaFamilia" ng-show="!agregando && !editandoJF ">
                     <nav class="navbar navbar-default navbar-fixed">
                         <div class="container-fluid">
@@ -150,7 +150,7 @@
         <div  class="col-md-3" >
         </div>
         <div  class="col-md-3" >
-            <div ng-show="!loading && familia.integrantes.length">
+            <div ng-show="!loading && familia.integrantes.length &&buscando">
 
                 <button type="button"  title="" class="btn btn-primary" pull-right ng-click="editFamilia()">Guardar Familia
                 </button>
@@ -278,7 +278,7 @@
             <div class="col-md-4">
                 <div class="styled-input-single" >
                     <input type="checkbox" name="fieldset-5"  id="chkSubNac" ng-model="persona.subsidio.nacional"/>
-                    <label for="chkSubNac">Sunsidio nacional</label>
+                    <label for="chkSubNac">Subsidio nacional</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -328,10 +328,10 @@
         </div>
         <!--<div class="styled-input-single" >-->
         <!--<input type="checkbox" name="fieldset-5" id="chkDis" ng-click="persona.discapacidad = !persona.discapacidad"/>-->
-        <!--<label for="chkDis">La persona presenta alguna discapacidad.</label>-->
+        <!--<label for="chkDis">¿La persona presenta alguna discapacidad?</label>-->
         <!--</div>-->
         <div class="form-group">
-            <label for="selectDiscapacidadP">La persona presenta alguna discapacidad.</label>
+            <label for="selectDiscapacidadP">¿La persona presenta alguna discapacidad?</label>
             <select class="form-control input-md" id="selectDiscapacidadP" ng-model="persona.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
         </div>
         <div class="styled-input-single" >
@@ -357,7 +357,7 @@
         </div>
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="persona.situacionesEspeciales.enfermedadCronica"/>
-            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
+            <label for="chkEnfermedad">La persona sufre una enfermedad crónica.</label>
         </div>
         <div id="personaEnferma" ng-show="persona.situacionesEspeciales.enfermedadCronica">
             <div class="form-group" style="margin-left:30px;">
@@ -490,7 +490,7 @@
             <div class="col-md-4">
                 <div class="styled-input-single" >
                     <input type="checkbox" name="fieldset-5"  id="chkSubNac" ng-model="jefeDeFamilia.subsidio.nacional"/>
-                    <label for="chkSubNac">Sunsidio nacional</label>
+                    <label for="chkSubNac">Subsidio nacional</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -592,10 +592,10 @@
         </div>
         <!--<div class="styled-input-single" >-->
         <!--<input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>-->
-        <!--<label for="chkDisJF">La persona presenta alguna discapacidad.</label>-->
+        <!--<label for="chkDisJF">¿La persona presenta alguna discapacidad?</label>-->
         <!--</div>-->
         <div class="form-group">
-            <label for="selectDiscapacidad">La persona presenta alguna discapacidad.</label>
+            <label for="selectDiscapacidad">¿La persona presenta alguna discapacidad?</label>
             <select class="form-control input-md" id="selectDiscapacidad" ng-model="jefeDeFamilia.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
         </div>
         <div class="styled-input-single" >
@@ -622,7 +622,7 @@
         </div>
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="jefeDeFamilia.situacionesEspeciales.enfermedadCronica"/>
-            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
+            <label for="chkEnfermedad">La persona sufre una enfermedad crónica.</label>
         </div>
         <div id="personaEnferma" ng-show="jefeDeFamilia.situacionesEspeciales.enfermedadCronica">
             <div class="form-group" style="margin-left:30px;">

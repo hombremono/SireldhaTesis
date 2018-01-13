@@ -1,3 +1,5 @@
+
+
 <head>
     <script>
         var placeSearch, autocomplete;
@@ -41,70 +43,70 @@
 //-----------------------------------------------TABLA PERSONA ------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------------------------->
 <div id="tablaFamilia" ng-show="!agregando && !editandoJF ">
-<nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Integrantes de la familia</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <button type="button" class="btn btn-default" ng-click="agregando=true">
-                                <i class="pe-7s-add-user"></i>Agregar
-                            </button>
-                        </li>
-                        <!--<li>-->
-                           <!--<a href="">-->
-                                <!--<i class="fa fa-search"></i>-->
-								<!--<p class="hidden-lg hidden-md">Buscar integrante</p>-->
-                            <!--</a>-->
-                        <!--</li>-->
-                    </ul>
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Integrantes de la familia</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <button type="button" class="btn btn-default" ng-click="agregando=true">
+                            <i class="pe-7s-add-user"></i>Agregar
+                        </button>
+                    </li>
+                    <!--<li>-->
+                    <!--<a href="">-->
+                    <!--<i class="fa fa-search"></i>-->
+                    <!--<p class="hidden-lg hidden-md">Buscar integrante</p>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                </ul>
 
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="header">
                 </div>
             </div>
-        </nav>
+            <table class="table table-hover">
+                <thead>
+                <th>Documento</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Relación con el jefe/a de familia</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="integrante in familia.integrantes">
+                    <td>{{integrante.DNI}}</td>
+                    <td>{{integrante.nombre}}</td>
+                    <td>{{integrante.apellido}}</td>
+                    <td>{{integrante.DescRelacionJF}}</td>
+                    <td class="td-actions text-right">
+                        <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="editarPersona(integrante)">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove" ng-click="eliminarPersona(integrante)" ng-show="integrante.relacionJF!=1" >
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td>
+                </tr>
 
-<div >
-<div class="col-md-12">
-    <div class="card card-plain">
-        <div class="header">
+                </tbody>
+            </table>
+
         </div>
     </div>
-        <table class="table table-hover">
-            <thead>
-            <th>Documento</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Relación con el jefe/a de familia</th>
-            </thead>
-            <tbody>
-            <tr ng-repeat="integrante in familia.integrantes">
-                <td>{{integrante.DNI}}</td>
-                <td>{{integrante.nombre}}</td>
-                <td>{{integrante.apellido}}</td>
-                <td>{{integrante.DescRelacionJF}}</td>
-                <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="editarPersona(integrante)">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button type="button" rel="tooltip" title="" class="btn btn-danger btn-simple btn-xs" data-original-title="Remove" ng-click="eliminarPersona(integrante)" ng-show="integrante.relacionJF!=1" >
-                        <i class="fa fa-times"></i>
-                    </button>
-                </td>
-            </tr>
 
-            </tbody>
-        </table>
+    <div >
 
+        <button type="button"  title="" class="btn btn-primary" pull-right ng-click="addFamilia()">Guardar Familia
+        </button>
     </div>
-</div>
-
-<div >
-
-    <button type="button"  title="" class="btn btn-primary" pull-right ng-click="addFamilia()">Guardar Familia
-    </button>
-</div>
 </div>
 
 
@@ -226,7 +228,7 @@
             <div class="col-md-4">
                 <div class="styled-input-single" >
                     <input type="checkbox" name="fieldset-5"  id="chkSubNac" ng-model="persona.subsidio.nacional"/>
-                    <label for="chkSubNac">Sunsidio nacional</label>
+                    <label for="chkSubNac">Subsidio nacional</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -276,10 +278,10 @@
         </div>
         <!--<div class="styled-input-single" >-->
         <!--<input type="checkbox" name="fieldset-5" id="chkDis" ng-click="persona.discapacidad = !persona.discapacidad"/>-->
-        <!--<label for="chkDis">La persona presenta alguna discapacidad.</label>-->
+        <!--<label for="chkDis">¿La persona presenta alguna discapacidad?</label>-->
         <!--</div>-->
         <div class="form-group">
-            <label for="selectDiscapacidadP"><span style="color:red">* </span>La persona presenta alguna discapacidad.</label>
+            <label for="selectDiscapacidadP"><span style="color:red">* </span>¿La persona presenta alguna discapacidad?</label>
             <select class="form-control input-md" id="selectDiscapacidadP" ng-model="persona.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
         </div>
         <div class="styled-input-single" >
@@ -305,7 +307,7 @@
         </div>
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="persona.situacionesEspeciales.enfermedadCronica"/>
-            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
+            <label for="chkEnfermedad">La persona sufre una enfermedad crónica.</label>
         </div>
         <div id="personaEnferma" ng-show="persona.situacionesEspeciales.enfermedadCronica">
             <div class="form-group" style="margin-left:30px;">
@@ -346,7 +348,7 @@
         <div class="form-group">
             <label for="inputDNI"><span style="color:red">* </span>Número de documento</label>
             <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.DNI"
-                    ng-pattern="/^[0-9]*$/" id="inputDNI" />
+                   ng-pattern="/^[0-9]*$/" id="inputDNI" />
         </div>
         <div class="form-group">
             <label for="inputCUIL"><span style="color:red">* </span>CUIL:</label>
@@ -442,7 +444,7 @@
             <div class="col-md-4">
                 <div class="styled-input-single" >
                     <input type="checkbox" name="fieldset-5"  id="chkSubNac" ng-model="jefeDeFamilia.subsidio.nacional"/>
-                    <label for="chkSubNac">Sunsidio nacional</label>
+                    <label for="chkSubNac">Subsidio nacional</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -545,10 +547,10 @@
         </div>
         <!--<div class="styled-input-single" >-->
         <!--<input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>-->
-        <!--<label for="chkDisJF">La persona presenta alguna discapacidad.</label>-->
+        <!--<label for="chkDisJF">¿La persona presenta alguna discapacidad?</label>-->
         <!--</div>-->
         <div class="form-group">
-            <label for="selectDiscapacidad"><span style="color:red">* </span>La persona presenta alguna discapacidad.</label>
+            <label for="selectDiscapacidad"><span style="color:red">* </span>¿La persona presenta alguna discapacidad?</label>
             <select class="form-control input-md" id="selectDiscapacidad" ng-model="jefeDeFamilia.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
         </div>
         <div class="styled-input-single" >
@@ -575,7 +577,7 @@
         </div>
         <div class="styled-input-single" >
             <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="jefeDeFamilia.situacionesEspeciales.enfermedadCronica"/>
-            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
+            <label for="chkEnfermedad">La persona sufre una enfermedad crónica.</label>
         </div>
         <div id="personaEnferma" ng-show="jefeDeFamilia.enfermedad">
             <div class="form-group" style="margin-left:30px;">

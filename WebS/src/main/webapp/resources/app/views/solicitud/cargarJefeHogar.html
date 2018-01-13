@@ -39,251 +39,251 @@
     </script>
 </head>
 
-    <form ng-submit="addjefeDeFamilia()" name="JfForm">
-        <h3>Carga de jefe de hogar</h3>
-        <div class="form-group">
-            <label for="inputNombre"><span style="color:red">* </span>Nombre:</label>
-            <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.nombre" id="inputNombre" />
-        </div>
-        <div class="form-group">
-            <label for="inputApellido"><span style="color:red">* </span>Apellido:</label>
-            <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.apellido" id="inputApellido" />
-        </div>
-        <div class="form-group">
-            <label for="selectDNI"><span style="color:red">* </span>Tipo de documento</label>
-            <select class="form-control input-md" id="selectDNI" ng-model="jefeDeFamilia.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
-        </div>
-        <div class="form-group">
-            <label for="inputDNI"><span style="color:red">* </span>Número de documento</label>
-            <input class="form-control input-md" type="number"  ng-model="jefeDeFamilia.DNI"
+<form ng-submit="addjefeDeFamilia()" name="JfForm">
+    <h3>Carga de jefe de hogar</h3>
+    <div class="form-group">
+        <label for="inputNombre"><span style="color:red">* </span>Nombre:</label>
+        <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.nombre" id="inputNombre" />
+    </div>
+    <div class="form-group">
+        <label for="inputApellido"><span style="color:red">* </span>Apellido:</label>
+        <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.apellido" id="inputApellido" />
+    </div>
+    <div class="form-group">
+        <label for="selectDNI"><span style="color:red">* </span>Tipo de documento</label>
+        <select class="form-control input-md" id="selectDNI" ng-model="jefeDeFamilia.tipoDni" ng-options="documento.id_TipoDocumento as documento.tipo for documento in tiposDni"></select>
+    </div>
+    <div class="form-group">
+        <label for="inputDNI"><span style="color:red">* </span>Número de documento</label>
+        <input class="form-control input-md" type="number"  ng-model="jefeDeFamilia.DNI"
                id="inputDNI" />
-        </div>
-        <div class="form-group">
-            <label for="inputCUIL"><span style="color:red">* </span>CUIL:</label>
-            <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.CUIL"
+    </div>
+    <div class="form-group">
+        <label for="inputCUIL"><span style="color:red">* </span>CUIL:</label>
+        <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.CUIL"
                ng-maxlength="12" placeholder="20365598657" ng-pattern="/^[0-9]*$/" id="inputCUIL" />
-        </div>
-        <div class="form-group">
+    </div>
+    <div class="form-group">
         <label for="fechaNac"><span style="color:red">* </span>Fecha de nacimiento</label>
         <input  class="form-control" id="fechaNac" type="date" ng-model="jefeDeFamilia.nacimiento">
-        </div>
-        <div class="form-group">
-            <label for="selectSexo"><span style="color:red">* </span>Género</label>
-            <select class="form-control input-md" id="selectSexo" ng-model="jefeDeFamilia.sexo" ng-options="sexo.id_Sexo as sexo.sexo for sexo in sexos"></select>
-        </div>
-        <div class="form-group">
-            <label for="selectEstadoC"><span style="color:red">* </span>Estado civil</label>
-            <select class="form-control input-md" id="selectEstadoC" ng-model="jefeDeFamilia.estadoCivil" ng-options="ec.id_EstadoCivil as ec.estadoCivil for ec in estadosCiviles"></select>
-        </div>
-        <div class="form-group">
-            <label for="selectNacionalidad"><span style="color:red">* </span>Nacionalidad</label>
-            <select class="form-control input-md" id="selectNacionalidad" ng-model="jefeDeFamilia.nacionalidad" ng-options="nac.id_Nacionalidad as nac.descripcion for nac in nacionalidades"></select>
-        </div>
-        <div class="form-group">
-            <label for="selectEstudios"><span style="color:red">* </span>Estudios</label>
-            <select class="form-control input-md" id="selectEstudios" ng-model="jefeDeFamilia.estudios" ng-options="est.id_Estudios as est.estudios for est in estudios"></select>
-        </div>
-        <div class="form-group">
-            <label for="selectProfesion"><span style="color:red">* </span>Profesión</label>
-            <select class="form-control input-md" id="selectProfesion" ng-model="jefeDeFamilia.profesion" ng-options="profesion.id_Profesion as profesion.profesion for profesion in profesiones"></select>
-        </div>
-        <h5>Capacidades constructivas</h5>
-        <div id="capConstructivasJF">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkPintor" ng-model="jefeDeFamilia.capacidadesConstructivas.pintor"/>
-                        <label for="chkPintor">Pintor</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkPocero" ng-model="jefeDeFamilia.capacidadesConstructivas.pocero"/>
-                        <label for="chkPocero">Pocero</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkCeramista" ng-model="jefeDeFamilia.capacidadesConstructivas.ceramista"/>
-                        <label for="chkCeramista">Ceramista</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkTechador" ng-model="jefeDeFamilia.capacidadesConstructivas.techador"/>
-                        <label for="chkTechador">Techador</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkYesero" ng-model="jefeDeFamilia.capacidadesConstructivas.yesero "/>
-                        <label for="chkYesero">Yesero</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkSoldador" ng-model="jefeDeFamilia.capacidadesConstructivas.soldador" />
-                        <label for="chkSoldador">Soldador</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkOpMaq" ng-model="jefeDeFamilia.capacidadesConstructivas.opMaq"/>
-                        <label for="chkOpMaq">Operador de maquinaria</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="styled-input-single" >
-                        <input type="checkbox" name="fieldset-5"  id="chkVidriero" ng-model="jefeDeFamilia.capacidadesConstructivas.vidriero "/>
-                        <label for="chkVidriero">Vidriero</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-<br>
-        <h5>¿Percibe algún subsidio estatal?</h5>
+    </div>
+    <div class="form-group">
+        <label for="selectSexo"><span style="color:red">* </span>Género</label>
+        <select class="form-control input-md" id="selectSexo" ng-model="jefeDeFamilia.sexo" ng-options="sexo.id_Sexo as sexo.sexo for sexo in sexos"></select>
+    </div>
+    <div class="form-group">
+        <label for="selectEstadoC"><span style="color:red">* </span>Estado civil</label>
+        <select class="form-control input-md" id="selectEstadoC" ng-model="jefeDeFamilia.estadoCivil" ng-options="ec.id_EstadoCivil as ec.estadoCivil for ec in estadosCiviles"></select>
+    </div>
+    <div class="form-group">
+        <label for="selectNacionalidad"><span style="color:red">* </span>Nacionalidad</label>
+        <select class="form-control input-md" id="selectNacionalidad" ng-model="jefeDeFamilia.nacionalidad" ng-options="nac.id_Nacionalidad as nac.descripcion for nac in nacionalidades"></select>
+    </div>
+    <div class="form-group">
+        <label for="selectEstudios"><span style="color:red">* </span>Estudios</label>
+        <select class="form-control input-md" id="selectEstudios" ng-model="jefeDeFamilia.estudios" ng-options="est.id_Estudios as est.estudios for est in estudios"></select>
+    </div>
+    <div class="form-group">
+        <label for="selectProfesion"><span style="color:red">* </span>Profesión</label>
+        <select class="form-control input-md" id="selectProfesion" ng-model="jefeDeFamilia.profesion" ng-options="profesion.id_Profesion as profesion.profesion for profesion in profesiones"></select>
+    </div>
+    <h5>Capacidades constructivas</h5>
+    <div id="capConstructivasJF">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="styled-input-single" >
-                    <input type="checkbox" name="fieldset-5"  id="chkSubNac" ng-model="jefeDeFamilia.subsidio.nacional"/>
-                    <label for="chkSubNac">Sunsidio nacional</label>
+                    <input type="checkbox" name="fieldset-5"  id="chkPintor" ng-model="jefeDeFamilia.capacidadesConstructivas.pintor"/>
+                    <label for="chkPintor">Pintor</label>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="styled-input-single" >
-                    <input type="checkbox" name="fieldset-5"  id="chkSubProv" ng-model="jefeDeFamilia.subsidio.provincial"/>
-                    <label for="chkSubProv">Subsidio provincial</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="styled-input-single" >
-                    <input type="checkbox" name="fieldset-5"  id="chkSubNacMun" ng-model="jefeDeFamilia.subsidio.municipal"/>
-                    <label for="chkSubNacMun">Subsidio municipal</label>
+                    <input type="checkbox" name="fieldset-5"  id="chkPocero" ng-model="jefeDeFamilia.capacidadesConstructivas.pocero"/>
+                    <label for="chkPocero">Pocero</label>
                 </div>
             </div>
         </div>
-        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="styled-input-single" >
+                    <input type="checkbox" name="fieldset-5"  id="chkCeramista" ng-model="jefeDeFamilia.capacidadesConstructivas.ceramista"/>
+                    <label for="chkCeramista">Ceramista</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="styled-input-single" >
+                    <input type="checkbox" name="fieldset-5"  id="chkTechador" ng-model="jefeDeFamilia.capacidadesConstructivas.techador"/>
+                    <label for="chkTechador">Techador</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="styled-input-single" >
+                    <input type="checkbox" name="fieldset-5"  id="chkYesero" ng-model="jefeDeFamilia.capacidadesConstructivas.yesero "/>
+                    <label for="chkYesero">Yesero</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="styled-input-single" >
+                    <input type="checkbox" name="fieldset-5"  id="chkSoldador" ng-model="jefeDeFamilia.capacidadesConstructivas.soldador" />
+                    <label for="chkSoldador">Soldador</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="styled-input-single" >
+                    <input type="checkbox" name="fieldset-5"  id="chkOpMaq" ng-model="jefeDeFamilia.capacidadesConstructivas.opMaq"/>
+                    <label for="chkOpMaq">Operador de maquinaria</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="styled-input-single" >
+                    <input type="checkbox" name="fieldset-5"  id="chkVidriero" ng-model="jefeDeFamilia.capacidadesConstructivas.vidriero "/>
+                    <label for="chkVidriero">Vidriero</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h5>¿Percibe algún subsidio estatal?</h5>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="styled-input-single" >
+                <input type="checkbox" name="fieldset-5"  id="chkSubNac" ng-model="jefeDeFamilia.subsidio.nacional"/>
+                <label for="chkSubNac">Subsidio nacional</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="styled-input-single" >
+                <input type="checkbox" name="fieldset-5"  id="chkSubProv" ng-model="jefeDeFamilia.subsidio.provincial"/>
+                <label for="chkSubProv">Subsidio provincial</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="styled-input-single" >
+                <input type="checkbox" name="fieldset-5"  id="chkSubNacMun" ng-model="jefeDeFamilia.subsidio.municipal"/>
+                <label for="chkSubNacMun">Subsidio municipal</label>
+            </div>
+        </div>
+    </div>
+    <br>
 
+    <div class="form-group">
+        <label for="selectDepLaboral"><span style="color:red">* </span>Dependencia laboral</label>
+        <select class="form-control input-md" id="selectDepLaboral" ng-model="jefeDeFamilia.depLaboral" ng-options="dl.id_DependenciaLaboral as dl.dependenciaLaboral for dl in depLaborales"></select>
+    </div>
+    <div id="trabajoAutonomo" ng-show="jefeDeFamilia.depLaboral === 2" style="margin-left:30px;">
+        <h5>Trabajador autónomo</h5>
         <div class="form-group">
-            <label for="selectDepLaboral"><span style="color:red">* </span>Dependencia laboral</label>
-            <select class="form-control input-md" id="selectDepLaboral" ng-model="jefeDeFamilia.depLaboral" ng-options="dl.id_DependenciaLaboral as dl.dependenciaLaboral for dl in depLaborales"></select>
+            <label for="inicioAct">Fecha de inicio de actividades</label>
+            <input  class="form-control" id="inicioAct" type="date" ng-model="jefeDeFamilia.trabajoAutonomo.inicioActividades">
         </div>
-        <div id="trabajoAutonomo" ng-show="jefeDeFamilia.depLaboral === 2" style="margin-left:30px;">
-            <h5>Trabajador autónomo</h5>
-        <div class="form-group">
-        <label for="inicioAct">Fecha de inicio de actividades</label>
-        <input  class="form-control" id="inicioAct" type="date" ng-model="jefeDeFamilia.trabajoAutonomo.inicioActividades">
-        </div>
-        </div>        
+    </div>
 
-        
-        <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
-        
-        <div id="trabajoDependencia" ng-show="jefeDeFamilia.depLaboral === 1" style="margin-left:30px;">
-            <h5>Trabajador en relación de dependencia</h5>
-            <h6>Datos de empresa / empleador</h6>
-            <div class="form-group">
+
+    <!--SELECTS. FALTA CARGAR LAS COLECCIONES-->
+
+    <div id="trabajoDependencia" ng-show="jefeDeFamilia.depLaboral === 1" style="margin-left:30px;">
+        <h5>Trabajador en relación de dependencia</h5>
+        <h6>Datos de empresa / empleador</h6>
+        <div class="form-group">
             <label for="inputEmpresaDep">Nombre</label>
             <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.trabajoDependencia.empresa" id="inputEmpresaDep"/>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
             <label for="inicioActDep">Fecha de inicio de actividades</label>
             <input  class="form-control" id="inicioActDep" type="date" ng-model="jefeDeFamilia.trabajoDependencia.fechaIngreso">
-            </div>
-            <div class="form-group">
-                <label for="inputLocDep">Localidad</label>
-                <select  class="form-control input-md" id="inputLocDep" ng-model="jefeDeFamilia.trabajoDependencia.idLocalidad" ng-options="localidad.id_Localidad as localidad.localidad for localidad in Localidades"></select>
-            </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
+            <label for="inputLocDep">Localidad</label>
+            <select  class="form-control input-md" id="inputLocDep" ng-model="jefeDeFamilia.trabajoDependencia.idLocalidad" ng-options="localidad.id_Localidad as localidad.localidad for localidad in Localidades"></select>
+        </div>
+        <div class="form-group">
             <label for="inputBaDep">Barrio</label>
             <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.trabajoDependencia.barrio" id="inputBaDep"/>
-            </div>
-            <div>
+        </div>
+        <div>
 
-                <div class="form-group">
-                    <label for="adress-jf">Dirección laboral</label>
-                    <input id="adress-jf" placeholder="Ingrese su direccion" type="text" class="form-control input-md" ng-model="jefeDeFamilia.trabajoDependencia.direccion.direccionFull"></input>
-                </div>
-            </div>
             <div class="form-group">
+                <label for="adress-jf">Dirección laboral</label>
+                <input id="adress-jf" placeholder="Ingrese su direccion" type="text" class="form-control input-md" ng-model="jefeDeFamilia.trabajoDependencia.direccion.direccionFull"></input>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="inputTelDep">Teléfono laboral</label>
             <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.trabajoDependencia.telefono" id="inputTelDep"/>
-            </div>
         </div>
-        <!---->
-        <div class="form-group">
-            <label for="inputIngresoN">Ingreso neto</label></br>
-            <span style="color: #848484">El ingreso es mensual y por persona. Incluye ingresos por jubilación y/o subsidios que se reciben por persona.</span>
-            <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.ingresoNeto" id="inputIngresoN" />
-        </div>
-        <div class="form-group">
-            <label for="inputMail"><span style="color:red">* </span>Email personal</label>
-            <input class="form-control input-md" type="email" ng-model="jefeDeFamilia.mail" id="inputMail" />
-        </div>
-        <div class="form-group">
-            <label for="inputTel">Teléfono personal</label>
-            <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.telefono" placeholder="0351 15423568" id="inputTel" />
-        </div>
-
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkJubJF" ng-model="jefeDeFamilia.jubilado"/>
-            <label for="chkJubJF">Jubilado.</label>
-        </div>
-    <div class="form-group" ng-show="jefeDeFamilia.jubilado">
-            <div class="form-group" style="margin-left: 30px">
-                <label for="inputCarnetJF">Nro carnet</label>
-                <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.carnetJubilacion" id="inputCarnetJF" />
-            </div>
     </div>
-        <!--<div class="styled-input-single" >-->
-            <!--<input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>-->
-            <!--<label for="chkDisJF">La persona presenta alguna discapacidad.</label>-->
-        <!--</div>-->
-        <div class="form-group">
-            <label for="selectDiscapacidad"><span style="color:red">* </span>La persona presenta alguna discapacidad.</label>
-            <select class="form-control input-md" id="selectDiscapacidad" ng-model="jefeDeFamilia.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
-        </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkPlanEstatal" ng-model="jefeDeFamilia.adjudicatarioPlanEstatal"/>
-            <label for="chkPlanEstatal">¿Ha sido adjudicatario de viviendas u operatorias financiadas por el estado? </label>
-        </div>
+    <!---->
+    <div class="form-group">
+        <label for="inputIngresoN">Ingreso neto</label></br>
+        <span style="color: #848484">El ingreso es mensual y por persona. Incluye ingresos por jubilación y/o subsidios que se reciben por persona.</span>
+        <input class="form-control input-md" type="number" ng-model="jefeDeFamilia.ingresoNeto" id="inputIngresoN" />
+    </div>
+    <div class="form-group">
+        <label for="inputMail"><span style="color:red">* </span>Email personal</label>
+        <input class="form-control input-md" type="email" ng-model="jefeDeFamilia.mail" id="inputMail" />
+    </div>
+    <div class="form-group">
+        <label for="inputTel">Teléfono personal</label>
+        <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.telefono" placeholder="0351 15423568" id="inputTel" />
+    </div>
 
-        <h5>Existencia de situaciones especiales</h5>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkComMalvinas" ng-model="jefeDeFamilia.situacionesEspeciales.excombatiente"/>
-            <label for="chkComMalvinas">Excombatiente de Malvinas</label>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5" id="chkJubJF" ng-model="jefeDeFamilia.jubilado"/>
+        <label for="chkJubJF">Jubilado.</label>
+    </div>
+    <div class="form-group" ng-show="jefeDeFamilia.jubilado">
+        <div class="form-group" style="margin-left: 30px">
+            <label for="inputCarnetJF">Nro carnet</label>
+            <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.carnetJubilacion" id="inputCarnetJF" />
         </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkViolencia" ng-model="jefeDeFamilia.situacionesEspeciales.victimaViolencia"/>
-            <label for="chkViolencia">Víctima de violencia de género y/o violencia familiar</label>
+    </div>
+    <!--<div class="styled-input-single" >-->
+    <!--<input type="checkbox" name="fieldset-5" id="chkDisJF" ng-click="jefeDeFamilia.discapacidad = !jefeDeFamilia.discapacidad"/>-->
+    <!--<label for="chkDisJF">¿La persona presenta alguna discapacidad?</label>-->
+    <!--</div>-->
+    <div class="form-group">
+        <label for="selectDiscapacidad"><span style="color:red">* </span>¿La persona presenta alguna discapacidad?</label>
+        <select class="form-control input-md" id="selectDiscapacidad" ng-model="jefeDeFamilia.discapacidadCombo" ng-options="dis.id_Discapacidad as dis.descripcion for dis in discapacidades"></select>
+    </div>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5"  id="chkPlanEstatal" ng-model="jefeDeFamilia.adjudicatarioPlanEstatal"/>
+        <label for="chkPlanEstatal">¿Ha sido adjudicatario de viviendas u operatorias financiadas por el estado? </label>
+    </div>
+
+    <h5>Existencia de situaciones especiales</h5>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5"  id="chkComMalvinas" ng-model="jefeDeFamilia.situacionesEspeciales.excombatiente"/>
+        <label for="chkComMalvinas">Excombatiente de Malvinas</label>
+    </div>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5"  id="chkViolencia" ng-model="jefeDeFamilia.situacionesEspeciales.victimaViolencia"/>
+        <label for="chkViolencia">Víctima de violencia de género y/o violencia familiar</label>
+    </div>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5"  id="chkSindicalista" ng-model="jefeDeFamilia.situacionesEspeciales.asociacionGremio"/>
+        <label for="chkSindicalista">Asociación a sindicatos y/o gremios</label>
+    </div>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5"  id="chkAsocCivil" ng-model="jefeDeFamilia.situacionesEspeciales.asociacionEntidadPublica"/>
+        <label for="chkAsocCivil">Asociación a entidades de bien público (Ej. Bomberos, Policía)</label>
+    </div>
+    <div class="styled-input-single" >
+        <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="jefeDeFamilia.situacionesEspeciales.enfermedadCronica"/>
+        <label for="chkEnfermedad">La persona sufre una enfermedad crónica.</label>
+    </div>
+    <div id="personaEnferma" ng-show="jefeDeFamilia.situacionesEspeciales.enfermedadCronica">
+        <div class="form-group" style="margin-left:30px;">
+            <label for="inputEnfermedad">Cual?</label>
+            <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.enfermedadDescripcion" id="inputEnfermedad" />
         </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkSindicalista" ng-model="jefeDeFamilia.situacionesEspeciales.asociacionGremio"/>
-            <label for="chkSindicalista">Asociación a sindicatos y/o gremios</label>
-        </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5"  id="chkAsocCivil" ng-model="jefeDeFamilia.situacionesEspeciales.asociacionEntidadPublica"/>
-            <label for="chkAsocCivil">Asociación a entidades de bien público (Ej. Bomberos, Policía)</label>
-        </div>
-        <div class="styled-input-single" >
-            <input type="checkbox" name="fieldset-5" id="chkEnfermedad" ng-model="jefeDeFamilia.situacionesEspeciales.enfermedadCronica"/>
-            <label for="chkEnfermedad">La persona sufre una enfermedad cronica.</label>
-        </div>
-        <div id="personaEnferma" ng-show="jefeDeFamilia.situacionesEspeciales.enfermedadCronica">
-            <div class="form-group" style="margin-left:30px;">
-                <label for="inputEnfermedad">Cual?</label>
-                <input class="form-control input-md" type="text" ng-model="jefeDeFamilia.enfermedadDescripcion" id="inputEnfermedad" />
-            </div>
-        </div>
+    </div>
 
 
 
-        <button  class="btn btn-primary  pull-right">Siguiente</button>
-    </form>
+    <button  class="btn btn-primary  pull-right">Siguiente</button>
+</form>
 
