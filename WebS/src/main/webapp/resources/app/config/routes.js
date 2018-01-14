@@ -2,6 +2,7 @@
 angular.module('webS')
 .config(function($routeProvider,$locationProvider,$httpProvider) {
 	//console.log("Iniciando configuración.");
+
 	$httpProvider.interceptors.push('APIInterceptor');
 	$locationProvider.hashPrefix('!');
   $routeProvider

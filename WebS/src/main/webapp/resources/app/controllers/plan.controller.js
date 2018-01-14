@@ -65,8 +65,11 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     //Global Variables
     $scope.agregandoPlan = false;
     //Variables n' Stuff
-    $scope.mostrarSitRegistro = true;
-    $scope.mostrarSitHogar =true;
+    $scope.mostrarSitRegistro = false;
+    $scope.mostrarSitHogar =false;
+    $scope.mostrarSitEspecial = false;
+    $scope.mostrarSitHab=false;
+    $scope.mostrarInfoCalmat=false;
 
     //Situaciones
     $scope.sitRegistro = {
@@ -75,8 +78,31 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.sitHogar = {
         items:[]
     };
+    $scope.sitEspecial={
+        items:[]
+    };
+    $scope.sitHab = {
+        items:[]
+    };
 
     //COMBOS
+    //SIT REGISTRO
+    $scope.comboSitRegistro = {
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },
+            {
+                id: 1,
+                descripcion: "Antigüedad de la inscripción en el registro"
+            },
+            {
+                id: 2,
+                descripcion: "Documentación probatoria completa"
+            }]
+    };
+    //SIT HOGAR
     $scope.comboSitHogar = {
         items: [
             {
@@ -86,6 +112,11 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             {
                 id: 1,
                 descripcion: "Inicio de residencia"
+            },
+            ,
+            {
+                id: 2,
+                descripcion: "Percepción de subsidios en el hogar"
             }]
     };
     $scope.comboSitLocalidad = {
@@ -166,7 +197,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             }
         ]
     };
-    $scope.comboSitRegistro = {
+    $scope.comboSitNacionalidad ={
         items: [
             {
                 id: 0,
@@ -174,45 +205,134 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             },
             {
                 id: 1,
-                descripcion: "Antigüedad de la inscripción en el registro"
+                descripcion: "ITEM EJEMPLO"
+            }
+        ]
+    };
+    $scope.comboSitEstadoCivil ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },]
+    };
+    $scope.comboSitSitLaboral ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },]
+    };
+
+
+
+    //SIT ESPECIALES
+    $scope.comboSitEsp ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
             },
             {
-                id: 2,
-                descripcion: "Documentación probatoria completa"
+                id: 1,
+                descripcion: "ITEM EJEMPLO"
             }]
     };
+    //SIT HABITACIONAL
+    $scope.comboSitHab ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            }]
+    };
+    $scope.comboPosesionInmueble ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },]
+    };
+    $scope.comboTipoVivienda ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },]
+    };
+    $scope.comboConservacion ={
+        items: [
+            {
+                id: 0,
+                descripcion: "-SELECCIONE-"
+            },]
+    };
+
     $scope.temp ={
         item : $scope.comboSitRegistro.items[0].id,
         itemHogar: $scope.comboSitHogar.items[0].id,
         itemLocalidad: $scope.comboSitLocalidad.items[0].id,
         itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
         itemCapCons: $scope.comboSitCapCons.items[0].id,
-        itemGenero: $scope.comboSitGenero.items[0].id
+        itemGenero: $scope.comboSitGenero.items[0].id,
+        itemNacionalidad:$scope.comboSitNacionalidad.items[0].id,
+        itemEstadoCivil:$scope.comboSitEstadoCivil.items[0].id,
+        itemSitLaboral:$scope.comboSitSitLaboral.items[0].id,
+        itemsPosesionInmueble:$scope.comboPosesionInmueble.items[0].id,
+        itemsTipoVivienda:$scope.comboTipoVivienda.items[0].id,
+        itemsSolHab:$scope.comboSitHab.items[0].id,
+        itemsEsp:$scope.comboSitEsp.items[0].id,
+        itemsConservacion:$scope.comboConservacion.items[0].id,
+        itemInicioResidencia:-1,
+        itemCantMiembros:-1,
+        itemIngreso:-1
     };
+    //VARIABLES FUERA DE TABLA
+    $scope.inicioResidencia = "";
+    $scope.cantMiembros = 0;
+    $scope.ingresosHogar=0;
 
     //FUNCIONES
     $scope.addItem = function(id,coleccion,categoria,combo){
         combo.forEach(function (element, index) {
             if (element.id == id && element.id !=0) {
+
                 var item={
+                    id:element.id,
                     categoria:categoria,
                     descripcion:element.descripcion,
                     puntaje:0,
-                    required:false
+                    required:false,
+                    valorEspecial:""
                 };
                 coleccion.push(item);
+                combo.splice(index,1);
+                coleccion.items[0].id;
             }
         });
-
-
-
+    };
+    $scope.addItemFueraDeTabla = function(id,coleccion,categoria,descripcion,valorEsp){
+        var item ={
+            id:-1,
+            categoria:categoria,
+            descripcion:descripcion,
+            puntaje:0,
+            required:false,
+            valorEspecial:valorEsp
+        };
+        coleccion.push(item);
     };
     $scope.quitarItem = function(item,coleccion,combo){
         coleccion.forEach(function (element, index) {
             if (element == item) {
-                coleccion.splice(element, 1);
+                coleccion.splice(index, 1);
             }
+            if(item.id<0){
+                combo.push(item);
+            };
         });
+
+
     };
     $scope.addAll = function(combo,coleccion,categoria){
         combo.forEach(function (elemento, index) {
@@ -241,7 +361,17 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             itemLocalidad: $scope.comboSitLocalidad.items[0].id,
             itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
             itemCapCons: $scope.comboSitCapCons.items[0].id,
-            itemGenero: $scope.comboSitGenero.items[0].id
+            itemGenero: $scope.comboSitGenero.items[0].id,
+            itemNacionalidad:$scope.comboSitNacionalidad.items[0].id,
+            itemEstadoCivil:$scope.comboSitEstadoCivil.items[0].id,
+            itemSitLaboral:$scope.comboSitSitLaboral.items[0].id,
+            itemsEsp:$scope.comboSitEsp.items[0].id,
+            itemsTipoVivienda:$scope.comboTipoVivienda.items[0].id,
+            itemsSolHab:$scope.comboSitHab.items[0].id,
+            itemsConservacion:$scope.comboConservacion.items[0].id,
+            itemInicioResidencia:-1,
+            itemCantMiembros:-1,
+            itemIngreso:-1
         };
         $scope.agregandoPlan = false;
     }
@@ -249,115 +379,4 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
 }
 
 
-/*
-    //Agregando y wait van a servir para el loading.
-    $scope.opt = {
-        agregando: false,
-        wait : true
-    };
-    var mapPlan = function (plan) {
-        var tempPlan;
-        tempPlan.id=plan.id;
-        tempPlan.Nombre =plan.Nombre;
-        tempPlan.Descripcion = plan.Descripcion;
-        $scope.planes.push(tempPlan);
-    };
 
-    planService.list().then(function(resp) {
-        $scope.opt.wait=false;
-        resp.forEach(function(plan){
-            mapPlan(plan);
-        });
-    }, function(respErr) {
-        console.log(respErr);
-        $scope.opt.wait=false;
-    });
-    $scope.agregar = function() {
-        $scope.opt.agregando=true;
-    }
-
-    $scope.save = function(plan) {
-        planService.add($scope.plan).then(function(resp) {
-            //Retorne el ID del PLAN NUEVO
-                planService.get(resp.plan.id).then(function(resp) {
-                    mapPlan(resp.plan);
-                });
-            $scope.cancelar();
-        }, function(respErr) {
-            console.log(respErr);
-        });
-    };
-    $$scope.cancelar = function() {
-        $scope.plan = {
-            id:"",
-            Nombre:"",
-            Descripcion:""
-        };
-        $scope.opt.agregando=false;
-    }
-    $scope.eliminarPlan = function(plan) {
-        if(confirm("¿Esta seguro que desea ELIMINAR el Plan Seleccionado?")) {
-            planService.delete(plan.id).then(function(resp) {
-                $scope.planes.forEach(function(item, idx) {
-                    if (item.id === plan.id) {
-                        $scope.planes.splice(idx,1);
-                        return false;
-                    }
-                });
-            }, function(respErr) {
-                console.log(respErr);
-            });
-        }
-
-    }
-
-
-    $scope.guardar = function() {
-        planService.update($scope.plan).then(function(resp) {
-            $scope.planes.forEach(function(item, idx) {
-                if (item.id === $scope.plan.id) {
-                    angular.copy($scope.plan, $scope.planes[idx]);
-                    return false;
-                }
-            });
-            $scope.cancelar();
-        }, function(respErr) {
-            console.log(respErr);
-            $scope.cancelar();
-        });
-
-    };
-
-    $scope.volverInicio = function(){
-        $location.path("/");
-    };
-
-
-    $scope.agregarPlan = function() {
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'views/plan/agregarPlan.html',
-            controller: 'AddPlanController',
-            controllerAs: '$ctrl',
-            size: 'lg',
-            resolve: {
-                instancia: function () {
-                    return $scope.plan;
-                }
-            }
-        });
-        modalInstance.result.then(function (instancia) {
-                if(instancia)
-                    $scope.plan = instancia;
-                $scope.save(instancia);
-            }, function () {
-                $scope.cancelar();
-            }
-        );
-    }/*
-}
-
-
-*/
