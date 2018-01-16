@@ -3,10 +3,18 @@ angular.module('webS')
 
 function MainController($scope, $location, $rootScope, coreService) {
     $scope.titulo="Menú Principal";
+    debugger;
+    $scope.acceso = $rootScope.acceso;
+    debugger;
+    $scope.$watch("acceso",function(newValue,oldValue){
+        console.log($scope.acceso+" VaLor anterior: "+oldValue+ " ---Valor Actual: "+newValue);
+    });
 
     $scope.startSolicitud = function(){
         $location.path('/requestHome');
     };
+    //$scope.rol=0;
+
 
     coreService.pingAuth().then(
         function(resp){

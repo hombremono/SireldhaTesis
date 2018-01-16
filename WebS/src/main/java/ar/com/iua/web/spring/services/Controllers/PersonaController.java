@@ -11,6 +11,7 @@ import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -34,6 +35,7 @@ public class PersonaController extends GenericController {
     private ISubsidioService subsidioService;
     @Autowired
     private ISituacionesEspecialesService situacionesEspecialesService;
+
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -100,7 +102,7 @@ public class PersonaController extends GenericController {
                     situacionesEspecialesService.saveOrUpdate(persona.getSituacionesEspeciales()) : personaActual.getSituacionesEspeciales();
             persona.setSubsidio(subsidio);
             persona.setSituacionesEspeciales(situacionesEspeciales);
-            if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
+            if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null && telefono.getNumero() != "" ) {
                 telefono.setActive(true);
                 persona.setTelefono(telefonoService.saveOrUpdate(telefono));
             } else {
