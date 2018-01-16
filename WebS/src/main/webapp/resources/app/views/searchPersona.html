@@ -57,7 +57,7 @@
         }
     </style>
 </head>
-<div id="lista de Personas" ng-show="!agregando && !editandoJF ">
+<div id="lista de Personas" class="ignorePDF" ng-show="!agregando && !editandoJF ">
     <nav class="navbar navbar-default navbar-fixed">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -124,14 +124,14 @@
         <button type="button"  title="" class="btn btn-default"ng-click="paginaInicial()">Volver
         </button>
     </div>
-</div>
+</div >
 
 
 
 <!--//--------------------------------------------------------------------------------------------------------------------------------------//
 //-----------------------------------------------CARGAR PERSONA ------------------------------------------------------------------------//
 //----------------------------------------------------------------------------------------------------------------------------------->
-<div id="cargarInt" ng-show="agregando">
+<div id="cargarInt" class="ignorePDF" ng-show="agregando">
 
     <form ng-submit="addPersona()" name="PersonaForm">
         <h3 ng-show="!persona.editando">Carga integrante de familia</h3>
@@ -348,7 +348,7 @@
 //----------------------------------------------------------------------------------------------------------------------------------->
 
 
-<div id="edicionJF" ng-show="editandoJF">
+<div id="edicionJF" class="ignorePDF" ng-show="editandoJF">
     <form ng-submit="editjefeDeFamilia()" name="JfForm">
         <h3>Editando Jefe de Hogar</h3>
         <div class="form-group">
