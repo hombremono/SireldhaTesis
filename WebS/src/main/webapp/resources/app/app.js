@@ -6,7 +6,7 @@ angular.module('webS',['ngRoute','ngSanitize', 'ui.bootstrap', 'ngTagsInput'])
     }
     
 	$rootScope.authenticated=false;
-	$rootScope.user={name:"",password:""};
+	$rootScope.user={name:"",password:"", rol:0};
 	$rootScope.loginOpen=false;
 
 	$rootScope.openLoginForm = function(size) {
@@ -36,3 +36,9 @@ angular.module('webS',['ngRoute','ngSanitize', 'ui.bootstrap', 'ngTagsInput'])
         return $sce.trustAsHtml(text)
       }
   });
+angular.module('webS')
+    .controller('SidebarController', ['$scope','$location', '$rootScope', 'coreService', SidebarController ]);
+
+function SidebarController($scope, $location, $rootScope, coreService) {
+	this.acceso = $rootScope.acceso;
+}

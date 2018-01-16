@@ -4,6 +4,9 @@ angular.module('webS')
 	   pingAuth: function() {
 		   return $http.get(URL_API_BASE+"core/pingAuth");
 	   },
+	   checkInfo:function(){
+	   	return $http.get(URL_API_BASE+"seccheck/my-info");
+	   },
 	   login: function(user) {
 		   var req = {
 				   method: 'POST',

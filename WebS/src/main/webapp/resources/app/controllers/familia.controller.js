@@ -148,6 +148,10 @@ $scope.jefeDeFamilia={
         asociacionEntidadPublica: false
     }
 };
+
+$scope.$watch("persona.situacionesEspeciales.excombatiente",function(newValue,oldValue){
+     
+});
 //Inicilizacion de Combos
 $scope.tiposDni =[{
     id_TipoDocumento:0,

@@ -3,10 +3,18 @@ angular.module('webS')
 
 function MainController($scope, $location, $rootScope, coreService) {
     $scope.titulo="Menú Principal";
+    debugger;
+    $scope.acceso = $rootScope.acceso;
+    debugger;
+    $scope.$watch("acceso",function(newValue,oldValue){
+        console.log($scope.acceso+" VaLor anterior: "+oldValue+ " ---Valor Actual: "+newValue);
+    });
 
     $scope.startSolicitud = function(){
         $location.path('/requestHome');
     };
+    //$scope.rol=0;
+
 
     coreService.pingAuth().then(
         function(resp){
@@ -18,5 +26,23 @@ function MainController($scope, $location, $rootScope, coreService) {
                 $rootScope.openLoginForm();
             }
             $rootScope.regularCall=true;
+        });
+    coreService.checkInfo().then(
+        function(resp){
+            if(resp.data != "")
+            {
+                var auth = resp.data.authorities[0].authority;
+                if(auth=="ROLE_ENTRY"){
+                    $rootScope.acceso=2;
+                }else if(auth=="ROLE_PLAN"){
+                    $rootScope.acceso=3;
+                }else if(auth=="ROLE_ADMIN"){
+                    $rootScope.acceso=1;
+                }
+                else{
+                    $rootScope.acceso =0;
+                }
+            }
+
         });
 }

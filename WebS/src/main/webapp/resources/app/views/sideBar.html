@@ -11,14 +11,14 @@
 
 <!--  Notifications Plugin    -->
 <script src="assets/js/bootstrap-notify.js"></script>
-
+<script type="text/javascript" 	src="controllers/main.controller.js"></script>
 <!---->
 
 <!--
         Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
         Tip 2: you can also add an image using data-image tag
     -->
-	<div id="anotherIdToBeIgnored" class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg">
+	<div id="anotherIdToBeIgnored" class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg" ng-controller="SidebarController as ctrl">
 		<div class="sidebar-wrapper">
 			<div class="logo">
 				<a class="simple-text">
@@ -33,25 +33,25 @@
 						<p>Inicio</p>
 					</a>
 				</li>
-				<li class="active">
+				<li class="active" ng-show="$root.acceso==2 || $root.acceso==1">
 					<a href="#!/requestHome">
 						<i class="pe-7s-note2"></i>
 						<p>Iniciar solicitud</p>
 					</a>
 				</li>
-				<li>
+				<li ng-show="$root.acceso==2 || $root.acceso==1">
 					<a href="#!/search">
 						<i class="pe-7s-user-female"></i>
 						<p>Buscar Personas</p>
 					</a>
 				</li>
-				<li>
+				<li ng-show="$root.acceso==2 || $root.acceso==1">
 					<a href="#!/searchFamily">
 						<i class="pe-7s-users"></i>
 						<p>Buscar Familia</p>
 					</a>
 				</li>
-				<li>
+				<li ng-show="$root.acceso==3 || $root.acceso==1">
 					<a href="#!/newPlan">
 						<i class="pe-7s-note2"></i>
 						<p>Administrar Planes</p>

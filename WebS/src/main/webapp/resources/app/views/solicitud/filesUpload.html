@@ -23,24 +23,50 @@
         <input type="file" id="myFileField" name="myFile" multiple class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
         <small id="fileHelp" class="form-text text-muted">Seleccione todos los archivos que desee cargar.</small>
     </div>
-    <div class="col-md-3"><h5>Lista de archivos necesarios.</h5>
-        <ul>
-            <li>Certficado de nacimiento de cada integrante.</li>
-            <li>Copia de documento de cada integrante.</li>
-            <li>Otros....</li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <ul>
-            <li>Certficado de matrimonio.</li>
-            <li>Escritura.</li>
-            <li>Otros....</li>
-        </ul>
-    </div>
+
 </div>
+
 
 <button class="btn btn-primary" ng-click = "uploadFile()">Cargar Archivos</button>
 <button class="btn btn-success pull-right" ng-click = "finish()">Finalizar solicitud</button>
+<hr>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Lista de archivos necesarios.</h4></div>
+        <div class="panel-body">
+            <div class="col-lg-4">
+                <ul>
+                    <li><b>DNI o Pasaporte </b>(número de documento)</li>
+                    <li><b>Partida de nacimiento</b>, actualizada, de todos los integrantes del grupo familiar (expedida por el Registro Civil) (número de documento)</li>
+                    <li>Constancia de <b>CUIL</b> (CUIL)</li>
+                    <li><b>Certificado de Convivencia y Residencia</b> expedido por la seccional de Policía correspondiente al domicilio de residencia (no más de dos meses de expedido) (inicio de residencia en la localidad)</li>
+                    <li><b>Si es casado</b>: acta de Matrimonio actualizada expedida por el Registro Civil (estado civil)</li>
+                    <li><b>Si es soltero/a con menores a cargo</b>: presentar acta acuerdo con homologación judicial de cuidado personal compartido indistinto a favor del que se inscribe (estado civil)</li>
+
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <ul>
+                    <li><b>Si es Divorciado/a</b>: Sentencia de divorcio, con menores a cargo presentar acuerdo de cuidado personal unilateral con sentencia u homologación judicial (estado civil)</li>
+                    <li><b>Si es viudo/a</b>: Acta de defunción del fallecido expedido por el Registro Civil y del Acta de Matrimonio actualizada (estado civil)</li>
+                    <li><b>Uniones Convivenciales</b>: en caso de unión convivencial sin hijos presentar inscripción en el registro de convivientes (Registro Civil) (estado civil)</li>
+                    <li>En caso de unión convivencial con hijos en común presentar <b>partidas de nacimiento actualizadas</b> de los mismos (estado civil y (número de documento)</li>
+                    <li><b>Si es empleado/a</b>: Certificado de trabajo expedido por el empleador. Ültimo recibo de sueldo expedido por el empleador.  Si tiene recibo de cobro quincenal original de los recibos de las últimas dos quincenas expedidos por el empleador. Recibo de cobro de salario familiar expedido por ANSES (dependencia laboral) </li>
+                    <li><b>Si es Independiente</b>: Declaración Jurada de ingresos realizada ante el empleado del IPV o certificación de ingresos expedido por Contador Público Nacional sellado por el Colegio de Ciencias Económicas o constancia de monotributo (dependencia laboral) </li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+                <li><b>Si es Jubilado y/o Pensionado</b>: último recibo de haberes que registre lugar de cobro en la localidad donde se realiza la inscripción y carnet de jubilado (jubilado)</li>
+                <li><b>Certificado de discapacidad</b>  expedido por Organismo Oficial competente de la Salud, indicando diagnóstico, tipo, porcentaje (en datos de la persona)</li>
+                <li><b>Certificado médico</b> expedido por Organismo Oficial competente de la Salud, indicando diagnóstico y/o carnet de excombatiente y/o carnet de afiliación a sindicatos, gremios y/o asociaciones (todas las consideraciones especiales)</li>
+                <li><b>Escritura o boleto de compra/venta</b> del inmueble (posesión de inmueble)</li>
+                <li>Si alquila debe presentar <b>Contrato y último recibo de pago de alquiler </b>(posesión de inmueble)</li>
+                <li><b>Si posee boleta de servicio del lugar de residencia donde se consigne Nº de Catastro</b> (tipo de vivienda que habita y en posesión de inmueble)</li>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
