@@ -64,10 +64,11 @@ public class HogarService  implements IHogarService {
     public HogarCombos getCombos() throws ServiceException {
         try {
             HogarCombos combos =
-                    new HogarCombos(solucionHabitacionalDao.list(),situacionInmuebleDao.list(),localidadDao.list());
+                    new HogarCombos(solucionHabitacionalDao.list(),
+                            situacionInmuebleDao.list(),localidadDao.list());
             return combos;
         } catch (PersistenceException e){
-            LOGSI.error(e.getMessage(),e);
+            //LOGSI.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(),e);
         }
     }

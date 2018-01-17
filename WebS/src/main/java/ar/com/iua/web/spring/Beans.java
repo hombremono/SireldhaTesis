@@ -199,6 +199,48 @@ public class Beans {
 	public IDiscapacidadDAO discapacidadDAO (final SessionFactory sessionFactory)
 	{ return new DiscapacidadDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO (final SessionFactory sessionFactory)
+	{ return new PlanSituacionHabitacionalDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanCalmatDAO planCalmatDAO (final SessionFactory sessionFactory)
+	{ return new PlanCalmatDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanCaracteristicasHogarDAO planCaracteristicasHogarDAO (final SessionFactory sessionFactory)
+	{ return new PlanCaracteristicasHogarDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanRangoEdadDAO planRangoEdadDAO (final SessionFactory sessionFactory)
+	{ return new PlanRangoEdadDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanSituacionHogarDAO situacionHogarDAO(final SessionFactory sessionFactory)
+	{ return new PlanSituacionHogarDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanSituacionRegistroDAO situacionRegistroDAO (final SessionFactory sessionFactory)
+	{ return new PlanSituacionRegistroDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPoseeInmuebleDAO poseeInmuebleDAO (final SessionFactory sessionFactory)
+	{ return new PoseeInmuebleDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IInstalacionInmuebleDAO instalacionInmuebleDAO (final SessionFactory sessionFactory)
+	{ return new InstalacionInmuebleDAO(sessionFactory);}
+
+
+
 	//---------------------------------------------------Services-------------------------------------------------------
 
 	@Bean
@@ -349,5 +391,27 @@ public class Beans {
 	@Bean
 	@Autowired
 	public ICapacidadConstructivaService capacidadConstructivaService (final ICapacidadConstructivaDAO capacidadConstructivaDAO) {return new CapacidadConstructivaService(capacidadConstructivaDAO);}
+
+	@Bean
+	@Autowired
+	public IPlanService planService (final IPlanSituacionRegistroDAO planSituacionRegistroDAO,
+									 final IPlanSituacionHogarDAO planSituacionHogarDAO,
+									 final ILocalidadDAO localidadDAO,
+									 final IPlanRangoEdadDAO planRangoEdadDAO,
+									 final ISexoDAO sexoDAO,
+									 final INacionalidadDAO nacionalidadDAO,
+									 final IEstadoCivilDAO estadoCivilDAO,
+									 final ISituacionLaboralDAO situacionLaboralDAO,
+									 final ITipoCapacidadConstructivaDAO capacidadConstructivaDAO,
+									 final IPlanCaracteristicasHogarDAO caracteristicasHogarDAO,
+									 final IPoseeInmuebleDAO poseeInmuebleDAO,
+									 final ISituacionInmuebleDAO situacionInmuebleDAO,
+									 final IPlanCalmatDAO planCalmatDAO,
+									 final IInstalacionInmuebleDAO instalacionInmuebleDAO,
+									 final IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO) {
+		return new PlanService(planSituacionRegistroDAO,planSituacionHogarDAO,localidadDAO,planRangoEdadDAO,sexoDAO,
+				nacionalidadDAO,estadoCivilDAO,situacionLaboralDAO,capacidadConstructivaDAO,caracteristicasHogarDAO,
+				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO) ;}
+
 
 }
