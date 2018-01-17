@@ -15,6 +15,7 @@ import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class TrabajoController extends GenericController {
     @Autowired
     private ITelefonoService telService;
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/autonomo/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadAutonomo (@PathVariable int id) throws IOException {
         try {
@@ -53,17 +55,20 @@ public class TrabajoController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/autonomo", method = RequestMethod.POST)
     public ResponseEntity<Object> addAutonomo (@RequestBody TrabajoAutonomo trabajoAutonomo) throws IOException {
 
         return add(trabajoAutonomo, trabajoAutonomoService, Constantes.URL_TRABAJO);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/autonomo", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateAutonomo (@RequestBody TrabajoAutonomo trabajoAutonomo) throws IOException {
         return update(trabajoAutonomo, trabajoAutonomoService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/autonomo/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteAutonomo (@PathVariable int id) throws IOException {
         try {
@@ -79,6 +84,7 @@ public class TrabajoController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/dependencia/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadDependencia (@PathVariable int id) throws IOException {
         try {
@@ -96,6 +102,7 @@ public class TrabajoController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/dependencia", method = RequestMethod.POST)
     public ResponseEntity<Object> addDependencia (@RequestBody TrabajoDependencia trabajoDependencia) throws IOException {
         Telefono telefono = trabajoDependencia.getTelefono();
@@ -116,11 +123,13 @@ public class TrabajoController extends GenericController {
         return add(trabajoDependencia, trabajoDependenciaService, Constantes.URL_TRABAJO);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/dependencia", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateDependencia (@RequestBody TrabajoDependencia trabajoDependencia) throws IOException {
         return update(trabajoDependencia, trabajoDependenciaService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/dependencia/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteTelDependencia (@PathVariable int id) throws IOException {
         try {

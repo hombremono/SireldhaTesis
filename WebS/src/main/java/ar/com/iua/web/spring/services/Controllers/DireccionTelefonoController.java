@@ -8,6 +8,7 @@ import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -26,21 +27,25 @@ public class DireccionTelefonoController extends GenericController {
     private ITelefonoService  telService;
 
     //----------DIRECCION----------
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/direccion/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadDir (@PathVariable int id) throws IOException {
         return load(id,dirService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/direccion/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteDir (@PathVariable int id) throws IOException {
         return delete(id,dirService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/direccion", method = RequestMethod.POST)
     public ResponseEntity<Object> addDir (@RequestBody Direccion direccion) throws IOException {
         return add(direccion,dirService,Constantes.URL_DIRTEL);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/direccion", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateDir (@RequestBody Direccion direccion) throws IOException {
         return update(direccion,dirService);
@@ -49,21 +54,25 @@ public class DireccionTelefonoController extends GenericController {
 
     //----------TELEFONO-----------
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/telefono/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadTel (@PathVariable int id) throws IOException {
         return load(id,telService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/telefono/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteTel (@PathVariable int id) throws IOException {
         return delete(id,telService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/telefono", method = RequestMethod.POST)
     public ResponseEntity<Object> addTel (@RequestBody Telefono telefono) throws IOException {
         return add(telefono,telService, Constantes.URL_DIRTEL);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/telefono", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateTel (@RequestBody Telefono telefono) throws IOException {
         return update(telefono,telService);

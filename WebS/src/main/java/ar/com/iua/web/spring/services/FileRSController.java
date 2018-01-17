@@ -14,6 +14,7 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,6 +35,7 @@ public class FileRSController {
 
 	// curl -i -F "id=1" -F "file=@/home/mariano/duke-java.jpeg" http://localhost:8080/WebS/api/v1/files/fs
 
+	@PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/fs", method = RequestMethod.POST)
 	public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") int id) {
 		String name = "-";
@@ -67,6 +69,7 @@ public class FileRSController {
 	private IArchivoService archivoService;
 
 	// curl -i -F "id=1" -F "file=@/home/mariano/duke-java.jpeg" http://localhost:8080/WebS/api/v1/files/
+	@PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Object> uploadLogic(@RequestParam("file") MultipartFile file) {
 		if (!file.isEmpty()) {
@@ -96,6 +99,7 @@ public class FileRSController {
 	}
 	// http://localhost:8080/WebS/api/v1/files/1
 
+	@PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<InputStreamResource> download(@PathVariable("id") int id) {

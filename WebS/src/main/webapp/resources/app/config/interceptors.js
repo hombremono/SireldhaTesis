@@ -4,9 +4,11 @@ angular.module('webS')
     //debugger;
 
     service.responseError = function(response) {
-        debugger;
        if(response.status==401) {
     	   $rootScope.openLoginForm();
+       }if(response.status==403) {
+           //TODO: Handle the Forbidden view response on the frontend
+           $rootScope.openLoginForm();
        }
        return response;
     };

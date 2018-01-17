@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,9 +27,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(Constantes.URL_BASE + "/**").authenticated();
+		http.authorizeRequests().antMatchers(Constantes.URL_BASE + "/**").authenticated()
+			.antMatchers(Constantes.URL_BASE + "/**").authenticated();
 		if (Boolean.parseBoolean(env.getProperty("auth.basic", "true"))) {
-			http.httpBasic();
+			//----------------------------------------------------------------------------------------------------------
+			//---------------------------------------------VIEW AUTH----------------------------------------------------
+			http.httpBasic().and()
+				.authorizeRequests()
+				.antMatchers(HttpMethod.GET,"/app/views/familia/*").hasAnyRole("ADMIN","ENTRY")
+				.antMatchers(HttpMethod.GET,"/app/views/searchFamily.html").hasAnyRole("ADMIN","ENTRY","PLAN");
+			//----------------------------------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------------------------------
 		}
 		if (Boolean.parseBoolean(env.getProperty("auth.form", "true"))) {
 			FormLoginConfigurer<HttpSecurity> flc = http.formLogin();

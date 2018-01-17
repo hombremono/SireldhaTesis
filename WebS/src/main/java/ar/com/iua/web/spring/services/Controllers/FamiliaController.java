@@ -16,6 +16,7 @@ import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -39,6 +40,7 @@ public class FamiliaController extends GenericController {
     private IPersonaService personaService;
 
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException {
         try {
@@ -56,6 +58,7 @@ public class FamiliaController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Familia familia) throws IOException {
         Telefono telefono = familia.getTelefono();
@@ -82,6 +85,7 @@ public class FamiliaController extends GenericController {
 
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity<Object> update (@RequestBody Familia familia) throws IOException {
         Telefono telefono = familia.getTelefono();
@@ -107,11 +111,13 @@ public class FamiliaController extends GenericController {
         return update(familia,familiaService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@PathVariable int id) throws IOException {
         return setInactive(id,familiaService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/integrantes/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getIntegrantes (@PathVariable int id) throws IOException {
         try {
@@ -129,6 +135,7 @@ public class FamiliaController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/integrantesByDni/{dni}", method = RequestMethod.GET)
     public ResponseEntity<Object> getIntegrantes (@PathVariable String dni) throws IOException {
         try {

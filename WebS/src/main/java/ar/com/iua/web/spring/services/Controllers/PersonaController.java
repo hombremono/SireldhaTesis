@@ -36,8 +36,7 @@ public class PersonaController extends GenericController {
     @Autowired
     private ISituacionesEspecialesService situacionesEspecialesService;
 
-
-
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException{
         try {
@@ -51,6 +50,7 @@ public class PersonaController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Persona persona) throws IOException {
         Telefono telefono = persona.getTelefono();
@@ -91,6 +91,7 @@ public class PersonaController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity<Object> update (@RequestBody Persona persona) throws IOException {
         Telefono telefono = persona.getTelefono();
@@ -115,6 +116,7 @@ public class PersonaController extends GenericController {
         return update(persona,personaService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete (@PathVariable int id) throws IOException {
         return setInactive(id,personaService);
@@ -131,6 +133,7 @@ public class PersonaController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/byDni/{dni}", method = RequestMethod.GET)
     public ResponseEntity<Object> getByDni (@PathVariable String dni) throws IOException {
         try {

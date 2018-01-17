@@ -11,6 +11,7 @@ import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class InmuebleController extends GenericController {
     @Autowired
     private IDireccionService direccionService;
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable int id) throws IOException {
         try {
@@ -55,16 +57,19 @@ public class InmuebleController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Inmueble inmueble) throws IOException {
         return add(inmueble, inmuebleService, Constantes.URL_INMUEBLE);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity<Object> update (@RequestBody Inmueble inmueble) throws IOException {
         return update(inmueble, inmuebleService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteTel (@PathVariable int id) throws IOException {
         try {
@@ -93,6 +98,7 @@ public class InmuebleController extends GenericController {
 
     //-------------------------------------------SIN INMUEBLE-----------------------------------------------
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/sinInmueble/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadSinInmueble (@PathVariable int id) throws IOException {
         try {
@@ -110,16 +116,19 @@ public class InmuebleController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/sinInmueble/", method = RequestMethod.POST)
     public ResponseEntity<Object> addSinInmueble (@RequestBody SinInmueble sinInmueble) throws IOException {
         return add(sinInmueble, sinInmuebleService, Constantes.URL_INMUEBLE);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/sinInmueble/", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateSinInmueble (@RequestBody Inmueble inmueble) throws IOException {
         return update(inmueble, inmuebleService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/sinInmueble/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteSinInmueble (@PathVariable int id) throws IOException {
         try {
@@ -137,7 +146,7 @@ public class InmuebleController extends GenericController {
 
 
     //-------------------------------------------TERRENO-----------------------------------------------
-
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/terreno/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadTerreno (@PathVariable int id) throws IOException {
         try {
@@ -155,6 +164,7 @@ public class InmuebleController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/terreno/", method = RequestMethod.POST)
     public ResponseEntity<Object> addTerreno (@RequestBody Terreno terreno) throws IOException {
         Direccion direccion = terreno.getDireccion();
@@ -169,11 +179,13 @@ public class InmuebleController extends GenericController {
         return add(terreno, terrenoService, Constantes.URL_INMUEBLE);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/terreno/", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateTerreno (@RequestBody Terreno terreno) throws IOException {
         return update(terreno, terrenoService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/terreno/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteTerreno (@PathVariable int id) throws IOException {
         try {
@@ -191,6 +203,7 @@ public class InmuebleController extends GenericController {
 
     //-------------------------------------------ALQUILER-----------------------------------------------
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/alquiler/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadAlquiler (@PathVariable int id) throws IOException {
         try {
@@ -208,16 +221,19 @@ public class InmuebleController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/alquiler/", method = RequestMethod.POST)
     public ResponseEntity<Object> addAlquiler (@RequestBody Alquiler alquiler) throws IOException {
         return add(alquiler, alquilerService, Constantes.URL_INMUEBLE);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/alquiler/", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateAlquiler(@RequestBody Alquiler alquiler) throws IOException {
         return update(alquiler, alquilerService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/alquiler/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteAlquiler (@PathVariable int id) throws IOException {
         try {
@@ -235,6 +251,7 @@ public class InmuebleController extends GenericController {
 
     //-------------------------------------------CARECE VIVIENDA-----------------------------------------------
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/careceVivienda/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> loadCareceVivienda (@PathVariable int id) throws IOException {
         try {
@@ -252,16 +269,19 @@ public class InmuebleController extends GenericController {
         }
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/careceVivienda/", method = RequestMethod.POST)
     public ResponseEntity<Object> addCareceVivienda (@RequestBody CareceVivienda careceVivienda) throws IOException {
         return add(careceVivienda, careceViviendaService, Constantes.URL_INMUEBLE);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/careceVivienda/", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateCareceVivienda(@RequestBody CareceVivienda careceVivienda) throws IOException {
         return update(careceVivienda, careceViviendaService);
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/careceVivienda/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteCareceVivienda (@PathVariable int id) throws IOException {
         try {
@@ -279,6 +299,7 @@ public class InmuebleController extends GenericController {
 
     //-------------------------------------------COCINA-----------------------------------------------
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/cocina/", method = RequestMethod.POST)
     public ResponseEntity<Object> addCocina (@RequestBody Cocina cocina) throws IOException {
         try {
@@ -293,6 +314,7 @@ public class InmuebleController extends GenericController {
 
     //-------------------------------------------BANO-----------------------------------------------
 
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/bano/", method = RequestMethod.POST)
     public ResponseEntity<Object> addBano (@RequestBody PoseeBano bano) throws IOException {
         try {

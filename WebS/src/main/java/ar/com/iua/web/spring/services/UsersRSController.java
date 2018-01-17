@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class UsersRSController extends GenericController{
 	@Autowired
 	private IUserService userService;
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ResponseEntity<Object> list() throws IOException {
 		try {
@@ -40,21 +42,25 @@ public class UsersRSController extends GenericController{
 		}
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> load(@PathVariable int id) throws IOException {
 		return load(id,userService);
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Object> delete(@PathVariable int id) throws IOException {
 		return delete(id,userService);
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Object> add(@RequestBody User user) throws IOException {
 		return add(user,userService,Constantes.URL_USERS);
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
 	public ResponseEntity<Object> update(@RequestBody User user) throws IOException {
 		return update(user,userService);

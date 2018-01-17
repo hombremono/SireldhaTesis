@@ -50,7 +50,6 @@ function LoginFormController($rootScope, $scope, $log, $uibModalInstance, coreSe
 		);
 	  };
     var welcomeNotification = function(nombre){
-    	debugger;
         $.notify({
             icon: "pe-7s-id",
             message: 'Bienvenido '+nombre
