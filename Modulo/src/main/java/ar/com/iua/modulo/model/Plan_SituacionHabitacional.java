@@ -29,12 +29,12 @@ public class Plan_SituacionHabitacional implements IModel{
         return id_Plan_SituacionHabitacional;
     }
 
-    public int getId_Plan_SolucionHabitacional() {
+    public int getId_Plan_SituacionHabitacional() {
         return id_Plan_SituacionHabitacional;
     }
 
-    public void setId_Plan_SolucionHabitacional(int id_Plan_SolucionHabitacional) {
-        this.id_Plan_SituacionHabitacional = id_Plan_SolucionHabitacional;
+    public void setId_Plan_SituacionHabitacional(int id_Plan_SituacionHabitacional) {
+        this.id_Plan_SituacionHabitacional = id_Plan_SituacionHabitacional;
     }
 
     public String getDescripcion() {
