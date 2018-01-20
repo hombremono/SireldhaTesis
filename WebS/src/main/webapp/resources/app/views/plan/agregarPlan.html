@@ -23,7 +23,7 @@
             <div class="header">
             </div>
         </div>
-        <table class="table table-hover">
+        <table class="table table-hover" ng-show="Planes.length >0 ">
             <thead>
             <th>Nombre del Plan</th>
             </thead>
@@ -32,7 +32,7 @@
                 <td>{{plan.nombre}}</td>
                 <td class="td-actions text-right">
                     <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="quitarItem(plan,Planes)">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-trash"></i>
                     </button>
                 </td>
             </tr>
@@ -443,7 +443,7 @@
                 </div>
             </div>
             <div ng-show="mostrarSitHab">
-            <div ng-show="sitEspecial.items.length">
+            <div ng-show="sitHab.items.length">
                 <table class="table">
                     <tr>
                         <th>Categoria</th>
@@ -452,13 +452,13 @@
                         <th>Requerido</th>
                         <th></th>
                     </tr>
-                    <tr ng-repeat="item in sitEspecial.items">
+                    <tr ng-repeat="item in sitHab.items">
                         <td>{{item.categoria}}</td>
                         <td>{{item.descripcion}}</td>
                         <td><input class="form-control input-md" type="text" ng-model="item.puntaje"/></td>
                         <td ><input type="checkbox" name="fieldset-5"  id="chkItemReqE" ng-model="item.required"/></td>
                         <td>
-                            <button type="button" class="btn btn-danger" ng-click="quitarItem(item,sitEspecial.items,comboSitEsp.items)">
+                            <button type="button" class="btn btn-danger" ng-click="quitarItem(item,sitHab.items,comboSitHab.items)">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </button>
                         </td>

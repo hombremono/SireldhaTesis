@@ -1,6 +1,6 @@
 angular.module('webS')
-.controller('LoginFormController', ['$rootScope', '$scope', '$log', '$uibModalInstance', 'coreService','user',  LoginFormController]);
-function LoginFormController($rootScope, $scope, $log, $uibModalInstance, coreService, user) {
+.controller('LoginFormController', ['$rootScope', '$scope', '$log','$location','$uibModalStack', '$uibModalInstance', 'coreService','user',  LoginFormController]);
+function LoginFormController($rootScope, $scope, $log, $location, $uibModalStack, $uibModalInstance, coreService, user) {
 	$scope.title="Ingreso";
 	$scope.user=user;
 	$scope.login = function () {
@@ -49,6 +49,9 @@ function LoginFormController($rootScope, $scope, $log, $uibModalInstance, coreSe
 			}
 		);
 	  };
+	$scope.close=function(){
+        $uibModalStack.dismissAll();
+    };
     var welcomeNotification = function(nombre){
         $.notify({
             icon: "pe-7s-id",

@@ -196,6 +196,26 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
                 indice: "-SELECCIONE-"
             }]
     };
+    $scope.temp ={
+        item : $scope.comboSitRegistro.items[0].id_SituacionRegistro,
+        itemHogar: $scope.comboSitHogar.items[0].id_SituacionHogar,
+        itemLocalidad: $scope.comboSitLocalidad.items[0].id_Localidad,
+        itemEdadJefe: $scope.comboSitEdadJefe.items[0].id_RangoEdad,
+        itemCapCons: $scope.comboSitCapCons.items[0].id_TipoCapacidadConstructiva,
+        itemGenero: $scope.comboSitGenero.items[0].id_Sexo,
+        itemNacionalidad:$scope.comboSitNacionalidad.items[0].id_Nacionalidad,
+        itemEstadoCivil:$scope.comboSitEstadoCivil.items[0].id_EstadoCivil,
+        itemSitLaboral:$scope.comboSitSitLaboral.items[0].id_DependenciaLaboral,
+        itemsPosesionInmueble:$scope.comboPosesionInmueble.items[0].id_PoseeInmueble,
+        itemsTipoVivienda:$scope.comboTipoVivienda.items[0].id_SituacionInmueble,
+        itemsSolHab:$scope.comboSitHab.items[0].id_Plan_SituacionHabitacional,
+        itemsEsp:$scope.comboSitEsp.items[0].id_CaracteristicasEspecialesHogar,
+        itemsConservacion:$scope.comboConservacion.items[0].id_InstalacionInmueble,
+        itemsCalmat:$scope.comboCalmat.items[0].id_Plan_Calmat,
+        itemInicioResidencia:-1,
+        itemCantMiembros:-1,
+        itemIngreso:-1
+    };
     planService.loadCombos().then(function(resp){
         var datos = resp.data;
         cargarCombo($scope.comboSitRegistro.items,datos.planSituacionRegistroList);
@@ -261,6 +281,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.ingresosHogar=0;
     //FUNCIONES
     $scope.addItem = function(id,coleccion,categoria,combo,key){
+        debugger;
         var add = true;
         combo.forEach(function (element, index) {
             if (element.id == id && element.id !=0) {
@@ -339,6 +360,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         };
     };
     $scope.getProperty = function (propertyName) {
+        debugger;
         return $scope.keyValueId[propertyName];
     };
     //FUNCIONES INTERNAS
