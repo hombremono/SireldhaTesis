@@ -7,17 +7,17 @@ function MainController($scope, $location, $rootScope, coreService) {
     $scope.iniciarSesion = function(){
         $rootScope.authenticated=false;
         $rootScope.openLoginForm();
-        // coreService.pingAuth().then(
-        //     function(resp){
-        //         if((resp.status===200 && resp.data.code==0)|| true) {
-        //             $rootScope.user.name=resp.data.username;
-        //             $rootScope.authenticated=true;
-        //         } else {
-        //             $rootScope.authenticated=false;
-        //             $rootScope.openLoginForm();
-        //         }
-        //         $rootScope.regularCall=true;
-        //     });
+        coreService.pingAuth().then(
+            function(resp){
+                if((resp.status===200 && resp.data.code==0)|| true) {
+                    $rootScope.user.name=resp.data.username;
+                    $rootScope.authenticated=true;
+                } else {
+                    $rootScope.authenticated=false;
+                    // $rootScope.openLoginForm();
+                }
+                $rootScope.regularCall=true;
+            });
         // coreService.checkInfo().then(
         //     function(resp){
         //         if(resp.data != "")
