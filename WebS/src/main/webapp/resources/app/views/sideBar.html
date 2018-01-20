@@ -33,6 +33,12 @@
 						<p>Inicio</p>
 					</a>
 				</li>
+				<li ng-show="!$root.authenticated">
+					<a ng-click="$root.openLoginForm()">
+						<i class="pe-7s-user-female"></i>
+						<p>Iniciar sesión</p>
+					</a>
+				</li>
 				<li class="active" ng-show="$root.acceso==2 || $root.acceso==1">
 					<a href="#!/requestHome">
 						<i class="pe-7s-note2"></i>
@@ -57,7 +63,7 @@
 						<p>Administrar Planes</p>
 					</a>
 				</li>
-				<li class="active-pro">
+				<li class="active-pro" ng-show="$root.authenticated">
 					<a href="/WebS/logout">
 						<i class="pe-7s-door-lock"></i>
 						<p>Desconectarse</p>
