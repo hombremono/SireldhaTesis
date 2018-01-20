@@ -22,7 +22,7 @@ public class Plan_SituacionRegistro implements IModel{
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "id_Constante", nullable = false)
+    @JoinColumn(name = "idConstante", nullable = false)
     private ConstantePlan constante;
 
     public ConstantePlan getConstante() {
