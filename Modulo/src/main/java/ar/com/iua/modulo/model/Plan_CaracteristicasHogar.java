@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "Plan_CaracteristicasHogar")
-public class Plan_CaracteristicasHogar implements IModel{
+public class Plan_CaracteristicasHogar extends Plan_Item implements IModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,18 +19,6 @@ public class Plan_CaracteristicasHogar implements IModel{
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
-
-    @ManyToOne
-    @JoinColumn(name = "idConstante", nullable = false)
-    private ConstantePlan constante;
-
-    public ConstantePlan getConstante() {
-        return constante;
-    }
-
-    public void setConstante(ConstantePlan constante) {
-        this.constante = constante;
-    }
 
     @Override
     public int getId() {

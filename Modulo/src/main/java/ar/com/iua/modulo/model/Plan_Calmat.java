@@ -7,11 +7,12 @@ import javax.persistence.*;
 /**
  * Created by mnicolas on 14/01/18.
  */
+
 @Entity
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "Plan_Calmat")
-public class Plan_Calmat implements IModel {
+public class Plan_Calmat extends Plan_Item implements IModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

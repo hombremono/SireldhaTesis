@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "instalacionInmueble")
-public class InstalacionInmueble {
+public class InstalacionInmueble extends Plan_Item {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_InstalacionInmueble;

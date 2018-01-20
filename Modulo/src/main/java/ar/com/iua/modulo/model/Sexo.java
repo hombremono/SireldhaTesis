@@ -14,7 +14,7 @@ import org.hibernate.annotations.Proxy;
 @Access(value = AccessType.FIELD)
 @Table(name = "sexo")
 
-public class Sexo implements IModel{
+public class Sexo extends Plan_Item implements IModel{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_Sexo;

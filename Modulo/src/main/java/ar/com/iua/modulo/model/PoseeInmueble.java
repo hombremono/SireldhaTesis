@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Proxy(lazy = false)
 @Access(value = AccessType.FIELD)
 @Table(name = "PoseeInmueble")
-public class PoseeInmueble implements IModel{
+public class PoseeInmueble extends Plan_Item implements IModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

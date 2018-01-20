@@ -175,11 +175,11 @@ DROP TABLE IF EXISTS `Plan_RangoEdad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Plan_RangoEdad` (
-  `id_RangoEdadr` int(11) NOT NULL AUTO_INCREMENT,
+  `id_RangoEdad` int(11) NOT NULL AUTO_INCREMENT,
   `desde` float NOT NULL,
   `hasta` float NOT NULL,
   `id_Plan_RangoEdad` int(11) NOT NULL,
-  PRIMARY KEY (`id_RangoEdadr`)
+  PRIMARY KEY (`id_RangoEdad`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
