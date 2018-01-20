@@ -18,6 +18,9 @@ angular.module('webS')
             },
             delete: function(id) {
                 return $http.delete(URL_API_BASE+"plan/"+id);
+            },
+            loadCombos:function(){
+                return $http.get(URL_API_BASE+"plan/loadCombos");
             }
         }
     }]);

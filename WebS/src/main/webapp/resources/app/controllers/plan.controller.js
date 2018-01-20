@@ -5,17 +5,19 @@ angular.module('webS').controller('PlanController',
     [ '$scope', '$sce', '$uibModal','$location', 'planService', PlanController ]);
 function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
-    $scope.Planes=[
-        {
-            nombre:"Plan de Prueba",
-            financiamiento:1,
-            tipo:3
-        }
-    ];
+    $scope.Planes=[];
     $scope.Plan = {
         nombre:"",
         financiamiento:0,
         tipo:0
+    };
+    $scope.keyValueId = {
+        "itemLocalidad":"localidad",
+        "itemGenero":"sexo",
+        "itemSitLaboral":"dependenciaLaboral",
+        "itemEstadoCivil":"estadoCivil",
+        "default":"descripcion",
+        "itemCalmat":"indice"
     };
     //Listas de Combos
     $scope.Financiamientos = [
@@ -61,7 +63,6 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         }
         ];
     $scope.Plan.tipo = $scope.Tipos[0].id;
-
     //Global Variables
     $scope.agregandoPlan = false;
     //Variables n' Stuff
@@ -70,8 +71,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.mostrarSitEspecial = false;
     $scope.mostrarSitHab=false;
     $scope.mostrarInfoCalmat=false;
-
-    //Situaciones
+    //Tablas
     $scope.sitRegistro = {
         items:[]
     };
@@ -84,230 +84,208 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.sitHab = {
         items:[]
     };
-
     //COMBOS
     //SIT REGISTRO
     $scope.comboSitRegistro = {
         items: [
             {
-                id: 0,
+                id_SituacionRegistro: 0,
                 descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "Antigüedad de la inscripción en el registro"
-            },
-            {
-                id: 2,
-                descripcion: "Documentación probatoria completa"
             }]
     };
     //SIT HOGAR
     $scope.comboSitHogar = {
         items: [
             {
-                id: 0,
+                id_SituacionHogar: 0,
                 descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "Inicio de residencia"
-            },
-            ,
-            {
-                id: 2,
-                descripcion: "Percepción de subsidios en el hogar"
             }]
     };
     $scope.comboSitLocalidad = {
         items: [
             {
-                id: 0,
-                descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "Laborde"
+                id_Localidad: 0,
+                localidad: "-SELECCIONE-"
             }]
     };
     $scope.comboSitGenero = {
         items: [
             {
-                id: 0,
-                descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "Femenino"
-            },
-            {
-                id: 2,
-                descripcion: "Masculino"
+                id_Sexo: 0,
+                sexo: "-SELECCIONE-"
             }]
     };
     $scope.comboSitEdadJefe = {
         items: [
             {
-                id: 0,
+                id_RangoEdad: 0,
                 descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "18-25"
-            },
-            {
-                id: 2,
-                descripcion: "26-35"
-            },
-            {
-                id: 3,
-                descripcion: "36-50"
-            }
-            ,
-            {
-                id: 4,
-                descripcion: "50+"
             }]
     };
     $scope.comboSitCapCons = {
         items: [
             {
-                id: 0,
+                id_TipoCapacidadConstructiva: 0,
                 descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "Pintor"
-            },
-            {
-                id: 2,
-                descripcion: "Pocero"
-            },
-            {
-                id: 3,
-                descripcion: "Ceramista"
-            },
-            {
-                id: 4,
-                descripcion: "Techador"
-            },
-            {
-                id: 5,
-                descripcion: "Yesero"
             }
         ]
     };
     $scope.comboSitNacionalidad ={
         items: [
             {
-                id: 0,
+                id_Nacionalidad: 0,
                 descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "ITEM EJEMPLO"
             }
         ]
     };
     $scope.comboSitEstadoCivil ={
         items: [
             {
-                id: 0,
-                descripcion: "-SELECCIONE-"
-            },]
+                id_EstadoCivil: 0,
+                estadoCivil: "-SELECCIONE-"
+            }]
     };
     $scope.comboSitSitLaboral ={
         items: [
             {
-                id: 0,
-                descripcion: "-SELECCIONE-"
-            },]
+                id_DependenciaLaboral: 0,
+                dependenciaLaboral: "-SELECCIONE-"
+            }]
     };
-
-
-
     //SIT ESPECIALES
     $scope.comboSitEsp ={
         items: [
             {
-                id: 0,
+                id_CaracteristicasEspecialesHogar: 0,
                 descripcion: "-SELECCIONE-"
-            },
-            {
-                id: 1,
-                descripcion: "ITEM EJEMPLO"
             }]
     };
     //SIT HABITACIONAL
     $scope.comboSitHab ={
         items: [
             {
-                id: 0,
+                id_Plan_SituacionHabitacional: 0,
                 descripcion: "-SELECCIONE-"
             }]
     };
     $scope.comboPosesionInmueble ={
         items: [
             {
-                id: 0,
+                id_PoseeInmueble: 0,
                 descripcion: "-SELECCIONE-"
-            },]
+            }]
     };
     $scope.comboTipoVivienda ={
         items: [
             {
-                id: 0,
+                id_SituacionInmueble: 0,
                 descripcion: "-SELECCIONE-"
-            },]
+            }]
     };
     $scope.comboConservacion ={
         items: [
             {
-                id: 0,
+                id_InstalacionInmueble: 0,
                 descripcion: "-SELECCIONE-"
-            },]
+            }]
     };
+    $scope.comboCalmat={
+        items: [
+            {
+                id_Plan_Calmat: 0,
+                indice: "-SELECCIONE-"
+            }]
+    };
+    planService.loadCombos().then(function(resp){
+        var datos = resp.data;
+        cargarCombo($scope.comboSitRegistro.items,datos.planSituacionRegistroList);
+        cargarCombo($scope.comboSitHogar.items,datos.planSituacionHogarList);
+        cargarCombo($scope.comboSitLocalidad.items,datos.localidadList);
+        cargarCombo($scope.comboSitGenero.items,datos.sexoList);
+        cargarCombo($scope.comboSitCapCons.items,datos.capacidadConstructivaList);
+        cargarCombo($scope.comboSitNacionalidad.items,datos.nacionalidadList);
+        cargarCombo($scope.comboSitEstadoCivil.items,datos.estadoCivilList);
+        cargarCombo($scope.comboSitSitLaboral.items,datos.situacionLaboralList);
+        cargarCombo($scope.comboSitEsp.items,datos.planCaracteristicasHogarList);
+        cargarCombo($scope.comboSitHab.items,datos.planSituacionHabitacionalList);
+        cargarCombo($scope.comboPosesionInmueble.items,datos.poseeInmuebleList);
+        cargarCombo($scope.comboTipoVivienda.items,datos.situacionInmuebleList);
+        cargarCombo($scope.comboConservacion.items,datos.instalacionInmuebleList);
+        cargarCombo($scope.comboCalmat.items,datos.planCalmatList);
+        cargarComboEdad($scope.comboSitEdadJefe.items,datos.planRangoEdadList);
+        //Seteado de elemento 0
+        defaultCombos();
 
-    $scope.temp ={
-        item : $scope.comboSitRegistro.items[0].id,
-        itemHogar: $scope.comboSitHogar.items[0].id,
-        itemLocalidad: $scope.comboSitLocalidad.items[0].id,
-        itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
-        itemCapCons: $scope.comboSitCapCons.items[0].id,
-        itemGenero: $scope.comboSitGenero.items[0].id,
-        itemNacionalidad:$scope.comboSitNacionalidad.items[0].id,
-        itemEstadoCivil:$scope.comboSitEstadoCivil.items[0].id,
-        itemSitLaboral:$scope.comboSitSitLaboral.items[0].id,
-        itemsPosesionInmueble:$scope.comboPosesionInmueble.items[0].id,
-        itemsTipoVivienda:$scope.comboTipoVivienda.items[0].id,
-        itemsSolHab:$scope.comboSitHab.items[0].id,
-        itemsEsp:$scope.comboSitEsp.items[0].id,
-        itemsConservacion:$scope.comboConservacion.items[0].id,
-        itemInicioResidencia:-1,
-        itemCantMiembros:-1,
-        itemIngreso:-1
+    });
+    var cargarCombo = function(combo, coleccion){
+        var resultado = [];
+        coleccion.forEach(function(value) {
+            combo.push(value);
+        });
+    };
+    var cargarComboEdad=function(combo, coleccion){
+        coleccion.forEach(function (element,index) {
+            var descripcion = "Entre "+element.desde+" y "+element.hasta+" años.";
+            var item ={
+                id_RangoEdad:element.id_RangoEdad,
+                descripcion:descripcion
+            };
+            combo.push(item);
+        })
+    };
+    var defaultCombos = function(){
+        $scope.temp ={
+            item : $scope.comboSitRegistro.items[0].id_SituacionRegistro,
+            itemHogar: $scope.comboSitHogar.items[0].id_SituacionHogar,
+            itemLocalidad: $scope.comboSitLocalidad.items[0].id_Localidad,
+            itemEdadJefe: $scope.comboSitEdadJefe.items[0].id_RangoEdad,
+            itemCapCons: $scope.comboSitCapCons.items[0].id_TipoCapacidadConstructiva,
+            itemGenero: $scope.comboSitGenero.items[0].id_Sexo,
+            itemNacionalidad:$scope.comboSitNacionalidad.items[0].id_Nacionalidad,
+            itemEstadoCivil:$scope.comboSitEstadoCivil.items[0].id_EstadoCivil,
+            itemSitLaboral:$scope.comboSitSitLaboral.items[0].id_DependenciaLaboral,
+            itemsPosesionInmueble:$scope.comboPosesionInmueble.items[0].id_PoseeInmueble,
+            itemsTipoVivienda:$scope.comboTipoVivienda.items[0].id_SituacionInmueble,
+            itemsSolHab:$scope.comboSitHab.items[0].id_Plan_SituacionHabitacional,
+            itemsEsp:$scope.comboSitEsp.items[0].id_CaracteristicasEspecialesHogar,
+            itemsConservacion:$scope.comboConservacion.items[0].id_InstalacionInmueble,
+            itemsCalmat:$scope.comboCalmat.items[0].id_Plan_Calmat,
+            itemInicioResidencia:-1,
+            itemCantMiembros:-1,
+            itemIngreso:-1
+        };
     };
     //VARIABLES FUERA DE TABLA
     $scope.inicioResidencia = "";
     $scope.cantMiembros = 0;
     $scope.ingresosHogar=0;
-
     //FUNCIONES
-    $scope.addItem = function(id,coleccion,categoria,combo){
+    $scope.addItem = function(id,coleccion,categoria,combo,key){
+        var add = true;
         combo.forEach(function (element, index) {
             if (element.id == id && element.id !=0) {
-
-                var item={
-                    id:element.id,
-                    categoria:categoria,
-                    descripcion:element.descripcion,
-                    puntaje:0,
-                    required:false,
-                    valorEspecial:""
-                };
-                coleccion.push(item);
-                combo.splice(index,1);
-                coleccion.items[0].id;
+                coleccion.forEach(function(e,i){
+                    if(e.descripcion == element[key] && e.categoria==categoria)
+                    {
+                        showNotification("Ese item ya se encuentra en el plan",'danger');
+                        add =false;
+                    }
+                });
+                if(add){
+                    var item={
+                        id:element.id,
+                        categoria:categoria,
+                        descripcion:element[key],
+                        puntaje:0,
+                        required:false,
+                        valorEspecial:""
+                    };
+                    coleccion.push(item);
+                    selectTags = planForm.getElementsByTagName("select");
+                    for(var i = 0; i < selectTags.length; i++) {
+                        selectTags[i].selectedIndex =0;
+                    }
+                }
             }
         });
     };
@@ -349,32 +327,60 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
 
     };
     $scope.addPlan = function(plan){
-        $scope.Planes.push(plan);
-        $scope.Plan = {
-            nombre:"",
-            financiamiento:0,
-            tipo:0
+        if(ejecutarValidaciones()){
+            $scope.Planes.push(plan);
+            $scope.Plan = {
+                nombre:"",
+                financiamiento:0,
+                tipo:0
+            };
+            defaultCombos();
+            $scope.agregandoPlan = false;
         };
-        $scope.temp ={
-            item : $scope.comboSitRegistro.items[0].id,
-            itemHogar: $scope.comboSitHogar.items[0].id,
-            itemLocalidad: $scope.comboSitLocalidad.items[0].id,
-            itemEdadJefe: $scope.comboSitEdadJefe.items[0].id,
-            itemCapCons: $scope.comboSitCapCons.items[0].id,
-            itemGenero: $scope.comboSitGenero.items[0].id,
-            itemNacionalidad:$scope.comboSitNacionalidad.items[0].id,
-            itemEstadoCivil:$scope.comboSitEstadoCivil.items[0].id,
-            itemSitLaboral:$scope.comboSitSitLaboral.items[0].id,
-            itemsEsp:$scope.comboSitEsp.items[0].id,
-            itemsTipoVivienda:$scope.comboTipoVivienda.items[0].id,
-            itemsSolHab:$scope.comboSitHab.items[0].id,
-            itemsConservacion:$scope.comboConservacion.items[0].id,
-            itemInicioResidencia:-1,
-            itemCantMiembros:-1,
-            itemIngreso:-1
-        };
-        $scope.agregandoPlan = false;
-    }
+    };
+    $scope.getProperty = function (propertyName) {
+        return $scope.keyValueId[propertyName];
+    };
+    //FUNCIONES INTERNAS
+    var ejecutarValidaciones=function(){
+        var result = true;
+        if($scope.Plan.nombre == undefined || $scope.Plan.nombre=="")
+        {
+          showNotification("Ingrese un nombre para el Plan",'danger');
+          result=false;
+        }
+        if($scope.Plan.tipo == undefined || $scope.Plan.tipo==0)
+        {
+            showNotification("Seleccione un tipo para el Plan",'danger');
+            result=false;
+        }
+        if($scope.Plan.financiamiento == undefined || $scope.Plan.financiamiento==0)
+        {
+            showNotification("Seleccione un financiamiento  para el Plan",'danger');
+            result=false;
+        }
+        return result;
+
+    };
+    $scope.Plan = {
+        nombre:"",
+        financiamiento:0,
+        tipo:0
+    };
+    var showNotification = function(mensaje, tipo){
+        $.notify({
+            icon: "pe-7s-attention",
+            message: mensaje
+
+        },{
+            type: tipo,
+            timer: 4000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+    };
 
 }
 
