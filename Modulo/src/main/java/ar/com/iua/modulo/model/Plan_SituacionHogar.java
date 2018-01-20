@@ -15,7 +15,7 @@ public class Plan_SituacionHogar implements IModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id_Plan_SituacionHogar;
+    private int id_SituacionHogar;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
@@ -34,15 +34,15 @@ public class Plan_SituacionHogar implements IModel{
 
     @Override
     public int getId() {
-        return id_Plan_SituacionHogar;
+        return id_SituacionHogar;
     }
 
     public int getId_SituacionHogar() {
-        return id_Plan_SituacionHogar;
+        return id_SituacionHogar;
     }
 
     public void setId_SituacionHogar(int id_SituacionHogar) {
-        this.id_Plan_SituacionHogar = id_SituacionHogar;
+        this.id_SituacionHogar = id_SituacionHogar;
     }
 
     public String getDescripcion() {

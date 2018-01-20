@@ -15,7 +15,7 @@ public class Plan_RangoEdad implements IModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id_Plan_RangoEdad;
+    private int id_RangoEdad;
 
     @Column(name = "desde", nullable = false)
     private float desde;
@@ -25,15 +25,15 @@ public class Plan_RangoEdad implements IModel{
 
     @Override
     public int getId() {
-        return id_Plan_RangoEdad;
+        return id_RangoEdad;
     }
 
-    public int getId_RangoEdadr() {
-        return id_Plan_RangoEdad;
+    public int getId_RangoEdad() {
+        return id_RangoEdad;
     }
 
-    public void setId_RangoEdadr(int id_RangoEdadr) {
-        this.id_Plan_RangoEdad = id_RangoEdadr;
+    public void setId_RangoEdad(int id_RangoEdad) {
+        this.id_RangoEdad = id_RangoEdad;
     }
 
     public float getDesde() {

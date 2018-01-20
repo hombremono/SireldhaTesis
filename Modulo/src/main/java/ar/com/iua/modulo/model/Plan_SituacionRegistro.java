@@ -16,13 +16,13 @@ public class Plan_SituacionRegistro implements IModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id_Plan_SituacionRegistro;
+    private int id_SituacionRegistro;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "idConstante", nullable = false)
+    @JoinColumn(name = "id_Constante", nullable = false)
     private ConstantePlan constante;
 
     public ConstantePlan getConstante() {
@@ -31,19 +31,15 @@ public class Plan_SituacionRegistro implements IModel{
 
     @Override
     public int getId() {
-        return id_Plan_SituacionRegistro;
+        return id_SituacionRegistro;
     }
 
-    public void setConstante(ConstantePlan constante) {
-        this.constante = constante;
+    public int getId_Plan_SituacionRegistro() {
+        return id_SituacionRegistro;
     }
 
-    public int getId_SituacionRegistro() {
-        return id_Plan_SituacionRegistro;
-    }
-
-    public void setId_SituacionRegistro(int id_SituacionRegistro) {
-        this.id_Plan_SituacionRegistro = id_SituacionRegistro;
+    public void setId_Plan_SituacionRegistro(int id_Plan_SituacionRegistro) {
+        this.id_SituacionRegistro = id_Plan_SituacionRegistro;
     }
 
     public String getDescripcion() {
@@ -52,5 +48,9 @@ public class Plan_SituacionRegistro implements IModel{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public void setConstante(ConstantePlan constante) {
+        this.constante = constante;
     }
 }
