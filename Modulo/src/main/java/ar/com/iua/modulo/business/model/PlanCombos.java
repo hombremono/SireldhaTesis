@@ -26,6 +26,7 @@ public class PlanCombos implements Serializable {
     private List<Plan_Calmat> planCalmatList;
     private List<InstalacionInmueble> instalacionInmuebleList;
     private List<Plan_SituacionHabitacional> planSituacionHabitacionalList;
+    private List<OrigenFinanciamiento> origenFinanciamientoList;
 
 
     public PlanCombos(List<Plan_SituacionRegistro> planSituacionRegistroList,
@@ -36,7 +37,8 @@ public class PlanCombos implements Serializable {
                       List<Plan_CaracteristicasHogar> planCaracteristicasHogarList,
                       List<PoseeInmueble> poseeInmuebleList, List<SituacionInmueble> situacionInmuebleList,
                       List<Plan_Calmat> planCalmatList, List<InstalacionInmueble> instalacionInmuebleList,
-                      List<Plan_SituacionHabitacional> planSituacionHabitacionalList) {
+                      List<Plan_SituacionHabitacional> planSituacionHabitacionalList,
+                      List<OrigenFinanciamiento> origenFinanciamientoList) {
         this.planSituacionRegistroList = planSituacionRegistroList;
         this.planSituacionHogarList = planSituacionHogarList;
         this.localidadList = localidadList;
@@ -52,6 +54,7 @@ public class PlanCombos implements Serializable {
         this.planCalmatList = planCalmatList;
         this.instalacionInmuebleList = instalacionInmuebleList;
         this.planSituacionHabitacionalList = planSituacionHabitacionalList;
+        this.origenFinanciamientoList = origenFinanciamientoList;
     }
 
     public static long getSerialVersionUID() {
@@ -176,5 +179,13 @@ public class PlanCombos implements Serializable {
 
     public void setPlanSituacionHabitacionalList(List<Plan_SituacionHabitacional> planSituacionHabitacionalList) {
         this.planSituacionHabitacionalList = planSituacionHabitacionalList;
+    }
+
+    public List<OrigenFinanciamiento> getOrigenFinanciamientoList() {
+        return origenFinanciamientoList;
+    }
+
+    public void setOrigenFinanciamientoList(List<OrigenFinanciamiento> origenFinanciamientoList) {
+        this.origenFinanciamientoList = origenFinanciamientoList;
     }
 }

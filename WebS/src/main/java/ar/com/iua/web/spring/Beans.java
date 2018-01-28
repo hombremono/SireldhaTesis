@@ -239,6 +239,23 @@ public class Beans {
 	public IInstalacionInmuebleDAO instalacionInmuebleDAO (final SessionFactory sessionFactory)
 	{ return new InstalacionInmuebleDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IOrigenFinanciamientoDAO origenFinanciamientoDAO (final SessionFactory sessionFactory)
+	{ return new OrigenFinanciamientoDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanDAO planDAO (final SessionFactory sessionFactory)
+	{ return new PlanDAO(sessionFactory);}
+
+	@Bean
+	@Autowired
+	public IPlanCriterioDAO planCriterioDAO (final SessionFactory sessionFactory)
+	{ return new PlanCriterioDAO(sessionFactory);}
+
+
+
 
 
 	//---------------------------------------------------Services-------------------------------------------------------
@@ -394,7 +411,8 @@ public class Beans {
 
 	@Bean
 	@Autowired
-	public IPlanService planService (final IPlanSituacionRegistroDAO planSituacionRegistroDAO,
+	public IPlanService planService (final IPlanDAO planDAO,
+									 final IPlanSituacionRegistroDAO planSituacionRegistroDAO,
 									 final IPlanSituacionHogarDAO planSituacionHogarDAO,
 									 final ILocalidadDAO localidadDAO,
 									 final IPlanRangoEdadDAO planRangoEdadDAO,
@@ -408,10 +426,13 @@ public class Beans {
 									 final ISituacionInmuebleDAO situacionInmuebleDAO,
 									 final IPlanCalmatDAO planCalmatDAO,
 									 final IInstalacionInmuebleDAO instalacionInmuebleDAO,
-									 final IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO) {
-		return new PlanService(planSituacionRegistroDAO,planSituacionHogarDAO,localidadDAO,planRangoEdadDAO,sexoDAO,
+									 final IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO,
+									 final IOrigenFinanciamientoDAO origenFinanciamientoDAO,
+									 final IPlanCriterioDAO planCriterioDAO) {
+		return new PlanService(planDAO, planSituacionRegistroDAO,planSituacionHogarDAO,localidadDAO,planRangoEdadDAO,sexoDAO,
 				nacionalidadDAO,estadoCivilDAO,situacionLaboralDAO,capacidadConstructivaDAO,caracteristicasHogarDAO,
-				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO) ;}
+				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO,
+				origenFinanciamientoDAO, planCriterioDAO) ;}
 
 
 }

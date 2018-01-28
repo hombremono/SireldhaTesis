@@ -15,9 +15,9 @@ import ar.com.iua.modulo.persistence.exception.PersistenceException;
 
 public class GenericService<Entity, PK extends Serializable> implements IGenericService<Entity, PK> {
 
-	private static final long serialVersionUID = 3544059594104153771L;
-	private static Logger LOG = LoggerFactory.getLogger(GenericService.class);
-	private IGenericDAO<Entity, PK> dao;
+	protected static final long serialVersionUID = 3544059594104153771L;
+	protected static Logger LOG = LoggerFactory.getLogger(GenericService.class);
+	protected IGenericDAO<Entity, PK> dao;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GenericService(IGenericDAO dao) {
