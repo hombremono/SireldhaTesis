@@ -18,7 +18,7 @@
         Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
         Tip 2: you can also add an image using data-image tag
     -->
-	<div id="anotherIdToBeIgnored" class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg" ng-controller="SidebarController as ctrl">
+	<div id="anotherIdToBeIgnored" style="background-color:#009ADA" class="sidebar" data-color="azure" data-image="assets/img/sidebar-5.jpg" ng-controller="SidebarController as ctrl">
 		<div class="sidebar-wrapper">
 			<div class="logo">
 				<a class="simple-text">
@@ -39,7 +39,7 @@
 						<p>Iniciar sesión</p>
 					</a>
 				</li>
-				<li class="active" ng-show="$root.acceso==2 || $root.acceso==1">
+				<li ng-show="$root.acceso==2 || $root.acceso==1">
 					<a href="#!/requestHome">
 						<i class="pe-7s-note2"></i>
 						<p>Iniciar solicitud</p>
@@ -70,6 +70,9 @@
 					</a>
 				</li>
 			</ul>
+			<div style="position:absolute;bottom: 5%;">
+				<p style="font-size: 11px">Derechos reservados 2018 UCC CEVE-CONICET-AVE</p>
+			</div>
 		</div>
 	</div>
 
