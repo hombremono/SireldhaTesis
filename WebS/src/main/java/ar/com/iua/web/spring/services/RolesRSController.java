@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.iua.modulo.business.Interfaces.IRoleService;
+import ar.com.iua.modulo.business.services.Interfaces.IRoleService;
 
 @RestController
 
-@RequestMapping(value = Constantes.URL_ROLES)
+@RequestMapping(value = ConstantesURL.URL_ROLES)
 public class RolesRSController {
 	private static Logger LOG = LoggerFactory.getLogger(RolesRSController.class);
 

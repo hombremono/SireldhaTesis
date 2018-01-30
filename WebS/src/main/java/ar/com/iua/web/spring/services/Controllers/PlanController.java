@@ -1,10 +1,10 @@
 package ar.com.iua.web.spring.services.Controllers;
 
-import ar.com.iua.modulo.business.Interfaces.IPlanService;
+import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
 import ar.com.iua.modulo.business.model.PlanCombos;
 import ar.com.iua.modulo.model.Plan;
 import ar.com.iua.modulo.model.exception.NotFoundException;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import java.io.IOException;
  * Created by mnicolas on 16/01/18.
  */
 @RestController
-@RequestMapping(value = Constantes.URL_PLAN)
+@RequestMapping(value = ConstantesURL.URL_PLAN)
 public class PlanController extends GenericController{
     protected static Logger LOG = LoggerFactory.getLogger(PlanController.class);
 
@@ -58,6 +58,6 @@ public class PlanController extends GenericController{
     @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Plan plan) throws IOException {
-        return add(plan, planService, Constantes.URL_PLAN);
+        return add(plan, planService, ConstantesURL.URL_PLAN);
     }
 }

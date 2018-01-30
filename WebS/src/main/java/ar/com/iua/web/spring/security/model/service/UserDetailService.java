@@ -8,10 +8,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import ar.com.iua.modulo.business.exception.ServiceException;
+import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.User;
-import ar.com.iua.modulo.business.Interfaces.IUserService;
+import ar.com.iua.modulo.business.services.Interfaces.IUserService;
 import ar.com.iua.web.spring.security.model.UserDetailsAdapter;
 
 @Component

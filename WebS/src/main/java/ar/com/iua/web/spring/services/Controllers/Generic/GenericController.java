@@ -1,7 +1,7 @@
 package ar.com.iua.web.spring.services.Controllers.Generic;
 
-import ar.com.iua.modulo.business.Interfaces.Generic.IGenericService;
-import ar.com.iua.modulo.business.Interfaces.Generic.INoDeleteService;
+import ar.com.iua.modulo.business.services.Interfaces.Generic.IGenericService;
+import ar.com.iua.modulo.business.services.Interfaces.Generic.INoDeleteService;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.IModel;
 import ar.com.iua.web.spring.services.SimpleResponse;
@@ -11,9 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
-import java.net.URI;
 
 /**
  * Created by mnicolas on 06/06/17.

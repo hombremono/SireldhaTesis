@@ -14,7 +14,7 @@ import ar.com.iua.web.spring.security.model.UserDetailsAdapter;
 
 @RestController
 
-@RequestMapping(value = Constantes.URL_SECCHECK)
+@RequestMapping(value = ConstantesURL.URL_SECCHECK)
 public class SecurityCheckRSController {
 
 	@PreAuthorize("hasAuthority('ADMIN')")

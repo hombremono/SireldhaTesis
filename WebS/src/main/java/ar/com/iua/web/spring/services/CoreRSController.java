@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = Constantes.URL_CORE)
+@RequestMapping(value = ConstantesURL.URL_CORE)
 public class CoreRSController  {
 	@RequestMapping(value = "/pingAuth", method = RequestMethod.GET)
 	public ResponseEntity<String> getIdCaApy() {

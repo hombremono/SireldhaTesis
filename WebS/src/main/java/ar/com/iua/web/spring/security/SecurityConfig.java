@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.FormLoginC
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 import ar.com.iua.web.spring.security.model.service.UserDetailService;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.web.spring.services.ConstantesURL;
 
 @Configuration
 @EnableWebSecurity // (debug = true)
@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(Constantes.URL_BASE + "/**").authenticated()
-			.antMatchers(Constantes.URL_BASE + "/**").authenticated();
+		http.authorizeRequests().antMatchers(ConstantesURL.URL_BASE + "/**").authenticated()
+			.antMatchers(ConstantesURL.URL_BASE + "/**").authenticated();
 		if (Boolean.parseBoolean(env.getProperty("auth.basic", "true"))) {
 			//----------------------------------------------------------------------------------------------------------
 			//---------------------------------------------VIEW AUTH----------------------------------------------------

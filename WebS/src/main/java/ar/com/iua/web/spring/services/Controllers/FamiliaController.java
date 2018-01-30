@@ -1,16 +1,15 @@
 package ar.com.iua.web.spring.services.Controllers;
 
-import ar.com.iua.modulo.business.Interfaces.IDireccionService;
-import ar.com.iua.modulo.business.Interfaces.IPersonaService;
-import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
-import ar.com.iua.modulo.business.exception.ServiceException;
+import ar.com.iua.modulo.business.services.Interfaces.IDireccionService;
+import ar.com.iua.modulo.business.services.Interfaces.IPersonaService;
+import ar.com.iua.modulo.business.services.Interfaces.ITelefonoService;
 import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Telefono;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Familia;
-import ar.com.iua.modulo.business.Interfaces.IFamiliaService;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.modulo.business.services.Interfaces.IFamiliaService;
+import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = Constantes.URL_FAMILIA)
+@RequestMapping(value = ConstantesURL.URL_FAMILIA)
 public class FamiliaController extends GenericController {
 
     @Autowired
@@ -81,7 +80,7 @@ public class FamiliaController extends GenericController {
         }catch (Exception e) {
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return add(familia,familiaService,Constantes.URL_FAMILIA);
+        return add(familia,familiaService, ConstantesURL.URL_FAMILIA);
 
     }
 

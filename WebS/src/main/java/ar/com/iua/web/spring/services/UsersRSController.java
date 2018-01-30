@@ -1,13 +1,11 @@
 package ar.com.iua.web.spring.services;
 
 import java.io.IOException;
-import java.net.URI;
 
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.User;
-import ar.com.iua.modulo.business.Interfaces.IUserService;
+import ar.com.iua.modulo.business.services.Interfaces.IUserService;
 
 @RestController
 
-@RequestMapping(value = Constantes.URL_USERS)
+@RequestMapping(value = ConstantesURL.URL_USERS)
 public class UsersRSController extends GenericController{
 	private static Logger LOG = LoggerFactory.getLogger(UsersRSController.class);
 
@@ -57,7 +54,7 @@ public class UsersRSController extends GenericController{
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ResponseEntity<Object> add(@RequestBody User user) throws IOException {
-		return add(user,userService,Constantes.URL_USERS);
+		return add(user,userService, ConstantesURL.URL_USERS);
 	}
 
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")

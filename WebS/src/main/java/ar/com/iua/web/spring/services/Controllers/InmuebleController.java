@@ -1,11 +1,10 @@
 package ar.com.iua.web.spring.services.Controllers;
 
-import ar.com.iua.modulo.business.Interfaces.*;
+import ar.com.iua.modulo.business.services.Interfaces.*;
 import ar.com.iua.modulo.business.model.InmuebleCombos;
 import ar.com.iua.modulo.model.*;
 import ar.com.iua.modulo.model.exception.NotFoundException;
-import ar.com.iua.modulo.model.persistence.dao.IDireccionDAO;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import java.io.IOException;
  */
 
 @RestController
-@RequestMapping(value = Constantes.URL_INMUEBLE)
+@RequestMapping(value = ConstantesURL.URL_INMUEBLE)
 public class InmuebleController extends GenericController {
 
     @Autowired
@@ -60,7 +59,7 @@ public class InmuebleController extends GenericController {
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Inmueble inmueble) throws IOException {
-        return add(inmueble, inmuebleService, Constantes.URL_INMUEBLE);
+        return add(inmueble, inmuebleService, ConstantesURL.URL_INMUEBLE);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
@@ -119,7 +118,7 @@ public class InmuebleController extends GenericController {
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/sinInmueble/", method = RequestMethod.POST)
     public ResponseEntity<Object> addSinInmueble (@RequestBody SinInmueble sinInmueble) throws IOException {
-        return add(sinInmueble, sinInmuebleService, Constantes.URL_INMUEBLE);
+        return add(sinInmueble, sinInmuebleService, ConstantesURL.URL_INMUEBLE);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
@@ -176,7 +175,7 @@ public class InmuebleController extends GenericController {
             LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return add(terreno, terrenoService, Constantes.URL_INMUEBLE);
+        return add(terreno, terrenoService, ConstantesURL.URL_INMUEBLE);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
@@ -224,7 +223,7 @@ public class InmuebleController extends GenericController {
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/alquiler/", method = RequestMethod.POST)
     public ResponseEntity<Object> addAlquiler (@RequestBody Alquiler alquiler) throws IOException {
-        return add(alquiler, alquilerService, Constantes.URL_INMUEBLE);
+        return add(alquiler, alquilerService, ConstantesURL.URL_INMUEBLE);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
@@ -272,7 +271,7 @@ public class InmuebleController extends GenericController {
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/careceVivienda/", method = RequestMethod.POST)
     public ResponseEntity<Object> addCareceVivienda (@RequestBody CareceVivienda careceVivienda) throws IOException {
-        return add(careceVivienda, careceViviendaService, Constantes.URL_INMUEBLE);
+        return add(careceVivienda, careceViviendaService, ConstantesURL.URL_INMUEBLE);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")

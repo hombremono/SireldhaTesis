@@ -1,10 +1,10 @@
 package ar.com.iua.web.spring.services.Controllers;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.web.spring.services.ConstantesURL;
 
 import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Telefono;
-import ar.com.iua.modulo.business.Interfaces.IDireccionService;
-import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
+import ar.com.iua.modulo.business.services.Interfaces.IDireccionService;
+import ar.com.iua.modulo.business.services.Interfaces.ITelefonoService;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.io.IOException;
  * Created by mnicolas on 04/06/17.
  */
 @RestController
-@RequestMapping(value = Constantes.URL_DIRTEL)
+@RequestMapping(value = ConstantesURL.URL_DIRTEL)
 public class DireccionTelefonoController extends GenericController {
 
 
@@ -42,7 +42,7 @@ public class DireccionTelefonoController extends GenericController {
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/direccion", method = RequestMethod.POST)
     public ResponseEntity<Object> addDir (@RequestBody Direccion direccion) throws IOException {
-        return add(direccion,dirService,Constantes.URL_DIRTEL);
+        return add(direccion,dirService, ConstantesURL.URL_DIRTEL);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
@@ -69,7 +69,7 @@ public class DireccionTelefonoController extends GenericController {
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/telefono", method = RequestMethod.POST)
     public ResponseEntity<Object> addTel (@RequestBody Telefono telefono) throws IOException {
-        return add(telefono,telService, Constantes.URL_DIRTEL);
+        return add(telefono,telService, ConstantesURL.URL_DIRTEL);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")

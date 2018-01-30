@@ -1,15 +1,15 @@
 package ar.com.iua.web.spring.services.Controllers;
 
-import ar.com.iua.modulo.business.Interfaces.IDireccionService;
-import ar.com.iua.modulo.business.Interfaces.ITelefonoService;
-import ar.com.iua.modulo.business.Interfaces.ITrabajoAutonomoService;
-import ar.com.iua.modulo.business.Interfaces.ITrabajoDependenciaService;
+import ar.com.iua.modulo.business.services.Interfaces.IDireccionService;
+import ar.com.iua.modulo.business.services.Interfaces.ITelefonoService;
+import ar.com.iua.modulo.business.services.Interfaces.ITrabajoAutonomoService;
+import ar.com.iua.modulo.business.services.Interfaces.ITrabajoDependenciaService;
 import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Telefono;
 import ar.com.iua.modulo.model.TrabajoAutonomo;
 import ar.com.iua.modulo.model.TrabajoDependencia;
 import ar.com.iua.modulo.model.exception.NotFoundException;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.io.IOException;
  */
 
 @RestController
-@RequestMapping(value = Constantes.URL_TRABAJO)
+@RequestMapping(value = ConstantesURL.URL_TRABAJO)
 public class TrabajoController extends GenericController {
 
     @Autowired
@@ -59,7 +59,7 @@ public class TrabajoController extends GenericController {
     @RequestMapping(value = "/autonomo", method = RequestMethod.POST)
     public ResponseEntity<Object> addAutonomo (@RequestBody TrabajoAutonomo trabajoAutonomo) throws IOException {
 
-        return add(trabajoAutonomo, trabajoAutonomoService, Constantes.URL_TRABAJO);
+        return add(trabajoAutonomo, trabajoAutonomoService, ConstantesURL.URL_TRABAJO);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
@@ -120,7 +120,7 @@ public class TrabajoController extends GenericController {
             LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return add(trabajoDependencia, trabajoDependenciaService, Constantes.URL_TRABAJO);
+        return add(trabajoDependencia, trabajoDependenciaService, ConstantesURL.URL_TRABAJO);
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")

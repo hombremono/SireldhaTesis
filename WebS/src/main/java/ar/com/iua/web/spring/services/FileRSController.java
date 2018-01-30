@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import ar.com.iua.modulo.business.exception.ServiceException;
+import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.Archivo;
-import ar.com.iua.modulo.business.Interfaces.IArchivoService;
+import ar.com.iua.modulo.business.services.Interfaces.IArchivoService;
 
 @RestController
 
-@RequestMapping(value = Constantes.URL_FILES)
+@RequestMapping(value = ConstantesURL.URL_FILES)
 public class FileRSController {
 	private static Logger LOG = LoggerFactory.getLogger(FileRSController.class);
 
@@ -82,7 +82,7 @@ public class FileRSController {
 				archivo.setArchivo(file.getBytes());
 				archivoService.save(archivo);
 				HttpHeaders headers = new HttpHeaders();
-				headers.setLocation(new URI(Constantes.URL_FILES + "/" + archivo.getIdArchivo()));
+				headers.setLocation(new URI(ConstantesURL.URL_FILES + "/" + archivo.getIdArchivo()));
 				return new ResponseEntity<Object>(headers, HttpStatus.CREATED);
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);

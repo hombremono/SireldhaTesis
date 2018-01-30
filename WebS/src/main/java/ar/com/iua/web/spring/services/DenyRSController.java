@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DenyRSController {
-	@RequestMapping(value = Constantes.URL_DENY, method = RequestMethod.GET)
+	@RequestMapping(value = ConstantesURL.URL_DENY, method = RequestMethod.GET)
 	public ResponseEntity<String> deny() {
 		return new ResponseEntity<String>(HttpStatus.UNAUTHORIZED);
 	}

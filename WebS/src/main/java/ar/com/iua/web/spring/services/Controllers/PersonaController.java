@@ -1,11 +1,10 @@
 package ar.com.iua.web.spring.services.Controllers;
 
-import ar.com.iua.modulo.business.Interfaces.*;
-import ar.com.iua.modulo.business.impl.SubsidioService;
+import ar.com.iua.modulo.business.services.Interfaces.*;
 import ar.com.iua.modulo.business.model.PersonaCombos;
 import ar.com.iua.modulo.model.*;
 import ar.com.iua.modulo.model.exception.NotFoundException;
-import ar.com.iua.web.spring.services.Constantes;
+import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
 import ar.com.iua.web.spring.services.SimpleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.List;
  * Created by mnicolas on 08/06/17.
  */
 @RestController
-@RequestMapping(value = Constantes.URL_PERSONA)
+@RequestMapping(value = ConstantesURL.URL_PERSONA)
 public class PersonaController extends GenericController {
 
     @Autowired

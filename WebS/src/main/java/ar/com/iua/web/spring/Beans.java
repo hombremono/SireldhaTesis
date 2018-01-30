@@ -1,7 +1,7 @@
 package ar.com.iua.web.spring;
 
-import ar.com.iua.modulo.business.Interfaces.*;
-import ar.com.iua.modulo.business.impl.*;
+import ar.com.iua.modulo.business.services.Interfaces.*;
+import ar.com.iua.modulo.business.services.impl.*;
 import ar.com.iua.modulo.model.persistence.dao.*;
 import ar.com.iua.modulo.model.persistence.dao.hibernate.*;
 import org.hibernate.SessionFactory;
