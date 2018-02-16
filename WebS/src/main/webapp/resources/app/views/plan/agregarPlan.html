@@ -30,9 +30,14 @@
             <tbody>
             <tr ng-repeat="plan in Planes">
                 <td>{{plan.nombre}}</td>
-                <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="quitarItem(plan,Planes)">
-                        <i class="fa fa-trash"></i>
+                <td>
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Editar plan" ng-click="quitarItem(plan,Planes)">
+                        <i class="fa fa-trash"></i> ELIMINAR
+                    </button>
+                </td>
+                <td>
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Cerrar plan" ng-click="cerrarPlan(plan)">
+                        <i class="pe-7s-key"></i> CERRAR
                     </button>
                 </td>
             </tr>
@@ -56,7 +61,7 @@
         </div>
         <div class="form-group">
             <label for="selectPlan"><span style="color:red">* </span>Tipo de plan</label>
-            <select class="form-control input-md" id="selectPlan" ng-model="Plan.tipo" ng-options="tipo.id as tipo.descripcion for tipo in Tipos"></select>
+            <select class="form-control input-md" id="selectPlan" ng-model="Plan.tipo" ng-options="tipo.id_SolucionHabitacional as tipo.descripcion for tipo in Tipos"></select>
         </div>
         <hr>
         <!--SITUACION REGISTRO-->
@@ -100,19 +105,15 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="sitRegistroSelect">Seleccion el elemento que desea agregar</label>
-                            <select class="form-control input-md" id="sitRegistroSelect" ng-model="temp.item" ng-options="combo.id_Plan_SituacionRegistro as combo.descripcion for combo in comboSitRegistro.items" ></select>
+                            <select class="form-control input-md" id="sitRegistroSelect" ng-model="temp.itemsRegistro" ng-options="combo.id_Plan_SituacionRegistro as combo.descripcion for combo in comboSitRegistro.items" ></select>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-danger" ng-click="addItem(temp.item,sitRegistro.items,'Situación en el registro',comboSitRegistro.items,temp.item.descripcion,getProperty('default'))">Agregar
+                        <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemsRegistro,sitRegistro.items,'Situacion registro',comboSitRegistro.items,getProperty('default'))">Agregar
                         </button>
                     </div>
-                    <!--<div class="col-md-2">-->
-                        <!--<button type="button" class="btn btn-danger" ng-click="addAll(comboSitRegistro.items,sitRegistro.items,'Situación en el registro')">Agregar Todos-->
-                        <!--</button>-->
-                    <!--</div>-->
                 </div>
 
 
@@ -168,13 +169,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemHogar,sitHogar.items,'Situación en el Hogar',comboSitHogar.items,temp.itemHogar.descripcion,getProperty('default'))">Agregar
+                            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemHogar,sitHogar.items,'Situación en el Hogar',comboSitHogar.items,getProperty('default'))">Agregar
                             </button>
                         </div>
-                        <!--<div class="col-md-2">-->
-                            <!--<button type="button" class="btn btn-danger" ng-click="addAll(comboSitHogar.items,sitHogar.items,'Situación en el Hogar')">Agregar Todos-->
-                            <!--</button>-->
-                        <!--</div>-->
                     </div>
                 </div>
                 <hr>
@@ -300,7 +297,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemEdadJefe,sitHogar.items,'Edad Jefe/a',comboSitEdadJefe.items)">Agregar
+                            <button type="button" class="btn btn-danger" ng-click="addItemBadId(temp.itemEdadJefe,sitHogar.items,'Edad Jefe/a',comboSitEdadJefe.items,getProperty('default'),'id_RangoEdad')">Agregar
                             </button>
                         </div>
                         <!--<div class="col-md-2">-->
@@ -322,8 +319,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemCapCons,sitHogar.items,'Capacidad constructiva',comboSitCapCons.items,getProperty('default'))">Agregar
-                            </button>
+                            <button type="button" class="btn btn-danger" ng-click="addItemBadId(temp.itemCapCons,sitHogar.items,'Capacidad constructiva',comboSitCapCons.items,getProperty('default'),'id_TipoCapacidadConstructiva')">Agregar
+                            </button>"
                         </div>
                         <!--<div class="col-md-2">-->
                             <!--<button type="button" class="btn btn-danger" ng-click="addAll(comboSitCapCons.items,sitHogar.items,'Capacidad constructiva')">Agregar Todos-->
@@ -521,7 +518,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemsTipoVivienda,sitHab.items,'Tipo de vivienda',comboTipoVivienda.items,getProperty('default'))">Agregar
+                            <button type="button" class="btn btn-danger" ng-click="addItemBadId(temp.itemsTipoVivienda,sitHab.items,'Tipo de vivienda',comboTipoVivienda.items,getProperty('default'),'id_SituacionInmueble')">Agregar
                             </button>
                         </div>
                         <!--<div class="col-md-2">-->
@@ -585,7 +582,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <button type="button" class="btn btn-danger" ng-click="addItem(temp.itemsConservacion,sitHab.items,'Conservación del inmueble',comboConservacion.items,getProperty('default'))">Agregar
+                            <button type="button" class="btn btn-danger" ng-click="addItemBadId(temp.itemsConservacion,sitHab.items,'Conservación del inmueble',comboConservacion.items,getProperty('default'),'id_InstalacionInmueble')">Agregar
                             </button>
                         </div>
                         <!--<div class="col-md-2">-->

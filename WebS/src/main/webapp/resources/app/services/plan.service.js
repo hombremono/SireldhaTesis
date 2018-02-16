@@ -21,6 +21,10 @@ angular.module('webS')
             },
             loadCombos:function(){
                 return $http.get(URL_API_BASE+"plan/loadCombos");
+            },
+            loadCombosHogar:function(){
+                return $http.get(URL_API_BASE+"hogar/loadCombos");
             }
+
         }
     }]);

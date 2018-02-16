@@ -92,8 +92,6 @@
     <script type="text/javascript" 	src="controllers/plan.controller.js"></script>
     <!--<script type="text/javascript" 	src="controllers/review.controller.js"></script>-->
     <script type="text/javascript" 	src="controllers/pdf.controller.js"></script>
-
-
     <script type="text/javascript" 	src="services/users.service.js"></script>
     <script type="text/javascript" 	src="services/roles.service.js"></script>
     <script type="text/javascript" 	src="services/core.service.js"></script>
@@ -108,26 +106,23 @@
     <!--GOOGLE MAPS API-->
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCk8HxU24CJ6sLduI-rOn8TPFkp6x7rk8I&libraries=places"></script>
-
 </head>
 <body ng-app="webS" style="background-color:#F3F4F5 ">
-<div class="wrapper" style="background-color:#F3F4F5 ">
-
-    <div  ng-include="'views/sideBar.html'"></div>
-    <div class="main-panel " >
-        <div class="content" style="background-color:#F3F4F5 ">
-            <div class=" page-styling" style="background-color:#F3F4F5 ">
-                <main  ng-view=""></main>
-            </div>
+<div class="main-panel " >
+    <div class="content" style="background-color:#F3F4F5 ">
+        <div class=" page-styling" style="background-color:#F3F4F5 ;margin-top: 1px !important;">
+            <main  ng-view=""></main>
         </div>
     </div>
+</div>
+<div class="wrapper" style="background-color:#F3F4F5 ">
+    <div  ng-include="'views/sideBar.html'"></div>
+
         <footer class="footer mainPagec">
             <div class="copy-rights mainPagec">
                 <p>Contacto con desarrollador del sistema: registrohabitacional@ceve.org.ar</p>
             </div>
         </footer>
-
-
 </div>
 
 </body>
