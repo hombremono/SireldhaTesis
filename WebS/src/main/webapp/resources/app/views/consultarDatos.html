@@ -1,0 +1,131 @@
+<div id="buscador" ng-show="!buscando" class="ignorePDF">
+    <nav class="navbar navbar-default navbar-fixed">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Consultar información</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <div class="input-group ">
+            <input type="text" class="form-control input-md" placeholder="Ingrese su codigo" ng-model="codigoPersonal" />
+            <span class="input-group-btn">
+                        <button class="btn btn-info btn-md" type="button" ng-click="buscarDatos()">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+            </span>
+        </div>
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="header">
+                </div>
+            </div>
+
+        </div>
+        <div >
+            <button type="button"  title="" class="btn btn-default"ng-click="paginaInicial()">Volver
+            </button>
+        </div>
+    </div>
+</div>
+<div id="resultados" ng-show="buscando">
+    <!--TIPO DE SOLUCION HABITACIONAL-->
+    <div>
+        <h3>Datos del hogar</h3>
+        <div class="form-group">
+            <label for="verTipoSolucion"></label>
+            <input class="form-control input-md" type="text" ng-model="" id="verTipoSolucion" />
+        </div>
+    </div>
+    <!--TABLA DE FAMILIA-->
+    <h3>Integrantes de la familia</h3>
+    <div ng-show="resultadosBusqueda.length">
+        <table class="table table-hover">
+            <thead>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="integrante in resultadosBusqueda">
+                <td>{{integrante.DNI}}</td>
+                <td>{{integrante.nombre}}</td>
+                <td>{{integrante.apellido}}</td>
+                <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="verPersona(integrante)" ng-show="integrante.DNI">
+                        <i class="pe-7s-look"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <!--DATOS DE LA PERSONA ELEGIDA-->
+
+    <div ng-show="verPersona">
+        <h3>Datos del integrante seleccionado</h3>
+        <div class="form-group">
+            <label for="inputNombre">>Nombre</label>
+            <input class="form-control input-md" type="text" ng-model="" id="inputNombre" disabled />
+        </div>
+        <div class="form-group">
+            <label for="inputApellido">Apellido</label>
+            <input class="form-control input-md" type="text" ng-model="" id="inputApellido" disabled />
+        </div>
+        <div class="form-group">
+            <label for="inputDNI">Número de documento</label>
+            <input class="form-control input-md" type="number" ng-model=""
+                   ng-pattern="/^[0-9]*$/" id="inputDNI" disabled/>
+        </div>
+        <div class="form-group">
+            <label for="inputCUIL">CUIL</label>
+            <input class="form-control input-md" type="number" ng-model=""
+                   ng-maxlength="12" placeholder="20365598657" ng-pattern="/^[0-9]*$/" id="inputCUIL" disabled />
+        </div>
+        <div class="form-group">
+            <label for="fechaNac">Fecha de nacimiento</label>
+            <input  class="form-control" id="fechaNac" type="date" ng-model="" disabled>
+        </div>
+        <div class="form-group">
+            <label for="selectSexo">Género</label>
+            <input class="form-control input-md" type="text" ng-model="" id="selectSexo" disabled />
+        </div>
+        <div class="form-group">
+            <label for="selectEstadoC">Estado civil</label>
+            <input class="form-control input-md" type="text" ng-model="" id="selectEstadoC" disabled />
+        </div>
+        <div class="form-group">
+            <label for="selectNacionalidad">Nacionalidad</label>
+            <input class="form-control input-md" type="text" ng-model="" id="selectNacionalidad" disabled />
+        </div>
+        <div class="form-group">
+            <label for="selectEstudios">Estudios</label>
+            <input class="form-control input-md" type="text" ng-model="" id="selectEstudios" disabled />
+        </div>
+        <div class="form-group">
+            <label for="selectProfesion">Profesión</label>
+            <input class="form-control input-md" type="text" ng-model="" id="selectProfesion" disabled />
+        </div>
+        <div class="form-group">
+            <label for="selectDepLaboral"><span style="color:red">* </span>Dependencia laboral</label>
+            <input class="form-control input-md" type="text" ng-model="" id="selectDepLaboral" disabled />
+        </div>
+        <button  class="btn btn-primary  pull-right" ng-click="!verPersona">Volver</button>
+
+    </div>
+    <div>
+        <button  class="btn btn-secondary  pull-right" ng-click="salir()">Cerrar</button>
+    </div>
+
+</div>
+<br>
+
+</div>

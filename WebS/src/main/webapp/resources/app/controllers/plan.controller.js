@@ -5,7 +5,30 @@ angular.module('webS').controller('PlanController',
     [ '$scope', '$sce', '$uibModal','$location', 'planService', PlanController ]);
 function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
-    $scope.Planes=[];
+    $scope.PlanesAbiertos=[
+        {
+            nombre:"PROcrear",
+            financiamiento:2,
+            tipo:1
+        },
+        {
+            nombre:"no LOTEngo",
+            financiamiento:1,
+            tipo:2
+        }
+    ];
+    $scope.PlanesCerrados = [
+        {
+            nombre:"Our House in the middle of the street",
+            financiamiento:1,
+            tipo:1
+        },
+        {
+            nombre:"Is our house",
+            financiamiento:2,
+            tipo:3
+        }
+    ];
     $scope.Plan = {
         nombre:"",
         financiamiento:0,
@@ -21,6 +44,19 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         },
         "planCriterioList": [
             ]};
+    $scope.Operaciones =[
+        {
+        id:0,
+        descripcion:"Mayor a "
+    },
+        {
+        id:1,
+        descripcion:"Menor a "
+    },
+        {
+        id:2,
+        descripcion:"Igual a "
+    }];
     /*Cuando me llega la lista en el servicio, antes de agregarla a planes necesito ordenarlos.*/
     $scope.Puntajes = [{
       "nombre":"Tomas",
@@ -79,6 +115,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.mostrarSitEspecial = false;
     $scope.mostrarSitHab = false;
     $scope.mostrarInfoCalmat = false;
+    $scope.verPlanesCerrados = false;
     //Tablas
     $scope.sitRegistro = {
         items:[]
@@ -160,6 +197,10 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
                 dependenciaLaboral: "-SELECCIONE-"
             }]
     };
+    //Situaciones especiales
+    $scope.itemOperacionVigencia = $scope.Operaciones[0];
+    $scope.itemOperacionMiembro = $scope.Operaciones[0];
+    $scope.itemOperacionIngreso = $scope.Operaciones[0];
     //SIT ESPECIALES
     $scope.comboSitEsp ={
         items: [
@@ -264,7 +305,6 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         });
     };
     var cargarComboEdad=function(combo, coleccion){
-        debugger;
         coleccion.forEach(function (element,index) {
             var descripcion = "Entre "+element.desde+" y "+element.hasta+" años.";
             var item ={
@@ -337,16 +377,21 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         var item ={
             id:-1,
             categoria:categoria,
-            descripcion:descripcion,
+            descripcion:descripcion.descripcion + ' '+ valorEsp,
             puntaje:0,
             required:false,
             valorEspecial:valorEsp,
             constante :0
         };
         coleccion.push(item);
+        $scope.itemOperacionVigencia = $scope.Operaciones[0];
+        $scope.itemOperacionMiembro = $scope.Operaciones[0];
+        $scope.itemOperacionIngreso = $scope.Operaciones[0];
+        $scope.inicioResidencia = "";
+        $scope.cantMiembros = 0;
+        $scope.ingresosHogar=0;
     };
     $scope.addItemBadId = function(id,coleccion,categoria,combo,key,idDesc){
-        debugger;
         var add = true;
         combo.forEach(function (element, index) {
             if (element[idDesc] == id && element[idDesc] !=0) {
@@ -403,7 +448,6 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
 
     };
     $scope.addPlan = function(plan){
-        debugger;
         if(ejecutarValidaciones()){
             $scope.PlanPost.nombre = $scope.Plan.nombre;
             $scope.PlanPost.origenFinanciamiento.id = $scope.Plan.financiamiento;
@@ -456,7 +500,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             planService.add($scope.PlanPost).then(function (resp) {
                 var datos = resp.data;
                 debugger;
-                $scope.Planes.push(plan);
+                $scope.PlanesAbiertos.push(plan);
                 $scope.Plan = {
                     nombre:"",
                     financiamiento:0,

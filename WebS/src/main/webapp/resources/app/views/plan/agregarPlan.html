@@ -2,7 +2,7 @@
     <nav class="navbar navbar-default ">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Planes</a>
+                <a class="navbar-brand" href="#">Administración de planes habitacionales</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -21,17 +21,19 @@
 
         <div class="card card-plain">
             <div class="header">
+                <h3 ng-show="!verPlanesCerrados">Planes habitacionales abiertos</h3>
+                <h3 ng-show="verPlanesCerrados">Planes habitacionales cerrados</h3>
             </div>
         </div>
-        <table class="table table-hover" ng-show="Planes.length >0 ">
+        <table class="table table-hover" ng-show="PlanesAbiertos.length >0 && !verPlanesCerrados ">
             <thead>
             <th>Nombre del Plan</th>
             </thead>
             <tbody>
-            <tr ng-repeat="plan in Planes">
+            <tr ng-repeat="plan in PlanesAbiertos">
                 <td>{{plan.nombre}}</td>
                 <td>
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Editar plan" ng-click="quitarItem(plan,Planes)">
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Editar plan" ng-click="quitarItem(plan,PlanesAbiertos)">
                         <i class="fa fa-trash"></i> ELIMINAR
                     </button>
                 </td>
@@ -44,8 +46,22 @@
 
             </tbody>
         </table>
+        <table class="table table-hover" ng-show="PlanesCerrados.length >0 && verPlanesCerrados">
+            <thead>
+            <th>Nombre del Plan</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="plan in PlanesCerrados">
+                <td>{{plan.nombre}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
 
     </div>
+    <button  class="btn btn-primary  pull-right" ng-click="verPlanesCerrados = true" ng-show="!verPlanesCerrados">Ver planes cerrados</button>
+    <button  class="btn btn-primary  pull-right" ng-click="verPlanesCerrados = false" ng-show="verPlanesCerrados">Ver Planes abiertos</button>
+
 
 </div>
 <div ng-show="agregandoPlan">
@@ -334,33 +350,49 @@
                     <div class="form-group">
                         <label for="fechaInicio">Fecha de inicio de vigencia</label>
                     </div>
-                    <div class="input-group">
-                        <input  class="form-control" id="fechaInicio" type="date" ng-model="inicioResidencia" aria-describedby="basic-addon2">
-                        <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemInicioResidencia,sitHogar.items,'Fecha','Inicio de residencia',inicioResidencia)">Agregar</button>
-                    </span>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select class="form-control input-md"  ng-model="itemOperacionVigencia" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
+                        </div>
+                        <div class="col-md-5">
+                            <input  class="form-control" id="fechaInicio" type="number" ng-model="inicioResidencia" aria-describedby="basic-addon2" placeholder="Ingrese solo el año">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemInicioResidencia,sitHogar.items,'Inicio de residencia',itemOperacionVigencia,inicioResidencia)">Agregar</button>
+                        </div>
                     </div>
+
                 </div>
                 <div>
                     <div class="form-group">
                         <label for="cantMiebros">Cantidad miembros del hogar</label>
                     </div>
-                    <div class="input-group">
-                        <input  class="form-control" id="cantMiebros" type="number" ng-model="cantMiembros" aria-describedby="basic-addon2">
-                        <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemCantMiembros,sitHogar.items,'Cantidad de miebros del hogar','',cantMiembros)">Agregar</button>
-        </span>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select class="form-control input-md"  ng-model="itemOperacionMiembro" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
+                        </div>
+                        <div class="col-md-5">
+                            <input  class="form-control" id="cantMiebros" type="number" ng-model="cantMiembros" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemCantMiembros,sitHogar.items,'Cantidad de miebros del hogar',itemOperacionMiembro,cantMiembros)">Agregar</button>
+                        </div>
                     </div>
                 </div>
                 <div>
                     <div class="form-group">
                         <label for="ingresosHogar">Ingresos del hogar</label>
                     </div>
-                    <div class="input-group">
-                        <input  class="form-control" id="ingresosHogar" type="number" ng-model="ingresosHogar" aria-describedby="basic-addon2">
-                        <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemIngreso,sitHogar.items,'Ingreso del hogar','',ingresosHogar)">Agregar</button>
-        </span>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <select class="form-control input-md"  ng-model="itemOperacionIngreso" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
+                        </div>
+                        <div class="col-md-5">
+                            <input  class="form-control" id="ingresosHogar" type="number" ng-model="ingresosHogar" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-outline-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemIngreso,sitHogar.items,'Ingreso del hogar',itemOperacionIngreso,ingresosHogar)">Agregar</button>
+                        </div>
                     </div>
                 </div>
 
