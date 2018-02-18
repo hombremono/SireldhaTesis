@@ -72,6 +72,10 @@ angular.module('webS')
           templateUrl: 'views/plan/listaPuntajes.html',
           controller: 'PlanController'
       })
+      .when('/requestInformation', {
+          templateUrl: 'views/consultarDatos.html',
+          controller: 'ConsultarDatosController'
+      })
     .otherwise({
       redirectTo: '/'
     });
