@@ -1,8 +1,18 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.business.model.PlanResultado;
+import ar.com.iua.modulo.business.plan.operaciones.OperadorDocumentacionCompleta;
+import ar.com.iua.modulo.business.services.Interfaces.IContantesPlanService;
+import ar.com.iua.modulo.business.services.Interfaces.IFamiliaService;
+import ar.com.iua.modulo.model.ConstantePlan;
+import ar.com.iua.modulo.model.Familia;
+import ar.com.iua.web.spring.services.PlanOperacionFactory;
+import ar.com.iua.modulo.business.plan.operaciones.IOperadorPlan;
 import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
 import ar.com.iua.modulo.business.model.PlanCombos;
+import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.model.Plan;
+import ar.com.iua.modulo.model.Plan_Criterio;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
@@ -16,6 +26,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mnicolas on 16/01/18.
@@ -27,6 +39,13 @@ public class PlanController extends GenericController{
 
     @Autowired
     private IPlanService planService;
+
+    @Autowired
+    private IContantesPlanService constantePlanService;
+
+    @Autowired
+    private IFamiliaService familiaService;
+
 
 
     @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
@@ -59,5 +78,33 @@ public class PlanController extends GenericController{
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Plan plan) throws IOException {
         return add(plan, planService, ConstantesURL.URL_PLAN);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/ejecutar/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> ejecutar (@PathVariable int id) throws IOException{
+        try {
+            Plan plan = planService.load(id);
+            List<Familia> familias = familiaService.list();//get familias
+            List<PlanResultado> listaFamilia = new ArrayList<PlanResultado>();
+            List<PlanResultado> resultados = listaFamilia;
+
+            for (Familia familia : familias) {
+                resultados.add(new PlanResultado(familia, familiaService.getIntegrantes(familia.getId_Familia()), plan));
+            }
+            for (Plan_Criterio criterio : plan.getPlanCriterioList()) {
+                ConstantePlan constantePlan = constantePlanService.load(criterio.getConstante().getId());
+                IOperadorPlan operador = PlanOperacionFactory.getInstance().getOperador(constantePlan);
+                resultados = operador.ejecutar(criterio,resultados);
+            }
+
+            return new ResponseEntity<Object>(resultados,HttpStatus.OK);
+        } catch (ServiceException e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }

@@ -33,6 +33,12 @@ public class Familia implements IModel{
     @Column(name = "isActive", nullable = false)
     private boolean isActive;
 
+    @Column(name = "fechaAlta")
+    private Date fechaAlta;
+
+    @Column(name = "documentacionCompleta", nullable = false)
+    private boolean documentacionCompleta;
+
     @ManyToOne
     @JoinColumn(name = "idSolucionHabitacional")
     private SolucionHabitacional solucionHabitacional;
@@ -119,6 +125,26 @@ public class Familia implements IModel{
 
     public void setTelefono(Telefono telefono) {
         this.telefono = telefono;
+    }
+
+    public int getAntiguedadResidencia() {
+        return antiguedadResidencia;
+    }
+
+    public boolean isDocumentacionCompleta() {
+        return documentacionCompleta;
+    }
+
+    public void setDocumentacionCompleta(boolean documentacionCompleta) {
+        this.documentacionCompleta = documentacionCompleta;
+    }
+
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
 
     @Override

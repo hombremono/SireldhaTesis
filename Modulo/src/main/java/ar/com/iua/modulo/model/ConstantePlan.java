@@ -24,6 +24,9 @@ public class ConstantePlan implements IModel {
     @Column(name = "constante", nullable = false)
     private String constante;
 
+    @Column(name = "claseOperador")
+    private String claseOperador;
+
     @Override
     public int getId() {
         return id_Constante;
@@ -52,4 +55,10 @@ public class ConstantePlan implements IModel {
     public void setConstante(String constante) {
         this.constante = constante;
     }
+
+    public void setClaseOperador(String claseOperador) {
+        this.claseOperador = claseOperador;
+    }
+
+    public String obtenerClaseOperador() { return this.claseOperador; }
 }

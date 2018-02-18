@@ -254,6 +254,11 @@ public class Beans {
 	public IPlanCriterioDAO planCriterioDAO (final SessionFactory sessionFactory)
 	{ return new PlanCriterioDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public IConstantePlanDAO constantePlanDAO ( final SessionFactory sessionFactory)
+	{ return new ConstantePlanDAO(sessionFactory);}
+
 
 
 
@@ -433,6 +438,12 @@ public class Beans {
 				nacionalidadDAO,estadoCivilDAO,situacionLaboralDAO,capacidadConstructivaDAO,caracteristicasHogarDAO,
 				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO,
 				origenFinanciamientoDAO, planCriterioDAO) ;}
+
+	@Bean
+	@Autowired
+	public IContantesPlanService contantesPlanService (final IConstantePlanDAO constantePlanDAO) {
+		return new ConstantePlanService(constantePlanDAO);
+	}
 
 
 }

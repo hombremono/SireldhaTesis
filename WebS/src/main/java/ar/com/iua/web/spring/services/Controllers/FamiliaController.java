@@ -19,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,6 +81,7 @@ public class FamiliaController extends GenericController {
         }catch (Exception e) {
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        familia.setFechaAlta(new Date());
         return add(familia,familiaService, ConstantesURL.URL_FAMILIA);
 
     }
