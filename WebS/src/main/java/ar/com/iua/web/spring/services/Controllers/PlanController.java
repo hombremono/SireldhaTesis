@@ -75,9 +75,16 @@ public class PlanController extends GenericController{
     }
 
     @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity<Object> add (@RequestBody Plan plan) throws IOException {
-        return add(plan, planService, ConstantesURL.URL_PLAN);
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ResponseEntity<Object> getAll () throws IOException {
+        try {
+            List<Plan> planes = planService.list();
+            return new ResponseEntity<Object>(planes ,HttpStatus.OK);
+        } catch (ServiceException e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+//        return add(plan, planService, ConstantesURL.URL_PLAN);
     }
 
     @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
