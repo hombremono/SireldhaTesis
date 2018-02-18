@@ -1,6 +1,7 @@
 package ar.com.iua.modulo.business.plan.operaciones;
 
 import ar.com.iua.modulo.business.model.PlanResultado;
+import ar.com.iua.modulo.business.utils.UtilsSingleton;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Plan_Criterio;
 
@@ -10,7 +11,10 @@ import ar.com.iua.modulo.model.Plan_Criterio;
 public class OperadorPercibeSubsidio extends OperadorAbstracto {
 
 
+    @Override
+    void cargarOperador(PlanResultado resultado, Plan_Criterio criterio) {
 
+    }
 
     @Override
     PlanResultado operar(PlanResultado resultado, Plan_Criterio criterio) {
@@ -26,11 +30,7 @@ public class OperadorPercibeSubsidio extends OperadorAbstracto {
     }
 
     private boolean buscarSubsidio(PlanResultado resultado) {
-        for (Persona integrante : resultado.obtenerIntegrantes()){
-            if (integrante.getSubsidio() != null) {
-                return true;
-            }
-        }
-        return false;
+        Persona jefe = UtilsSingleton.getInstance().getJefeFamilia(resultado.obtenerIntegrantes());
+        return jefe.getSubsidio() != null;
     }
 }

@@ -1,5 +1,6 @@
 package ar.com.iua.modulo.business.model;
 
+import ar.com.iua.modulo.business.utils.UtilsSingleton;
 import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Plan;
@@ -26,13 +27,8 @@ public class PlanResultado {
         this.integrantes = integrantes;
         this.plan = plan;
         this.puntaje = 0;
-        for (Persona integrante : integrantes){
-            if (integrante.getRolFamiliar().getId_RolFamiliar() == 1) {
-                this.nombreJefe = integrante.getApellido() + " " + integrante.getNombre();
-            }
-        }
-
-
+        Persona jefe = UtilsSingleton.getInstance().getJefeFamilia(integrantes);
+        if (jefe != null) this.nombreJefe = jefe.getApellido() + " " + jefe.getNombre();
     }
 
     public Familia obtenerFamilia() {

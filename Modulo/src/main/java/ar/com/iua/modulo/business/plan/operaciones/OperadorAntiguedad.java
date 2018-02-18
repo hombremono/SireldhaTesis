@@ -8,6 +8,12 @@ import ar.com.iua.modulo.model.Plan_Criterio;
  */
 public class OperadorAntiguedad extends OperadorAbstracto {
 
+
+    @Override
+    void cargarOperador(PlanResultado resultado, Plan_Criterio criterio) {
+
+    }
+
     @Override
     PlanResultado operar(PlanResultado resultado, Plan_Criterio criterio) {
         float puntaje = resultado.obtenerFamilia().getAntiguedadResidencia() * criterio.getPuntaje();
