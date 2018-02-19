@@ -121,7 +121,7 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="sitRegistroSelect">Seleccion el elemento que desea agregar</label>
-                            <select class="form-control input-md" id="sitRegistroSelect" ng-model="temp.itemsRegistro" ng-options="combo.id_Plan_SituacionRegistro as combo.descripcion for combo in comboSitRegistro.items" ></select>
+                            <select class="form-control input-md selectItem" id="sitRegistroSelect" ng-model="temp.itemsRegistro" ng-options="combo.id_Plan_SituacionRegistro as combo.descripcion for combo in comboSitRegistro.items" ></select>
                         </div>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitHogarSelect">Seleccion el elemento que desea agregar</label>
-                                <select class="form-control input-md" id="sitHogarSelect" ng-model="temp.itemHogar" ng-options="combo.id_SituacionHogar as combo.descripcion for combo in comboSitHogar.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitHogarSelect" ng-model="temp.itemHogar" ng-options="combo.id_SituacionHogar as combo.descripcion for combo in comboSitHogar.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitGeneroSelect">Genero del jefe/a de hogar</label>
-                                <select class="form-control input-md" id="sitGeneroSelect" ng-model="temp.itemGenero" ng-options="combo.id_Sexo as combo.sexo for combo in comboSitGenero.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitGeneroSelect" ng-model="temp.itemGenero" ng-options="combo.id_Sexo as combo.sexo for combo in comboSitGenero.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -219,7 +219,7 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="sitNacionalidadSelect">Nacionalidad del jefe/a de hogar</label>
-                            <select class="form-control input-md" id="sitNacionalidadSelect" ng-model="temp.itemNacionalidad" ng-options="combo.id_Nacionalidad as combo.descripcion for combo in comboSitNacionalidad.items" ></select>
+                            <select class="form-control input-md selectItem" id="sitNacionalidadSelect" ng-model="temp.itemNacionalidad" ng-options="combo.id_Nacionalidad as combo.descripcion for combo in comboSitNacionalidad.items" ></select>
                         </div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="sitEstadoCivilSelect">Estado civil del Jefe/a de hogar</label>
-                            <select class="form-control input-md" id="sitEstadoCivilSelect" ng-model="temp.itemEstadoCivil" ng-options="combo.id_EstadoCivil as combo.estadoCivil for combo in comboSitEstadoCivil.items" ></select>
+                            <select class="form-control input-md selectItem" id="sitEstadoCivilSelect" ng-model="temp.itemEstadoCivil" ng-options="combo.id_EstadoCivil as combo.estadoCivil for combo in comboSitEstadoCivil.items" ></select>
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitSitLaboralSelect">Situación laboral del jefe/a de familia</label>
-                                <select class="form-control input-md" id="sitSitLaboralSelect" ng-model="temp.itemSitLaboral" ng-options="combo.id_DependenciaLaboral as combo.dependenciaLaboral for combo in comboSitSitLaboral.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitSitLaboralSelect" ng-model="temp.itemSitLaboral" ng-options="combo.id_DependenciaLaboral as combo.dependenciaLaboral for combo in comboSitSitLaboral.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -285,7 +285,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitLocalidadSelect">Localidad</label>
-                                <select class="form-control input-md" id="sitLocalidadSelect" ng-model="temp.itemLocalidad" ng-options="combo.id_Localidad as combo.localidad for combo in comboSitLocalidad.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitLocalidadSelect" ng-model="temp.itemLocalidad" ng-options="combo.id_Localidad as combo.localidad for combo in comboSitLocalidad.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -307,7 +307,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitEdadJefeSelect">Edad jefe/a de Hogar</label>
-                                <select class="form-control input-md" id="sitEdadJefeSelect" ng-model="temp.itemEdadJefe" ng-options="combo.id_RangoEdad as combo.descripcion for combo in comboSitEdadJefe.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitEdadJefeSelect" ng-model="temp.itemEdadJefe" ng-options="combo.id_RangoEdad as combo.descripcion for combo in comboSitEdadJefe.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -329,7 +329,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitCapConstSelect">Capacidad constructiva</label>
-                                <select class="form-control input-md" id="sitCapConstSelect" ng-model="temp.itemCapCons" ng-options="combo.id_TipoCapacidadConstructiva as combo.descripcion for combo in comboSitCapCons.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitCapConstSelect" ng-model="temp.itemCapCons" ng-options="combo.id_TipoCapacidadConstructiva as combo.descripcion for combo in comboSitCapCons.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -352,7 +352,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <select class="form-control input-md"  ng-model="itemOperacionVigencia" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
+                            <select class="form-control input-md selectItem"  ng-model="itemOperacionVigencia" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
                         </div>
                         <div class="col-md-5">
                             <input  class="form-control" id="fechaInicio" type="number" ng-model="inicioResidencia" aria-describedby="basic-addon2" placeholder="Ingrese solo el año">
@@ -369,7 +369,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <select class="form-control input-md"  ng-model="itemOperacionMiembro" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
+                            <select class="form-control input-md selectItem"  ng-model="itemOperacionMiembro" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
                         </div>
                         <div class="col-md-5">
                             <input  class="form-control" id="cantMiebros" type="number" ng-model="cantMiembros" aria-describedby="basic-addon2">
@@ -385,7 +385,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-2">
-                            <select class="form-control input-md"  ng-model="itemOperacionIngreso" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
+                            <select class="form-control input-md selectItem"  ng-model="itemOperacionIngreso" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
                         </div>
                         <div class="col-md-5">
                             <input  class="form-control" id="ingresosHogar" type="number" ng-model="ingresosHogar" aria-describedby="basic-addon2">
@@ -440,7 +440,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitEspecialSelect">Situaciones especiales</label>
-                                <select class="form-control input-md" id="sitEspecialSelect" ng-model="temp.itemsEsp" ng-options="combo.id_CaracteristicasEspecialesHogar as combo.descripcion for combo in comboSitEsp.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitEspecialSelect" ng-model="temp.itemsEsp" ng-options="combo.id_CaracteristicasEspecialesHogar as combo.descripcion for combo in comboSitEsp.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -500,7 +500,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="solucionHabSelect">Situacion habitacional</label>
-                                <select class="form-control input-md" id="solucionHabSelect" ng-model="temp.itemsSolHab" ng-options="combo.id_Plan_SituacionHabitacional as combo.descripcion for combo in comboSitHab.items" ></select>
+                                <select class="form-control input-md selectItem" id="solucionHabSelect" ng-model="temp.itemsSolHab" ng-options="combo.id_Plan_SituacionHabitacional as combo.descripcion for combo in comboSitHab.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -522,7 +522,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="sitPosesionInmuebleSelect">Posesión de inmueble</label>
-                                <select class="form-control input-md" id="sitPosesionInmuebleSelect" ng-model="temp.itemsPosesionInmueble" ng-options="combo.id_PoseeInmueble as combo.descripcion for combo in comboPosesionInmueble.items" ></select>
+                                <select class="form-control input-md selectItem" id="sitPosesionInmuebleSelect" ng-model="temp.itemsPosesionInmueble" ng-options="combo.id_PoseeInmueble as combo.descripcion for combo in comboPosesionInmueble.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -544,7 +544,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="tipoViviendaSelect">Tipo de vivienda</label>
-                                <select class="form-control input-md" id="tipoViviendaSelect" ng-model="temp.itemsTipoVivienda" ng-options="combo.id_SituacionInmueble as combo.descripcion for combo in comboTipoVivienda.items" ></select>
+                                <select class="form-control input-md selectItem" id="tipoViviendaSelect" ng-model="temp.itemsTipoVivienda" ng-options="combo.id_SituacionInmueble as combo.descripcion for combo in comboTipoVivienda.items" ></select>
                             </div>
                         </div>
                     </div>
@@ -565,7 +565,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="calmatSelect">Indice CALMAT</label>
-                                <select class="form-control input-md" id="calmatSelect" ng-model="temp.itemsCalmat" ng-options="combo.id_Plan_Calmat as combo.indice for combo in comboCalmat.items" ></select>
+                                <select class="form-control input-md selectItem" id="calmatSelect" ng-model="temp.itemsCalmat" ng-options="combo.id_Plan_Calmat as combo.indice for combo in comboCalmat.items" ></select>
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -608,7 +608,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="conservacionSelect">Conservación del inmueble</label>
-                                <select class="form-control input-md" id="conservacionSelect" ng-model="temp.itemsConservacion" ng-options="combo.id_InstalacionInmueble as combo.descripcion for combo in comboConservacion.items" ></select>
+                                <select class="form-control input-md selectItem" id="conservacionSelect" ng-model="temp.itemsConservacion" ng-options="combo.id_InstalacionInmueble as combo.descripcion for combo in comboConservacion.items" ></select>
                             </div>
                         </div>
                     </div>

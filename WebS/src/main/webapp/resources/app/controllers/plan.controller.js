@@ -365,7 +365,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
                         constante :element.constante.id_Constante
                     };
                     coleccion.push(item);
-                    selectTags = planForm.getElementsByTagName("select");
+                    selectTags = planForm.getElementsByClassName("selectItem");
                     for(var i = 0; i < selectTags.length; i++) {
                         selectTags[i].selectedIndex =0;
                     }
@@ -562,6 +562,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             showNotification("Seleccione un financiamiento  para el Plan",'danger');
             result=false;
         }
+        //For each de los items de cada plan para comprobar que no tennga mas de un item en requerido
         return result;
 
     };
