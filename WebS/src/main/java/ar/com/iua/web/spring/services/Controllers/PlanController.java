@@ -107,7 +107,7 @@ public class PlanController extends GenericController{
             for (Plan_Criterio criterio : plan.getPlanCriterioList()) {
                 ConstantePlan constantePlan = constantePlanService.load(criterio.getConstante().getId());
                 IOperadorPlan operador = PlanOperacionFactory.getInstance().getOperador(constantePlan);
-                resultados = operador.ejecutar(criterio,resultados);
+                resultados = operador.ejecutar(criterio,resultados, this.planService);
             }
 
             return new ResponseEntity<Object>(resultados,HttpStatus.OK);

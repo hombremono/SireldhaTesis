@@ -1,6 +1,7 @@
 package ar.com.iua.modulo.business.plan.operaciones;
 
 import ar.com.iua.modulo.business.model.PlanResultado;
+import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
 import ar.com.iua.modulo.business.utils.UtilsSingleton;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Plan_Criterio;
@@ -13,7 +14,7 @@ public class OperadorGeneroJefe extends OperadorAbstracto {
     private Persona jefe;
 
     @Override
-    void cargarOperador(PlanResultado resultado, Plan_Criterio criterio) {
+    void cargarOperador(PlanResultado resultado, Plan_Criterio criterio, IPlanService planService) {
         this.jefe  = UtilsSingleton.getInstance().getJefeFamilia(resultado.obtenerIntegrantes());
     }
 

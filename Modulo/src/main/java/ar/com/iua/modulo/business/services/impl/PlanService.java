@@ -5,9 +5,11 @@ import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.business.model.PlanCombos;
 import ar.com.iua.modulo.model.Plan;
 import ar.com.iua.modulo.model.Plan_Criterio;
+import ar.com.iua.modulo.model.Plan_RangoEdad;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.persistence.dao.*;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -100,6 +102,18 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
             LOG.error(e.getMessage(), e);
             throw new ServiceException(e.getMessage(), e);
         }  catch (NotFoundException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public Plan_RangoEdad getRangoEdad(int constanteId) throws ServiceException {
+        try {
+
+            //List<Persona> integrantes = personaDAO.searchByCriteria(Restrictions.eq("familia.id", id));
+            List<Plan_RangoEdad> rangos = this.planRangoEdadDAO.searchByCriteria(Restrictions.eq("constante.id", constanteId));
+            return rangos.get(0);
+        } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
             throw new ServiceException(e.getMessage(), e);
         }

@@ -2,6 +2,7 @@ package ar.com.iua.modulo.business.utils;
 
 import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.model.Persona;
+import ar.com.iua.modulo.model.Plan_RangoEdad;
 
 import java.util.List;
 
@@ -11,6 +12,9 @@ import java.util.List;
 public class UtilsSingleton {
 
     private static UtilsSingleton instancia;
+
+    //-------- VARIABLES ESPECIFICAS-----------
+    private Plan_RangoEdad rangoEdad;
 
     protected UtilsSingleton() {
         // Exists only to defeat instantiation.
@@ -29,5 +33,17 @@ public class UtilsSingleton {
             }
         }
         return null;
+    }
+
+    public boolean isBetween(int bottom, int top, int x) {
+        return top > bottom ? x > bottom && x < top : x > top && x < bottom;
+    }
+
+    public Plan_RangoEdad getRangoEdad() {
+        return rangoEdad;
+    }
+
+    public void setRangoEdad(Plan_RangoEdad rangoEdad) {
+        this.rangoEdad = rangoEdad;
     }
 }

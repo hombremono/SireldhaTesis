@@ -1,23 +1,16 @@
 package ar.com.iua.modulo.business.plan.operaciones;
 
 import ar.com.iua.modulo.business.model.PlanResultado;
-import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
 import ar.com.iua.modulo.model.Plan_Criterio;
 
 /**
- * Created by mnicolas on 17/02/18.
+ * Created by mnicolas on 18/02/18.
  */
-public class OperadorDocumentacionCompleta extends OperadorAbstracto {
-
-
-    @Override
-    void cargarOperador(PlanResultado resultado, Plan_Criterio criterio, IPlanService planService) {
-
-    }
+public class OperadorSituacionLaboral extends OperadorAbstractoJefe {
 
     @Override
     PlanResultado operar(PlanResultado resultado, Plan_Criterio criterio) {
-        if (resultado.obtenerFamilia().isDocumentacionCompleta()) {
+        if (this.jefe.getSituacionLaboral().getConstante().getId() == criterio.getConstante().getId()) {
             resultado.addPuntaje(criterio.getPuntaje());
         }
         return resultado;
@@ -25,7 +18,6 @@ public class OperadorDocumentacionCompleta extends OperadorAbstracto {
 
     @Override
     boolean verificarRequerido(PlanResultado resultado, Plan_Criterio criterio) {
-        return resultado.obtenerFamilia().isDocumentacionCompleta();
+        return this.jefe.getSituacionLaboral().getConstante().getId() == criterio.getConstante().getId();
     }
-
 }
