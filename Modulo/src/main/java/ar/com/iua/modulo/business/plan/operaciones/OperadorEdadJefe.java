@@ -26,12 +26,7 @@ public class OperadorEdadJefe extends OperadorAbstractoJefe {
     @Override
     void cargarOperador(PlanResultado resultado, Plan_Criterio criterio, IPlanService planService) {
         super.cargarOperador(resultado, criterio, planService);
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(this.jefe.getFechaNacimiento());
-        int nacimientoJefe = calendar.get(Calendar.YEAR);
-        calendar.setTime(new Date());
-        int anoActual = calendar.get(Calendar.YEAR);
-        this.edadJefe = anoActual - nacimientoJefe;
+        this.edadJefe = UtilsSingleton.getInstance().getEdad(this.jefe);
         Plan_RangoEdad rango;
         try {
             rango = planService.getRangoEdad(criterio.getConstante().getId_Constante());

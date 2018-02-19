@@ -4,6 +4,9 @@ import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Plan_RangoEdad;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -13,8 +16,6 @@ public class UtilsSingleton {
 
     private static UtilsSingleton instancia;
 
-    //-------- VARIABLES ESPECIFICAS-----------
-    private Plan_RangoEdad rangoEdad;
 
     protected UtilsSingleton() {
         // Exists only to defeat instantiation.
@@ -39,11 +40,13 @@ public class UtilsSingleton {
         return top > bottom ? x > bottom && x < top : x > top && x < bottom;
     }
 
-    public Plan_RangoEdad getRangoEdad() {
-        return rangoEdad;
+    public int getEdad(Persona persona) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(persona.getFechaNacimiento());
+        int anoNacimiento = calendar.get(Calendar.YEAR);
+        calendar.setTime(new Date());
+        int anoActual = calendar.get(Calendar.YEAR);
+        return anoActual - anoNacimiento;
     }
 
-    public void setRangoEdad(Plan_RangoEdad rangoEdad) {
-        this.rangoEdad = rangoEdad;
-    }
 }
