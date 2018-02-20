@@ -433,11 +433,13 @@ public class Beans {
 									 final IInstalacionInmuebleDAO instalacionInmuebleDAO,
 									 final IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO,
 									 final IOrigenFinanciamientoDAO origenFinanciamientoDAO,
-									 final IPlanCriterioDAO planCriterioDAO) {
+									 final IPlanCriterioDAO planCriterioDAO,
+									 final ICareceViviendaDAO careceViviendaDAO,
+									 final IInmuebleDAO inmuebleDAO) {
 		return new PlanService(planDAO, planSituacionRegistroDAO,planSituacionHogarDAO,localidadDAO,planRangoEdadDAO,sexoDAO,
 				nacionalidadDAO,estadoCivilDAO,situacionLaboralDAO,capacidadConstructivaDAO,caracteristicasHogarDAO,
 				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO,
-				origenFinanciamientoDAO, planCriterioDAO) ;}
+				origenFinanciamientoDAO, planCriterioDAO, careceViviendaDAO, inmuebleDAO) ;}
 
 	@Bean
 	@Autowired

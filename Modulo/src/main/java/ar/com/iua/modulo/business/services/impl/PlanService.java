@@ -3,9 +3,7 @@ package ar.com.iua.modulo.business.services.impl;
 import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
 import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.business.model.PlanCombos;
-import ar.com.iua.modulo.model.Plan;
-import ar.com.iua.modulo.model.Plan_Criterio;
-import ar.com.iua.modulo.model.Plan_RangoEdad;
+import ar.com.iua.modulo.model.*;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.persistence.dao.*;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
@@ -38,6 +36,8 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
     private IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO;
     private IOrigenFinanciamientoDAO origenFinanciamientoDAO;
     private IPlanCriterioDAO planCriterioDAO;
+    private ICareceViviendaDAO careceViviendaDAO;
+    private IInmuebleDAO inmuebleDAO;
 
     public PlanService(IPlanDAO planDAO, IPlanSituacionRegistroDAO planSituacionRegistroDAO, IPlanSituacionHogarDAO planSituacionHogarDAO,
                        ILocalidadDAO localidadDAO, IPlanRangoEdadDAO planRangoEdadDAO, ISexoDAO sexoDAO,
@@ -48,7 +48,7 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
                        IInstalacionInmuebleDAO instalacionInmuebleDAO,
                        IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO,
                        IOrigenFinanciamientoDAO origenFinanciamientoDAO,
-                       IPlanCriterioDAO planCriterioDAO) {
+                       IPlanCriterioDAO planCriterioDAO, ICareceViviendaDAO careceViviendaDAO, IInmuebleDAO inmuebleDAO) {
         super(planDAO);
         this.planSituacionRegistroDAO = planSituacionRegistroDAO;
         this.planSituacionHogarDAO = planSituacionHogarDAO;
@@ -67,6 +67,8 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
         this.planSituacionHabitacionalDAO = planSituacionHabitacionalDAO;
         this.origenFinanciamientoDAO = origenFinanciamientoDAO;
         this.planCriterioDAO = planCriterioDAO;
+        this.careceViviendaDAO = careceViviendaDAO;
+        this.inmuebleDAO = inmuebleDAO;
     }
 
     @Override
@@ -109,10 +111,36 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
 
     public Plan_RangoEdad getRangoEdad(int constanteId) throws ServiceException {
         try {
-
-            //List<Persona> integrantes = personaDAO.searchByCriteria(Restrictions.eq("familia.id", id));
             List<Plan_RangoEdad> rangos = this.planRangoEdadDAO.searchByCriteria(Restrictions.eq("constante.id", constanteId));
             return rangos.get(0);
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public CareceVivienda getCarecimiento(int idFamilia) throws ServiceException {
+        try {
+            List<CareceVivienda> carecimiento = this.careceViviendaDAO.searchByCriteria(Restrictions.eq("familia.id", idFamilia));
+            if (carecimiento.size() > 0)
+            {
+                return carecimiento.get(0);
+            }
+            return null;
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public Inmueble getInmuebleByFamilia(int idFamilia) throws ServiceException {
+        try {
+            List<Inmueble> inmueble = this.inmuebleDAO.searchByCriteria(Restrictions.eq("familia.id", idFamilia));
+            if (inmueble.size() > 0)
+            {
+                return inmueble.get(0);
+            }
+            return null;
         } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
             throw new ServiceException(e.getMessage(), e);
