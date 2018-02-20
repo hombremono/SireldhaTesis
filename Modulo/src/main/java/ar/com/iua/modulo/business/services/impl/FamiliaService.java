@@ -68,4 +68,17 @@ public class FamiliaService extends GenericService<Familia, Integer> implements 
             throw new ServiceException(e.getMessage(),e);
         }
     }
+
+    @Override
+    public Familia getFamiliaByCodigo(String codigoAlta) throws ServiceException, NotFoundException {
+        try {
+            List<Familia> familia = familiaDAO.searchByCriteria(Restrictions.eq("codigoDeAlta", codigoAlta));
+            return  familia.size() > 0 ? familia.get(0) : null ;
+        } catch (PersistenceException e){
+            LOG.error(e.getMessage(),e);
+            throw new ServiceException(e.getMessage(),e);
+        }
+    }
+
+
 }

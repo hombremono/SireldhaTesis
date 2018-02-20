@@ -36,6 +36,9 @@ public class Familia implements IModel{
     @Column(name = "fechaAlta")
     private Date fechaAlta;
 
+    @Column(name = "codigoDeAlta")
+    private String codigoDeAlta;
+
     @Column(name = "documentacionCompleta", nullable = false)
     private boolean documentacionCompleta;
 
@@ -145,6 +148,14 @@ public class Familia implements IModel{
 
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
+    }
+
+    public String getCodigoDeAlta() {
+        return codigoDeAlta;
+    }
+
+    public void setCodigoDeAlta(String codigoDeAlta) {
+        this.codigoDeAlta = codigoDeAlta;
     }
 
     @Override

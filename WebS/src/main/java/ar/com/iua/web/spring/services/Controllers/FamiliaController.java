@@ -19,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.rmi.server.UID;
 import java.util.Date;
 import java.util.List;
 
@@ -59,6 +60,24 @@ public class FamiliaController extends GenericController {
     }
 
     @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/codigo/{codigoAlta}", method = RequestMethod.GET)
+    public ResponseEntity<Object> load (@PathVariable String codigoAlta) throws IOException {
+        try {
+            Familia target = familiaService.getFamiliaByCodigo(codigoAlta);
+            if(target != null &&  target.isActive()){
+                return new ResponseEntity<Object>(target , HttpStatus.OK);
+            }else  {
+                return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+            }
+        } catch (NotFoundException nfe) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Familia familia) throws IOException {
         Telefono telefono = familia.getTelefono();
@@ -81,6 +100,7 @@ public class FamiliaController extends GenericController {
         }catch (Exception e) {
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        familia.setCodigoDeAlta(new UID().toString());
         familia.setFechaAlta(new Date());
         return add(familia,familiaService, ConstantesURL.URL_FAMILIA);
 

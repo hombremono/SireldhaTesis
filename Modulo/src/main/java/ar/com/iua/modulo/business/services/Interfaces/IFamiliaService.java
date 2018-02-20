@@ -16,4 +16,5 @@ public interface IFamiliaService extends IGenericService<Familia, Integer>, INoD
     public Familia load(int id, boolean getInactive) throws ServiceException, NotFoundException;
     public void setInactive(int id) throws ServiceException, NotFoundException;
     public List<Persona> getIntegrantes(int id) throws ServiceException,NotFoundException;
+    public Familia getFamiliaByCodigo(String codigoAlta) throws ServiceException,NotFoundException;
 }
