@@ -4,15 +4,13 @@ import ar.com.iua.modulo.business.model.PlanResultado;
 import ar.com.iua.modulo.business.plan.operaciones.OperadorDocumentacionCompleta;
 import ar.com.iua.modulo.business.services.Interfaces.IContantesPlanService;
 import ar.com.iua.modulo.business.services.Interfaces.IFamiliaService;
-import ar.com.iua.modulo.model.ConstantePlan;
-import ar.com.iua.modulo.model.Familia;
+import ar.com.iua.modulo.business.utils.UtilsSingleton;
+import ar.com.iua.modulo.model.*;
 import ar.com.iua.web.spring.services.PlanOperacionFactory;
 import ar.com.iua.modulo.business.plan.operaciones.IOperadorPlan;
 import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
 import ar.com.iua.modulo.business.model.PlanCombos;
 import ar.com.iua.modulo.business.utils.exception.ServiceException;
-import ar.com.iua.modulo.model.Plan;
-import ar.com.iua.modulo.model.Plan_Criterio;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.web.spring.services.ConstantesURL;
 import ar.com.iua.web.spring.services.Controllers.Generic.GenericController;
@@ -100,9 +98,15 @@ public class PlanController extends GenericController{
             List<Familia> familias = familiaService.list();//get familias
             List<PlanResultado> listaFamilia = new ArrayList<PlanResultado>();
             List<PlanResultado> resultados = listaFamilia;
-
+            List<Persona> integrantesFamilia = new ArrayList<Persona>();
             for (Familia familia : familias) {
-                resultados.add(new PlanResultado(familia, familiaService.getIntegrantes(familia.getId_Familia()), plan));
+                integrantesFamilia = familiaService.getIntegrantes(familia.getId_Familia());
+                if(!UtilsSingleton.getInstance().verificarFamilia(familia,integrantesFamilia)){
+                    familiaService.update(familia);
+                }
+                if (familia.isActive()){
+                    resultados.add(new PlanResultado(familia, integrantesFamilia, plan));
+                }
             }
             for (Plan_Criterio criterio : plan.getPlanCriterioList()) {
                 ConstantePlan constantePlan = constantePlanService.load(criterio.getConstante().getId());

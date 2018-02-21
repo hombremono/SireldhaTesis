@@ -1,5 +1,6 @@
 package ar.com.iua.modulo.business.utils;
 
+import ar.com.iua.modulo.business.services.impl.FamiliaService;
 import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Plan_RangoEdad;
@@ -34,6 +35,22 @@ public class UtilsSingleton {
             }
         }
         return null;
+    }
+
+    public boolean verificarFamilia(Familia familia,List<Persona> integrantes){
+        boolean valido = true;
+        if (!(integrantes.size() > 0)) {
+            valido = false;
+        }
+        if(this.getJefeFamilia(integrantes) == null) {
+            valido = false;
+        }
+        familia.setActive(valido);
+        if (familia.getFechaAlta() == null){
+            familia.setFechaAlta(new Date());
+            valido = false;
+        }
+        return valido;
     }
 
     public boolean isBetween(int bottom, int top, int x) {

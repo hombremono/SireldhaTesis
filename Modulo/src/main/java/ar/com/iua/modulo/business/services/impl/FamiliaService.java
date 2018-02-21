@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -78,6 +79,18 @@ public class FamiliaService extends GenericService<Familia, Integer> implements 
             LOG.error(e.getMessage(),e);
             throw new ServiceException(e.getMessage(),e);
         }
+    }
+
+    @Override
+    public List<Familia> list() throws ServiceException {
+        ArrayList<Familia> response = new ArrayList<Familia>();
+        for (Familia familia : super.list()) {
+            if (familia.isActive()){
+                response.add(familia);
+            }
+
+        }
+        return response;
     }
 
 

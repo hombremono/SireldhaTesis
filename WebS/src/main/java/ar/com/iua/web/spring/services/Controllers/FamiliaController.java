@@ -116,14 +116,10 @@ public class FamiliaController extends GenericController {
             if(telefono != null && telefono.getId_Telefono() <= 0 && telefono.getNumero() != null) {
                 telefono.setActive(true);
                 familia.setTelefono(telService.saveOrUpdate(telefono));
-            } else {
-                familia.setTelefono(null);
             }
             if(direccion != null && direccion.getId_Direccion() <= 0) {
                 direccion.setisActive(true);
                 familia.setDireccion(dirService.saveOrUpdate(direccion));
-            } else {
-                familia.setDireccion(null);
             }
 
         }catch (Exception e) {
