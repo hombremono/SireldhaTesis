@@ -38,6 +38,7 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
     private IPlanCriterioDAO planCriterioDAO;
     private ICareceViviendaDAO careceViviendaDAO;
     private IInmuebleDAO inmuebleDAO;
+    private IConstantePlanDAO constantePlanDAO;
 
     public PlanService(IPlanDAO planDAO, IPlanSituacionRegistroDAO planSituacionRegistroDAO, IPlanSituacionHogarDAO planSituacionHogarDAO,
                        ILocalidadDAO localidadDAO, IPlanRangoEdadDAO planRangoEdadDAO, ISexoDAO sexoDAO,
@@ -48,7 +49,8 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
                        IInstalacionInmuebleDAO instalacionInmuebleDAO,
                        IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO,
                        IOrigenFinanciamientoDAO origenFinanciamientoDAO,
-                       IPlanCriterioDAO planCriterioDAO, ICareceViviendaDAO careceViviendaDAO, IInmuebleDAO inmuebleDAO) {
+                       IPlanCriterioDAO planCriterioDAO, ICareceViviendaDAO careceViviendaDAO, IInmuebleDAO inmuebleDAO,
+                       IConstantePlanDAO constantePlanDAO) {
         super(planDAO);
         this.planSituacionRegistroDAO = planSituacionRegistroDAO;
         this.planSituacionHogarDAO = planSituacionHogarDAO;
@@ -69,6 +71,7 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
         this.planCriterioDAO = planCriterioDAO;
         this.careceViviendaDAO = careceViviendaDAO;
         this.inmuebleDAO = inmuebleDAO;
+        this.constantePlanDAO = constantePlanDAO;
     }
 
     @Override
@@ -155,6 +158,15 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
                 return instalacion.get(0);
             }
             return null;
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public List<ConstantePlan> getConstantesOperadoresLogicos () throws ServiceException {
+        try {
+            return this.constantePlanDAO.searchByCriteria(Restrictions.eq("grupo", "OPERADOR_LOGICO"));
         } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
             throw new ServiceException(e.getMessage(), e);

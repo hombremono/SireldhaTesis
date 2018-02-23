@@ -91,6 +91,17 @@ public class PlanController extends GenericController{
     }
 
     @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/constantesOperadores", method = RequestMethod.GET)
+    public ResponseEntity<Object> getOperadoresLogicos () throws IOException {
+        try {
+            return new ResponseEntity<Object>(planService.getConstantesOperadoresLogicos() ,HttpStatus.OK);
+        } catch (ServiceException e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/ejecutar/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> ejecutar (@PathVariable int id) throws IOException{
         try {

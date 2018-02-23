@@ -5,6 +5,8 @@ import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.business.model.PlanCombos;
 import ar.com.iua.modulo.model.*;
 
+import java.util.List;
+
 /**
  * Created by mnicolas on 16/01/18.
  */
@@ -15,5 +17,6 @@ public interface IPlanService extends IGenericService<Plan, Integer> {
     public CareceVivienda getCarecimiento(int idFamilia) throws ServiceException;
     public Inmueble getInmuebleByFamilia(int idFamilia) throws ServiceException;
     public InstalacionInmueble getInstalacionBySeveridad (int severidad) throws ServiceException;
+    public List<ConstantePlan> getConstantesOperadoresLogicos () throws ServiceException;
 
 }

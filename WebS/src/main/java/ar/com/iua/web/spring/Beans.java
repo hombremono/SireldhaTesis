@@ -435,11 +435,12 @@ public class Beans {
 									 final IOrigenFinanciamientoDAO origenFinanciamientoDAO,
 									 final IPlanCriterioDAO planCriterioDAO,
 									 final ICareceViviendaDAO careceViviendaDAO,
-									 final IInmuebleDAO inmuebleDAO) {
+									 final IInmuebleDAO inmuebleDAO,
+									 final IConstantePlanDAO constantePlanDAO) {
 		return new PlanService(planDAO, planSituacionRegistroDAO,planSituacionHogarDAO,localidadDAO,planRangoEdadDAO,sexoDAO,
 				nacionalidadDAO,estadoCivilDAO,situacionLaboralDAO,capacidadConstructivaDAO,caracteristicasHogarDAO,
 				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO,
-				origenFinanciamientoDAO, planCriterioDAO, careceViviendaDAO, inmuebleDAO) ;}
+				origenFinanciamientoDAO, planCriterioDAO, careceViviendaDAO, inmuebleDAO, constantePlanDAO) ;}
 
 	@Bean
 	@Autowired
