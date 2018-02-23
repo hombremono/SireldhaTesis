@@ -5,6 +5,7 @@ import ar.com.iua.modulo.model.Familia;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Plan_RangoEdad;
 
+import java.rmi.server.UID;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -48,6 +49,10 @@ public class UtilsSingleton {
         familia.setActive(valido);
         if (familia.getFechaAlta() == null){
             familia.setFechaAlta(new Date());
+            valido = false;
+        }
+        if (familia.getCodigoDeAlta() == null) {
+            familia.setCodigoDeAlta(new UID().toString());
             valido = false;
         }
         return valido;

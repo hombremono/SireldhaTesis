@@ -26,7 +26,9 @@ public class OperadorPoseeInmueble extends OperadorAbstracto {
 
     @Override
     PlanResultado operar(PlanResultado resultado, Plan_Criterio criterio) {
-        if (this.poseeInmueble) {
+        if(criterio.getConstante().getConstante().equals("POSEE") && this.poseeInmueble){
+            resultado.addPuntaje(criterio.getPuntaje());
+        } else if(criterio.getConstante().getConstante().equals("NO POSEE")&& !this.poseeInmueble){
             resultado.addPuntaje(criterio.getPuntaje());
         }
         return resultado;
@@ -34,6 +36,11 @@ public class OperadorPoseeInmueble extends OperadorAbstracto {
 
     @Override
     boolean verificarRequerido(PlanResultado resultado, Plan_Criterio criterio) {
-        return this.poseeInmueble;
+        if(criterio.getConstante().getConstante().equals("POSEE") && this.poseeInmueble){
+            return true;
+        } else if(criterio.getConstante().getConstante().equals("NO POSEE")&& !this.poseeInmueble){
+            return true;
+        }
+        return false;
     }
 }

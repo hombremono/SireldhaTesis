@@ -147,5 +147,19 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
         }
     }
 
+    public InstalacionInmueble getInstalacionBySeveridad (int severidad) throws ServiceException {
+        try {
+            List<InstalacionInmueble> instalacion = this.instalacionInmuebleDAO.searchByCriteria(Restrictions.eq("severidad", severidad));
+            if (instalacion.size() > 0)
+            {
+                return instalacion.get(0);
+            }
+            return null;
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
 
 }

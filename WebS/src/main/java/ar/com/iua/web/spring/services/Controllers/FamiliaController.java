@@ -59,7 +59,6 @@ public class FamiliaController extends GenericController {
         }
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/codigo/{codigoAlta}", method = RequestMethod.GET)
     public ResponseEntity<Object> load (@PathVariable String codigoAlta) throws IOException {
         try {
