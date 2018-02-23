@@ -4,6 +4,7 @@ function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $locatio
 
     $scope.files = [];
     $scope.archivos = [];
+    $scope.documentacionCompleta = false;
   $scope.uploadFile = function() {
       $scope.files = document.getElementById("myFileField").files;
       for (var i = 0; i < $scope.files.length; i++) {
@@ -29,6 +30,7 @@ function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $locatio
       };
   };
   $scope.finish = function(){
+      //POST DEL CHECK
     $location.path('/printPdf');
   };
 

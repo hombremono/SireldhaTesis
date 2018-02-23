@@ -4,7 +4,7 @@
 angular.module('webS')
     .factory('planService',['$http','URL_API_BASE',function($http, URL_API_BASE) {
         return {
-            list: function() {
+            getPlanes: function() {
                 return $http.get(URL_API_BASE+"plan/");
             },
             update: function(o) {

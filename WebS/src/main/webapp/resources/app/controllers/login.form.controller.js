@@ -55,7 +55,7 @@ function LoginFormController($rootScope, $scope, $log, $location, $uibModalStack
     var welcomeNotification = function(nombre){
         $.notify({
             icon: "pe-7s-id",
-            message: 'Bienvenido '+nombre
+            message: 'Bienvenido/a a la plataforma'
 
         },{
             type: 'success',

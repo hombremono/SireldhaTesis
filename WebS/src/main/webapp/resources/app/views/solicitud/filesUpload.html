@@ -25,9 +25,16 @@
     </div>
 
 </div>
-
-
 <button class="btn btn-primary" ng-click = "uploadFile()">Cargar Archivos</button>
+<div class="row">
+    <div class="col-md-6">
+        <div class="styled-input-single" >
+            <input type="checkbox" name="fieldset-5"  id="chkCompleto" ng-model="documentacionCompleta"/>
+            <label for="chkCompleto">Documentación completa</label>
+        </div>
+    </div>
+</div>
+<br>
 <button class="btn btn-success pull-right" ng-click = "finish()">Finalizar solicitud</button>
 <hr>
 <div class="row">

@@ -63,6 +63,12 @@
 						<p>Administrar Planes</p>
 					</a>
 				</li>
+				<li ng-show="!$root.authenticated">
+					<a href="#!/requestInformation">
+						<i class="pe-7s-note2"></i>
+						<p>Consultar Información</p>
+					</a>
+				</li>
 				<li class="active-pro" ng-show="$root.authenticated">
 					<a href="/WebS/logout">
 						<i class="pe-7s-door-lock"></i>

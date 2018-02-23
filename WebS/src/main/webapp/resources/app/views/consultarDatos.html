@@ -17,7 +17,7 @@
         <div class="input-group ">
             <input type="text" class="form-control input-md" placeholder="Ingrese su codigo" ng-model="codigoPersonal" />
             <span class="input-group-btn">
-                        <button class="btn btn-info btn-md" type="button" ng-click="buscarDatos()">
+                        <button class="btn btn-info btn-md" type="button" ng-click="buscarDatos(codigoPersonal)">
                             <i class="glyphicon glyphicon-search"></i>
                         </button>
             </span>
@@ -40,8 +40,20 @@
     <div>
         <h3>Datos del hogar</h3>
         <div class="form-group">
-            <label for="verTipoSolucion"></label>
-            <input class="form-control input-md" type="text" ng-model="" id="verTipoSolucion" />
+            <label for="verTipoSolucion">Solución habitacional solicitada</label>
+            <input class="form-control input-md" type="text" ng-model="datosHabitacionales.solucion" id="verTipoSolucion" disabled />
+        </div>
+        <div class="form-group">
+            <label for="verTipoSolucion">Situación inmueble</label>
+            <input class="form-control input-md" type="text" ng-model="datosHabitacionales.situacionInmueble" id="verSituacionInmueble" disabled />
+        </div>
+        <div class="form-group">
+            <label for="verTipoSolucion">Dirección</label>
+            <input class="form-control input-md" type="text" ng-model="datosHabitacionales.direccion" id="verDireccion" disabled />
+        </div>
+        <div class="form-group">
+            <label for="verTipoSolucion">Teléfono</label>
+            <input class="form-control input-md" type="text" ng-model="datosHabitacionales.telefono" id="verTelefono" disabled />
         </div>
     </div>
     <!--TABLA DE FAMILIA-->
@@ -55,12 +67,12 @@
             </thead>
             <tbody>
             <tr ng-repeat="integrante in resultadosBusqueda">
-                <td>{{integrante.DNI}}</td>
+                <td>{{integrante.nroDocumento}}</td>
                 <td>{{integrante.nombre}}</td>
                 <td>{{integrante.apellido}}</td>
                 <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="verPersona(integrante)" ng-show="integrante.DNI">
-                        <i class="pe-7s-look"></i>
+                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-simple btn-xs" data-original-title="Edit Task" ng-click="verPersona(integrante)">
+                        <i class="fa fa-user"></i>
                     </button>
                 </td>
             </tr>
@@ -70,57 +82,61 @@
     </div>
     <!--DATOS DE LA PERSONA ELEGIDA-->
 
-    <div ng-show="verPersona">
+    <div ng-show="seePerson">
         <h3>Datos del integrante seleccionado</h3>
         <div class="form-group">
-            <label for="inputNombre">>Nombre</label>
-            <input class="form-control input-md" type="text" ng-model="" id="inputNombre" disabled />
+            <label for="inputNombre">Nombre</label>
+            <input class="form-control input-md" type="text" ng-model="persona.nombre" id="inputNombre" disabled />
         </div>
         <div class="form-group">
             <label for="inputApellido">Apellido</label>
-            <input class="form-control input-md" type="text" ng-model="" id="inputApellido" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.apellido" id="inputApellido" disabled />
         </div>
         <div class="form-group">
             <label for="inputDNI">Número de documento</label>
-            <input class="form-control input-md" type="number" ng-model=""
-                   ng-pattern="/^[0-9]*$/" id="inputDNI" disabled/>
+            <input class="form-control input-md" type="text" ng-model="persona.nroDocumento"
+                    id="inputDNI" disabled/>
         </div>
         <div class="form-group">
             <label for="inputCUIL">CUIL</label>
-            <input class="form-control input-md" type="number" ng-model=""
-                   ng-maxlength="12" placeholder="20365598657" ng-pattern="/^[0-9]*$/" id="inputCUIL" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.nroCuil"
+                   id="inputCUIL" disabled />
         </div>
         <div class="form-group">
             <label for="fechaNac">Fecha de nacimiento</label>
-            <input  class="form-control" id="fechaNac" type="date" ng-model="" disabled>
+            <input  class="form-control" id="fechaNac" type="text" ng-model="persona.fechaNacimiento" disabled>
         </div>
         <div class="form-group">
             <label for="selectSexo">Género</label>
-            <input class="form-control input-md" type="text" ng-model="" id="selectSexo" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.sexo.sexo" id="selectSexo" disabled />
         </div>
         <div class="form-group">
             <label for="selectEstadoC">Estado civil</label>
-            <input class="form-control input-md" type="text" ng-model="" id="selectEstadoC" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.estadoCivil.estadoCivil" id="selectEstadoC" disabled />
         </div>
         <div class="form-group">
             <label for="selectNacionalidad">Nacionalidad</label>
-            <input class="form-control input-md" type="text" ng-model="" id="selectNacionalidad" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.nacionalidad.descripcion" id="selectNacionalidad" disabled />
+        </div>
+        <div class="form-group">
+            <label for="selectNacionalidad">Relación con el jefe/a de hogar</label>
+            <input class="form-control input-md" type="text" ng-model="persona.rolFamiliar.rolFamiliar" id="selectRelacionJefe" disabled />
         </div>
         <div class="form-group">
             <label for="selectEstudios">Estudios</label>
-            <input class="form-control input-md" type="text" ng-model="" id="selectEstudios" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.estudios.estudios" id="selectEstudios" disabled />
         </div>
         <div class="form-group">
             <label for="selectProfesion">Profesión</label>
-            <input class="form-control input-md" type="text" ng-model="" id="selectProfesion" disabled />
+            <input class="form-control input-md" type="text" ng-model="persona.profesion.profesion" id="selectProfesion" disabled />
         </div>
         <div class="form-group">
-            <label for="selectDepLaboral"><span style="color:red">* </span>Dependencia laboral</label>
-            <input class="form-control input-md" type="text" ng-model="" id="selectDepLaboral" disabled />
+            <label for="selectDepLaboral">Dependencia laboral</label>
+            <input class="form-control input-md" type="text" ng-model="persona.situacionLaboral.dependenciaLaboral" id="selectDepLaboral" disabled />
         </div>
-        <button  class="btn btn-primary  pull-right" ng-click="!verPersona">Volver</button>
 
     </div>
+    <br>
     <div>
         <button  class="btn btn-secondary  pull-right" ng-click="salir()">Cerrar</button>
     </div>

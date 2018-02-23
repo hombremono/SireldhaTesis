@@ -1797,7 +1797,7 @@ $scope.addPersona = function() {
                                 asociacionEntidadPublica: false
                             }
                         };
-                        showNotification("Persona realizados con éxito!","success");
+                        showNotification("Persona cargada con éxito!","success");
                         $scope.DNIBusqueda="";
                         $scope.resultadosBusqueda=[];
                         $scope.agregando = false;
@@ -1854,7 +1854,7 @@ $scope.eliminarPersona = function(integrante){
     }
 };
 $scope.editarPersona = function(integrante){
-    debugger;
+
     if(integrante.relacionJF!=1)
     {
         $scope.persona.editando=true;
@@ -1986,13 +1986,18 @@ $scope.addFamilia = function(){
         ingresoNetoFamiliar +=item.ingresoNeto;
     });
     $rootScope.hogar.ingresoNetoFamiliar = ingresoNetoFamiliar;
-    var familyReq = $rootScope.hogar;
-    familiaService.update(familyReq).then(function(resp){
-        var v = resp.data;
-        $scope.familia.integrantes=[];
-        $scope.buscando = false;
-        $location.path('/requestProperty');
+    //var familyReq = $rootScope.hogar;
+
+    familiaService.get($rootScope.idFamilia).then(function(resp){
+       resp.data.ingresoNetoFamiliar = ingresoNetoFamiliar;
+        familiaService.update(resp.data).then(function(res){
+            debugger;
+            $scope.familia.integrantes=[];
+            $scope.buscando = false;
+            $location.path('/requestProperty');
+        });
     });
+
 
 };
 $scope.editFamilia = function(){
@@ -2001,6 +2006,7 @@ $scope.editFamilia = function(){
         ingresoNetoFamiliar +=item.ingresoNeto;
     });
     familiaService.get(idFamilia).then(function(resp){
+
         var familyReq = resp.data;
         familiaService.update(familyReq).then(function(resp){
             var v = resp.data;

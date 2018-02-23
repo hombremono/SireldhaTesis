@@ -7,28 +7,22 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
     $scope.PlanesAbiertos=[
         {
-            nombre:"PROcrear",
+            nombre:"proCreAr",
             financiamiento:2,
             tipo:1
         },
         {
-            nombre:"no LOTEngo",
-            financiamiento:1,
-            tipo:2
-        }
-    ];
-    $scope.PlanesCerrados = [
-        {
-            nombre:"Our House in the middle of the street",
-            financiamiento:1,
+            nombre:"Plan federal de viviendas",
+            financiamiento:2,
             tipo:1
         },
         {
-            nombre:"Is our house",
+            nombre:"LOTEngo",
             financiamiento:2,
-            tipo:3
+            tipo:1
         }
     ];
+    $scope.PlanesCerrados = [];
     $scope.Plan = {
         nombre:"",
         financiamiento:0,
@@ -58,31 +52,10 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         descripcion:"Igual a "
     }];
     /*Cuando me llega la lista en el servicio, antes de agregarla a planes necesito ordenarlos.*/
-    $scope.Puntajes = [{
-      "nombre":"Tomas",
-      "apellido":"Turbate",
-     "puntos": 23,
-    "dni": "03034562"
-    },{
-        "nombre":"Susana",
-        "apellido":"Horia",
-        "puntos":420,
-        "dni":"89776421"
-
-    },{
-        "nombre":"Miguel",
-        "apellido":"Del Sel",
-        "puntos":2,
-        "dni":"00987672"
-
-    },{
-        "nombre":"Rosa",
-        "apellido":"Lel",
-        "puntos":90,
-        "dni":"34556234"
-
-    }
-    ];
+    $scope.Puntajes = [];
+    $scope.Puntajes.sort(function(a,b){
+        return parseFloat((b.puntos)-parseFloat(a.puntos));
+    });
     $scope.keyValueId = {
         "itemLocalidad":"localidad",
         "itemGenero":"sexo",
@@ -295,9 +268,16 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
         itemCantMiembros:-1,
         itemIngreso:-1
     };
-    // planService.getPlanes().then(function(resp){
-    //
-    // });
+    planService.getPlanes().then(function(resp) {
+        resp.data.forEach(function (item, index) {
+            if (item.active) {
+                $scope.PlanesAbiertos.push(item)
+            }
+            else {
+                $scope.PlanesCerrados.push(item)
+            }
+        });
+    });
     var cargarCombo = function(combo, coleccion){
         var resultado = [];
         coleccion.forEach(function(value) {
@@ -373,7 +353,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             }
         });
     };
-    $scope.addItemFueraDeTabla = function(id,coleccion,categoria,descripcion,valorEsp){
+    $scope.addItemFueraDeTabla = function(id,coleccion,categoria,descripcion,valorEsp,constante){
         var item ={
             id:-1,
             categoria:categoria,
@@ -381,7 +361,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             puntaje:0,
             required:false,
             valorEspecial:valorEsp,
-            constante :0
+            constante :constante
         };
         coleccion.push(item);
         $scope.itemOperacionVigencia = $scope.Operaciones[0];
@@ -449,6 +429,7 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
     };
     $scope.addPlan = function(plan){
         if(ejecutarValidaciones()){
+            if(validarRequired()){
             $scope.PlanPost.nombre = $scope.Plan.nombre;
             $scope.PlanPost.origenFinanciamiento.id = $scope.Plan.financiamiento;
             $scope.PlanPost.solucionHabitacional.id_SolucionHabitacional = $scope.Plan.tipo;
@@ -499,7 +480,6 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             }
             planService.add($scope.PlanPost).then(function (resp) {
                 var datos = resp.data;
-                debugger;
                 $scope.PlanesAbiertos.push(plan);
                 $scope.Plan = {
                     nombre:"",
@@ -536,14 +516,102 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
                 $scope.agregandoPlan = false;
             });
 
-        };
-    };
+            }}};
+
     $scope.cerrarPlan = function(plan){
         $location.path('/getPoints');
     };
     $scope.getProperty = function (propertyName) {
         return $scope.keyValueId[propertyName];
     };
+    //Generar PDF
+    $scope.createPDF = function(){
+    var doc = new jsPDF("landscape", "mm", "a4");
+    var elementHandler = {
+        '#ignorePDF': function (element, renderer) {
+            return true;
+        },
+        '#anotherIdToBeIgnored': function (element, renderer) {
+            return true;
+        },
+        '#pdfButton': function (element, renderer) {
+            return true;
+        }
+    };
+    var source = $('#tblPuntajes')[0];
+    doc.fromHTML(
+        source,
+        15,
+        15,
+        {
+            'width': 180,'elementHandlers': elementHandler
+        });
+
+    //doc.output('save', 'filename.pdf');
+
+
+    //doc.autoPrint();
+    window.open(doc.output('bloburl'), '_blank');
+    $location.path('/');
+};
+    $scope.demoFromHTML = function() {
+        var pdf = new jsPDF('p', 'pt', 'letter');
+        // source can be HTML-formatted string, or a reference
+        // to an actual DOM element from which the text will be scraped.
+        source = $('#tblPuntajes')[0];
+
+        // we support special element handlers. Register them with jQuery-style
+        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+        // There is no support for any other type of selectors
+        // (class, of compound) at this time.
+        specialElementHandlers = {
+            '#ignorePDF': function (element, renderer) {
+                return true;
+            },
+            '#anotherIdToBeIgnored': function (element, renderer) {
+                return true;
+            },
+            '#pdfButton': function (element, renderer) {
+                return true;
+            },
+            '#bypassme': function (element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true
+            }
+        };
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 10,
+            width: 700
+        };
+        // all coords and widths are in jsPDF instance's declared units
+        // 'inches' in this case
+        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                // dispose: object with X, Y of the last line add to the PDF
+                //          this allow the insertion of new lines after html
+                pdf.save('Test.pdf');
+            }, margins);
+        //window.open(pdf.output('bloburl'), '_blank');
+
+    };
+    $scope.printData = function () {
+
+            var divToPrint=document.getElementById("tblPuntajes");
+            newWin= window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        };
+
     //FUNCIONES INTERNAS
     var ejecutarValidaciones=function(){
         var result = true;
@@ -563,8 +631,13 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             result=false;
         }
         //For each de los items de cada plan para comprobar que no tennga mas de un item en requerido
-        return result;
 
+        return result;
+        if(!validarRequired($scope.sitRegistro))
+        {
+            showNotification("Verifique que en Situación en el Registro, no haya mas de un elemento excluyente por categoría",'danger');
+            result=false
+        }
     };
     var showNotification = function(mensaje, tipo){
         $.notify({
@@ -580,8 +653,59 @@ function PlanController($scope, $sce, $uibModal, $location, planService) {
             }
         });
     };
+    var validarRequired= function(){
+        var BreakException = {};
+        var result =true;
+        try {
+            $scope.sitRegistro.items.forEach(function(elemento1, index1){
+                $scope.sitRegistro.items.forEach(function(elemento2,index2){
+                    if(elemento1!=elemento2 && elemento1.categoria == elemento2.categoria && elemento1.required == true && elemento2.required==true){
+                        showNotification("Verifique que en Situación en el Registro, no haya mas de un elemento excluyente por categoría",'danger');
+                        result= false;
+                        throw BreakException;
+                    }
+                });
+            });
+            $scope.sitHogar.items.forEach(function(elemento1, index1){
+                $scope.sitHogar.items.forEach(function(elemento2,index2){
+                    if(elemento1!=elemento2 &&  elemento1.categoria == elemento2.categoria && elemento1.required == true && elemento2.required==true){
+                        showNotification("Verifique que en Situación del hogar, no haya mas de un elemento excluyente por categoría",'danger');
+                        result= false;
+                        throw BreakException;
+                    }
+                });
+            });
+            $scope.sitEspecial.items.forEach(function(elemento1, index1){
+                $scope.sitEspecial.items.forEach(function(elemento2,index2){
+                    if(elemento1!=elemento2 && elemento1.categoria == elemento2.categoria && elemento1.required == true && elemento2.required==true){
+                        showNotification("Verifique que en Situaciones especiales, no haya mas de un elemento excluyente por categoría",'danger');
+                        result= false;
+                        throw BreakException;
+                    }
+                });
+            });
+            $scope.sitHab.items.forEach(function(elemento1, index1){
+                $scope.sitHab.items.forEach(function(elemento2,index2){
+                    if(elemento1!=elemento2 && elemento1.categoria == elemento2.categoria && elemento1.required == true && elemento2.required==true){
+                        showNotification("Verifique que en Situación habitacional, no haya mas de un elemento excluyente por categoría",'danger');
+                        result= false;
+                        throw BreakException;
+                    }
+                });
+            });
 
-}
+        } catch (e) {
+            if (e !== BreakException) throw e;
+            result= false;
+        }
+        return result;
+
+
+    };
+};
+
+
+
 
 
 

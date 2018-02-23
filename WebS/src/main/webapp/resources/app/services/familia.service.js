@@ -44,6 +44,9 @@ angular.module('webS')
             },
             searchFamily:function(dni){
                 return $http.get(URL_API_BASE+"familia/integrantesByDni/"+dni);
+            },
+            getDatos:function(codigo){
+                return $http.get(URL_API_BASE+"familia/codigo/"+codigo);
             }
 
         }

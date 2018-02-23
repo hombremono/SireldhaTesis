@@ -2,13 +2,19 @@
 <!DOCTYPE html>
 <html>
 <body>
-<p id="ignorePDF">Impresión de clave</p>
+<div id="ignorePDF">
+    <h3 >Impresión de clave</h3>
+    <p>La siguiente le permitira al hogar que solicita la solucitud habitaciona consultar sus datos en la plataforma.</p>
+</div>
+
 <div>
-    <div ng-show="false">
-        <p>{{clave}}
+    <div id="printThis" ng-show="false">
+        <h3>SIRELDHA</h3>
+        <p>Su código de registro es : {{clave}}<p>
+        <p>En caso de pèrdida del mismo diríjase al municipio para consultar sus datos.
         </p>
     </div>
 </div>
-<button id="pdfButton" class="btn btn-primary" ng-click = "createPDF()">CreatePDF</button>
+<button id="pdfButton" class="btn btn-primary" ng-click = "createPDF()">Generar PDF</button>
 </body>
 </html>

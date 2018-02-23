@@ -1,8 +1,11 @@
 angular.module('webS').controller('PdfController',
-    [ '$http','URL_API_BASE','$scope', '$sce', '$uibModal','$location', PdfController]);
-function PdfController( $http, URL_API_BASE, $scope, $sce, $uibModal, $location) {
+    [ '$http','URL_API_BASE','$scope','$rootScope', '$sce', '$uibModal','familiaService','$location', PdfController]);
+function PdfController( $http, URL_API_BASE, $scope,$rootScope, $sce, $uibModal,familiaService, $location) {
 
-    $scope.clave = Math.floor(Math.random() * 10) + 2365984;
+    $scope.clave = "";
+    familiaService.get($rootScope.idFamilia).then(function(resp){
+        $scope.clave=resp.data.codigoDeAlta;
+    });
     $scope.createPDF = function(){
         var doc = new jsPDF("landscape", "mm", "a4");
         var elementHandler = {
@@ -16,7 +19,7 @@ function PdfController( $http, URL_API_BASE, $scope, $sce, $uibModal, $location)
                 return true;
             }
         };
-        var source = window.document.getElementsByTagName("body")[0];
+        var source = window.document.getElementById("printThis");
         doc.fromHTML(
             source,
             15,
