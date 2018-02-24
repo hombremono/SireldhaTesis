@@ -14,7 +14,7 @@ import org.hibernate.annotations.Proxy;
 @Access(value = AccessType.FIELD)
 @Table(name = "materialpiso")
 
-public class MaterialPiso {
+public class MaterialPiso extends Plan_Item{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_MaterialPiso;

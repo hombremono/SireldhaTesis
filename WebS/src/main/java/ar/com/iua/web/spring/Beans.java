@@ -259,6 +259,11 @@ public class Beans {
 	public IConstantePlanDAO constantePlanDAO ( final SessionFactory sessionFactory)
 	{ return new ConstantePlanDAO(sessionFactory);}
 
+	@Bean
+	@Autowired
+	public ICalmatDAO calmatDAO ( final SessionFactory sessionFactory)
+	{ return new CalmatDAO(sessionFactory);}
+
 
 
 
@@ -436,11 +441,12 @@ public class Beans {
 									 final IPlanCriterioDAO planCriterioDAO,
 									 final ICareceViviendaDAO careceViviendaDAO,
 									 final IInmuebleDAO inmuebleDAO,
-									 final IConstantePlanDAO constantePlanDAO) {
+									 final IConstantePlanDAO constantePlanDAO,
+									 final ICalmatDAO calmatDAO) {
 		return new PlanService(planDAO, planSituacionRegistroDAO,planSituacionHogarDAO,localidadDAO,planRangoEdadDAO,sexoDAO,
 				nacionalidadDAO,estadoCivilDAO,situacionLaboralDAO,capacidadConstructivaDAO,caracteristicasHogarDAO,
 				poseeInmuebleDAO,situacionInmuebleDAO,planCalmatDAO,instalacionInmuebleDAO,planSituacionHabitacionalDAO,
-				origenFinanciamientoDAO, planCriterioDAO, careceViviendaDAO, inmuebleDAO, constantePlanDAO) ;}
+				origenFinanciamientoDAO, planCriterioDAO, careceViviendaDAO, inmuebleDAO, constantePlanDAO, calmatDAO) ;}
 
 	@Bean
 	@Autowired

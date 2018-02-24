@@ -7,6 +7,7 @@ import ar.com.iua.modulo.model.*;
 import ar.com.iua.modulo.model.exception.NotFoundException;
 import ar.com.iua.modulo.model.persistence.dao.*;
 import ar.com.iua.modulo.persistence.exception.PersistenceException;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
     private ICareceViviendaDAO careceViviendaDAO;
     private IInmuebleDAO inmuebleDAO;
     private IConstantePlanDAO constantePlanDAO;
+    private ICalmatDAO calmatDAO;
 
     public PlanService(IPlanDAO planDAO, IPlanSituacionRegistroDAO planSituacionRegistroDAO, IPlanSituacionHogarDAO planSituacionHogarDAO,
                        ILocalidadDAO localidadDAO, IPlanRangoEdadDAO planRangoEdadDAO, ISexoDAO sexoDAO,
@@ -50,7 +52,7 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
                        IPlanSituacionHabitacionalDAO planSituacionHabitacionalDAO,
                        IOrigenFinanciamientoDAO origenFinanciamientoDAO,
                        IPlanCriterioDAO planCriterioDAO, ICareceViviendaDAO careceViviendaDAO, IInmuebleDAO inmuebleDAO,
-                       IConstantePlanDAO constantePlanDAO) {
+                       IConstantePlanDAO constantePlanDAO, ICalmatDAO calmatDAO) {
         super(planDAO);
         this.planSituacionRegistroDAO = planSituacionRegistroDAO;
         this.planSituacionHogarDAO = planSituacionHogarDAO;
@@ -72,6 +74,7 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
         this.careceViviendaDAO = careceViviendaDAO;
         this.inmuebleDAO = inmuebleDAO;
         this.constantePlanDAO = constantePlanDAO;
+        this.calmatDAO = calmatDAO;
     }
 
     @Override
@@ -170,6 +173,82 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
         } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
             throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public Calmat calcularCalmat (Inmueble inmueble) throws ServiceException {
+        int categoriaPiso = calcularCategoriaPiso(inmueble);
+        int categoriaPared = calcularCategoriaPared(inmueble);
+        int categoriaTecho = calcularCategoriaTecho(inmueble);
+        Criterion catPiso = Restrictions.eq("categoriaPiso", categoriaPiso);
+        Criterion catPared = Restrictions.eq("categoriaPared", categoriaPared);
+        Criterion catTecho = Restrictions.eq("categoriaTecho", categoriaTecho);
+        try {
+            List<Calmat> response = this.calmatDAO.searchByCriteria(Restrictions.and(catPiso,catPared,catTecho));
+            return response.size() > 0 ? response.get(0) : null;
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    private int calcularCategoriaPiso (Inmueble inmuble) {
+        String constante = inmuble.getMaterialPiso().getConstante().getConstante();
+        switch (constante) {
+            case "CERAMICA":
+                return 1;
+            case "MADERA":
+                return 1;
+            case "CEMENTO":
+                return 2;
+            case "TIERRA":
+                return 3;
+            default:
+                return -1;
+        }
+    }
+
+    private int calcularCategoriaPared (Inmueble inmuble) {
+        String constante = inmuble.getPared().getTipoPared().getConstante().getConstante();
+        boolean revoqueExt = inmuble.getPared().isRevoqueExterior();
+
+        switch (constante) {
+            case "LADRILLO":
+                return revoqueExt ? 1 : 2;
+            case "ADOBE":
+                return revoqueExt ? 1 : 2;
+            case "MADERA":
+                return revoqueExt ? 1 : 2;
+            case "CHAPA":
+                return 3;
+            case "CHORIZO":
+                return 4;
+            default:
+                return -1;
+        }
+    }
+
+    private int calcularCategoriaTecho (Inmueble inmuble) {
+        String constante = inmuble.getTecho().getTipoTecho().getConstante().getConstante();
+        boolean cieloRazo = inmuble.getTecho().isCieloRazo();
+
+        switch (constante) {
+            case "MEMBRANA":
+                return cieloRazo ? 1 : 2;
+            case "BALDOSA":
+                return cieloRazo ? 1 : 2;
+            case "PIZARRA":
+                return cieloRazo ? 1 : 2;
+            case "CHAPA":
+                return 3;
+            case "FIBROCEMENTO":
+                return 3;
+            case "CARTON":
+                return 4;
+            case "PALMA":
+                return 4;
+            default:
+                return -1;
         }
     }
 

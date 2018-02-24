@@ -18,5 +18,6 @@ public interface IPlanService extends IGenericService<Plan, Integer> {
     public Inmueble getInmuebleByFamilia(int idFamilia) throws ServiceException;
     public InstalacionInmueble getInstalacionBySeveridad (int severidad) throws ServiceException;
     public List<ConstantePlan> getConstantesOperadoresLogicos () throws ServiceException;
+    public Calmat calcularCalmat (Inmueble inmueble) throws ServiceException;
 
 }
