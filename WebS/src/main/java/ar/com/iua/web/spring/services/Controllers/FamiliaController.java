@@ -3,6 +3,7 @@ package ar.com.iua.web.spring.services.Controllers;
 import ar.com.iua.modulo.business.services.Interfaces.IDireccionService;
 import ar.com.iua.modulo.business.services.Interfaces.IPersonaService;
 import ar.com.iua.modulo.business.services.Interfaces.ITelefonoService;
+import ar.com.iua.modulo.business.utils.exception.ServiceException;
 import ar.com.iua.modulo.model.Direccion;
 import ar.com.iua.modulo.model.Persona;
 import ar.com.iua.modulo.model.Telefono;
@@ -169,6 +170,25 @@ public class FamiliaController extends GenericController {
             LOG.error(e.getMessage(), e);
             return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_ENTRY') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/setDocumentacion/{idFamilia}/{check}", method = RequestMethod.GET)
+    public ResponseEntity<Object> setDocumentacion (@PathVariable("idFamilia") int idFamilia, @PathVariable("check") boolean check) throws IOException {
+        try {
+            Familia familia = familiaService.load(idFamilia);
+            familia.setDocumentacionCompleta(check);
+            return update(familia,familiaService);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        }
+
+
     }
 
 }

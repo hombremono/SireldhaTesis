@@ -34,7 +34,6 @@ public class PlanResultado {
             this.nombreJefe = jefe.getApellido() + " " + jefe.getNombre();
             this.dniJefe = jefe.getNroDocumento();
         }
-
     }
 
     public Familia obtenerFamilia() {
