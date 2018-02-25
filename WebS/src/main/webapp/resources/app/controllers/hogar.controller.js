@@ -83,6 +83,7 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
     //List no hace falta. O se van a listar todos los hogares alguna vez??
 
     $scope.crearHogar = function () {
+
         //Variables de Id para eñ Req de crear Hogar
         var telefonoId = -1;
         var direccionId = -1;
@@ -199,7 +200,7 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
                         showNotification('Ingrese una fecha de Inicio de residencia valida', 'danger');
                         result = false;
                     }
-                    debugger;
+
                     if(result){
                         var telefonoReq;
                         //Variables para los Req de los Id
@@ -235,7 +236,9 @@ function HogarController($scope,$rootScope, $sce, $uibModal, hogarService, $loca
                             "antiguedadResidencia": getYears($scope.Hogar.fechaInicio)
                         };
                         $rootScope.hogar = hogarReq;
+                        document.getElementById("btnHogar").disabled = true;
                         hogarService.add(hogarReq).then(function (resp) {
+                            document.getElementById("btnHogar").disabled = false;
                             $rootScope.idFamilia = resp.data.id_Familia;
                             $rootScope.hogar.id_Familia = resp.data.id_Familia;
 

@@ -1,11 +1,12 @@
 angular.module('webS').controller('FilesController',
-    [ '$http','URL_API_BASE','$scope', '$sce', '$uibModal','$location', 'fileService', FilesController]);
-function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $location, fileService) {
+    [ '$http','URL_API_BASE','$scope','$rootScope', '$sce', '$uibModal','$location', 'familiaService', FilesController]);
+function FilesController( $http, URL_API_BASE, $scope, $rootScope, $sce, $uibModal, $location, familiaService) {
 
     $scope.files = [];
     $scope.archivos = [];
     $scope.documentacionCompleta = false;
   $scope.uploadFile = function() {
+      document.getElementById("fileLoad").disabled = true;
       $scope.files = document.getElementById("myFileField").files;
       for (var i = 0; i < $scope.files.length; i++) {
           var formData = new FormData();
@@ -21,18 +22,34 @@ function FilesController( $http, URL_API_BASE, $scope, $sce, $uibModal, $locatio
               processData: false // NEEDED, DON'T OMIT THIS
               // ... Other options like success and etc
           }).then(function (response) {
+              document.getElementById("fileLoad").disabled = false;
+              showNotification('Archivos cargados con éxito!');
+              $scope.files = [];
               var data = response.data;
               var status = response.status;
               console.log(data);
-              $location.path('/printPdf');
-
           });
       };
   };
   $scope.finish = function(){
-      //POST DEL CHECK
-    $location.path('/printPdf');
+      familiaService.chkDocumentacionCompleta($rootScope.idFamilia,$scope.documentacionCompleta).then(function(resp){
+          $location.path('/printPdf');
+      });
   };
+    var showNotification = function(mensaje, tipo){
+        $.notify({
+            icon: "pe-7s-attention",
+            message: mensaje
+
+        },{
+            type: tipo,
+            timer: 4000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
+    };
 
 };
 

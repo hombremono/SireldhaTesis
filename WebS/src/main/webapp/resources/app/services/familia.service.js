@@ -47,7 +47,9 @@ angular.module('webS')
             },
             getDatos:function(codigo){
                 return $http.get(URL_API_BASE+"familia/codigo/"+codigo);
-            }
+            },
+            chkDocumentacionCompleta:function(id,valor){
+                return $http.get(URL_API_BASE+"familia/setDocumentacion/"+id+"/"+valor)  ;          }
 
         }
     }]);

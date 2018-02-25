@@ -24,6 +24,12 @@ angular.module('webS')
             },
             loadCombosHogar:function(){
                 return $http.get(URL_API_BASE+"hogar/loadCombos");
+            },
+            getOperadores:function(){
+                return $http.get(URL_API_BASE+"plan/constantesOperadores");
+            },
+            cerrarPlan:function(id){
+                return $http.get(URL_API_BASE+"plan/ejecutar/"+id)
             }
 
         }

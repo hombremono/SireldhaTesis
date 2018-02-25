@@ -450,6 +450,7 @@ if($rootScope.idJefe){
   });
 }
 $scope.addjefeDeFamilia = function(){
+    document.getElementById("btnFamilia").disabled = true;
     valid = ejecutarValidacionesJF();
     if(valid){
         var telefonoReq;
@@ -506,6 +507,7 @@ $scope.addjefeDeFamilia = function(){
 
         };
         personaService.add(jefeReq).then(function(resp){
+                document.getElementById("btnFamilia").disabled = false;
 
             if(resp.status == 409)
             {
@@ -594,12 +596,14 @@ $scope.addjefeDeFamilia = function(){
                         "active": true
                     };
                     familiaService.addAutonomo(trabajoAutonomo).then(function (resp) {
+                        document.getElementById("btnFamilia").disabled = false;
                         $rootScope.idAutonomo = resp.data.id_TrabajoAutonomo;
                         $location.path('/family');
                     });
 
                 }
                 else {
+                    document.getElementById("btnFamilia").disabled = false;
                     $location.path('/family');
                 }
             }
@@ -614,6 +618,7 @@ $scope.addjefeDeFamilia = function(){
 $scope.editjefeDeFamilia = function() {
     valid = ejecutarValidacionesJF();
     if(valid){
+
         var telefonoJefeEdit;
         if($scope.jefeDeFamilia.idTelefono!=0){
             telefonoJefeEdit = {
@@ -676,6 +681,7 @@ $scope.editjefeDeFamilia = function() {
             $rootScope.idJefe = $scope.jefeDeFamilia.idEdicion;
         }
         personaService.update(jefeReqEdit).then(function(resp){
+                document.getElementById("btnFamilia").disabled = false;
             if(resp.status == 409)
             {
                 showNotification(resp.data.message, 'danger');
@@ -1991,7 +1997,7 @@ $scope.addFamilia = function(){
     familiaService.get($rootScope.idFamilia).then(function(resp){
        resp.data.ingresoNetoFamiliar = ingresoNetoFamiliar;
         familiaService.update(resp.data).then(function(res){
-            debugger;
+            document.getElementById("btnFamilia").disabled = false;
             $scope.familia.integrantes=[];
             $scope.buscando = false;
             $location.path('/requestProperty');
@@ -2456,80 +2462,96 @@ $scope.tablaDeFamilia = function(){
     }
 var ejecutarValidacionesJF = function(){
     var result = true;
+    document.getElementById("btnFamilia").disabled = true;
     if($scope.jefeDeFamilia.nombre == "")
     {
         showNotification('Ingrese un nombre', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.apellido == "")
     {
         showNotification('Ingrese el apellido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.tipoDni == 0)
     {
         showNotification('Seleccione un tipo de DNI valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.DNI == "" || $scope.jefeDeFamilia.DNI.toString().length > 9)
     {
         showNotification('Ingrese un DNI valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.CUIL=="" || $scope.jefeDeFamilia.CUIL==undefined)
     {
         showNotification('Ingrese un CUIL valido, revise la cantidad de digitos','danger');
+        document.getElementById("btnFamilia").disabled = false;
         result=false;
     }
     if($scope.jefeDeFamilia.nacimiento == "" || ($scope.jefeDeFamilia.nacimiento.getFullYear() > 10000))
     {
         showNotification('Ingrese una fecha de nacimiento valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.sexo == 0)
     {
         showNotification('Seleccione un Sexo', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.estadoCivil == 0)
     {
         showNotification('Seleccione un Estado Civil valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.nacionalidad == 0)
     {
         showNotification('Seleccione una Nacionalidad valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.estudios == 0)
     {
         showNotification('Seleccione un nivel de Estudios valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.profesion == 0)
     {
         showNotification('Seleccione una profesion valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.depLaboral == 0)
     {
         showNotification('Seleccione una Dependencia Laboral valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     //Validaciones Laborales
     if($scope.jefeDeFamilia.depLaboral == 1 && $scope.jefeDeFamilia.trabajoDependencia.empresa=="")
     {
         showNotification('Ingrese una empresa', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.depLaboral == 1 && (($scope.jefeDeFamilia.trabajoDependencia.fechaIngreso=="")|| ($scope.jefeDeFamilia.trabajoDependencia.fechaIngreso.getFullYear() > 10000)))
     {
         showNotification('Ingrese una fecha de ingreso laboral valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.jefeDeFamilia.depLaboral ==2 && ($scope.jefeDeFamilia.trabajoAutonomo.inicioActividades=="" ||($scope.jefeDeFamilia.trabajoAutonomo.inicioActividades.getFullYear() > 10000)))
     {
         showNotification('Seleccione una fecha de inicio de actividades valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     //----
@@ -2541,6 +2563,7 @@ var ejecutarValidacionesJF = function(){
     if($scope.jefeDeFamilia.discapacidadCombo == 0)
     {
         showNotification('Seleccione una discapacidad valida. ', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
         result=false;
     }
     if($scope.jefeDeFamilia.depLaboral==1){
@@ -2549,6 +2572,7 @@ var ejecutarValidacionesJF = function(){
         var reL = new RegExp("^[a-zA-Z, ]*$");
         if ((reN.test(direccion))||(reL.test(direccion))) {
             showNotification('Ingrese una dirección valida!', 'danger');
+            document.getElementById("btnFamilia").disabled = false;
             result = false;
 
         }
@@ -2558,74 +2582,89 @@ var ejecutarValidacionesJF = function(){
 };
 var ejecutarValidaciones = function(){
     var result = true;
+    document.getElementById("btnFamilia").disabled = true;
     if($scope.persona.nombre == "")
     {
         showNotification('Ingrese un nombre', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.apellido == "")
     {
         showNotification('Ingrese el apellido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.tipoDni == 0)
     {
         showNotification('Seleccione un tipo de DNI valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.DNI == "" || ($scope.persona.DNI.toString().length > 9))
     {
         showNotification('Ingrese un DNI valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.CUIL=="" || $scope.persona.CUIL==undefined)
     {
         showNotification('Ingrese un CUIL valido, revise la cantidad de digitos','danger');
+        document.getElementById("btnFamilia").disabled = false;
         result=false;
     }
     if($scope.persona.nacimiento == "" ||($scope.persona.nacimiento.getFullYear() > 10000))
     {
         showNotification('Ingrese una fecha de nacimiento valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.sexo == 0)
     {
         showNotification('Seleccione un Sexo', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.estadoCivil == 0)
     {
         showNotification('Seleccione un Estado Civil valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.nacionalidad == 0)
     {
         showNotification('Seleccione una Nacionalidad valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.estudios == 0)
     {
         showNotification('Seleccione un nivel de Estudios valido', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.profesion == 0)
     {
         showNotification('Seleccione una profesion valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.depLaboral == 0)
     {
         showNotification('Seleccione una Dependencia Laboral valida', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.relacionJF == 0)
     {
         showNotification('Seleccione una relacion con el Jefe/a de familia', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
             result=false;
     }
     if($scope.persona.discapacidadCombo == 0)
     {
         showNotification('Seleccione una discapacidad valida. ', 'danger');
+        document.getElementById("btnFamilia").disabled = false;
         result=false;
     }
     // if($scope.persona.ingresoNeto == "" || $scope.persona.ingresoNeto < 0  )
@@ -2637,6 +2676,7 @@ var ejecutarValidaciones = function(){
 
 };
 var showNotification = function(mensaje, tipo){
+    document.getElementById("btnFamilia").disabled = false;
         $.notify({
             icon: "pe-7s-attention",
             message: mensaje

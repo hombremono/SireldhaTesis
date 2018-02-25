@@ -238,8 +238,6 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
         var valid;
         $scope.cargarInmueble = function() {
             //Validaciones
-
-
             valid = ejecutarValidacionesConservacion();
             if(valid){
                 var inmubleConexAgua = null;
@@ -324,7 +322,9 @@ function InmuebleController($scope,$rootScope, $sce, $uibModal, $location, inmue
                     "id_InstalacionInmueble":$scope.inmueble.instalacionElectrica
                 }
                 };
+                document.getElementById("btnInmueble").disabled = true;
             inmuebleService.add(reqInmueble).then(function(resp) {
+                document.getElementById("btnInmueble").disabled = false;
                 var idInmueble = resp.data.id_Inmueble;
                 if($scope.inmueble.cocina && $scope.inmueble.bano)
                 {

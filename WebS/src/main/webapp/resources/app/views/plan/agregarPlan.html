@@ -1,3 +1,24 @@
+<style>
+    .loader {
+        border: 12px solid #f3f3f3; /* Light grey */
+        border-top: 12px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    #loadingWrapper {
+        text-align: center;
+    }
+    #loadingdiv {
+        display: inline-block;
+    }
+</style>
 <div id="tablaPlanes" ng-show="!agregandoPlan ">
     <nav class="navbar navbar-default ">
         <div class="container-fluid">
@@ -17,7 +38,8 @@
         </div>
     </nav>
 
-    <div>
+
+    <div ng-show="!loading">
 
         <div class="card card-plain">
             <div class="header">
@@ -57,10 +79,13 @@
             </tbody>
         </table>
         <br>
+        <button  class="btn btn-primary  pull-right" ng-click="verPlanesCerrados = true" ng-show="!verPlanesCerrados">Ver planes cerrados</button>
+        <button  class="btn btn-primary  pull-right" ng-click="verPlanesCerrados = false" ng-show="verPlanesCerrados">Ver Planes abiertos</button>
 
     </div>
-    <button  class="btn btn-primary  pull-right" ng-click="verPlanesCerrados = true" ng-show="!verPlanesCerrados">Ver planes cerrados</button>
-    <button  class="btn btn-primary  pull-right" ng-click="verPlanesCerrados = false" ng-show="verPlanesCerrados">Ver Planes abiertos</button>
+    <div id="loadingWrapper">
+        <div id ="loadingdiv" class="loader" ng-show="loading"></div>
+    </div>
 
 
 </div>
@@ -355,10 +380,10 @@
                             <select class="form-control input-md selectItem"  ng-model="itemOperacionVigencia" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
                         </div>
                         <div class="col-md-5">
-                            <input  class="form-control" id="fechaInicio" type="number" ng-model="inicioResidencia" aria-describedby="basic-addon2" placeholder="Ingrese solo el año">
+                            <input  class="form-control" id="fechaInicio" type="number" ng-model="temp.itemInicioResidencia" aria-describedby="basic-addon2" placeholder="Ingrese solo el año">
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemInicioResidencia,sitHogar.items,'Inicio de residencia',itemOperacionVigencia,inicioResidencia)">Agregar</button>
+                            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(sitHogar.items,temp.itemInicioResidencia,itemOperacionVigencia,'Inicio de residencia',3)">Agregar</button>
                         </div>
                     </div>
 
@@ -372,10 +397,10 @@
                             <select class="form-control input-md selectItem"  ng-model="itemOperacionMiembro" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
                         </div>
                         <div class="col-md-5">
-                            <input  class="form-control" id="cantMiebros" type="number" ng-model="cantMiembros" aria-describedby="basic-addon2">
+                            <input  class="form-control" id="cantMiebros" type="number" ng-model="temp.itemCantMiembros" aria-describedby="basic-addon2">
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemCantMiembros,sitHogar.items,'Cantidad de miebros del hogar',itemOperacionMiembro,cantMiembros)">Agregar</button>
+                            <button class="btn btn-secondary" type="button"  ng-click="addItemFueraDeTabla(sitHogar.items,temp.itemCantMiembros,itemOperacionMiembro,'Cantidad de miebros del hogar',1)">Agregar</button>
                         </div>
                     </div>
                 </div>
@@ -388,10 +413,10 @@
                             <select class="form-control input-md selectItem"  ng-model="itemOperacionIngreso" ng-options="combo as combo.descripcion for combo in Operaciones" ></select>
                         </div>
                         <div class="col-md-5">
-                            <input  class="form-control" id="ingresosHogar" type="number" ng-model="ingresosHogar" aria-describedby="basic-addon2">
+                            <input  class="form-control" id="ingresosHogar" type="number" ng-model="temp.itemIngreso" aria-describedby="basic-addon2">
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-outline-secondary" type="button"  ng-click="addItemFueraDeTabla(temp.itemIngreso,sitHogar.items,'Ingreso del hogar',itemOperacionIngreso,ingresosHogar)">Agregar</button>
+                            <button class="btn btn-outline-secondary" type="button"  ng-click="addItemFueraDeTabla(sitHogar.items,temp.itemIngreso,itemOperacionIngreso,'Ingreso del hogar',2)">Agregar</button>
                         </div>
                     </div>
                 </div>
