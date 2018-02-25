@@ -2,6 +2,7 @@ package ar.com.iua.modulo.business.plan.operaciones;
 
 import ar.com.iua.modulo.business.model.PlanResultado;
 import ar.com.iua.modulo.business.services.Interfaces.IPlanService;
+import ar.com.iua.modulo.business.utils.UtilsSingleton;
 import ar.com.iua.modulo.model.Plan_Criterio;
 
 /**
@@ -14,13 +15,16 @@ public class OperadorInicioVigencia extends OperadorAbstracto {
 
     @Override
     void cargarOperador(PlanResultado resultados, Plan_Criterio criterio, IPlanService planService) {
-        operacionLogica = criterio.getConstante().getConstanteOperador().getConstante();
+        operacionLogica = criterio.getConstanteOperador().getConstante();
         switch (operacionLogica) {
-            case "INICIO_VIGENCIA":
+            case "MAYOR":
+                this.match = UtilsSingleton.getInstance().getAño(resultados.obtenerFamilia().getFechaAlta()) > Integer.parseInt(criterio.getValor());
                 break;
-            case "CANTIDAD_INTEGRANTES":
+            case "MENOR":
+                this.match = UtilsSingleton.getInstance().getAño(resultados.obtenerFamilia().getFechaAlta()) < Integer.parseInt(criterio.getValor());
                 break;
-            case "INGRESOS":
+            case "IGUAL":
+                this.match = UtilsSingleton.getInstance().getAño(resultados.obtenerFamilia().getFechaAlta()) == Integer.parseInt(criterio.getValor());
                 break;
         }
 
@@ -28,11 +32,14 @@ public class OperadorInicioVigencia extends OperadorAbstracto {
 
     @Override
     PlanResultado operar(PlanResultado resultado, Plan_Criterio criterio) {
-        return null;
+        if (this.match) {
+            resultado.addPuntaje(criterio.getPuntaje());
+        }
+        return resultado;
     }
 
     @Override
     boolean verificarRequerido(PlanResultado resultado, Plan_Criterio criterio) {
-        return false;
+        return this.match;
     }
 }

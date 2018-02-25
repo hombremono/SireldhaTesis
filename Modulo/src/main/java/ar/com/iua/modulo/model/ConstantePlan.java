@@ -27,9 +27,7 @@ public class ConstantePlan implements IModel {
     @Column(name = "claseOperador")
     private String claseOperador;
 
-    @ManyToOne
-    @JoinColumn(name = "idOperadorLogico")
-    private ConstantePlan constanteOperador;
+
 
     @Override
     public int getId() {
@@ -66,11 +64,4 @@ public class ConstantePlan implements IModel {
 
     public String obtenerClaseOperador() { return this.claseOperador; }
 
-    public ConstantePlan getConstanteOperador() {
-        return constanteOperador;
-    }
-
-    public void setConstanteOperador(ConstantePlan constanteOperador) {
-        this.constanteOperador = constanteOperador;
-    }
 }

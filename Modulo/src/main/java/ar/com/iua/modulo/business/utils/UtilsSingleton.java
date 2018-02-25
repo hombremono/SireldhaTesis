@@ -71,4 +71,10 @@ public class UtilsSingleton {
         return anoActual - anoNacimiento;
     }
 
+    public int getAño(Date fecha) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date());
+        return calendar.get(Calendar.YEAR);
+    }
+
 }

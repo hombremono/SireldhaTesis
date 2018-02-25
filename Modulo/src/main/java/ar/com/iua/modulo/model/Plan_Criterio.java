@@ -35,6 +35,10 @@ public class Plan_Criterio implements IModel{
     @JoinColumn(name = "idPlan")
     private Plan plan;
 
+    @ManyToOne
+    @JoinColumn(name = "idOperadorLogico")
+    private ConstantePlan constanteOperador;
+
     @Override
     public int getId() {
         return id;
@@ -79,5 +83,13 @@ public class Plan_Criterio implements IModel{
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public ConstantePlan getConstanteOperador() {
+        return constanteOperador;
+    }
+
+    public void setConstanteOperador(ConstantePlan constanteOperador) {
+        this.constanteOperador = constanteOperador;
     }
 }
