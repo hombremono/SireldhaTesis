@@ -29,7 +29,7 @@ public class Plan_Criterio implements IModel{
     private boolean requerido;
 
     @Column(name="valor")
-    private float valor;
+    private String valor;
 
     @ManyToOne
     @JoinColumn(name = "idPlan")
@@ -73,11 +73,11 @@ public class Plan_Criterio implements IModel{
         this.plan = plan;
     }
 
-    public float getValor() {
+    public String getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 }
