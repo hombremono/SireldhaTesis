@@ -66,11 +66,11 @@ public class ConstantePlan implements IModel {
 
     public String obtenerClaseOperador() { return this.claseOperador; }
 
-    public ConstantePlan getConstantePlan() {
+    public ConstantePlan getConstanteOperador() {
         return constanteOperador;
     }
 
-    public void setConstantePlan(ConstantePlan constantePlan) {
-        this.constanteOperador = constantePlan;
+    public void setConstanteOperador(ConstantePlan constanteOperador) {
+        this.constanteOperador = constanteOperador;
     }
 }
