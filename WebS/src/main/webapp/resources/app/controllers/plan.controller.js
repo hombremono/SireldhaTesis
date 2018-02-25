@@ -460,7 +460,7 @@ function PlanController($scope, $rootScope, $sce, $uibModal, $location, planServ
                             "constante":{"id_Constante":elemento.constante},
                             "requerido":elemento.required,
                             "puntaje":elemento.puntaje,
-                            "valor":elemento.valor,
+                            "valor":(elemento.valor).toString(),
                             "constanteOperador":elemento.constanteOperador
                         };
 
