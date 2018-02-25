@@ -22,13 +22,19 @@ public class PlanResultado {
 
     private String nombreJefe;
 
+    private String dniJefe;
+
     public PlanResultado(Familia familia, List<Persona> integrantes, Plan plan) {
         this.familia = familia;
         this.integrantes = integrantes;
         this.plan = plan;
         this.puntaje = 0;
         Persona jefe = UtilsSingleton.getInstance().getJefeFamilia(integrantes);
-        if (jefe != null) this.nombreJefe = jefe.getApellido() + " " + jefe.getNombre();
+        if (jefe != null) {
+            this.nombreJefe = jefe.getApellido() + " " + jefe.getNombre();
+            this.dniJefe = jefe.getNroDocumento();
+        }
+
     }
 
     public Familia obtenerFamilia() {
@@ -67,5 +73,13 @@ public class PlanResultado {
 
     public void setNombreJefe(String nombreJefe) {
         this.nombreJefe = nombreJefe;
+    }
+
+    public String getDniJefe() {
+        return dniJefe;
+    }
+
+    public void setDniJefe(String dniJefe) {
+        this.dniJefe = dniJefe;
     }
 }

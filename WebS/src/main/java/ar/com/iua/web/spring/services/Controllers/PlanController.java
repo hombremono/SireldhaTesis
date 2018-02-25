@@ -75,6 +75,7 @@ public class PlanController extends GenericController{
     @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity<Object> add (@RequestBody Plan plan) throws IOException {
+        plan.setActive(true);
         return add(plan, planService, ConstantesURL.URL_PLAN);
     }
 
@@ -124,7 +125,8 @@ public class PlanController extends GenericController{
                 IOperadorPlan operador = PlanOperacionFactory.getInstance().getOperador(constantePlan);
                 resultados = operador.ejecutar(criterio,resultados, this.planService);
             }
-
+            plan.setActive(false);
+            planService.update(plan);
             return new ResponseEntity<Object>(resultados,HttpStatus.OK);
         } catch (ServiceException e) {
             LOG.error(e.getMessage(), e);
