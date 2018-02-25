@@ -80,13 +80,14 @@ public class PlanService extends GenericService<Plan, Integer> implements IPlanS
     @Override
     public PlanCombos getCombos() throws ServiceException {
         try {
+            List<ConstantePlan> operacionesLogicas = constantePlanDAO.searchByCriteria(Restrictions.eq("grupo", "OPERACION_LOGICA"));
             PlanCombos combos =
                     new PlanCombos(planSituacionRegistroDAO.list(),planSituacionHogarDAO.list(),localidadDAO.list(),
                             planRangoEdadDAO.list(),sexoDAO.list(),nacionalidadDAO.list(),estadoCivilDAO.list(),
                             situacionLaboralDAO.list(),capacidadConstructivaDAO.list(),caracteristicasHogarDAO.list(),
                             poseeInmuebleDAO.list(),situacionInmuebleDAO.list(),planCalmatDAO.list(),
                             instalacionInmuebleDAO.list(),planSituacionHabitacionalDAO.list(),
-                            origenFinanciamientoDAO.list());
+                            origenFinanciamientoDAO.list(), operacionesLogicas);
             return combos;
         } catch (PersistenceException e){
             throw new ServiceException(e.getMessage(),e);

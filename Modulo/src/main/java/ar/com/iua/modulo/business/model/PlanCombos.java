@@ -27,6 +27,7 @@ public class PlanCombos implements Serializable {
     private List<InstalacionInmueble> instalacionInmuebleList;
     private List<Plan_SituacionHabitacional> planSituacionHabitacionalList;
     private List<OrigenFinanciamiento> origenFinanciamientoList;
+    private List<ConstantePlan> operacionesLogicas;
 
 
     public PlanCombos(List<Plan_SituacionRegistro> planSituacionRegistroList,
@@ -38,7 +39,7 @@ public class PlanCombos implements Serializable {
                       List<PoseeInmueble> poseeInmuebleList, List<SituacionInmueble> situacionInmuebleList,
                       List<Plan_Calmat> planCalmatList, List<InstalacionInmueble> instalacionInmuebleList,
                       List<Plan_SituacionHabitacional> planSituacionHabitacionalList,
-                      List<OrigenFinanciamiento> origenFinanciamientoList) {
+                      List<OrigenFinanciamiento> origenFinanciamientoList, List<ConstantePlan> operacionesLogicas) {
         this.planSituacionRegistroList = planSituacionRegistroList;
         this.planSituacionHogarList = planSituacionHogarList;
         this.localidadList = localidadList;
@@ -55,6 +56,7 @@ public class PlanCombos implements Serializable {
         this.instalacionInmuebleList = instalacionInmuebleList;
         this.planSituacionHabitacionalList = planSituacionHabitacionalList;
         this.origenFinanciamientoList = origenFinanciamientoList;
+        this.operacionesLogicas = operacionesLogicas;
     }
 
     public static long getSerialVersionUID() {
@@ -187,5 +189,13 @@ public class PlanCombos implements Serializable {
 
     public void setOrigenFinanciamientoList(List<OrigenFinanciamiento> origenFinanciamientoList) {
         this.origenFinanciamientoList = origenFinanciamientoList;
+    }
+
+    public List<ConstantePlan> getOperacionesLogicas() {
+        return operacionesLogicas;
+    }
+
+    public void setOperacionesLogicas(List<ConstantePlan> operacionesLogicas) {
+        this.operacionesLogicas = operacionesLogicas;
     }
 }
