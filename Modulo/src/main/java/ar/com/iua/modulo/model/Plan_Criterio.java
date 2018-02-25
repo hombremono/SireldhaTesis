@@ -28,6 +28,9 @@ public class Plan_Criterio implements IModel{
     @Column(name="requerido")
     private boolean requerido;
 
+    @Column(name="valor")
+    private float valor;
+
     @ManyToOne
     @JoinColumn(name = "idPlan")
     private Plan plan;
@@ -68,5 +71,13 @@ public class Plan_Criterio implements IModel{
 
     public void setPlan(Plan plan) {
         this.plan = plan;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
     }
 }
