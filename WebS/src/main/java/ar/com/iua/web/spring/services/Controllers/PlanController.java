@@ -1,5 +1,6 @@
 package ar.com.iua.web.spring.services.Controllers;
 
+import ar.com.iua.modulo.business.model.ExcelExportModel;
 import ar.com.iua.modulo.business.model.PlanResultado;
 import ar.com.iua.modulo.business.plan.operaciones.OperadorDocumentacionCompleta;
 import ar.com.iua.modulo.business.services.Interfaces.IContantesPlanService;
@@ -134,6 +135,28 @@ public class PlanController extends GenericController{
         } catch (NotFoundException e) {
             return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
         }
-
     }
+
+    @PreAuthorize("hasAuthority('ROLE_PLAN') or hasAuthority('ROLE_ADMIN')")
+    @RequestMapping(value = "/exportExcel", method = RequestMethod.GET)
+    public ResponseEntity<Object> exportExcel () {
+        try {
+            List<Familia> familias = familiaService.list();
+            List<ExcelExportModel> result = new ArrayList<ExcelExportModel>();
+            for (Familia familia : familias) {
+                List<Persona> integrantesFamilia = familiaService.getIntegrantes(familia.getId_Familia());
+                if (familia.isActive()){
+                    result.add(new ExcelExportModel(familia, integrantesFamilia, planService));
+                }
+            }
+
+            return new ResponseEntity<Object>(result,HttpStatus.OK);
+        } catch (ServiceException e) {
+            LOG.error(e.getMessage(), e);
+            return new ResponseEntity<Object>(new SimpleResponse(-1, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
