@@ -35,7 +35,7 @@ public class ExcelExportModel {
 
     private String localidadResidencia;
 
-    private Date inicioResidencia;
+    private String inicioResidencia;
 
     private int edadJefe;
 
@@ -162,7 +162,7 @@ public class ExcelExportModel {
         return localidadResidencia;
     }
 
-    public Date getInicioResidencia() {
+    public String getInicioResidencia() {
         return inicioResidencia;
     }
 
@@ -294,7 +294,7 @@ public class ExcelExportModel {
     }
 
     private void setInicioResidencia() {
-        this.inicioResidencia = familia.getFechaAlta();
+        this.inicioResidencia = familia.getFechaAlta().toString().split(" ")[0];
     }
 
     private void setEdadJefe() {
