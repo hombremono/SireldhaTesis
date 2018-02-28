@@ -58,9 +58,15 @@
 					</a>
 				</li>
 				<li ng-show="$root.acceso==3 || $root.acceso==1">
-					<a href="#!/newPlan">
+				<a href="#!/newPlan">
+					<i class="pe-7s-note2"></i>
+					<p>Administrar Planes</p>
+				</a>
+			</li>
+				<li ng-show="$root.acceso==1">
+					<a ng-click="$root.generarReportes()">
 						<i class="pe-7s-note2"></i>
-						<p>Administrar Planes</p>
+						<p>Reportes</p>
 					</a>
 				</li>
 				<li ng-show="!$root.authenticated">

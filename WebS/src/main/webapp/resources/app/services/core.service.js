@@ -15,6 +15,9 @@ angular.module('webS')
 				   data: 'remember-me=true&username='+user.name+'&password='+user.password
 		   };
 		   return $http(req);
-	   }
+	   },
+       getExcel:function(){
+           return $http.get(URL_API_BASE+"plan/exportExcel");
+       }
    };
 }]);

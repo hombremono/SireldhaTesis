@@ -23,17 +23,31 @@ function FilesController( $http, URL_API_BASE, $scope, $rootScope, $sce, $uibMod
               // ... Other options like success and etc
           }).then(function (response) {
               document.getElementById("fileLoad").disabled = false;
-              showNotification('Archivos cargados con éxito!');
+
               $scope.files = [];
               var data = response.data;
               var status = response.status;
               console.log(data);
           });
       };
+      showNotification('Archivos cargados con éxito!');
   };
   $scope.finish = function(){
       familiaService.chkDocumentacionCompleta($rootScope.idFamilia,$scope.documentacionCompleta).then(function(resp){
-          $location.path('/printPdf');
+          //$location.path('/printPdf');
+          $.notify({
+              icon: "pe-7s-smile",
+              message: 'Solicitud cargada con Exito!'
+
+          },{
+              type: 'success',
+              timer: 4000,
+              placement: {
+                  from: 'top',
+                  align: 'right'
+              }
+          });
+          $location.path('/');
       });
   };
     var showNotification = function(mensaje, tipo){

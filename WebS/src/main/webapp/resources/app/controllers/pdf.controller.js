@@ -7,26 +7,26 @@ function PdfController( $http, URL_API_BASE, $scope,$rootScope, $sce, $uibModal,
         $scope.clave=resp.data.codigoDeAlta;
     });
     $scope.createPDF = function(){
-        var doc = new jsPDF("landscape", "mm", "a4");
-        var elementHandler = {
-            '#ignorePDF': function (element, renderer) {
-                return true;
-            },
-            '#anotherIdToBeIgnored': function (element, renderer) {
-                return true;
-            },
-            '#pdfButton': function (element, renderer) {
-                return true;
-            }
-        };
-        var source = window.document.getElementById("printThis");
-        doc.fromHTML(
-            source,
-            15,
-            15,
-            {
-                'width': 180,'elementHandlers': elementHandler
-            });
+        // var doc = new jsPDF("landscape", "mm", "a4");
+        // var elementHandler = {
+        //     '#ignorePDF': function (element, renderer) {
+        //         return true;
+        //     },
+        //     '#anotherIdToBeIgnored': function (element, renderer) {
+        //         return true;
+        //     },
+        //     '#pdfButton': function (element, renderer) {
+        //         return true;
+        //     }
+        // };
+        // var source = window.document.getElementById("printThis");
+        // doc.fromHTML(
+        //     source,
+        //     15,
+        //     15,
+        //     {
+        //         'width': 180,'elementHandlers': elementHandler
+        //     });
 
         //doc.output('save', 'filename.pdf');
 

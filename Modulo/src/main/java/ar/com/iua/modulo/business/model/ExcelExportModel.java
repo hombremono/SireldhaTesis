@@ -25,69 +25,69 @@ public class ExcelExportModel {
     private IPlanService planService;
     //---------------------------------------------------
 
-    private String nombreJefe;
+    private String nombreJefe = "";
 
-    private String dniJefe;
+    private String dniJefe = "";
 
-    private int antiguedadInscripcion;
+    private int antiguedadInscripcion = 0;
 
-    private boolean documentacionCompleta;
+    private boolean documentacionCompleta = false;
 
-    private String localidadResidencia;
+    private String localidadResidencia = "";
 
-    private String inicioResidencia;
+    private String inicioResidencia = "";
 
-    private int edadJefe;
+    private int edadJefe = 0;
 
-    private String generoJefe;
+    private String generoJefe = "";
 
-    private String nacionalidadJefe;
+    private String nacionalidadJefe = "";
 
-    private int cantidadIntegrantes;
+    private int cantidadIntegrantes = 0;
 
-    private String estadoCivilJefe;
+    private String estadoCivilJefe = "";
 
-    private String capacidadesConstructivas;
+    private String capacidadesConstructivas = "";
 
-    private String situacionLaboralJefe;
+    private String situacionLaboralJefe = "";
 
     private float ingresoNetoFamiliar = 0;
 
-    private boolean percepcionSubsidio;
+    private boolean percepcionSubsidio = false;
 
-    private boolean hogarUnipersonal;
+    private boolean hogarUnipersonal = false;
 
-    private boolean presenciaJubilado;
+    private boolean presenciaJubilado= false;
 
-    private boolean presenciaDiscapacitado;
+    private boolean presenciaDiscapacitado = false;
 
-    private boolean presenciaMenor;
+    private boolean presenciaMenor = false;
 
-    private boolean presenciaMayor65;
+    private boolean presenciaMayor65 = false;
 
-    private boolean precenciaEnfermedadCronica;
+    private boolean precenciaEnfermedadCronica = false;
 
-    private boolean presenciaViolencia;
+    private boolean presenciaViolencia = false;
 
-    private boolean presenciaMiembroGremio;
+    private boolean presenciaMiembroGremio = false;
 
-    private boolean presenciaAsociacionEntidadpublica;
+    private boolean presenciaAsociacionEntidadpublica = false;
 
-    private boolean posecionInmueble;
+    private boolean posecionInmueble = false;
 
-    private String estadoInmueble;
+    private String estadoInmueble = "";
 
-    private String tipoVivienda;
+    private String tipoVivienda = "";
 
-    private boolean perdidaCatastrofe;
+    private boolean perdidaCatastrofe = false;
 
-    private boolean zonaRiesgo;
+    private boolean zonaRiesgo = false;
 
-    private String indiceCalmat;
+    private String indiceCalmat = "";
 
-    private boolean existeHacinamiento;
+    private boolean existeHacinamiento = false;
 
-    private boolean existePromiscuidad;
+    private boolean existePromiscuidad = false;
 
     //------------------------------------------------------------------CONSTRUCTOR
 
@@ -318,10 +318,11 @@ public class ExcelExportModel {
     }
 
     private void setCapacidadesConstructivas() {
-        this.capacidadesConstructivas = "";
+        this.capacidadesConstructivas = "'" ;
         for(CapacidadConstructiva capacidad : this.jefe.getCapacidadesConstructivas()) {
             this.capacidadesConstructivas += capacidad.getTipoCapacidadConstructiva().getDescripcion() + ", ";
         }
+        this.capacidadesConstructivas += "'";
     }
 
     private void setSituacionLaboralJefe() {
@@ -417,7 +418,7 @@ public class ExcelExportModel {
     }
 
     private void setTipoVivienda() {
-        this.tipoVivienda = this.familia.getSituacionInmueble().getDescripcion();
+        this.tipoVivienda = "'" + this.familia.getSituacionInmueble().getDescripcion() + "'";
     }
 
     private void setPerdidaCatastrofe() {

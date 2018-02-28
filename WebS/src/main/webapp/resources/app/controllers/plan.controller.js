@@ -6,7 +6,12 @@ angular.module('webS').controller('PlanController',
 function PlanController($scope, $rootScope, $sce, $uibModal, $location, planService) {
     $scope.titulo = "Planes de vivienda";
     $scope.loading = false;
-    $scope.PlanesAbiertos=[];
+    $scope.PlanesAbiertos=[
+        {nombre:"Plan quinquenal de viviendas."},
+        {nombre:"ProCreAr 2018"},
+        {nombre:"LOTEngo"},
+        {nombre:"Plan de mejoramiento de viviendas excombatientes"}
+    ];
     $scope.PlanesCerrados = [];
     $scope.Plan = {
         nombre:"",
@@ -40,7 +45,60 @@ function PlanController($scope, $rootScope, $sce, $uibModal, $location, planServ
     $scope.itemsOperadores=[];
     /*Cuando me llega la lista en el servicio, antes de agregarla a planes necesito ordenarlos.*/
     $scope.Puntajes = [];
-    //$rootScope.Puntajes = $scope.Puntajes;
+    $rootScope.Puntajes = [
+        {
+        dniJefe:"25639562",
+        nombreJefe:"Baro Baronetti",
+        puntaje:1026
+        },
+        {
+            dniJefe:"20365987",
+            nombreJefe:"Jose Gonzalez",
+            puntaje:1256
+        },
+        {
+            dniJefe:"20123542",
+            nombreJefe:"Susana Horia",
+            puntaje:996
+        },
+        {
+            dniJefe:"32587121",
+            nombreJefe:"Kevin Panceta",
+            puntaje:1029
+        },
+        {
+            dniJefe:"25698741",
+            nombreJefe:"Helena Marley",
+            puntaje:1203
+        },
+        {
+            dniJefe:"21456321",
+            nombreJefe:"Angela Moss",
+            puntaje:1302
+        },
+        {
+            dniJefe:"25639874",
+            nombreJefe:"Hector Salamanca",
+            puntaje:1008
+        },
+        {
+            dniJefe:"18547639",
+            nombreJefe:"Marina Ortega",
+            puntaje:1265
+        },
+        {
+            dniJefe:"26532155",
+            nombreJefe:"Micaela Ortellado",
+            puntaje:960
+        },
+        {
+            dniJefe:"30652333",
+            nombreJefe:"Juan Domingo Larreta",
+            puntaje:1198
+        }];
+    $rootScope.Puntajes.sort(function(a,b){
+        return parseFloat((b.puntaje)-parseFloat(a.puntaje));
+    });
     $scope.nombrePlan = "";
     //$rootScope.nombrePlan= $scope.nombrePlan;
     $scope.idPlan=-1;
@@ -230,7 +288,6 @@ function PlanController($scope, $rootScope, $sce, $uibModal, $location, planServ
         cargarCombo($scope.comboCalmat.items,datos.planCalmatList);
         cargarCombo($scope.Financiamientos,datos.origenFinanciamientoList);
         cargarComboEdad($scope.comboSitEdadJefe.items,datos.planRangoEdadList);
-        debugger;
         $scope.inicioResidencia = datos.operacionesLogicas[0];
         $scope.cantMiembros = datos.operacionesLogicas[1];
         $scope.ingresosHogar=datos.operacionesLogicas[2];
@@ -270,14 +327,14 @@ function PlanController($scope, $rootScope, $sce, $uibModal, $location, planServ
         itemIngreso:0
     };
     planService.getPlanes().then(function(resp) {
-        resp.data.forEach(function (item, index) {
-            if (item.active) {
-                $scope.PlanesAbiertos.push(item)
-            }
-            else {
-                $scope.PlanesCerrados.push(item)
-            }
-        });
+        // resp.data.forEach(function (item, index) {
+        //     if (item.active) {
+        //         $scope.PlanesAbiertos.push(item)
+        //     }
+        //     else {
+        //         $scope.PlanesCerrados.push(item)
+        //     }
+        // });
     });
     var cargarCombo = function(combo, coleccion){
         var resultado = [];
@@ -550,19 +607,21 @@ function PlanController($scope, $rootScope, $sce, $uibModal, $location, planServ
             }}};
     $scope.cerrarPlan = function(plan){
         $scope.loading = true;
-        planService.cerrarPlan(plan.id).then(function(resp){
-            $rootScope.Puntajes =[];
-            $rootScope.nombrePlan="";
-            $scope.loading = false;
-            resp.data.forEach(function(item, index){
-                $rootScope.nombrePlan=item.nombrePlan;
-                $rootScope.Puntajes.push(item);
-            });
-            $rootScope.Puntajes.sort(function(a,b){
-                return parseFloat((b.puntaje)-parseFloat(a.puntaje));
-            });
-            $location.path('/getPoints');
-        });
+        // planService.cerrarPlan(plan.id).then(function(resp){
+        //     $rootScope.Puntajes =[];
+        //     $rootScope.nombrePlan="";
+        //     $scope.loading = false;
+        //     resp.data.forEach(function(item, index){
+        //         $rootScope.nombrePlan=item.nombrePlan;
+        //         $rootScope.Puntajes.push(item);
+        //     });
+        //     $rootScope.Puntajes.sort(function(a,b){
+        //         return parseFloat((b.puntaje)-parseFloat(a.puntaje));
+        //     });
+        //     $location.path('/getPoints');
+        // });
+
+        $location.path('/getPoints');
 
     };
     $scope.getProperty = function (propertyName) {
